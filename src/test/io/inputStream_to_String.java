@@ -13,6 +13,8 @@ public class inputStream_to_String {
 	
 	public static void main(String[] args) {
 		try {
+			
+		//获取文件流
 		File f =new File("G:\\1.txt");
 		InputStream i = new FileInputStream(f);
 		//apache io 输入流转String 格式

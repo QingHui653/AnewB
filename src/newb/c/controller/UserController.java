@@ -28,11 +28,11 @@ public class UserController {
 	    } 
 	 
 	@RequestMapping("/newbb") //,produces ="text/html;charset=UTF-8"
-	 public @ResponseBody String showUser(@RequestParam("userid") int userId){  
+	 public String showUser(ModelMap modelMap, @RequestParam("userid") int userId){  
 	        User user = userService.getUserById(userId);
-//	        modelMap.addAttribute("user", user);
+	        modelMap.addAttribute("user", user);
 	        String str="hello word 你好世界";
-	        return str;  
+	        return "/user/showInfo";  
 	    }
 	 
 	 @RequestMapping("/newbs")  

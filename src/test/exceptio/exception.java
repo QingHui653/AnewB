@@ -14,10 +14,10 @@ public class exception {
 			InputStream i = new FileInputStream(f);
 		} catch (FileNotFoundException e) {
 			//获取完整的堆栈异常
-			String fullStackTrace = org.apache.commons.lang.exception.ExceptionUtils.getFullStackTrace(e);
+			String fullStackTrace = org.apache.commons.lang3.exception.ExceptionUtils.getStackTrace(e);
 			e.printStackTrace();
 //			Thread.currentThread().getStackTrace();
-//			System.out.println("完整的堆栈异常" +fullStackTrace);
+			System.out.println("完整的堆栈异常" +fullStackTrace);
 		}
 		
 	}

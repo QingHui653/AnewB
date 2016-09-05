@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans 
 		http://www.springframework.org/schema/beans/spring-beans-4.1.xsd 
@@ -9,8 +11,10 @@
 		http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
 		http://www.springframework.org/schema/aop 
 		http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
-		">
-
+		http://www.springframework.org/schema/context
+       	http://www.springframework.org/schema/context/spring-context.xsd
+       	">
+	
 	<!-- 配置数据源 使用的是Druid数据源 -->
 	<bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init" destroy-method="close">
@@ -54,19 +58,51 @@
 		<property name="dataSource" ref="dataSource" />
 		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
 		<property name="mapperLocations" value="classpath:/newb/c/mapping/*.xml" />
-	</bean>
-
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="newb.c.dao" />
-		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+		<property name="typeAliasesPackage" value="newb.c.model"/>
+		<property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageHelper">
+                    <!-- 这里的几个配置主要演示如何使用，如果不理解，一定要去掉下面的配置 -->
+                    <property name="properties">
+                        <value>
+                            dialect=mysql
+                            reasonable=true
+                            <!-- supportMethodsArguments=true
+                            params=count=countSql
+                            autoRuntimeDialect=true -->
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
 	</bean>
 	
-
-	<!-- 配置事务管理器 -->
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
+	
+	<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="newb.c.dao"/>
+        <!-- 3.2.2版本新特性，markerInterface可以起到mappers配置的作用，详细情况需要看Marker接口类 -->
+        <property name="markerInterface" value="tk.mybatis.mapper.common.Mapper"/>
+        <!-- 通用Mapper通过属性注入进行配置，默认不配置时会注册Mapper<T>接口  -->
+        <property name="properties">
+            <value>
+                mappers=tk.mybatis.mapper.common.Mapper
+            </value>
+        </property>
+    </bean>
+	
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
+    </bean>
+    
+    <aop:aspectj-autoproxy/>
+    
+    
+	<!-- Spring aop事务管理 -->
+	<aop:config>
+		<aop:pointcut id="transactionPointcut" expression="execution(* newb.c.service..*Impl.*(..))" />
+		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
+	</aop:config>
+	
 
 	<!-- 注解方式配置事物 -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
@@ -77,19 +113,16 @@
 			<tx:method name="insert*" propagation="REQUIRED" />
 			<tx:method name="update*" propagation="REQUIRED" />
 			<tx:method name="delete*" propagation="REQUIRED" />
-
 			<tx:method name="get*" propagation="SUPPORTS" read-only="true" />
 			<tx:method name="find*" propagation="SUPPORTS" read-only="true" />
 			<tx:method name="select*" propagation="SUPPORTS" read-only="true" />
 
 		</tx:attributes>
 	</tx:advice>
-	<!-- Spring aop事务管理 -->
-	<aop:config>
-		<aop:pointcut id="transactionPointcut"
-			expression="execution(* newb.c.service..*Impl.*(..))" />
-		<aop:advisor pointcut-ref="transactionPointcut"
-			advice-ref="transactionAdvice" />
-	</aop:config>
 
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 </beans>

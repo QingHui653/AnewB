@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>foot.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+
+<script src="http://lib.sinaapp.com/js/jquery/2.0.3/jquery-2.0.3.min.js"></script>
+
+</head>
+<body>
+<br /> <br /> <br /> <br /> <br />
+<a href="#" class="actGofoot">底部</a>
+<br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /><br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /><br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /><br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /><br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /><br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /><br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /><br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /><br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /><br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /><br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /><br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br /><br /> <br /> <br /> <br /> <br />
+<br /> <br /> <br /> <br /> <br />
+ 
+<a href="#" class="actGotop">顶部</a>
+<br /> <br /> <br /> <br /> <br />
+<span></span>
+</body>
+
+
+<script>
+$(document).ready(function () {
+//当点击顶部按钮的时候，执行方法,scrollTop属性获取选中标签距滚动条的距离。
+$('#top').click(function () {
+	$('html').animate({ scrollTop: '0px' }, 2000);
+});
+//当点击底部标签时候，执行方法，其中offset()获取匹配元素在当前视口的相对偏移,返回的是一个对象，有两个属性top,left
+//animate,的第二个属性当然我们也可以设置'slow','normal'或'fast'
+$('#foot').click(function () {
+$('html').animate(
+$('html').scrollTop(4000);
+);
+});
+});
+</script>
+
+<script type="text/javascript">
+$(function(){    
+    $(window).scroll(function() {        
+        if($(window).scrollTop() >= 100){
+            $('.actGotop').fadeIn(300); 
+        }else{    
+            $('.actGotop').fadeOut(300);    
+        }  
+    });
+    $('.actGotop').click(function(){
+    $('html,body').animate({scrollTop: '0px'}, 800);});
+});
+</script>
+</html>
+

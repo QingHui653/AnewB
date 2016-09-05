@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-  <display-name>AnewB</display-name>
-  <context-param>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>AnewB</display-name>
+	<!-- Spring context应用 配置Spring与 mybatis -->
+	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:spring.xml,classpath:spring-mybatis.xml</param-value>
+		<param-value>classpath:spring-*.xml</param-value>
+<!-- 		<param-value>classpath:spring.xml,classpath:spring-mybatis.xml</param-value> -->
 	</context-param>
-
+	
+	<!--编码拦截器  -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -22,6 +28,14 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	<!-- <context-param>  
+         <param-name>logbackConfigLocation</param-name>  
+         <param-value>classpath:logback.xml</param-value>  
+	</context-param>  
+	<listener>  
+         <listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>  
+	</listener>  -->
 
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -39,34 +53,45 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
-				classpath:spring-mvc.xml
+				classpath:springMVC.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>rest</servlet-name>
-		<url-pattern>*.cc</url-pattern>
-	</servlet-mapping>
-	<!-- <servlet-mapping>
-		<servlet-name>rest</servlet-name>
 		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<!-- <servlet-mapping> <servlet-name>rest</servlet-name> <url-pattern>/</url-pattern> 
+		</servlet-mapping> -->
+		
+	<!-- 不拦截这些静态资源 -->
+	<!-- <servlet-mapping>
+    	<servlet-name>default</servlet-name>
+    	<url-pattern>*.html</url-pattern>
+    	<url-pattern>*.js</url-pattern>
+    	<url-pattern>*.css</url-pattern>
+    	<url-pattern>*.png</url-pattern>
+    	<url-pattern>*.jpg</url-pattern>
+    	<url-pattern>*.gif</url-pattern>
 	</servlet-mapping> -->
-	<!--Druid 连接池内置监控配置  -->
-	<servlet>  
-    	<servlet-name>DruidStatView</servlet-name>  
-    	<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>  
-	</servlet>  
-	<servlet-mapping>  
-    	<servlet-name>DruidStatView</servlet-name>  
-    	<url-pattern>/druid/*</url-pattern>  
-	</servlet-mapping> 
+		
+	<!--Druid 连接池内置监控配置 -->
+	<servlet>
+		<servlet-name>DruidStatView</servlet-name>
+		<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DruidStatView</servlet-name>
+		<url-pattern>/druid/*</url-pattern>
+	</servlet-mapping>
 
 	<!-- 配置session超时时间，单位分钟 -->
 	<session-config>
 		<session-timeout>30</session-timeout>
 	</session-config>
-
+	
+	<!-- welcome  -->
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>

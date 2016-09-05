@@ -5,7 +5,12 @@
     <classPathEntry location="E:\mysql\mysql-connector-java-5.1.26-bin.jar" />   
     <!-- <classPathEntry location="C:\oracle\product\10.2.0\db_1\jdbc\lib\ojdbc14.jar" />-->  
     <!-- <classPathEntry location="G:\笔记\JAR\sqljdbc4.jar" />   -->
-    <context id="DB2Tables" targetRuntime="MyBatis3">  
+    <context id="Mysql" targetRuntime="MyBatis3Simple"  defaultModelType="flat">  
+    	<property name="beginningDelimiter" value="`"/>
+    	<property name="endingDelimiter" value="`"/>
+    	<plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+      			<property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+    	</plugin>
         <commentGenerator>  
             <property name="suppressAllComments" value="true" />  
         </commentGenerator>  
@@ -15,27 +20,19 @@
         <!--<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@localhost:1521:orcl" userId="msa" password="msa">-->  
         </jdbcConnection>  
         
-        
-        <javaTypeResolver>  
-            <property name="forceBigDecimals" value="false" />  
-        </javaTypeResolver>  
         <!-- 生成模型的包名和位置 -->  
-        <javaModelGenerator targetPackage="newb.c.model" targetProject="D:\web7\AnewB\src\">  
-            <property name="enableSubPackages" value="true" />  
-            <property name="trimStrings" value="true" />  
-        </javaModelGenerator>  
+        <javaModelGenerator targetPackage="newb.c.model" targetProject="G:\bean"/>  
         <!-- 生成的映射文件包名和位置 -->  
-        <sqlMapGenerator targetPackage="newb.c.mapping" targetProject="D:\web7\AnewB\src\">  
-            <property name="enableSubPackages" value="true" />  
-        </sqlMapGenerator>  
+        <sqlMapGenerator targetPackage="newb.c.mapping" targetProject="G:\bean"/>  
         <!-- 生成DAO的包名和位置 -->  
-        <javaClientGenerator type="XMLMAPPER" targetPackage="newb.c.dao" targetProject="D:\web7\AnewB\src\">  
-            <property name="enableSubPackages" value="true" />  
-        </javaClientGenerator>  
+        <javaClientGenerator type="XMLMAPPER" targetPackage="newb.c.dao" targetProject="G:\bean" />  
         
         
         
         <!-- 要生成那些表(更改tableName和domainObjectName就可以) -->  
         <table tableName="user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />  
+        <table tableName="user" >
+      		<generatedKey column="oid" sqlStatement="Mysql" identity="true"/>
+    		</table>
     </context>  
 </generatorConfiguration> 

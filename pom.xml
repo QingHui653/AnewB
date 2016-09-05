@@ -7,73 +7,166 @@
 	<packaging>war</packaging>
 	<name>ANewB</name>
 	<description />
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	
-	
-	
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-framework-bom</artifactId>
+				<version>4.3.2.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
-		<!-- java EE 7  -->
+		<!-- Spring -->
+		<!-- Spring 核心包 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+		<!-- Spring IOC的基础实现 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+		</dependency>
+		<!-- Spring IOC的高级扩展,如任务调度等 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<!-- Spring AOP -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+		</dependency>
+		<!--  提供对AspectJ的支持，以便可以方便的将面向方面的功能集成进IDE中，比如Eclipse AJDT。
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+		</dependency> -->
+		<!-- 应用程序上下文 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-instrument</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-instrument-tomcat</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc-portlet</artifactId>
+		</dependency>
+		<!-- <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+		</dependency> -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+		</dependency>
+		
+		<!--spring-oxm依赖-->
+        <dependency>
+            <groupId>org.codehaus.castor</groupId>
+            <artifactId>castor-xml</artifactId>
+            <version>1.3.3</version>
+            <exclusions>
+            	<exclusion>
+            		<artifactId>commons-lang</artifactId>
+            		<groupId>commons-lang</groupId>
+            	</exclusion>
+            </exclusions>
+        </dependency>
+	
+		<!-- WEB -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.websocket</groupId>
+			<artifactId>javax.websocket-api</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>javax.transaction-api</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!-- java EE 7 -->
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
 			<version>7.0</version>
 			<scope>provided</scope>
 		</dependency>
-		<!-- JSTL  -->
+		<!-- JSTL -->
 		<dependency>
-			<groupId>org.glassfish.web</groupId>
-			<artifactId>javax.servlet.jsp.jstl</artifactId>
-			<version>1.2.2</version>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
 		</dependency>
-		<!-- Spring  -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
-			<version>4.1.0.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aspects</artifactId>
-			<version>4.1.0.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-			<version>4.1.0.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>4.1.0.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-			<version>4.1.0.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-expression</artifactId>
-			<version>4.1.0.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-instrument</artifactId>
-			<version>4.1.0.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-instrument-tomcat</artifactId>
-			<version>4.1.0.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<version>4.1.0.RELEASE</version>
-		</dependency>
+		
+		<!-- 版本已最高 -->
 		<dependency>
 			<groupId>aopalliance</groupId>
 			<artifactId>aopalliance</artifactId>
@@ -84,35 +177,19 @@
 			<artifactId>commons-pool</artifactId>
 			<version>1.6</version>
 		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-		</dependency>
+		
+		<!---spring-aop依赖 -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
-			<version>1.8.2</version>
+			<version>1.8.9</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-			<version>4.1.0.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-			<version>4.1.0.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-			<version>4.1.0.RELEASE</version>
-		</dependency>
+
+		<!-- 连接池 -->
 		<dependency>
 			<groupId>com.mchange</groupId>
 			<artifactId>c3p0</artifactId>
-			<version>0.9.2.1</version>
+			<version>0.9.5.2</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-dbcp</groupId>
@@ -120,132 +197,66 @@
 			<version>1.4</version>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>4.1.0.RELEASE</version>
+    		<groupId>com.cloudhopper.proxool</groupId>
+   		 	<artifactId>proxool</artifactId>
+   		 	<version>0.9.1</version>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>4.1.0.RELEASE</version>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.18</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc-portlet</artifactId>
-			<version>4.1.0.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jms</artifactId>
-			<version>4.1.0.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-oxm</artifactId>
-			<version>4.1.0.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>4.1.0.RELEASE</version>
-		</dependency>
+		<!-- 连接池 -->
+		
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>6.8.8</version>
+			<version>6.9.10</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-web</artifactId>
-			<version>3.2.5.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-core</artifactId>
-			<version>3.2.5.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-acl</artifactId>
-			<version>3.2.5.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-aspects</artifactId>
-			<version>3.2.5.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-cas</artifactId>
-			<version>3.2.5.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-config</artifactId>
-			<version>3.2.5.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-crypto</artifactId>
-			<version>3.2.5.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-ldap</artifactId>
-			<version>3.2.5.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-openid</artifactId>
-			<version>3.2.5.RELEASE</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>httpclient</artifactId>
-					<groupId>org.apache.httpcomponents</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-remoting</artifactId>
-			<version>3.2.5.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-taglibs</artifactId>
-			<version>3.2.5.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.webflow</groupId>
-			<artifactId>spring-faces</artifactId>
-			<version>2.4.0.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.webflow</groupId>
-			<artifactId>spring-webflow</artifactId>
-			<version>2.4.0.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.webflow</groupId>
-			<artifactId>spring-binding</artifactId>
-			<version>2.4.0.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.webflow</groupId>
-			<artifactId>spring-js</artifactId>
-			<version>2.4.0.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.webflow</groupId>
-			<artifactId>spring-js-resources</artifactId>
-			<version>2.4.0.RELEASE</version>
-		</dependency>
+
+		<!-- Spring security 权限包 -->
+
+		<!-- <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-web</artifactId> 
+			<version>4.1.3.RELEASE</version> </dependency> <dependency> <groupId>org.springframework.security</groupId> 
+			<artifactId>spring-security-core</artifactId> <version>4.1.3.RELEASE</version> 
+			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
+			<artifactId>spring-security-acl</artifactId> <version>4.1.3.RELEASE</version> 
+			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
+			<artifactId>spring-security-aspects</artifactId> <version>4.1.3.RELEASE</version> 
+			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
+			<artifactId>spring-security-cas</artifactId> <version>4.1.3.RELEASE</version> 
+			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
+			<artifactId>spring-security-config</artifactId> <version>4.1.3.RELEASE</version> 
+			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
+			<artifactId>spring-security-crypto</artifactId> <version>4.1.3.RELEASE</version> 
+			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
+			<artifactId>spring-security-ldap</artifactId> <version>4.1.3.RELEASE</version> 
+			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
+			<artifactId>spring-security-openid</artifactId> <version>4.1.3.RELEASE</version> 
+			<exclusions> <exclusion> <artifactId>httpclient</artifactId> <groupId>org.apache.httpcomponents</groupId> 
+			</exclusion> </exclusions> </dependency> <dependency> <groupId>org.springframework.security</groupId> 
+			<artifactId>spring-security-remoting</artifactId> <version>4.1.3.RELEASE</version> 
+			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
+			<artifactId>spring-security-taglibs</artifactId> <version>4.1.3.RELEASE</version> 
+			</dependency> -->
+
+		<!-- Spring webflow -->
+
+		<!-- <dependency> <groupId>org.springframework.webflow</groupId> <artifactId>spring-faces</artifactId> 
+			<version>2.4.2.RELEASE</version> </dependency> <dependency> <groupId>org.springframework.webflow</groupId> 
+			<artifactId>spring-webflow</artifactId> <version>2.4.2.RELEASE</version> 
+			</dependency> <dependency> <groupId>org.springframework.webflow</groupId> 
+			<artifactId>spring-binding</artifactId> <version>2.4.2.RELEASE</version> 
+			</dependency> <dependency> <groupId>org.springframework.webflow</groupId> 
+			<artifactId>spring-js</artifactId> <version>2.4.2.RELEASE</version> </dependency> 
+			<dependency> <groupId>org.springframework.webflow</groupId> <artifactId>spring-js-resources</artifactId> 
+			<version>2.4.2.RELEASE</version> </dependency> -->
 		<dependency>
 			<groupId>opensymphony</groupId>
 			<artifactId>ognl</artifactId>
 			<version>2.6.11</version>
 		</dependency>
-		
+
 		<!-- mybatis与spring -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -257,100 +268,170 @@
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.3.0</version>
 		</dependency>
-		
+
 		<!-- MYSQL -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.34</version>
 		</dependency>
-		
-		
+
 		<!-- oracle -->
 		<dependency>
-    		<groupId>com.oracle</groupId>
-    		<artifactId>ojdbc14</artifactId>
-    		<version>10.2.0.4.0</version>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc14</artifactId>
+			<version>10.2.0.4.0</version>
 		</dependency>
-		
+		<!-- SQL server -->
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>sqljdbc4</artifactId>
+			<version>4.0</version>
+		</dependency>
+
+		<!-- 测试 junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
+
+
 		<!-- 连接池 -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
 			<version>1.0.18</version>
 		</dependency>
-		
+
 		<!-- spring mvc json -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.13</version>
 		</dependency>
-		
+
 		<dependency>
-    		<groupId>org.codehaus.jackson</groupId>
-    		<artifactId>jackson-core-asl</artifactId>
-    		<version>1.9.13</version>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.13</version>
 		</dependency>
-		
-		
+
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.5.4</version>
 		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-		<dependency>
-    		<groupId>com.google.code.gson</groupId>
-   		    <artifactId>gson</artifactId>
-    		<version>2.7</version>
-		</dependency>
-		
+
+		<!-- alibaba fastjson -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>1.2.3</version>
+			<version>1.2.8</version>
 		</dependency>
-		
-		<!-- 文件上传下载-->
-		<dependency>  
-            <groupId>commons-io</groupId>  
-            <artifactId>commons-io</artifactId>  
-            <version>2.4</version>  
-        </dependency>  
-  
-        <dependency>  
-            <groupId>commons-fileupload</groupId>  
-            <artifactId>commons-fileupload</artifactId>  
-            <version>1.2.2</version>  
-        </dependency>
-        
-        <!--apache 工具包 -->
+
+		<!-- GSON -->
 		<dependency>
-    		<groupId>org.apache.commons</groupId>
-    		<artifactId>commons-lang3</artifactId>
-    		<version>3.4</version>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.7</version>
 		</dependency>
-        
-        <!-- 爬虫框架 -->
-        <dependency>
-    		<groupId>us.codecraft</groupId>
-    		<artifactId>webmagic-core</artifactId>
-    		<version>0.5.3</version>
-        </dependency>
+
+		<!-- Springmvc,文件上传下载 -->
 		<dependency>
-    		<groupId>us.codecraft</groupId>
-    		<artifactId>webmagic-extension</artifactId>
-    		<version>0.5.3</version>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.microsoft.sqlserver</groupId>
-			<artifactId>sqljdbc4</artifactId>
-			<version>4.0</version>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+
+		<!--apache 工具包 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+		</dependency>
+
+		<!-- logback-->
+		<!-- <dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.1.7</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.slf4j</groupId>
+   		 	<artifactId>jcl-over-slf4j</artifactId>
+    		<version>1.7.21</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.logback-extensions</groupId>
+    		<artifactId>logback-ext-spring</artifactId>
+    		<version>0.1.4</version>
+		</dependency> -->
+		
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.logback-extensions/logback-ext-spring -->
+		<!-- <dependency>
+    		<groupId>org.logback-extensions</groupId>
+    		<artifactId>logback-ext-spring</artifactId>
+    		<version>0.1.4</version>
+		</dependency>
+		https://mvnrepository.com/artifact/org.slf4j/jcl-over-slf4j
+		<dependency>
+    		<groupId>org.slf4j</groupId>
+   		 	<artifactId>jcl-over-slf4j</artifactId>
+    		<version>1.7.21</version>
+		</dependency>
+		slf4j
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.21</version>
+		</dependency> -->
+		
+		<!--通用Mapper-->
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper</artifactId>
+            <version>3.3.8</version>
+        </dependency>
+		<!-- mybaits 分页插件 -->
+		<dependency>
+    		<groupId>com.github.pagehelper</groupId>
+    		<artifactId>pagehelper</artifactId>
+    		<version>4.1.6</version>
+		</dependency>
+		
+
+		<!-- 爬虫框架 -->
+		<dependency>
+			<groupId>us.codecraft</groupId>
+			<artifactId>webmagic-core</artifactId>
+			<version>0.5.3</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-lang</artifactId>
+					<groupId>commons-lang</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>us.codecraft</groupId>
+			<artifactId>webmagic-extension</artifactId>
+			<version>0.5.3</version>
 		</dependency>
 	</dependencies>
+
+
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<resources>
@@ -366,8 +447,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -379,34 +460,36 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
-			
+
 			<!-- mybatis orm插件 -->
 			<plugin>
-                <groupId>org.mybatis.generator</groupId>
-                <artifactId>mybatis-generator-maven-plugin</artifactId>
-                <version>1.3.2</version>
-                <configuration>
-                    <verbose>true</verbose>
-                    <overwrite>true</overwrite>
-                </configuration>
-            </plugin>
-            
-            <!-- 部署至本机 -->  
-           	<!--  <plugin>  
-                <groupId>org.codehaus.cargo</groupId>  
-                <artifactId>cargo-maven2-plugin</artifactId>  
-                <version>1.0</version>  
-                <configuration>  
-                    <container>  
-                        <containerId>tomcat8x</containerId>  
-                        <home>D:\tool\apache-tomcat-8.0.30</home>  
-                    </container>  
-                    <configuration>  
-                        <type>existing</type>  
-                        <home>D:\tool\apache-tomcat-8.0.30</home>  
-                    </configuration>  
-                </configuration>  
-            </plugin> -->
+				<groupId>org.mybatis.generator</groupId>
+				<artifactId>mybatis-generator-maven-plugin</artifactId>
+				<version>1.3.2</version>
+				<configuration>
+					<verbose>true</verbose>
+					<overwrite>true</overwrite>
+				</configuration>
+				 <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.34</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>tk.mybatis</groupId>
+                        <artifactId>mapper</artifactId>
+                        <version>3.3.8</version>
+                    </dependency>
+                </dependencies>
+			</plugin>
+
+			<!-- 部署至本机 -->
+			<!-- <plugin> <groupId>org.codehaus.cargo</groupId> <artifactId>cargo-maven2-plugin</artifactId> 
+				<version>1.0</version> <configuration> <container> <containerId>tomcat8x</containerId> 
+				<home>D:\tool\apache-tomcat-8.0.30</home> </container> <configuration> <type>existing</type> 
+				<home>D:\tool\apache-tomcat-8.0.30</home> </configuration> </configuration> 
+				</plugin> -->
 		</plugins>
 	</build>
 </project>
