@@ -296,14 +296,6 @@
 			<version>4.12</version>
 		</dependency>
 
-
-		<!-- 连接池 -->
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid</artifactId>
-			<version>1.0.18</version>
-		</dependency>
-
 		<!-- spring mvc json -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>

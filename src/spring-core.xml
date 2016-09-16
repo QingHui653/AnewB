@@ -14,10 +14,9 @@
 	
 	<!--引入配置属性文件 -->
 	<context:property-placeholder location="classpath:config.properties" />
-	
+	<!--配置注解  -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	<!--自动扫描含有@Service将其注入为bean -->
 	<context:component-scan base-package="newb.c.service" />
 	
-	<!-- <context:component-scan base-package="src.main.java.dao.dao" /> -->
 </beans>

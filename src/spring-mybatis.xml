@@ -59,6 +59,7 @@
 		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
 		<property name="mapperLocations" value="classpath:/newb/c/mapping/*.xml" />
 		<property name="typeAliasesPackage" value="newb.c.model"/>
+		<!-- mybatis 分页插件 -->
 		<property name="plugins">
             <array>
                 <bean class="com.github.pagehelper.PageHelper">
@@ -77,7 +78,7 @@
         </property>
 	</bean>
 	
-	
+	<!--  通用mapper 插件 -->
 	<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="newb.c.dao"/>
         <!-- 3.2.2版本新特性，markerInterface可以起到mappers配置的作用，详细情况需要看Marker接口类 -->

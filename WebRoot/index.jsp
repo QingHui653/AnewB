@@ -10,18 +10,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     
     <title>Login</title>
-    
-<script type="text/javascript">
-	alert("");
- 	function login(){
- 		var form = document.forms[0]; 
- 		form.action = "${pageContext.request.contextPath}/user/login.cc"; 
- 		form.method="post";
- 		form.submit();
- 	}
-</script>
-	
-
 </head>
   
   <body>
@@ -30,7 +18,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <tr>username:<input type="text" name="username"></></tr>
     <tr>password:<input type="password" name="password"></></tr>
     <tr><input type="button" value="login" onclick="login()"></></tr>
+    <tr><input type="button" value="loginFor" onclick="loginFor()"></></tr>
     </table>
     </form>
+    
+    
+    <script type="text/javascript">
+ 	function login(){
+ 		alert("进入login")
+ 		var form = document.forms[0]; 
+ 		form.action = "${pageContext.request.contextPath}/user/login"; 
+ 		form.method="post";
+ 		form.submit();
+ 	}
+ 	
+ 	function loginFor(){
+ 		alert("进入loginFor")
+ 		var form = document.forms[0]; 
+ 		form.action = "${pageContext.request.contextPath}/user/loginFor"; 
+ 		form.method="post";
+ 		form.submit();
+ 	}
+</script>
   </body>
 </html>

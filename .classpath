@@ -17,5 +17,11 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xmlrpc-client-3.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xmlrpc-common-3.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xmlrpc-server-3.0-rz.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ws-commons-util-1.0.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-httpclient-3.0.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
