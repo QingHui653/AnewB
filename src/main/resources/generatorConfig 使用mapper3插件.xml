@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">  
+<generatorConfiguration>
+	<!-- 使用mybaits 通用插件生成,建议不要使用这个 -->    
+    <!-- 数据库驱动包位置 -->  
+    <classPathEntry location="E:\mysql\mysql-connector-java-5.1.26-bin.jar" />   
+    <!-- <classPathEntry location="C:\oracle\product\10.2.0\db_1\jdbc\lib\ojdbc14.jar" />-->  
+    <!-- <classPathEntry location="G:\笔记\JAR\sqljdbc4.jar" />   -->
+    <context id="Mysql" targetRuntime="MyBatis3Simple"  defaultModelType="flat">  
+    	<property name="beginningDelimiter" value="`"/>
+    	<property name="endingDelimiter" value="`"/>
+    	<plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+      			<property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+    	</plugin>
+        <commentGenerator>  
+            <property name="suppressAllComments" value="true" />  
+        </commentGenerator>  
+        <!-- 数据库链接URL、用户名、密码 -->  
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/newb?characterEncoding=utf8" userId="root" password="123456">   
+        <!-- <jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver" connectionURL="jdbc:sqlserver://127.0.0.1:1433;databaseName=newb" userId="sa" password="7262140"> -->   
+        <!--<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@localhost:1521:orcl" userId="msa" password="msa">-->  
+        </jdbcConnection>  
+        
+        <!-- 生成模型的包名和位置 -->  
+        <javaModelGenerator targetPackage="newb.c.model" targetProject="G:\bean"/>  
+        <!-- 生成的映射文件包名和位置 -->  
+        <sqlMapGenerator targetPackage="newb.c.mapping" targetProject="G:\bean"/>  
+        <!-- 生成DAO的包名和位置 -->  
+        <javaClientGenerator type="XMLMAPPER" targetPackage="newb.c.dao" targetProject="G:\bean" />  
+        
+        
+        
+        <!-- 要生成那些表(更改tableName和domainObjectName就可以) -->  
+        <table tableName="user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />  
+        <table tableName="user" >
+      		<generatedKey column="oid" sqlStatement="Mysql" identity="true"/>
+    		</table>
+    </context>  
+</generatorConfiguration> 

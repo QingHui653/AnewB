@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<something-else-entirely>
+	<proxool>		
+		<alias>hj</alias>
+		<driver-url>jdbc:sqlserver://192.168.22.62:1433;databaseName=ykchr</driver-url>
+		<driver-class>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver-class>
+		<driver-properties>
+			<property name="user" value="sa"/>
+			<property name="password" value="38688063"/>
+		</driver-properties>
+		<maximum-active-time>720000000</maximum-active-time>
+		<maximum-connection-count>2000</maximum-connection-count>
+		<minimum-connection-count>10</minimum-connection-count>
+		<house-keeping-sleep-time>90000</house-keeping-sleep-time>
+		<maximum-new-connections>10</maximum-new-connections>
+		<prototype-count>5</prototype-count>
+	</proxool>
+	
+	<proxool>		
+		<alias>zp</alias>
+		<driver-url>jdbc:sqlserver://127.0.0.1:1433;databaseName=zp</driver-url>
+		<driver-class>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver-class>
+		<driver-properties>
+			<property name="user" value="yksoft"/>
+			<property name="password" value="yksoft1919"/>
+		</driver-properties>
+		<maximum-active-time>720000000</maximum-active-time>
+		<maximum-connection-count>2000</maximum-connection-count>
+		<minimum-connection-count>10</minimum-connection-count>
+		<house-keeping-sleep-time>90000</house-keeping-sleep-time>
+		<maximum-new-connections>10</maximum-new-connections>
+		<prototype-count>5</prototype-count>
+	</proxool>
+</something-else-entirely>
