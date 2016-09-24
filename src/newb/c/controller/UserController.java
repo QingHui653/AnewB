@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -49,10 +50,10 @@ public class UserController {
 	private UserService userService;
 	
 	
-	//常用工具类
-	GregorianCalendar cal=new GregorianCalendar();
-	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-	String curtime=sdf.format(cal.getTime());
+	//常用工具类   时间不能用在这 ,不然每次进入不会重新new 一个对象,
+	//会使得时间有BUG
+//	GregorianCalendar cal=new GregorianCalendar();
+	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	/**
 	 *  访问/user/newb/2
@@ -64,7 +65,9 @@ public class UserController {
 	 * @return
 	 */
 	 @RequestMapping("/newb/{userId}") 
-	 public String showUserInfo(ModelMap modelMap, int userId){  
+	 public String showUserInfo(ModelMap modelMap,@PathVariable int userId){
+		 	String curtime=sdf.format(Calendar.getInstance().getTime());
+		 	System.out.println(" 时间--"+curtime);
 	        User user = userService.getUserById(userId);
 	        modelMap.addAttribute("user", user);  
 	        return "/user/showInfo";  

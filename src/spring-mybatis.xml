@@ -4,6 +4,7 @@
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:cache="http://www.springframework.org/schema/cache"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans 
 		http://www.springframework.org/schema/beans/spring-beans-4.1.xsd 
@@ -13,6 +14,7 @@
 		http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
 		http://www.springframework.org/schema/context
        	http://www.springframework.org/schema/context/spring-context.xsd
+       	http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
        	">
 	
 	<!-- 配置数据源 使用的是Druid数据源 -->

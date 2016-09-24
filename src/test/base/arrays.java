@@ -2,6 +2,8 @@ package test.base;
 
 import java.util.Arrays;
 
+import com.sun.tools.doclets.internal.toolkit.Configuration;
+
 public class arrays {
 
 	public static void main(String[] args) {
@@ -27,6 +29,7 @@ public class arrays {
         //输出[[Ljava.lang.String;@55e6cb2a, [Ljava.lang.String;@23245e75, [Ljava.lang.String;@28b56559]
         System.out.println(Arrays.deepToString(b));  //适合打印多维数组
         //输出[[A0, A1, A2, A3], [A0, A1, A2, A3], [A0, A1, A2, A3]]
+        
 	}
 
 }

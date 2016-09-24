@@ -35,7 +35,7 @@ public class XmlRpcTest {
 	 */
 	public String sms(String phone) {
 		String yzm =(int)(Math.random()*900000+100000)+"";
-		String content="尊敬的用户:,您的验证码是"+yzm+",请尽快验证,温馨提示:请妥善保管,不要随便泄露给他人,【仁智招聘】";
+		String content="【仁智招聘】尊敬的用户:,您的验证码是"+yzm+",请尽快验证,温馨提示:请妥善保管,不要随便泄露给他人。";
 		XmlRpcTest test = new XmlRpcTest();
 		test.testGetBalance(); ///查询短信剩余
 		test.testAddTask();   //增加任务单
@@ -53,7 +53,7 @@ public class XmlRpcTest {
 //		//新增任务单 
 		test.testAddTask();   //增加任务单
 //		//添加短信内容
-		test.testAddsmsContent("content2"); //短信内容
+		test.testAddsmsContent("【仁智招聘】尊敬的用户:,您的验证码是156301,请尽快验证"); //短信内容
 //		//提交手机号码
 		test.testAddWhiteList("15173961640"); //手机.
 		test.sms("15173961640");

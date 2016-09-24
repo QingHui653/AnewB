@@ -8,7 +8,27 @@
 		http://www.springframework.org/schema/context/spring-context-4.1.xsd 
 		http://www.springframework.org/schema/mvc 
 		http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
+	
+	<!-- 启用spring mvc 注解 -->
+    <context:annotation-config />
+    
+    <mvc:annotation-driven />
 
+	<!-- <mvc:annotation-driven /> -->
+    <!--注解说明  
+    <context:annotation-config />--> 
+     
+    <!--@Controller 声明Action组件
+    @Service    声明Service组件    @Service("myMovieLister") 
+    @Repository 声明Dao组件
+    @Component   泛指组件, 当不好归类时. 
+    @RequestMapping("/menu")  请求映射
+    @Resource  用于注入，( j2ee提供的 ) 默认按名称装配，@Resource(name="beanName") 
+    @Autowired 用于注入，(spring提供的) 默认按类型装配 
+    @Transactional( rollbackFor={Exception.class}) 事务管理
+    @ResponseBody
+    @Scope("prototype")   设定bean的作用域 -->
+	
 	<!-- 自动扫描controller包下的所有类，如果@Controller注入为bean -->
 	<context:component-scan base-package="newb.c.controller" />
 
@@ -48,8 +68,35 @@
 		</property>
 	</bean>
 	
-	<bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller"/>
+	<bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller" />
 	
+	 <!-- 全局拦截器   会拦截静态资源
+    Spring为我们提供了：
+    org.springframework.web.servlet.HandlerInterceptor接口，
+    org.springframework.web.servlet.handler.HandlerInterceptorAdapter适配器，
+           实现这个接口或继承此类，可以非常方便的实现自己的拦截器。
+      
+          有以下三个方法：
+      
+    Action之前执行:
+     public boolean preHandle(HttpServletRequest request,
+       HttpServletResponse response, Object handler);
+      
+           生成视图之前执行
+     public void postHandle(HttpServletRequest request,
+       HttpServletResponse response, Object handler,
+       ModelAndView modelAndView);
+      
+           最后执行，可用于释放资源
+     public void afterCompletion(HttpServletRequest request,
+       HttpServletResponse response, Object handler, Exception ex)
+    <mvc:interceptors >  
+     <mvc:interceptor>  
+            <mvc:mapping path="/user/*" />  /user/*    
+            <bean class="com.mvc.MyInteceptor"></bean>  
+        </mvc:interceptor>  
+    </mvc:interceptors>  
+    -->
 	<!-- 配置权限拦截器 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
@@ -57,43 +104,78 @@
 			<bean class="newb.c.interceptor.MemberInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
+	
+	<!-- 总错误处理
+		   这里主要的类是SimpleMappingExceptionResolver类，和他的父类AbstractHandlerExceptionResolver类。
+		   具体可以配置哪些属性，我是通过查看源码知道的。
+		   你也可以实现HandlerExceptionResolver接口，写一个自己的异常处理程序。
+    <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="defaultErrorView">
+           <value>/error/error</value> error页面可以通过Exception e = (Exception)request.getAttribute("exception")获得异常信息
+        </property>
+        <property name="defaultStatusCode">
+           <value>500</value>
+        </property>
+        <property name="warnLogCategory">
+           <value>org.springframework.web.servlet.handler.SimpleMappingExceptionResolver</value>
+        </property>
+    </bean>-->
+	
+	<!-- 对静态资源文件的访问  方案一 （二选一）
+                       会把"/**" url,注册到SimpleUrlHandlerMapping的urlMap中,把对静态资源的访问由HandlerMapping转到
+    org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler处理并返回.
+    DefaultServletHttpRequestHandler使用就是各个Servlet容器自己的默认Servlet.
+    <mvc:default-servlet-handler/> -->
+     
+    <!-- 对静态资源文件的访问  方案二 （二选一）/images/**映射到ResourceHttpRequestHandler进行处理，
+    location指定静态资源的位置.可以是web application根目录下、jar包里面，这样可以把静态资源压缩到jar包中。
+    cache-period 可以使得静态资源进行web cache 
+    <mvc:resources mapping="/images/**" location="/images/" cache-period="31556926"/>
+    <mvc:resources mapping="/js/**" location="/js/" cache-period="31556926"/>
+    <mvc:resources mapping="/css/**" location="/css/" cache-period="31556926"/>-->
+	
+	<mvc:resources mapping="/javascript/**" location="/static_resources/javascript/" />
+	<mvc:resources mapping="/css/**" location="/css/" />
+	<mvc:resources mapping="/images/**" location="/images/" />
+	<mvc:default-servlet-handler />
 
 	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
-	<!--内容协商-->
-  <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-    <property name="contentNegotiationManager">
-      <bean class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
-        <property name="defaultContentType" value="text/html"/>
-        <property name="mediaTypes">
-          <map>
-            <entry key="json" value="application/json"/>
-            <entry key="xml" value="application/xml"/>
-            <entry key="html" value="text/html"/>
-          </map>
-        </property>
-      </bean>
-    </property>
-    <property name="viewResolvers">
-      <list>
-        <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-          <property name="prefix" value="/WEB-INF/views/"/>
-          <property name="suffix" value=".jsp"/>
-        </bean>
-      </list>
-    </property>
-    <property name="defaultViews">
-      <list>
-        <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
-        <bean class="org.springframework.web.servlet.view.xml.MarshallingView">
-          <property name="marshaller" ref="castorMarshaller"/>
-        </bean>
-      </list>
-    </property>
-  </bean>
-	
-	
-	
-	
+	<!--内容协商 -->
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="contentNegotiationManager">
+			<bean
+				class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+				<property name="defaultContentType" value="text/html" />
+				<property name="mediaTypes">
+					<map>
+						<entry key="json" value="application/json" />
+						<entry key="xml" value="application/xml" />
+						<entry key="html" value="text/html" />
+					</map>
+				</property>
+			</bean>
+		</property>
+		<property name="viewResolvers">
+			<list>
+				<bean
+					class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+					<property name="prefix" value="/WEB-INF/views/" />  <!-- 前缀 -->
+					<property name="suffix" value=".jsp" />				<!-- 后缀 -->
+				</bean>
+			</list>
+		</property>
+		<property name="defaultViews">
+			<list>
+				<bean
+					class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+				<bean class="org.springframework.web.servlet.view.xml.MarshallingView">
+					<property name="marshaller" ref="castorMarshaller" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
 	<!-- 配置多文件上传 -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
