@@ -6,9 +6,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -16,10 +18,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import newb.c.model.SessionB;
 import newb.c.model.User;
 import newb.c.model.UserData;
 import newb.c.model.UserXL;
@@ -107,11 +111,63 @@ public class UserController {
 	 public String login(ModelMap modelMap, String username, String password,HttpSession httpSession){  
 		 	int userId=2;
 		 	User user = userService.getUserById(userId);
+		 	SessionB session = new SessionB(user);
 	        modelMap.addAttribute("user", user);
 	        //添加到session
-	        httpSession.setAttribute("user", user);
+	        httpSession.setAttribute("session", session);
 	        return "/admin/showInfo";  
 	    }
+	 /**
+	  * session测试,关闭浏览器服务器端的session不会丢失,但浏览器
+	  * 端的sessionid会丢失,服务器靠这个sessionid查找session,因此
+	  * 下次访问生成时新的sessionid.
+	  * @param request
+	  * @param response
+	  * @throws ServletException
+	  * @throws IOException
+	  */
+	 @RequestMapping("/sessionTest") 
+	 public void doGet(HttpServletRequest request, HttpServletResponse response)
+			 throws ServletException, IOException {
+			 response.setContentType("text/html;charset=UTF-8");
+			 HttpSession session = request.getSession(true);
+			 String heading = null;
+			 Integer accessCount = (Integer) session.getAttribute("accessCount");
+			 if (session.getAttribute("accessCount") == null) {
+			 accessCount = new Integer(1);
+			 heading = "欢迎您首次登陆这个页面";
+			 } else {
+			 heading = "欢迎您再次登陆这个页面";
+			 accessCount = accessCount + 1;
+			 }
+			 session.setAttribute("accessCount", accessCount);
+			 PrintWriter out = response.getWriter();
+			 out.println("<HTML>");
+			 out.println("  <HEAD><TITLE>session tracking example</TITLE></HEAD>");
+			 out.println("  <BODY>");
+			 out.println("  <center>");
+			 out.println("<h4>" + heading + "<a href='session'>再次访问</a>"
+			 + "</h4>");
+			 out.println("<table border='0'>");
+			 out.println("<tr bgcolor=\"ffad00\"><td>信息<td>值\n");
+			 String state = session.isNew() ? "新会话" : "旧会话";
+			 out.println("<tr><td>会话状态：<td>" + state + "\n");
+			 out.println("<tr><td>会话ID:<td>" + session.getId() + "\n");
+			 out.println("<tr><td>创建时间:<td>");
+			 out.println("" + new Date(session.getCreationTime()) + "\n");
+			 out.println("<tr><td>最近访问时间:<td>");
+			 out.println("" + new Date(session.getLastAccessedTime()) + "\n");
+			 out.println("<tr><td>最大不活动时间:<td>" + session.getMaxInactiveInterval()
+			 + "S\n");
+			 out.println("<tr><td>Cookie:<td>" + request.getHeader("Cookie") + "\n");
+			 out.println("<tr><td>已被访问次数:<td>" + accessCount + "\n");
+			 out.println("</table>");
+			 out.println("  </center>");
+			 out.println("  </BODY>");
+			 out.println("</HTML>");
+			 out.flush();
+			 out.close();
+			 }
 	 /**
 	  * 使用forward 使之 重新进入另一个controller /user/newbs
 	  * @param modelMap

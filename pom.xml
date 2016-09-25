@@ -239,6 +239,30 @@
 			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
 			<artifactId>spring-security-taglibs</artifactId> <version>4.1.3.RELEASE</version> 
 			</dependency> -->
+			
+		<!-- shiro权限 -->
+		<dependency>
+    		<groupId>org.apache.shiro</groupId>
+    		<artifactId>shiro-core</artifactId>
+    		<version>1.3.2</version>
+		</dependency>
+		
+		<!--shiro-web -->
+		<dependency>
+    		<groupId>org.apache.shiro</groupId>
+    		<artifactId>shiro-web</artifactId>
+    		<version>1.3.2</version>
+		</dependency>
+		
+		<!-- shiro-spring -->
+		<dependency>
+    		<groupId>org.apache.shiro</groupId>
+    		<artifactId>shiro-spring</artifactId>
+    		<version>1.3.2</version>
+		</dependency>
+		
+		
+			
 
 		<!-- Spring webflow -->
 
@@ -459,7 +483,16 @@
 			<artifactId>webmagic-extension</artifactId>
 			<version>0.5.3</version>
 		</dependency>
+		
+		<!-- jxl 操作word,excel等-->
+		<dependency>
+    		<groupId>net.sourceforge.jexcelapi</groupId>
+    		<artifactId>jxl</artifactId>
+    		<version>2.6.12</version>
+		</dependency>
+		
 	</dependencies>
+	
 
 
 	<build>

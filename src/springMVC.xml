@@ -137,7 +137,7 @@
 	<mvc:resources mapping="/javascript/**" location="/static_resources/javascript/" />
 	<mvc:resources mapping="/css/**" location="/css/" />
 	<mvc:resources mapping="/images/**" location="/images/" />
-	<mvc:default-servlet-handler />
+	<!-- <mvc:default-servlet-handler /> -->
 
 	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
 	<!--内容协商 -->

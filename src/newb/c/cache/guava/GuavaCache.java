@@ -1,11 +1,14 @@
 package newb.c.cache.guava;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 
+import org.apache.shiro.cache.CacheException;
+import org.apache.shiro.cache.CacheManager;
 import org.springframework.cache.Cache;
 import org.springframework.cache.support.SimpleValueWrapper;
 
-public class GuavaCache implements Cache{
+public class GuavaCache implements Cache,CacheManager {
 	
 	public GuavaCache (String name,com.google.common.cache.Cache<Object, Object> cache,boolean allowNullValues){
 		this.name = name;
@@ -80,6 +83,14 @@ public class GuavaCache implements Cache{
 	public ValueWrapper putIfAbsent(Object arg0, Object arg1) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <K, V> org.apache.shiro.cache.Cache<K, V> getCache(String arg0)
+			throws CacheException {
+		Object Value= cache.getIfPresent(arg0);
+		return  (Value != null ? (org.apache.shiro.cache.Cache<K, V>)new SimpleValueWrapper(Value) : null);
 	}
 
 }
