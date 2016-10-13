@@ -16,6 +16,9 @@
        	http://www.springframework.org/schema/context/spring-context.xsd
        	http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
        	">
+       	
+    <!-- 扫描目录下的包自动装配 -->  	
+    <context:component-scan base-package="newb.c.service" /> 
 	
 	<!-- 配置数据源 使用的是Druid数据源 -->
 	<bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
@@ -54,6 +57,10 @@
 		<!-- 监控数据库   这个别名映射配置信息保存在druid-xxx.jar!/META-INF/druid-filter.properties-->
 		<property name="filters" value="mergeStat,log4j" />
 	</bean>
+	
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+         <property name="dataSource" ref="dataSource"></property>
+     </bean>
 
 	<!-- myBatis文件 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -80,15 +87,18 @@
         </property>
 	</bean>
 	
+	
+	
 	<!--  通用mapper 插件 -->
 	<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="newb.c.dao"/>
         <!-- 3.2.2版本新特性，markerInterface可以起到mappers配置的作用，详细情况需要看Marker接口类 -->
-        <property name="markerInterface" value="tk.mybatis.mapper.common.Mapper"/>
+        <!-- <property name="markerInterface" value="newb.c.service.common.MyMapper"/> -->
         <!-- 通用Mapper通过属性注入进行配置，默认不配置时会注册Mapper<T>接口  -->
         <property name="properties">
             <value>
-                mappers=tk.mybatis.mapper.common.Mapper
+                <!-- mappers=tk.mybatis.mapper.common.Mapper -->
+                mappers=newb.c.service.common.MyMapper
             </value>
         </property>
     </bean>
@@ -97,8 +107,8 @@
         <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
     
-    <aop:aspectj-autoproxy/>
     
+    <aop:aspectj-autoproxy/>
     
 	<!-- Spring aop事务管理 -->
 	<aop:config>

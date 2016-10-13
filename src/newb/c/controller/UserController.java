@@ -27,6 +27,7 @@ import newb.c.model.SessionB;
 import newb.c.model.User;
 import newb.c.model.UserData;
 import newb.c.model.UserXL;
+import newb.c.service.ResultService;
 import newb.c.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,9 @@ public class UserController {
 	@Autowired 
 	private UserService userService;
 	
+	@Autowired
+	private ResultService resultService;
+	
 	
 	//常用工具类   时间不能用在这 ,不然每次进入不会重新new 一个对象,
 	//会使得时间有BUG
@@ -70,8 +74,6 @@ public class UserController {
 	 */
 	 @RequestMapping("/newb/{userId}") 
 	 public String showUserInfo(ModelMap modelMap,@PathVariable int userId){
-		 	String curtime=sdf.format(Calendar.getInstance().getTime());
-		 	System.out.println(" 时间--"+curtime);
 	        User user = userService.getUserById(userId);
 	        modelMap.addAttribute("user", user);  
 	        return "/user/showInfo";  

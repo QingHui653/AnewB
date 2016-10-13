@@ -9,10 +9,10 @@
 			<property name="password" value="123456"/>
 		</driver-properties>
 		<maximum-active-time>720000000</maximum-active-time>
-		<maximum-connection-count>2000</maximum-connection-count>
+		<maximum-connection-count>50</maximum-connection-count>
 		<minimum-connection-count>10</minimum-connection-count>
 		<house-keeping-sleep-time>90000</house-keeping-sleep-time>
-		<maximum-new-connections>10</maximum-new-connections>
+		<simultaneous-build-throttle>10</simultaneous-build-throttle>
 		<prototype-count>5</prototype-count>
 	</proxool>
 </something-else-entirely>

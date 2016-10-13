@@ -23,6 +23,13 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	
+	<!-- Inherit defaults from Spring Boot -->
+    <!-- <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.4.1.RELEASE</version>
+    </parent> -->
 
 	<dependencies>
 		<!-- Spring -->
@@ -92,10 +99,10 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc-portlet</artifactId>
 		</dependency>
-		<!-- <dependency>
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jms</artifactId>
-		</dependency> -->
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-oxm</artifactId>
@@ -172,6 +179,7 @@
 			<artifactId>aopalliance</artifactId>
 			<version>1.0</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>commons-pool</groupId>
 			<artifactId>commons-pool</artifactId>
@@ -195,7 +203,7 @@
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
-		</dependency>
+			</dependency>
 		<dependency>
     		<groupId>com.cloudhopper.proxool</groupId>
    		 	<artifactId>proxool</artifactId>
@@ -204,7 +212,7 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
-			<version>1.0.18</version>
+			<version>1.0.25</version>
 		</dependency>
 		<!-- 连接池 -->
 		
@@ -385,6 +393,12 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-configuration2</artifactId>
 			<version>2.1</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-lang3</artifactId>
+					<groupId>org.apache.commons</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 		<dependency>
@@ -407,32 +421,75 @@
     		<version>2.9.0</version>
 		</dependency>
 		
-		
-		
-		
-
-		<!-- logback-->
-		<!-- <dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.1.7</version>
-		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
 		<dependency>
-    		<groupId>org.slf4j</groupId>
-   		 	<artifactId>jcl-over-slf4j</artifactId>
-    		<version>1.7.21</version>
+    		<groupId>io.netty</groupId>
+    		<artifactId>netty-all</artifactId>
+    		<version>5.0.0.Alpha2</version>
+    		<!-- <version>4.1.5.Final</version> -->
 		</dependency>
+		
+		<!--dubbo -->
 		<dependency>
-    		<groupId>org.logback-extensions</groupId>
-    		<artifactId>logback-ext-spring</artifactId>
-    		<version>0.1.4</version>
-		</dependency> -->
+    		<groupId>com.alibaba</groupId>
+    		<artifactId>dubbo</artifactId>
+    		<version>2.5.3</version>
+    		<exclusions>
+    			<exclusion>
+    				<artifactId>spring</artifactId>
+    				<groupId>org.springframework</groupId>
+    			</exclusion>
+    		</exclusions>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.101tec/zkclient -->
+		<dependency>
+    		<groupId>com.101tec</groupId>
+    		<artifactId>zkclient</artifactId>
+    		<version>0.9</version>
+		</dependency>
+		
+		
+		<!-- zookeeper -->
+		<dependency>
+    		<groupId>org.apache.zookeeper</groupId>
+    		<artifactId>zookeeper</artifactId>
+    		<version>3.5.2-alpha</version>
+    		<exclusions>
+    			<exclusion>
+    				<artifactId>netty</artifactId>
+    				<groupId>io.netty</groupId>
+    			</exclusion>
+    		</exclusions>
+		</dependency>
+		
+		<!-- <dependency>  
+            <groupId>javax.annotation</groupId>  
+            <artifactId>jsr250-api</artifactId>  
+            <version>1.0</version>  
+        </dependency> -->  
+        <dependency>  
+            <groupId>org.apache.activemq</groupId>  
+            <artifactId>activemq-core</artifactId>  
+            <version>5.7.0</version>  
+        </dependency>  
+		
+		
 		
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
+		
+
+		<!-- logback-->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.1.7</version>
+		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/org.logback-extensions/logback-ext-spring -->
 		<!-- <dependency>
     		<groupId>org.logback-extensions</groupId>
@@ -444,13 +501,19 @@
     		<groupId>org.slf4j</groupId>
    		 	<artifactId>jcl-over-slf4j</artifactId>
     		<version>1.7.21</version>
-		</dependency>
-		slf4j
+		</dependency> -->
+		<!-- slf4j -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.21</version>
-		</dependency> -->
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.fusesource.jansi/jansi -->
+		<dependency>
+    		<groupId>org.fusesource.jansi</groupId>
+    		<artifactId>jansi</artifactId>
+    		<version>1.13</version>
+		</dependency>
 		
 		<!--通用Mapper-->
         <dependency>
@@ -471,12 +534,16 @@
 			<groupId>us.codecraft</groupId>
 			<artifactId>webmagic-core</artifactId>
 			<version>0.5.3</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>commons-lang</artifactId>
-					<groupId>commons-lang</groupId>
-				</exclusion>
-			</exclusions>
+			<exclusions> 
+					<exclusion> 
+ 						<artifactId>commons-lang</artifactId> 
+ 						<groupId>commons-lang</groupId> 
+ 					</exclusion>
+ 					<exclusion>
+            			<groupId>org.slf4j</groupId>
+            			<artifactId>slf4j-log4j12</artifactId>
+        			</exclusion>
+			</exclusions> 
 		</dependency>
 		<dependency>
 			<groupId>us.codecraft</groupId>
@@ -490,6 +557,12 @@
     		<artifactId>jxl</artifactId>
     		<version>2.6.12</version>
 		</dependency>
+		
+		<!-- <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>1.4.1.RELEASE</version>
+        </dependency> -->
 		
 	</dependencies>
 	
@@ -523,6 +596,11 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
+			
+			<plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
 
 			<!-- mybatis orm插件 -->
 			<plugin>
@@ -548,7 +626,7 @@
 			</plugin>
 
 			<!-- 部署至本机 -->
-			<!-- <plugin> <groupId>org.codehaus.cargo</groupId> <artifactId>cargo-maven2-plugin</artifactId> 
+			<!--<plugin> <groupId>org.codehaus.cargo</groupId> <artifactId>cargo-maven2-plugin</artifactId> 
 				<version>1.0</version> <configuration> <container> <containerId>tomcat8x</containerId> 
 				<home>D:\tool\apache-tomcat-8.0.30</home> </container> <configuration> <type>existing</type> 
 				<home>D:\tool\apache-tomcat-8.0.30</home> </configuration> </configuration> 

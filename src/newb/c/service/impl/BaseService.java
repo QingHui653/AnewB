@@ -25,7 +25,10 @@
 package newb.c.service.impl;
 
 import newb.c.service.IService;
+import newb.c.service.common.MyMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
@@ -36,9 +39,9 @@ import java.util.List;
 public abstract class BaseService<T> implements IService<T> {
 
     @Autowired
-    protected Mapper<T> mapper;
+    protected MyMapper<T> mapper;
 
-    public Mapper<T> getMapper() {
+    public MyMapper<T> getMapper() {
         return mapper;
     }
 
@@ -67,5 +70,11 @@ public abstract class BaseService<T> implements IService<T> {
         return mapper.selectByExample(example);
     }
 
+    public List<T> CommonSelMapper(String key) {
+        return mapper.CommonSelMapper(key);
+    }
     //TODO 其他...
+    public int CommonDelMapper(String key) {
+        return mapper.CommonDelMapper(key);
+    }
 }

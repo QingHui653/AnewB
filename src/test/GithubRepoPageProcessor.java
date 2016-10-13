@@ -23,8 +23,13 @@ public class GithubRepoPageProcessor implements PageProcessor {
         }
         page.putField("readme", page.getHtml().xpath("//div[@id='readme']/tidyText()"));
         System.out.println("------------------------------");
-        System.out.println(page.getResultItems().getAll());
+        System.out.println("-----------开始-----------");
         System.out.println("------------------------------");
+//        System.out.println(page.getResultItems().getAll());
+        System.out.println("-----------内容-----------");
+        System.out.println("------------------------------");
+        System.out.println(page.getResultItems().get("readme"));
+        System.out.println("-----------结束---------------");
     }
 
     @Override
@@ -33,8 +38,8 @@ public class GithubRepoPageProcessor implements PageProcessor {
     }
 
     public static void main(String[] args) {
-        Spider.create(new GithubRepoPageProcessor())
-        .addUrl("https://github.com/code4craft")
-        .addPipeline(new JsonFilePipeline("D:\\webmagic\\")).thread(5).run();
+        Spider.create(new GithubRepoPageProcessor())//https://github.com/QingHui653
+        .addUrl("https://github.com/QingHui653")//https://github.com/code4craft
+        .addPipeline(new JsonFilePipeline("G:\\bean\\")).thread(5).run();
     }
 }

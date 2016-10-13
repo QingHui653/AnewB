@@ -20,5 +20,6 @@ public class stream {
 			players.forEach((player) -> System.out.print(player + "; "));
 			 
 	}
-
+	
+	
 }

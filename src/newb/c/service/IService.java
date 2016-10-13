@@ -45,5 +45,9 @@ public interface IService<T> {
     int updateNotNull(T entity);
 
     List<T> selectByExample(Object example);
+    
+    List<T> CommonSelMapper(String key);
+    
+    int CommonDelMapper(String key);
 
 }

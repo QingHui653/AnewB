@@ -32,8 +32,8 @@
         
         <!-- 要生成那些表(更改tableName和domainObjectName就可以) -->  
        <!--  <table tableName="user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />  --> 
-        <table tableName="user_cache" >
-      		<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        <table tableName="result" >
+      		<generatedKey column="oid" sqlStatement="Mysql" identity="true"/>
     		</table>
     </context>  
 </generatorConfiguration> 

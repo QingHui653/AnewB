@@ -14,11 +14,15 @@
 	
 	<!--引入配置属性文件 -->
 	<context:property-placeholder location="classpath*:*.properties" />
+	
+	<import resource="spring-*.xml"/>
+	<!-- <import resource="spring-cache.xml"/>
+	<import resource="spring-mybatis.xml"/> -->
+	
+	
+	
 	<!--配置注解  -->
-	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
 	<!--自动扫描含有@Service将其注入为bean -->
-	<context:component-scan base-package="newb.c.service" />
-	
-	
-	
+	<!-- <context:component-scan base-package="newb.c.service" /> -->
 </beans>

@@ -100,11 +100,11 @@
 		<constructor-arg index="2" value="${redis.master.port}" type="int"/>
 	</bean>
 	
-    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+    <bean id="connectionRedisFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
      p:host-name="${redis.master.hostname}" p:port="${redis.master.port}" p:pool-config-ref="jedisPoolConfig" />
 
     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
-    	<property name="connectionFactory" ref="connectionFactory" />
+    	<property name="connectionFactory" ref="connectionRedisFactory" />
     </bean>
 	
 	

@@ -8,7 +8,7 @@ public class InsertSort {
 	public static void main(String[] args) {
 		/**
 		 * 直接插入排序 
-		 * 1.数组的第0位不能由数据
+		 * 1.数组的第0位不能有数据
 		 * 2.数组从第二个数据开始处理
 		 * (如果该数据比前一位要小，说明要前移)
 		 * (先将该数据备份到第0位)

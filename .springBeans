@@ -8,10 +8,12 @@
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
 		<config>src/springMVC.xml</config>
-		<config>src/spring-core.xml</config>
+		<config>src/springshiro.xml</config>
+		<config>src/spring.xml</config>
 	</configs>
 	<autoconfigs>
 		<config>src/spring-mybatis.xml</config>
+		<config>src/spring-cache.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>

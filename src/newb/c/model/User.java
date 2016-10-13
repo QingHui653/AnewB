@@ -1,8 +1,10 @@
 package newb.c.model;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
-public class User {
+public class User implements Serializable {
     /**
      * ID
      */

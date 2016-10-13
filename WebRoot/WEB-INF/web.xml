@@ -7,15 +7,17 @@
 	<!-- Spring context应用 配置Spring与 mybatis -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:spring-*.xml</param-value>
-<!-- 		<param-value>classpath:spring.xml,classpath:spring-mybatis.xml</param-value> -->
+		<param-value>classpath:spring.xml</param-value>
+<!-- 		<param-value>classpath:spring.xml,classpath:spring-mybatis.xml,classpath:spring-cache.xml</param-value> -->
 	</context-param>
 	
 	<!--编码拦截器  -->
 	<filter>
+		<description>字符集过滤器</description>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
 		<init-param>
+			<description>字符集编码</description>
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
 		</init-param>
@@ -30,6 +32,7 @@
 	</filter-mapping>
 	
 	<filter>
+		<description>druid uri监听</description>
 		<filter-name>DruidWebStatFilter</filter-name>
 		<filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>
 		<init-param>
@@ -70,6 +73,7 @@
 	</listener>  -->
 
 	<listener>
+		<description>spring监听器</description>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
@@ -97,9 +101,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>
-				classpath:springMVC.xml
-			</param-value>
+			<param-value>classpath:springMVC.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -121,7 +123,7 @@
     	<url-pattern>*.gif</url-pattern>
 	</servlet-mapping> -->
 		
-	<!--Druid 连接池内置监控配置 -->
+	<!--Druid 连接池内置监控配置  监控SQL -->
 	<servlet>
 		<servlet-name>DruidStatView</servlet-name>
 		<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>

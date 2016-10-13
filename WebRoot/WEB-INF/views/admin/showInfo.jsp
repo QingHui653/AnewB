@@ -8,7 +8,7 @@
 </head>
 <body>
 
-     姓名： ${user.username}
+     姓名： ${user.oid}
 
 </body>
 </html>
