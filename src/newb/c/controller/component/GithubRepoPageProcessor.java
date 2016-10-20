@@ -22,21 +22,26 @@ public class GithubRepoPageProcessor implements PageProcessor {
 
     @Override
     public void process(Page page) { //(https://github\\.com/\\w+/\\w+)
-        page.addTargetRequests(page.getHtml().links().regex("(https://github\\.com/QingHui653/\\w+)").all());
+    	String name;
+    	if (page.getUrl().toString().contains("?")) {
+    		name=page.getUrl().toString().substring(page.getUrl().toString().lastIndexOf("/")+1,page.getUrl().toString().indexOf("?"));
+		}else {
+			name=page.getUrl().toString().substring(page.getUrl().toString().lastIndexOf("/")+1);
+		}
+        page.addTargetRequests(page.getHtml().links().regex("(https://github\\.com/"+name+"/\\w+)").all());
+//        page.addTargetRequest(page.getHtml().links().regex(""));
+//        page.addTargetRequests(page.getHtml().links().regex(regexUrl).all());
         Result r = new Result();
         r.setF1(page.getUrl().regex("https://github\\.com/(\\w+)/.*").toString());
-        r.setF2(page.getHtml().xpath("//h1[@class='entry-title public']/strong/a/text()").toString());
+        r.setF2(page.getHtml().xpath("//*[@id='js-repo-pjax-container']/div[1]/div[1]/h1/strong/a/tidyText()").toString());// //h1[@class='entry-title public']/strong/a/text()
         r.setF3(page.getHtml().xpath("//div[@id='readme']/tidyText()").toString());
 //        page.putField("author", page.getUrl().regex("https://github\\.com/(\\w+)/.*").toString());
 //        page.putField("name", page.getHtml().xpath("//h1[@class='entry-title public']/strong/a/text()").toString());
-        if (page.getResultItems().get("name")==null){
-            page.setSkip(true);
-        }
 //        page.putField("readme", page.getHtml().xpath("//div[@id='readme']/tidyText()").toString());
         page.putField("result", r);
-//        JdbcTemplate jdbcTemplate=new JdbcTemplate();
-//        jdbcTemplate.execute("create table temp(id int primary key,name varchar(32))");
-        resultService.save(r);
+        if (r.getF3()!=null) {
+        	resultService.save(r);
+		}
 //        System.out.println(page.getResultItems().getAll());
     }
 

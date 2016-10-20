@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -119,10 +120,19 @@ public class ApiController {
 	}
 	
 	@RequestMapping("/rep")
-	public void rep() {
+	public void rep() {//alibaba  QingHui653
+		String[] urls =new String[9];
+		for (int i = 1; i < 10; i++) {
+			String url="https://github.com/alibaba";
+			if (i!=1) {
+				url=url+"?page="+i;
+			}
+			urls[i-1]=url;
+		}
+		System.out.println("--"+Arrays.toString(urls));
 		Spider.create(g)
-		.addUrl("https://github.com/QingHui653")
-		.addPipeline(new JsonFilePipeline("G:\\bean\\")).thread(5).run();
+		.addUrl(urls)
+		.thread(5).run();
 	}
 	
 	@RequestMapping("/getrep")

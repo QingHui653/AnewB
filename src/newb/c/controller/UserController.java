@@ -78,6 +78,23 @@ public class UserController {
 	        modelMap.addAttribute("user", user);  
 	        return "/user/showInfo";  
 	    } 
+	 
+	 /**
+	  * save 测试事务
+	  * @param modelMap
+	  * @param userId
+	  * @return
+	  */
+	 @RequestMapping("/newb/save")
+	 @ResponseBody
+	 public String insert(ModelMap modelMap){
+		 	User user =new User();
+		 	user.setOid(8);
+		 	user.setUsername("XX");
+		 	user.setPassword("XX");
+	        modelMap.addAttribute("user", user);  
+	        return "/user/showInfo";  
+	    } 
 	 /**
 	  *  返回中文字符串,需要在MVC中配置 不然会自动加引号
 	  * @param modelMap

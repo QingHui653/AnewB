@@ -19,7 +19,7 @@ public class LogProxy {
 	
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
-	@Pointcut("execution(* newb.c.controller.*Controller.*(..))")//execution(* newb.c.controller.*.*(..))
+	@Pointcut("execution(* newb.c.controller.*Controller.*(..)) and !execution(* newb.c.controller.ApiController.rep())")//execution(* newb.c.controller.*.*(..))
 	private void Log() {
 	}
 

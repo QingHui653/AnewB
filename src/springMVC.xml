@@ -18,15 +18,8 @@
 	
 	<!-- 启用spring mvc 注解 -->
     <mvc:annotation-driven />
-    
-    <aop:aspectj-autoproxy proxy-target-class="true"/>  
-    <bean id="caFaceAuthAspect" class="newb.c.proxy.log.LogProxy"/>
-
-	<!-- <mvc:annotation-driven /> -->
-    <!--注解说明  
-    <context:annotation-config />--> 
-     
-    <!--@Controller 声明Action组件
+    <!--
+    @Controller 声明Action组件
     @Service    声明Service组件    @Service("myMovieLister") 
     @Repository 声明Dao组件
     @Component   泛指组件, 当不好归类时. 
@@ -36,6 +29,15 @@
     @Transactional( rollbackFor={Exception.class}) 事务管理
     @ResponseBody
     @Scope("prototype")   设定bean的作用域 -->
+    
+    <!-- 日志代理配置 -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>  
+    <bean id="caFaceAuthAspect" class="newb.c.proxy.log.LogProxy"/>
+
+	<!-- <mvc:annotation-driven /> -->
+    <!--注解说明  
+    <context:annotation-config />--> 
+     
 	
 
 	<!--RequestMappingHandlerAdapter -->
@@ -114,8 +116,8 @@
 	<!-- 总错误处理
 		   这里主要的类是SimpleMappingExceptionResolver类，和他的父类AbstractHandlerExceptionResolver类。
 		   具体可以配置哪些属性，我是通过查看源码知道的。
-		   你也可以实现HandlerExceptionResolver接口，写一个自己的异常处理程序。
-    <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		   你也可以实现HandlerExceptionResolver接口，写一个自己的异常处理程序。-->
+    <!-- <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="defaultErrorView">
            <value>/error/error</value> error页面可以通过Exception e = (Exception)request.getAttribute("exception")获得异常信息
         </property>
@@ -125,7 +127,7 @@
         <property name="warnLogCategory">
            <value>org.springframework.web.servlet.handler.SimpleMappingExceptionResolver</value>
         </property>
-    </bean>-->
+    </bean> -->
 	
 	<!-- 对静态资源文件的访问  方案一 （二选一）
                        会把"/**" url,注册到SimpleUrlHandlerMapping的urlMap中,把对静态资源的访问由HandlerMapping转到
@@ -133,16 +135,16 @@
     DefaultServletHttpRequestHandler使用就是各个Servlet容器自己的默认Servlet.
     <mvc:default-servlet-handler/> -->
      
-    <!-- 对静态资源文件的访问  方案二 （二选一）/images/**映射到ResourceHttpRequestHandler进行处理，
+   <!--  对静态资源文件的访问  方案二 （二选一）/images/**映射到ResourceHttpRequestHandler进行处理，
     location指定静态资源的位置.可以是web application根目录下、jar包里面，这样可以把静态资源压缩到jar包中。
-    cache-period 可以使得静态资源进行web cache 
-    <mvc:resources mapping="/images/**" location="/images/" cache-period="31556926"/>
+    cache-period 可以使得静态资源进行web cache  -->
+    <!-- <mvc:resources mapping="/images/**" location="/images/" cache-period="31556926"/>
     <mvc:resources mapping="/js/**" location="/js/" cache-period="31556926"/>
-    <mvc:resources mapping="/css/**" location="/css/" cache-period="31556926"/>-->
-	
-	<!-- <mvc:resources mapping="/javascript/**" location="/static_resources/javascript/" />
-	<mvc:resources mapping="/css/**" location="/css/" />
-	<mvc:resources mapping="/images/**" location="/images/" /> -->
+    <mvc:resources mapping="/css/**" location="/css/" cache-period="31556926"/> -->
+	<!-- <mvc:resources mapping="/css/**" location="/css/" />
+	<mvc:resources mapping="/font/**" location="/css/"/>
+	<mvc:resources mapping="/images/**" location="/images/" />
+	<mvc:resources mapping="/js/**" location="/js/" /> -->
 	<mvc:default-servlet-handler />
 
 	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->

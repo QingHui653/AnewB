@@ -23,5 +23,4 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 	public List<User> getUsers() {
 		return mapper.selectAll();
 	}
-
 }
