@@ -14,10 +14,9 @@
 		http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
 		">
 	<!-- 自动扫描下的包自动装配 -->
-	<context:component-scan base-package="newb.c.controller" />
-	
+	<context:component-scan base-package="newb.c.controller"/>
+    <context:component-scan base-package="newb.c.api"/> 
 	<!-- 启用spring mvc 注解 -->
-    <mvc:annotation-driven />
     <!--
     @Controller 声明Action组件
     @Service    声明Service组件    @Service("myMovieLister") 
@@ -34,13 +33,7 @@
     <aop:aspectj-autoproxy proxy-target-class="true"/>  
     <bean id="caFaceAuthAspect" class="newb.c.proxy.log.LogProxy"/>
 
-	<!-- <mvc:annotation-driven /> -->
-    <!--注解说明  
-    <context:annotation-config />--> 
-     
-	
-
-	<!--RequestMappingHandlerAdapter -->
+	<!--RequestMappingHandlerAdapter 返回映射处理适配器-->
 	<mvc:annotation-driven>
 		<mvc:message-converters>
 			<ref bean="stringHttpMessageConverter" />
@@ -97,7 +90,7 @@
       
            最后执行，可用于释放资源
      public void afterCompletion(HttpServletRequest request,
-       HttpServletResponse response, Object handler, Exception ex)
+       HttpServletResponse response, Object handler, Exception ex);
     <mvc:interceptors >  
      <mvc:interceptor>  
             <mvc:mapping path="/user/*" />  /user/*    
@@ -132,8 +125,8 @@
 	<!-- 对静态资源文件的访问  方案一 （二选一）
                        会把"/**" url,注册到SimpleUrlHandlerMapping的urlMap中,把对静态资源的访问由HandlerMapping转到
     org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler处理并返回.
-    DefaultServletHttpRequestHandler使用就是各个Servlet容器自己的默认Servlet.
-    <mvc:default-servlet-handler/> -->
+    DefaultServletHttpRequestHandler使用就是各个Servlet容器自己的默认Servlet. -->
+    <mvc:default-servlet-handler/>
      
    <!--  对静态资源文件的访问  方案二 （二选一）/images/**映射到ResourceHttpRequestHandler进行处理，
     location指定静态资源的位置.可以是web application根目录下、jar包里面，这样可以把静态资源压缩到jar包中。
@@ -145,7 +138,6 @@
 	<mvc:resources mapping="/font/**" location="/css/"/>
 	<mvc:resources mapping="/images/**" location="/images/" />
 	<mvc:resources mapping="/js/**" location="/js/" /> -->
-	<mvc:default-servlet-handler />
 
 	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
 	<!--内容协商 -->
@@ -185,8 +177,7 @@
 	</bean>
 
 	<!-- 配置多文件上传 -->
-	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="defaultEncoding">
 			<value>UTF-8</value>
 		</property>

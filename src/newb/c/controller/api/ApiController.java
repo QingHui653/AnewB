@@ -1,4 +1,4 @@
-package newb.c.controller;
+package newb.c.controller.api;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

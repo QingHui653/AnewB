@@ -1,4 +1,4 @@
-package newb.c.controller;
+package newb.c.controller.User;
 
 import io.swagger.annotations.ApiOperation;
 

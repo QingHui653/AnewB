@@ -1,4 +1,4 @@
-package newb.c.service;
+package newb.c.controller.api;
 
 import java.util.List;
 
