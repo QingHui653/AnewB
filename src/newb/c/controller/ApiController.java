@@ -44,6 +44,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,8 +54,8 @@ import tk.mybatis.mapper.common.base.select.SelectMapper;
 import tk.mybatis.mapper.entity.Example;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.pipeline.JsonFilePipeline;
-import newb.c.controller.acomponent.GithubRepoPageProcessor;
-import newb.c.controller.acomponent.ProducerServiceImpl;
+import newb.c.controller.component.GithubRepoPageProcessor;
+import newb.c.controller.component.ProducerServiceImpl;
 import newb.c.model.RepList;
 import newb.c.model.Result;
 import newb.c.service.ResultService;
@@ -173,5 +174,23 @@ public class ApiController {
 		List<RepList> repList= resultService.getRepList();
 		modelMap.addAttribute("repList", repList);
 		return "rep/newb";
+	}
+	
+	@RequestMapping(value="/rep/{group}",method=RequestMethod.GET)
+	public String getGroupRes(ModelMap modelMap,@PathVariable String group) {
+		Example  example =new Example(Result.class);
+		example.createCriteria().andEqualTo("f1", group);
+		List<Result> GroupList = resultService.selectByExample(example);
+		modelMap.addAttribute("GroupList", GroupList);
+		return "rep/GroupList";
+	}
+	
+	@RequestMapping(value="/rep/{group}/{project}",method=RequestMethod.GET)
+	public String getProject(ModelMap modelMap,@PathVariable String group,@PathVariable String project) {
+		Example  example =new Example(Result.class);
+		example.createCriteria().andEqualTo("f1", group).andEqualTo("f4", project);
+		List<Result> GroupList = resultService.selectByExample(example);
+		modelMap.addAttribute("GroupList", GroupList);
+		return "rep/GroupList";
 	}
 }

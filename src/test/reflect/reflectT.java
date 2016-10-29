@@ -26,10 +26,10 @@ public class reflectT {
 		Object ob = cl.newInstance();   //新建实例
 		System.out.println("getDeclaredFields 字段名 "+Arrays.toString(cl.getDeclaredFields()));
 		Field[] f= cl.getDeclaredFields();
-		/*for (Field ff : f) {
+		for (Field ff : f) {
 			ff.setAccessible(true);
 			ff.set(ob, ff.getName());
-		}*/
+		}
 		} catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
 		}

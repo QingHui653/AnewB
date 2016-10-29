@@ -1,4 +1,4 @@
-package newb.c.controller.acomponent;
+package newb.c.controller.component;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +34,7 @@ public class GithubRepoPageProcessor implements PageProcessor {
         Result r = new Result();
         r.setF1(page.getUrl().regex("https://github\\.com/(\\w+)/.*").toString());
         r.setF2(page.getHtml().xpath("//*[@id='js-repo-pjax-container']/div[1]/div[1]/h1/strong/a/tidyText()").toString());// //h1[@class='entry-title public']/strong/a/text()
+        r.setF4(page.getHtml().xpath("//*[@id='js-repo-pjax-container']/div[1]/div[1]/h1/strong/a/text()").toString());// //h1[@class='entry-title public']/strong/a/text()
         r.setF3(page.getHtml().xpath("//div[@id='readme']/tidyText()").toString());
 //        page.putField("author", page.getUrl().regex("https://github\\.com/(\\w+)/.*").toString());
 //        page.putField("name", page.getHtml().xpath("//h1[@class='entry-title public']/strong/a/text()").toString());

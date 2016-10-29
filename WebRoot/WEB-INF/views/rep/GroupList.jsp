@@ -78,12 +78,32 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${repList}" var="rep">
+						<c:forEach items="${GroupList}" var="group">
 							<tr>
-								<td><a href="project/${rep.result }">${rep.result }</td>
-								<td>${rep.count }</td>
+								<td>${group.f1 }</td>
+								<td>${group.f2 }</td>
 							</tr>
 						</c:forEach>
+						<tr>
+							<td>1</td>
+							<td>01/04/2012</td>
+						</tr>
+						<tr class="success">
+							<td>1</td>
+							<td>TB - Monthly</td>
+						</tr>
+						<tr class="error">
+							<td>2</td>
+							<td>TB - Monthly</td>
+						</tr>
+						<tr class="warning">
+							<td>3</td>
+							<td>TB - Monthly</td>
+						</tr>
+						<tr class="info">
+							<td>4</td>
+							<td>TB - Monthly</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>

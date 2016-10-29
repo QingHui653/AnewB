@@ -73,7 +73,7 @@ public class UserController {
 	 * @return
 	 */
 	 @ApiOperation(value = "获取用户列表", notes = "") 
-	 @RequestMapping(value="/newb/{userId}",method= RequestMethod.POST) 
+	 @RequestMapping(value="/newb/{userId}",method= RequestMethod.GET) 
 	 public String showUserInfo(ModelMap modelMap,@PathVariable int userId){
 	        User user = userService.getUserById(userId);
 	        modelMap.addAttribute("user", user);  

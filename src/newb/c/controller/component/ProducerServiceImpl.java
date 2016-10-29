@@ -1,4 +1,4 @@
-package newb.c.controller.acomponent;
+package newb.c.controller.component;
 
 
 import javax.jms.Destination;

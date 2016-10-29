@@ -4,9 +4,9 @@ public class RepList {
 	
 	private String result;
 	
-	private int count;
+	private Long count;
 
-	public RepList(String result, int count) {
+	public RepList(String result, Long count) {
 		super();
 		this.result = result;
 		this.count = count;
@@ -20,13 +20,12 @@ public class RepList {
 		this.result = result;
 	}
 
-	public int getCount() {
+	public Long getCount() {
 		return count;
 	}
 
-	public void setCount(int count) {
+	public void setCount(Long count) {
 		this.count = count;
 	}
-
 	
 }

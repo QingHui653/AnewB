@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-public class User implements Serializable {
+public class User implements Serializable,Comparable<User> {
     /**
      * ID
      */
@@ -15,8 +15,21 @@ public class User implements Serializable {
     private String username;
 
     private String password;
+    
+    
 
-    /**
+    public User() {
+		super();
+	}
+
+	public User(Integer oid, String username, String password) {
+		super();
+		this.oid = oid;
+		this.username = username;
+		this.password = password;
+	}
+
+	/**
      * 获取ID
      *
      * @return oid - ID
@@ -61,4 +74,17 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
+	@Override
+	public int compareTo(User o) {
+		return this.getOid()-o.getOid();
+	}
+
+	@Override
+	public String toString() {
+		return "User["+oid+","+username+","+password+"]";
+	}
+    
+	
+    
 }
