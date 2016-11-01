@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProducerServiceImpl{
 	
-	/*@Autowired
+	@Autowired
 	private JmsTemplate jmsTemplate; 
 	
 	public void sendMessage(Destination destination, final String message) {   
@@ -29,5 +29,5 @@ public class ProducerServiceImpl{
   
     public JmsTemplate getJmsTemplate() {   
         return jmsTemplate;   
-    }  */  
+    }    
 }

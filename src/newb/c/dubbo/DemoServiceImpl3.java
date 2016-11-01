@@ -5,11 +5,11 @@ import java.util.List;
 
 import newb.c.model.User;
 
-public class DemoServiceImpl implements DemoService {
+public class DemoServiceImpl3 implements DemoService3 {
 
 	@Override
 	public String sayHello(String name) {
-		return "Hello1 " + name;
+		return "Hello3 " + name;
 	}
 
 	@Override

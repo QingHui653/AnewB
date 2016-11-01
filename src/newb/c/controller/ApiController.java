@@ -74,10 +74,10 @@ public class ApiController {
 	private ResultService resultService;
 	@Autowired
 	private GithubRepoPageProcessor g;
-//	@Autowired
-//	private ProducerServiceImpl producerServiceImpl;
-	/*@Autowired
-	private Destination destination; */
+	@Autowired
+	private ProducerServiceImpl producerServiceImpl;
+	@Autowired
+	private Destination destination; 
 	
 	private static final Logger logger = LoggerFactory.getLogger(ApiController.class);
 	
@@ -162,12 +162,12 @@ public class ApiController {
 		System.out.println("redis 查询"+valueOper.get("CC"));
     }
 	
-	/*@RequestMapping("/sendmq")
+	@RequestMapping("/sendmq")
 	@ResponseBody
 	public String sendmq() {
 		producerServiceImpl.sendMessage(destination, "HHHHHworld");
 		return "OK";
-	}*/
+	}
 	
 	@RequestMapping(value="/rep/getRes",method=RequestMethod.GET)
 	public String getRepRes(ModelMap modelMap) {
