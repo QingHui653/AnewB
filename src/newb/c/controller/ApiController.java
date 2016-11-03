@@ -23,6 +23,7 @@ import java.util.List;
 
 
 import java.util.Properties;
+import java.util.concurrent.Callable;
 
 import javax.jms.Destination;
 
@@ -38,6 +39,7 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
@@ -56,8 +58,10 @@ import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.pipeline.JsonFilePipeline;
 import newb.c.controller.component.GithubRepoPageProcessor;
 import newb.c.controller.component.ProducerServiceImpl;
+import newb.c.dubbo.DemoService0;
 import newb.c.model.RepList;
 import newb.c.model.Result;
+import newb.c.model.User;
 import newb.c.service.ResultService;
 import newb.c.utilDb.DataHandle;
 
@@ -77,8 +81,10 @@ public class ApiController {
 	@Autowired
 	private ProducerServiceImpl producerServiceImpl;
 	@Autowired
-	private Destination destination; 
-	
+	private Destination destination;
+	@Autowired
+	private DemoService0 demoService;
+
 	private static final Logger logger = LoggerFactory.getLogger(ApiController.class);
 	
 	DataHandle data =new DataHandle();
@@ -192,5 +198,16 @@ public class ApiController {
 		List<Result> GroupList = resultService.selectByExample(example);
 		modelMap.addAttribute("GroupList", GroupList);
 		return "rep/GroupList";
+	}
+	
+	@RequestMapping(value="/dubbo",method=RequestMethod.GET)
+	public Object getDubboServer(){
+		/*String hello = (String) demoService.sayHello("tom");  
+        System.out.println(hello);   
+        List<User> list = (List<User>) demoService.getUsers();*/
+        Object hello =demoService.sayHello("tom");  
+        System.out.println(hello);   
+        Object list =demoService.getUsers();
+		return list;
 	}
 }

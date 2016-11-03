@@ -29,6 +29,6 @@
     <!-- 声明需要暴露的服务接口 -->  
     <dubbo:service interface="newb.c.dubbo.DemoService" ref="demoService" />  
     <dubbo:service interface="newb.c.dubbo.DemoService2" ref="demoService2" />  
-    <dubbo:service interface="newb.c.dubbo.DemoService3" ref="demoService3" />  
+    <!-- <dubbo:service interface="newb.c.dubbo.DemoService3" ref="demoService3" />-->
       
 </beans>
