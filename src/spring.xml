@@ -16,6 +16,8 @@
 	<context:property-placeholder location="classpath*:*.properties" />
 	
 	<import resource="spring-*.xml"/>
+	<!-- <import resource="springhighGrade-*.xml"/> -->
+	
 	<!-- <import resource="spring-cache.xml"/>
 	<import resource="spring-mybatis.xml"/> -->
 	

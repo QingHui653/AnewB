@@ -78,12 +78,14 @@ public class ApiController {
 	private ResultService resultService;
 	@Autowired
 	private GithubRepoPageProcessor g;
-	@Autowired
+	//ActiveMQ
+	/*@Autowired
 	private ProducerServiceImpl producerServiceImpl;
 	@Autowired
-	private Destination destination;
-	@Autowired
-	private DemoService0 demoService;
+	private Destination destination;*/
+	//dubbo IOC
+	/*@Autowired
+	private DemoService0 demoService;*/
 
 	private static final Logger logger = LoggerFactory.getLogger(ApiController.class);
 	
@@ -168,10 +170,11 @@ public class ApiController {
 		System.out.println("redis 查询"+valueOper.get("CC"));
     }
 	
-	@RequestMapping("/sendmq")
+	@RequestMapping(value="/sendmq",method=RequestMethod.GET)
 	@ResponseBody
 	public String sendmq() {
-		producerServiceImpl.sendMessage(destination, "HHHHHworld");
+		//ActiveMq
+//		producerServiceImpl.sendMessage(destination, "HHHHHworld");
 		return "OK";
 	}
 	
@@ -205,9 +208,10 @@ public class ApiController {
 		/*String hello = (String) demoService.sayHello("tom");  
         System.out.println(hello);   
         List<User> list = (List<User>) demoService.getUsers();*/
-        Object hello =demoService.sayHello("tom");  
-        System.out.println(hello);   
-        Object list =demoService.getUsers();
-		return list;
+		//dubbo test
+//        Object hello =demoService.sayHello("tom");  
+//        System.out.println(hello);   
+//        Object list =demoService.getUsers();
+		return null;
 	}
 }

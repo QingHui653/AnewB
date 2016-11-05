@@ -50,9 +50,9 @@ public class SpringfoxDocConfig {
                 .description("可查看所以的api说明")
                 .termsOfServiceUrl("AnewB")
                 .contact("AnewB")
-                .license("Apache License Version 2.0")
+                .license("i just want run")
                 .licenseUrl("https://github.com/QingHui653")
-                .version("2.0")
+                .version("9999999")
                 .build();
     }
 

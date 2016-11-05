@@ -14,7 +14,6 @@
     <cache:annotation-driven cache-manager="cacheManager" key-generator="myKeyGenerator"/>
     
     <!-- 自定义key生成器 -->
-    <!-- <bean id="myKeyGenerator" class="com.feng.cache.common.MyKeyGenerator"></bean> -->
     <bean id="myKeyGenerator" class="newb.c.cache.common.MyKeyGenerator"></bean>
     
     

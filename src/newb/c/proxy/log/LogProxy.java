@@ -29,6 +29,9 @@ public class LogProxy {
 		System.out.println("");
 		System.out.println("-------------------------------日志代理开始--------------------------------------------------");
 		System.out.println("----------------进入的方法为 --- "+point.toString());
+		//Struts2的切面方法切不到,所以只能输出这个
+		System.out.println("----------------截取Struts2 --- "+point.getThis()+"+++"+point.toShortString());
+		//Struts2的切面方法切不到,所以只能输出这个
 		System.out.println("----------------传入的参数为---" +Arrays.toString(point.getArgs()));
 //		System.out.println("1--"+point.toString());
 //		System.out.println("2--"+point.toShortString());
@@ -40,10 +43,6 @@ public class LogProxy {
 	 	System.out.println("----------------开始时间---"+curtime);
 	}
 
-	/**
-	 * This is the method which I would like to execute after a selected method
-	 * execution.
-	 */
 	@After("Log()")
 	public void afterAdvice() {
 		String curtime=sdf.format(Calendar.getInstance().getTime());
@@ -51,9 +50,6 @@ public class LogProxy {
 		System.out.println("-------------------------------日志代理结束--------------------------------------------------");
 	}
 
-	/**
-	 * This is the method which I would like to execute when any method returns.
-	 */
 	@AfterReturning(pointcut = "Log()", returning = "retVal")
 	public void afterReturningAdvice(Object retVal) {
 		if (retVal!=null) {
@@ -61,10 +57,6 @@ public class LogProxy {
 		}
 	}
 
-	/**
-	 * This is the method which I would like to execute if there is an exception
-	 * raised by any method.
-	 */
 	@AfterThrowing(pointcut = "Log()", throwing = "ex")
 	public void AfterThrowingAdvice(IllegalArgumentException ex) {
 		System.out.println("There has been an exception: " + ex.toString());
