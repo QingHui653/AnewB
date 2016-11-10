@@ -2,8 +2,6 @@ package test.base;
 
 import java.util.Arrays;
 
-import com.sun.tools.doclets.internal.toolkit.Configuration;
-
 public class arrays {
 
 	public static void main(String[] args) {

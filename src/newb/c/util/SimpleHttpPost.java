@@ -27,14 +27,11 @@ public class SimpleHttpPost  {
 			HttpResponse httpResponse=httpclient.execute(httpPost);
 			if(httpResponse.getStatusLine().getStatusCode()==200){
 				HttpEntity httpEntity=httpResponse.getEntity();
-				
 				response=EntityUtils.toString(httpEntity, "utf-8");
 			}
 		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return response;

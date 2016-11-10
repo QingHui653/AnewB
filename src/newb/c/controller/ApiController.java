@@ -52,10 +52,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import io.swagger.annotations.ApiOperation;
 import tk.mybatis.mapper.common.base.select.SelectMapper;
 import tk.mybatis.mapper.entity.Example;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.pipeline.JsonFilePipeline;
+import newb.c.api.weather.weather;
 import newb.c.controller.component.GithubRepoPageProcessor;
 import newb.c.controller.component.ProducerServiceImpl;
 import newb.c.dubbo.DemoService0;
@@ -86,6 +88,8 @@ public class ApiController {
 	//dubbo IOC
 	/*@Autowired
 	private DemoService0 demoService;*/
+	
+	weather weather = new weather();
 
 	private static final Logger logger = LoggerFactory.getLogger(ApiController.class);
 	
@@ -213,5 +217,13 @@ public class ApiController {
 //        System.out.println(hello);   
 //        Object list =demoService.getUsers();
 		return null;
+	}
+	
+	@ApiOperation(value="根据城市获取天气情况")
+	@RequestMapping(value="/weather/{cityname}",method=RequestMethod.GET)
+	@ResponseBody
+	public Object queryWeather(@PathVariable String cityname){
+		String res= weather.queryWeather(cityname);
+		return res;
 	}
 }

@@ -63,8 +63,8 @@ public class RedisCacheFactoryBean implements Cache {
   }
 
   /**
-   * 描述 : <Object转byte[]>. <br>
    * <p>
+   * 描述 : <Object转byte[]>. <br>
    * <使用方法说明>
    * </p>
    * 

@@ -1,5 +1,7 @@
 package test.arith;
 
+import java.util.Arrays;
+
 public class InsertSort {
 
 	/**
@@ -70,7 +72,29 @@ public class InsertSort {
 		for (int i = 1; i < sorted.length; i++) {
 			System.out.println("  "+sorted[i]);
 		}
+		System.out.println("------------------------------插入排序");
+		int[] sort = {0,332,25,73,63,44};
+		int[] arr = {3,44,38,5,47,15,36,26,27,2,46,4,19,50,48};
+		InsertSort ins = new InsertSort();
+		
+		int[] c= ins.insertionSort(arr);
+		int[] c2= ins.insertionSort(sort);
+		
+		System.out.println("--------插入排序"+Arrays.toString(c));
+		System.out.println("--------插入排序"+Arrays.toString(c2));
 	}
 	
+	public int[] insertionSort(int[] array) {
+		for (int i = 1; i < array.length; i++) {
+            int key = array[i];
+            int j = i - 1;
+            while (j >= 0 && array[j] > key) {
+                array[j + 1] = array[j];
+                j--;
+            }
+            array[j + 1] = key;
+        }
+        return array;
+	}
 
 }

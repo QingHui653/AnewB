@@ -28,7 +28,7 @@ public class GithubRepoPageProcessor implements PageProcessor {
 //        System.out.println(page.getResultItems().getAll());
         System.out.println("-----------内容-----------");
         System.out.println("------------------------------");
-        System.out.println(page.getResultItems().get("readme"));
+        System.out.println(page.getResultItems().get("readme").toString());
         System.out.println("-----------结束---------------");
     }
 
