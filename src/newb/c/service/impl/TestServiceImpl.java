@@ -7,7 +7,7 @@ import newb.c.model.UserCache;
 import newb.c.service.TestCacheService;
 
 @Service("TestService")
-public class TestServiceImpl extends BaseService<UserCache> implements TestCacheService{
+public class TestServiceImpl extends BaseServiceImpl<UserCache> implements TestCacheService{
 
 	@Override
 	@Cacheable(value="default")

@@ -96,6 +96,19 @@ public class UserController {
 	        modelMap.addAttribute("user", user);  
 	        return "/user/showInfo";  
 	    } 
+	 
+	 /**
+	  * del 测试事务 具体看BaseServiceImpl
+	  * @param modelMap
+	  * @param userId
+	  * @return
+	  */
+	 @RequestMapping(value="/newb/del",method= RequestMethod.POST)
+	 @ResponseBody
+	 public String del(ModelMap modelMap){
+		 	int test=userService.delete(null);
+	        return test+"";  
+	    }
 	 /**
 	  *  返回中文字符串,需要在MVC中配置 不然会自动加引号
 	  * @param modelMap

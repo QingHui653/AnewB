@@ -12,7 +12,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service("ResultService")
-public class ResultServiceImpl extends BaseService<Result> implements ResultService {
+public class ResultServiceImpl extends BaseServiceImpl<Result> implements ResultService {
 	
 	@Autowired
 	private ResultMapper resultMapper;

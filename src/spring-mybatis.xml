@@ -15,7 +15,8 @@
 		http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
 		http://www.springframework.org/schema/context
        	http://www.springframework.org/schema/context/spring-context.xsd
-       	http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+       	http://www.springframework.org/schema/cache 
+       	http://www.springframework.org/schema/cache/spring-cache.xsd
        	http://www.dangdang.com/schema/ddframe/rdb 
         http://www.dangdang.com/schema/ddframe/rdb/rdb.xsd
        	">
@@ -135,8 +136,8 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<!-- 注解方式配置事物 -->
-	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
+	<!-- 开启注解方式支持配置事物 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
 	
 	<!-- 拦截器方式配置事物 -->
 	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">

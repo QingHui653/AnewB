@@ -101,7 +101,7 @@
 	<!-- 配置权限拦截器 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/admin/" />
+			<mvc:mapping path="/**" />
 			<bean class="newb.c.interceptor.MemberInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
