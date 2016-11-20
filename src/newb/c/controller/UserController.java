@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import newb.c.model.RepList;
 import newb.c.model.SessionB;
 import newb.c.model.User;
 import newb.c.model.UserData;
