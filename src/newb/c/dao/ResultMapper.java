@@ -10,6 +10,8 @@ import newb.c.service.common.MyMapper;
 
 public interface ResultMapper extends MyMapper<Result> {
 	
-	@Select("SELECT F_1 ,count(F_1) count FROM RESULT GROUP BY F_1")
+	@Select("SELECT F_1 result ,count(F_1) count FROM RESULT GROUP BY F_1")
 	List<RepList> getRepList();
+	
+	
 }

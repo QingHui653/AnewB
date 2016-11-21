@@ -9,7 +9,7 @@ public class User implements Serializable,Comparable<User> {
      * ID
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    /*@GeneratedValue(strategy = GenerationType.IDENTITY)*/
     private Integer oid;
 
     private String username;

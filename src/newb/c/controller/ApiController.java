@@ -63,8 +63,11 @@ import newb.c.controller.component.ProducerServiceImpl;
 import newb.c.dubbo.DemoService0;
 import newb.c.model.RepList;
 import newb.c.model.Result;
+import newb.c.model.TOrder;
 import newb.c.model.User;
 import newb.c.service.ResultService;
+import newb.c.service.TOrderService;
+import newb.c.service.UserService;
 import newb.c.utilDb.DataHandle;
 
 
@@ -78,8 +81,12 @@ public class ApiController {
 	private RedisTemplate<String, String> redisTemplate;
 	@Autowired
 	private ResultService resultService;
+	@Autowired 
+	private UserService userService;
 	@Autowired
 	private GithubRepoPageProcessor g;
+	@Autowired
+	private TOrderService tOrderService;
 	//ActiveMQ
 	/*@Autowired
 	private ProducerServiceImpl producerServiceImpl;
@@ -225,5 +232,28 @@ public class ApiController {
 	public Object queryWeather(@PathVariable String cityname){
 		String res= weather.queryWeather(cityname);
 		return res;
+	}
+	
+	@RequestMapping(value="/sharding",method=RequestMethod.GET)
+	@ResponseBody
+	public Object shardingTest() {
+		/*TOrder tO0=new TOrder(0, 0, "第0条数据");
+		int bool0= tOrderService.insertByXML(tO0);
+		TOrder tO1=new TOrder(1, 1, "第1条数据");
+		int bool1= tOrderService.insertByXML(tO1);
+		TOrder tO2=new TOrder(2, 2, "第2条数据");
+		int bool2= tOrderService.insertByXML(tO2);*/
+		
+//		TOrder tO1=new TOrder(1, 1, "第1条数据");
+//		int bool1= tOrderService.insertByMapper(tO1);
+//		TOrder tO2=new TOrder(2, 2, "第2条数据");
+//		int bool2= tOrderService.insertByComm(tO2); 
+		/**
+		 * 分页插件不支持主键自增,SELECT LAST_INSERT_ID();配置在model中
+		 */
+		User u = new User(10, "xx", "cc");
+		int bool0=userService.save(u);
+		
+		return bool0;
 	}
 }

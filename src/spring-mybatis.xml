@@ -8,11 +8,11 @@
 	xmlns:rdb="http://www.dangdang.com/schema/ddframe/rdb" 
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans 
-		http://www.springframework.org/schema/beans/spring-beans-4.1.xsd 
+		http://www.springframework.org/schema/beans/spring-beans.xsd 
 		http://www.springframework.org/schema/tx 
-		http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+		http://www.springframework.org/schema/tx/spring-tx.xsd
 		http://www.springframework.org/schema/aop 
-		http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+		http://www.springframework.org/schema/aop/spring-aop.xsd
 		http://www.springframework.org/schema/context
        	http://www.springframework.org/schema/context/spring-context.xsd
        	http://www.springframework.org/schema/cache 
@@ -25,8 +25,7 @@
     <context:component-scan base-package="newb.c.service" /> 
 	
 	<!-- 配置数据源 使用的是Druid数据源 -->
-	<bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
-		init-method="init" destroy-method="close">
+	<bean name="parentDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
@@ -58,29 +57,41 @@
 		<!-- 监控数据库   这个别名映射配置信息保存在druid-xxx.jar!/META-INF/druid-filter.properties-->
 		<property name="filters" value="mergeStat,log4j" />
 	</bean>
-	
-    <!-- <rdb:strategy id="databaseStrategy" sharding-columns="user_id" algorithm-class="com.dangdang.ddframe.rdb.sharding.spring.algorithm.SingleKeyModuloDatabaseShardingAlgorithm"/>
-    <rdb:strategy id="tableStrategy" sharding-columns="order_id" algorithm-class="com.dangdang.ddframe.rdb.sharding.spring.algorithm.SingleKeyModuloTableShardingAlgorithm"/>
-
+	<!-- 分库数据库0 -->
+	<bean id="ds_0" parent="parentDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+    <!-- 分库数据库1 -->
+	<bean id="ds_1" parent="parentDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+    	
+    <rdb:strategy id="databaseShardingStrategy" sharding-columns="user_id" algorithm-class="newb.c.sharding.SingleKeyModuloDatabaseShardingAlgorithm"/>
+    <rdb:strategy id="tableShardingStrategy" sharding-columns="order_id" algorithm-class="newb.c.sharding.SingleKeyModuloTableShardingAlgorithm"/>
+    
     <rdb:data-source id="shardingDataSource">
-        <rdb:sharding-rule data-sources="dbtbl_0,dbtbl_1" default-data-source="dbtbl_0">
+        <rdb:sharding-rule data-sources="ds_0,ds_1" default-data-source="ds_0">
             <rdb:table-rules>
-                <rdb:table-rule logic-table="t_order" actual-tables="t_order_${0..3}" table-strategy="tableStrategy"/>
-                <rdb:table-rule logic-table="t_order_item" actual-tables="t_order_item_${0..3}" database-strategy="databaseStrategy" table-strategy="tableStrategy"/>
+                <rdb:table-rule logic-table="t_order" actual-tables="t_order_0,t_order_1" database-strategy="databaseShardingStrategy" table-strategy="tableShardingStrategy"/>
             </rdb:table-rules>
             <rdb:binding-table-rules>
-                <rdb:binding-table-rule logic-tables="t_order, t_order_item"/>
+                <rdb:binding-table-rule logic-tables="t_order"/>
             </rdb:binding-table-rules>
-            <rdb:default-database-strategy sharding-columns="user_id" algorithm-expression="dbtbl_${id.longValue() % 2 + 1}"/>
         </rdb:sharding-rule>
         <rdb:props>
             <prop key="metrics.enable">true</prop>
         </rdb:props>
-    </rdb:data-source> -->
+    </rdb:data-source>
      
 	<!-- myBatis文件 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
+		<property name="dataSource" ref="shardingDataSource" /><!-- parentDataSource shardingDataSource -->
 		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
 		<property name="mapperLocations" value="classpath:/newb/c/mapping/*.xml" />
 		<property name="typeAliasesPackage" value="newb.c.model"/>
@@ -133,7 +144,7 @@
 	<!-- 配置事务管理器 -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
+		<property name="dataSource" ref="shardingDataSource" /><!-- parentDataSource  shardingDataSource-->
 	</bean>
 
 	<!-- 开启注解方式支持配置事物 -->
@@ -143,9 +154,11 @@
 	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="insert*" propagation="REQUIRED" />
+			<!-- <tx:method name="save*" propagation="REQUIRED" /> -->
 			<tx:method name="update*" propagation="REQUIRED" />
 			<tx:method name="delete*" propagation="REQUIRED" />
 			<tx:method name="get*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="query*" propagation="SUPPORTS" read-only="true" />
 			<tx:method name="find*" propagation="SUPPORTS" read-only="true" />
 			<tx:method name="select*" propagation="SUPPORTS" read-only="true" />
 		</tx:attributes>

@@ -80,8 +80,8 @@
 					<tbody>
 						<c:forEach items="${GroupList}" var="group">
 							<tr>
-								<td>${group.f1 }</td>
-								<td>${group.f2 }</td>
+								<td>${group.result }</td>
+								<td>${group.count }</td>
 							</tr>
 						</c:forEach>
 						<tr>

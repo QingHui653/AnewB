@@ -27,6 +27,13 @@ import lombok.NoArgsConstructor;
 public class RepList {
 	private String result;
 	private Long count;
+	
+	public RepList(String result, Long count) {
+		super();
+		this.result = result;
+		this.count = count;
+	}
+	
 	public String getResult() {
 		return result;
 	}
