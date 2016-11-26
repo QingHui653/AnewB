@@ -57,14 +57,13 @@
 		<!-- 监控数据库   这个别名映射配置信息保存在druid-xxx.jar!/META-INF/druid-filter.properties-->
 		<property name="filters" value="mergeStat,log4j" />
 	</bean>
-	<!-- 分库数据库0 -->
+	
 	<bean id="ds_0" parent="parentDataSource">
         <property name="driverClassName" value="${jdbc.driver}"/>
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
     </bean>
-    <!-- 分库数据库1 -->
 	<bean id="ds_1" parent="parentDataSource">
         <property name="driverClassName" value="${jdbc.driver}"/>
         <property name="url" value="${jdbc.url}"/>
@@ -154,7 +153,7 @@
 	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="insert*" propagation="REQUIRED" />
-			<!-- <tx:method name="save*" propagation="REQUIRED" /> -->
+			<tx:method name="save*" propagation="REQUIRED" />
 			<tx:method name="update*" propagation="REQUIRED" />
 			<tx:method name="delete*" propagation="REQUIRED" />
 			<tx:method name="get*" propagation="SUPPORTS" read-only="true" />

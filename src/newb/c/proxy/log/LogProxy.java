@@ -3,6 +3,7 @@ package newb.c.proxy.log;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -50,10 +51,15 @@ public class LogProxy {
 		System.out.println("-------------------------------日志代理结束--------------------------------------------------");
 	}
 
+	@SuppressWarnings("rawtypes")
 	@AfterReturning(pointcut = "Log()", returning = "retVal")
 	public void afterReturningAdvice(Object retVal) {
 		if (retVal!=null) {
-			System.out.println("----------------返回值为--" + retVal.toString());
+			if(retVal instanceof List){
+				System.out.println("----------------返回List的个数为--"+((List)retVal).size());
+			}else {
+				System.out.println("----------------返回值为--" + retVal.toString());
+			}
 		}
 	}
 

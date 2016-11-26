@@ -18,7 +18,10 @@ public class stream {
 			       "Juan Martin Del Potro"};  
 			List<String> players =  Arrays.asList(atp);
 			players.forEach((player) -> System.out.print(player + "; "));
-			 
+			
+			int[] inp={5,3,6}; 		
+			List<int[]> i = Arrays.asList(inp);
+			i.forEach((l)->System.out.println(Arrays.toString(l)));
 	}
 	
 	

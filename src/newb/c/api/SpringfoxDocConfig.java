@@ -31,7 +31,10 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @EnableSwagger2 //Enable swagger 2.0 spec
 @ComponentScan("newb.c.controller")
 public class SpringfoxDocConfig {
-
+	/**
+	 * 访问/swagger-ui.html
+	 * @return
+	 */
 	@Bean
     public Docket configSpringfoxDocketForAll() {
         return new Docket(DocumentationType.SWAGGER_2)

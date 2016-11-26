@@ -1,10 +1,17 @@
 package newb.c.model;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
-public class Result {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Result implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
+    /*@GeneratedValue(strategy = GenerationType.IDENTITY)*/
     private Integer oid;
 
     @Column(name = "f_1")

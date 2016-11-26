@@ -1,10 +1,17 @@
 package newb.c.model;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Table(name = "t_order")
-public class TOrder {
-    @Id
+public class TOrder implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @Column(name = "order_id")
     /*@GeneratedValue(strategy = GenerationType.IDENTITY)*/
     private Integer orderId;

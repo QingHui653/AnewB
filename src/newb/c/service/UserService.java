@@ -10,4 +10,6 @@ public interface UserService extends IService<User> {
     User getUserById(int id);  
     
     List<User> getUsers();
+    
+    int insertAll(List<User> userList);
 }

@@ -1,6 +1,7 @@
 package newb.c.util;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,6 +30,8 @@ public class JsonUtil {
 //			System.out.println("ff"+ff.getName());
 //			System.out.println("ff"+ff.getType().toString());
 //			System.out.println("ff"+m.get(ff.getName()));
+			
+			if(ff.getGenericType().getTypeName() instanceof  String)
 			if (ff.getType().toString().equals("class java.lang.Integer")) {
 				ff.set(ob, Integer.valueOf(m.get(ff.getName())));
 			}else {

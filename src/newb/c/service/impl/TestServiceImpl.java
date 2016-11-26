@@ -1,14 +1,21 @@
 package newb.c.service.impl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import newb.c.dao.UserCacheMapper;
 import newb.c.model.UserCache;
 import newb.c.service.TestCacheService;
 
 @Service("TestService")
 public class TestServiceImpl extends BaseServiceImpl<UserCache> implements TestCacheService{
 
+	@Autowired
+	private UserCacheMapper userCacheMapper;
+		
 	@Override
 	@Cacheable(value="default")
 	public String defaultCache(String name) {
@@ -57,6 +64,11 @@ public class TestServiceImpl extends BaseServiceImpl<UserCache> implements TestC
 	public String redisCache1hour(String name) {
 		System.err.println("db start break redisCache1hour");
 		return "redisCache1hour";
+	}
+
+	@Override
+	public int insertAll(List<UserCache> userCacheList) {
+		return userCacheMapper.insertAll(userCacheList);
 	}
 
 }

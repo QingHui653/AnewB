@@ -1,10 +1,17 @@
 package newb.c.model;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Table(name = "user_cache")
-public class UserCache {
+public class UserCache implements Serializable{
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * ID
      */
     @Id
