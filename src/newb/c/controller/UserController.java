@@ -104,24 +104,38 @@ public class UserController {
 		 	/**
 		 	 * 测试插入10w数据，用时，在服务器开启后第一次用时10s，后面用时2-4s
 		 	 */
-		 	/*List<User> userList = new ArrayList<User>();
-		 	for (int i = 0; i < 100000; i++) {
+		 	List<User> userList = new ArrayList<User>();
+		 	for (int i = 0; i < 400000; i++) {
 		 		User user =new User();
 		 		user.setOid(i);
 		 		user.setUsername(i+"");
 		 		user.setPassword(i+"");
 		 		userList.add(user);
 			}
-		 	userService.insertAll(userList);*/
+		 	userService.insertAll(userList);
 		 	/**
 		 	 * 测试查询10w条数据，user在oid加入索引 类型Unique 方法：BTREE
 		 	 */
-		 	Example e= new Example(User.class);
+		 	/*Example e= new Example(User.class);
 		 	e.createCriteria().andGreaterThanOrEqualTo("oid", 0);
 		 	List<User> userList = userService.selectByExample(e);
-		 	System.out.println("有索引--"+userList.size());
+		 	System.out.println("有索引--"+userList.size());*/
 	        return "/user/showInfo";  
 	    } 
+	 
+	 /**
+	  * save 测试事务
+	  * @param modelMap
+	  * @param userId
+	  * @return
+	  */
+	 @RequestMapping(value="/user/selectuser",method= RequestMethod.GET)
+	 @ResponseBody
+	 public String selectUserForUpdate(ModelMap modelMap){
+		 	List<User> userList = userService.selectAllForUpdate();
+		 	System.out.println("有索引 forupdate--"+userList.size());
+	        return "/user/showInfo";  
+	    }
 	 
 	 /**
 	  * userCahce表，测试插入10w条数据
@@ -135,24 +149,24 @@ public class UserController {
 		 /**
 		 	 * 测试插入10w数据，用时，在服务器开启后第一次用时10s，后面用时2-4s
 		 	 */
-		 	/*List<UserCache> userCacheList = new ArrayList<UserCache>();
-		 	for (int i = 0; i < 100000; i++) {
+		 	List<UserCache> userCacheList = new ArrayList<UserCache>();
+		 	for (int i = 0; i < 1000000; i++) {
 		 		UserCache userCache =new UserCache();
 		 		userCache.setId(i);
 		 		userCache.setName(i+"");
 		 		userCache.setAge(i);
 		 		userCacheList.add(userCache);
 			}
-		 	userCacheService.insertAll(userCacheList);*/
+		 	userCacheService.insertAll(userCacheList);
 		 	
 		 	/**
 		 	 * 测试查询10w条数据，user_cache 未加索引
 		 	 */
-		 	Example e= new Example(UserCache.class);
+		 	/*Example e= new Example(UserCache.class);
 		 	e.createCriteria().andGreaterThanOrEqualTo("id", 0);
 		 	List<UserCache> userCacheList =userCacheService.selectByExample(e);
-		 	System.out.println("无索引--"+userCacheList.size());
-	        return userCacheList;  
+		 	System.out.println("无索引--"+userCacheList.size());*/
+	        return "userCacheList";  
 	    } 
 	 
 	 /**
@@ -319,7 +333,7 @@ public class UserController {
 					// 取得当前上传文件的文件名称
 					String myFileName = f.getOriginalFilename();
 					// 如果名称不为“”,说明该文件存在，否则说明该文件不存在
-					if (myFileName.trim() != "") {
+					if (!"".equals(myFileName.trim()) ) {
 						// 定义上传路径
 						String path = "G:\\bean\\"+ myFileName;
 						File localFile = new File(path);

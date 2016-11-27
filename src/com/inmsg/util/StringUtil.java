@@ -20,8 +20,8 @@ public class StringUtil {
 	      "0", "1", "2", "3", "4", "5", "6", "7",
 	      "8", "9", "A", "B", "C", "D", "E", "F"};
 
-	/**²Î  Êý: Object
-	 * ·µ»ØÖµ: ×Ö·û´®
+	/**ï¿½ï¿½  ï¿½ï¿½: Object
+	 * ï¿½ï¿½ï¿½ï¿½Öµ: ï¿½Ö·ï¿½ï¿½ï¿½
 	 * */
 	public static String getStringValueFromObject(Object obj) {
 		if (null == obj) {
@@ -60,9 +60,9 @@ public class StringUtil {
 	}
 	
 	  /**
-	   * ×ª»»×Ö½ÚÊý×éÎª16½øÖÆ×Ö´®
-	   * @param b ×Ö½ÚÊý×é
-	   * @return 16½øÖÆ×Ö´®
+	   * ×ªï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½Îª16ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½
+	   * @param b ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½
+	   * @return 16ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½
 	   */
 
 	  public static String byteArrayToHexString(byte[] b) {
@@ -119,12 +119,12 @@ public class StringUtil {
 		 }
 		 
 		 /**
-		  * µÃµ½Ò»¸ö¾­¹ý±àÂëºóÊ®Áù½øÖÆµÄ×Ö·û´®µÄÖ¸¶¨±àÂëµÄÔ­Ê¼×Ö·û´®
+		  * ï¿½Ãµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê®ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­Ê¼ï¿½Ö·ï¿½ï¿½ï¿½
 		  * 
 		  * @param hexStr
-		  *            String Òª½âÂëµÄ×Ö·û´®
+		  *            String Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
 		  * @param charsetName
-		  *            String ½âÂëµÄ×Ö·û¼¯
+		  *            String ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
 		  * @return String
 		  */
 		 public static String getOrigValueofHexString(String hexStr,
@@ -162,7 +162,6 @@ public class StringUtil {
 		if (str == null || str.length() == 0) {
 			returnvalue = new BigDecimal(0.0);
 		}
-		
 		try {
 			returnvalue = new BigDecimal(str);
 		}catch(Exception e) {
@@ -188,7 +187,7 @@ public class StringUtil {
 	}
 	
     /**
-     * ±àÂë×ª»»£ºISO8859_1 µ½ GB2312
+     * ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ISO8859_1 ï¿½ï¿½ GB2312
      * 
      * @param stringValue
      *            ISO String
@@ -196,7 +195,7 @@ public class StringUtil {
      */
     public static String iso2gb ( String stringValue )
     {
-        // Èç¹û²ÎÊýÎªnull£¬·µ»Ønull
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªnullï¿½ï¿½ï¿½ï¿½ï¿½ï¿½null
         if ( stringValue == null )
         {
             return null ;
@@ -214,7 +213,7 @@ public class StringUtil {
     }
 
     /**
-     * ±àÂë×ª»»£º utf µ½ iso
+     * ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ utf ï¿½ï¿½ iso
      * 
      * @param stringValue
      *            UTF8 String
@@ -222,7 +221,7 @@ public class StringUtil {
      */
     public static String utf2iso ( String stringValue )
     {
-        // Èç¹û²ÎÊýÎªnull£¬·µ»Ønull
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªnullï¿½ï¿½ï¿½ï¿½ï¿½ï¿½null
         if ( stringValue == null )
         {
             return null ;
@@ -238,7 +237,7 @@ public class StringUtil {
         return value ;
     }
     /**
-     * ±àÂë×ª»»£ºISO8859_1 µ½ utf
+     * ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ISO8859_1 ï¿½ï¿½ utf
      * 
      * @param stringValue
      *            ISO8859_1 String
@@ -246,7 +245,7 @@ public class StringUtil {
      */
     public static String iso2utf( String stringValue )
     {
-        // Èç¹û²ÎÊýÎªnull£¬·µ»Ønull
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªnullï¿½ï¿½ï¿½ï¿½ï¿½ï¿½null
         if ( stringValue == null )
         {
             return null ;
@@ -262,7 +261,7 @@ public class StringUtil {
         return value ;
     }
     /**
-     * ±àÂë×ª»»£ºGB2312µ½ISO8859_1
+     * ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½GB2312ï¿½ï¿½ISO8859_1
      * 
      * @param stringValue
      *            GB2312 String
@@ -270,7 +269,7 @@ public class StringUtil {
      */
     public static String gb2iso ( String stringValue )
     {
-        // Èç¹û²ÎÊýÎªnull£¬·µ»Ønull
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªnullï¿½ï¿½ï¿½ï¿½ï¿½ï¿½null
         if ( stringValue == null )
         {
             return null ;
@@ -288,7 +287,7 @@ public class StringUtil {
     }
 
     /**
-     * ±àÂë×ª»»£º UTF8 µ½ GB2312
+     * ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ UTF8 ï¿½ï¿½ GB2312
      * 
      * @param stringValue
      *            UTF8 String
@@ -296,7 +295,7 @@ public class StringUtil {
      */
     public static String utf2gb ( String stringValue )
     {
-        // Èç¹û²ÎÊýÎªnull£¬·µ»Ønull
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªnullï¿½ï¿½ï¿½ï¿½ï¿½ï¿½null
         if ( stringValue == null )
         {
             return null ;
@@ -313,7 +312,7 @@ public class StringUtil {
     }
     
     /**
-     * ±àÂë×ª»»£º UTF8 µ½ GBK
+     * ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ UTF8 ï¿½ï¿½ GBK
      * 
      * @param stringValue
      *            UTF8 String
@@ -321,7 +320,7 @@ public class StringUtil {
      */
     public static String utf2gbk ( String stringValue )
     {
-        // Èç¹û²ÎÊýÎªnull£¬·µ»Ønull
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªnullï¿½ï¿½ï¿½ï¿½ï¿½ï¿½null
         if ( stringValue == null )
         {
             return null ;
@@ -338,7 +337,7 @@ public class StringUtil {
     }
 
     /**
-     * ±àÂë×ª»»£ºGB2312 µ½ UTF8
+     * ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½GB2312 ï¿½ï¿½ UTF8
      * 
      * @param stringValue
      *            GB2312 String
@@ -346,7 +345,7 @@ public class StringUtil {
      */
     public static String gb2utf ( String stringValue )
     {
-        // Èç¹û²ÎÊýÎªnull£¬·µ»Ønull
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªnullï¿½ï¿½ï¿½ï¿½ï¿½ï¿½null
         if ( stringValue == null )
         {
             return null ;
@@ -363,7 +362,7 @@ public class StringUtil {
     }
     
     /**
-     * ±àÂë×ª»»£ºGBK µ½ UTF8
+     * ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½GBK ï¿½ï¿½ UTF8
      * 
      * @param stringValue
      *            GBK String
@@ -371,7 +370,7 @@ public class StringUtil {
      */
     public static String gbk2utf ( String stringValue )
     {
-        // Èç¹û²ÎÊýÎªnull£¬·µ»Ønull
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªnullï¿½ï¿½ï¿½ï¿½ï¿½ï¿½null
         if ( stringValue == null )
         {
             return null ;
@@ -388,7 +387,7 @@ public class StringUtil {
     }
 
     /**
-     * ±àÂë×ª»»£ºISO8859_1 µ½ GBK
+     * ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ISO8859_1 ï¿½ï¿½ GBK
      * 
      * @param stringValue
      *            ISO8859_1 String
@@ -396,7 +395,7 @@ public class StringUtil {
      */
     public static String iso2gbk ( String stringValue )
     {
-        // Èç¹û²ÎÊýÎªnull£¬·µ»Ønull
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªnullï¿½ï¿½ï¿½ï¿½ï¿½ï¿½null
         if ( stringValue == null )
         {
             return null ;
@@ -413,11 +412,11 @@ public class StringUtil {
     }
 
     /**
-     * ÅÐ¶ÏÊÇ·ñÖ¸¶¨×Ö·û´®Îª¿Õ×Ö·û´®(null»òÕß³¤¶ÈÎª0)
+     * ï¿½Ð¶ï¿½ï¿½Ç·ï¿½Ö¸ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½(nullï¿½ï¿½ï¿½ß³ï¿½ï¿½ï¿½Îª0)
      * 
      * @param stringValue
      *            String
-     * @return boolean ¿ÕÔò·µ»Øtrue£¬·ñÔò·µ»Øfalse
+     * @return boolean ï¿½ï¿½ï¿½ò·µ»ï¿½trueï¿½ï¿½ï¿½ï¿½ï¿½ò·µ»ï¿½false
      */
     public static boolean isEmptyString ( String stringValue )
     {
@@ -431,11 +430,11 @@ public class StringUtil {
     }
 
     /**
-     * ×Ö·û´®×ª»»³ÉÊý×Ö
+     * ï¿½Ö·ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      * 
      * @param stringValue
-     *            String ×Ö·û´®
-     * @return int Êý×Ö
+     *            String ï¿½Ö·ï¿½ï¿½ï¿½
+     * @return int ï¿½ï¿½ï¿½ï¿½
      */
     public static int stringToInt ( String stringValue )
     {
@@ -443,13 +442,13 @@ public class StringUtil {
     }
 
     /**
-     * ×Ö·û´®×ª»»³ÉÊý×Ö
+     * ï¿½Ö·ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      * 
      * @param stringValue
-     *            String ×Ö·û´®
+     *            String ï¿½Ö·ï¿½ï¿½ï¿½
      * @param defaultValue
-     *            ×ª»»Ê§°ÜÊ±µÄÄ¬ÈÏÖµ
-     * @return int Êý×Ö
+     *            ×ªï¿½ï¿½Ê§ï¿½ï¿½Ê±ï¿½ï¿½Ä¬ï¿½ï¿½Öµ
+     * @return int ï¿½ï¿½ï¿½ï¿½
      */
     public static int stringToInt ( String stringValue , int defaultValue )
     {
@@ -468,15 +467,15 @@ public class StringUtil {
     }
 
     /**
-     * Êý×Ö×ª»»³É×Ö·û´®
+     * ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
      * 
      * @param stringValue
-     *            String ×Ö·û´®
-     *            length ×Ü³¤¶È
-     *            d Õ¼Î»·û
+     *            String ï¿½Ö·ï¿½ï¿½ï¿½
+     *            length ï¿½Ü³ï¿½ï¿½ï¿½
+     *            d Õ¼Î»ï¿½ï¿½
      * @param defaultValue
-     *            ×ª»»Ê§°ÜÊ±µÄÄ¬ÈÏÖµ
-     * @return int Êý×Ö
+     *            ×ªï¿½ï¿½Ê§ï¿½ï¿½Ê±ï¿½ï¿½Ä¬ï¿½ï¿½Öµ
+     * @return int ï¿½ï¿½ï¿½ï¿½
      */
     public static String intToStr (int intvalue,int length,char d) {
     	String svalue = String.valueOf(intvalue);
@@ -490,13 +489,13 @@ public class StringUtil {
     }
 
     /**
-     * ¸ø³ö×Ö·û´®ºÍ³¤¶È£¬ÅÐ¶ÏÊÇ·ñ³¬³öÕâ¸ö³¤¶È£¨ÖÐÓ¢ÎÄ¶¼ËãÒ»¸ö×Ö·û£©
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Í³ï¿½ï¿½È£ï¿½ï¿½Ð¶ï¿½ï¿½Ç·ñ³¬³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ï¿½ï¿½ï¿½Ó¢ï¿½Ä¶ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
      * 
      * @param str
-     *            ×Ö·û´®
+     *            ï¿½Ö·ï¿½ï¿½ï¿½
      * @param length
-     *            ÖÆ¶¨µÄ³¤¶È
-     * @return boolean ÊÇ·ñ³¬³ö³¤¶È£¬³¬³öÎªtrue ·ñÔòÎªfalses
+     *            ï¿½Æ¶ï¿½ï¿½Ä³ï¿½ï¿½ï¿½
+     * @return boolean ï¿½Ç·ñ³¬³ï¿½ï¿½ï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½ï¿½Îªtrue ï¿½ï¿½ï¿½ï¿½Îªfalses
      */
     public static boolean charLength ( String str , int length )
     {
@@ -533,11 +532,11 @@ public class StringUtil {
     }
 
     /**
-     * ¶Ô×Ö·û´®½øÐÐ BASE64 ±àÂë
+     * ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ BASE64 ï¿½ï¿½ï¿½ï¿½
      * 
      * @param s
-     *            ±àÂëÇ°µÄ×Ö·û´®
-     * @return String ±àÂëºóµÄ×Ö·û´®
+     *            ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
+     * @return String ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
      */
     public static String base64Encode ( String s )
     {
@@ -547,11 +546,11 @@ public class StringUtil {
     }
 
     /**
-     * ½« BASE64 ±àÂëµÄ×Ö·û´® s ½øÐÐ½âÂë
+     * ï¿½ï¿½ BASE64 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ s ï¿½ï¿½ï¿½Ð½ï¿½ï¿½ï¿½
      * 
      * @param s
-     *            BASE64 ±àÂëµÄ×Ö·û´®
-     * @return String ½âÂëºóµÄ×Ö·û´®
+     *            BASE64 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
+     * @return String ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
      */
     public static String base64Decode ( String s )
     {
@@ -561,11 +560,11 @@ public class StringUtil {
     }
 
     /**
-     * Éú³ÉÖ¸¶¨³¤¶ÈµÄËæ»ú×Ö·û´®
+     * ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Èµï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
      * 
      * @param len
-     *            Ö¸¶¨ÒªÉú³ÉµÄ×Ö·û´®µÄ³¤¶È
-     * @return String Ëæ»ú×Ö·û´®
+     *            Ö¸ï¿½ï¿½Òªï¿½ï¿½ï¿½Éµï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½
+     * @return String ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
      */
     public static String randStr ( int len )
     {
@@ -584,11 +583,11 @@ public class StringUtil {
     }
 
     /**
-     * object ×ª»»³É String £¬²¢½øÐÐnullµÄ¼ì²éÒÔ¼°¿Õ¸ñµÄ¹ýÂË
+     * object ×ªï¿½ï¿½ï¿½ï¿½ String ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½nullï¿½Ä¼ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½Õ¸ï¿½Ä¹ï¿½ï¿½ï¿½
      * 
      * @param object
-     *            Òª×ª»»µÄobject
-     * @return String ×ª»»ºóµÄ×Ö·û´®
+     *            Òª×ªï¿½ï¿½ï¿½ï¿½object
+     * @return String ×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
      */
     public static String toStr ( Object object )
     {
@@ -602,13 +601,13 @@ public class StringUtil {
     }
 
     /**
-     * ½«object×ª»»³É×Ö·û´®£¬È»ºó¹ýÂËµôÖ¸¶¨µÄ×Ö·û
+     * ï¿½ï¿½object×ªï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½È»ï¿½ï¿½ï¿½ï¿½Ëµï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½
      * 
      * @param object
-     *            Òª×ª»»µÄ×Ö·û´®
+     *            Òª×ªï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
      * @param filter
-     *            Òª¹ýÂËµÄÄÚÈÝ
-     * @return String ×ª»»¹ýÂËºóµÄ×Ö·û´®
+     *            Òªï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½
+     * @return String ×ªï¿½ï¿½ï¿½ï¿½ï¿½Ëºï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
      */
     public static String clearStr ( Object object , String filter )
     {
@@ -621,7 +620,7 @@ public class StringUtil {
         return result ;
     }
     
-    /***ÅÐ¶Ï×Ö·û´®ÊÇ·ñÈ«Êý×Ö***
+    /***ï¿½Ð¶ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ç·ï¿½È«ï¿½ï¿½ï¿½ï¿½***
      * 
      * **/
 	public static boolean isNumeric(String str)
@@ -636,7 +635,7 @@ public class StringUtil {
 	}
 	
 	/**
-	 * ¸ù¾ÝÖ¸¶¨³¤¶ÈÌî³äÖ¸¶¨×Ö·û£¬×óÌî³ä
+	 * ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * */
 	public static String leftFillStr (int len,String oldStr,char fillchar) {
 		if (len <= oldStr.length()) {
@@ -654,7 +653,7 @@ public class StringUtil {
 	}
 	
 	
-	//´«ÈëµÄnull×Ö·û´®£¬Ò²ÈÏÎªÊÇ¿Õ×Ö·û´®
+	//ï¿½ï¿½ï¿½ï¿½ï¿½nullï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½Îªï¿½Ç¿ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
 	public static String Object2Str(Object obj) {
 		if (obj != null && !obj.toString().equalsIgnoreCase("null")) {
 			return obj.toString().trim();
@@ -665,11 +664,11 @@ public class StringUtil {
 	
 	
 	/**
-	 * Ìæ»»\nÎª<br>
+	 * ï¿½æ»»\nÎª<br>
 	 * 
 	 * @param str
-	 *            Òª¸ñÊ½»¯µÄ×Ö·û´®
-	 * @return ¸ñÊ½»¯ºóµÄ×Ö·û´®
+	 *            Òªï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
+	 * @return ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
 	 */
 	public static String toBr(String str) {
 		String html = str;
@@ -679,14 +678,14 @@ public class StringUtil {
 		html = replace(html, "\\", "\\\\");
 		html = replace(html, "\'", "\\\'");
 		html = replace(html, "\"", "\\\"");
-		html = replace(html, " ", "&nbsp;&nbsp;"); // Á½¸öÓ¢ÎÄ¿Õ¸ñ
+		html = replace(html, " ", "&nbsp;&nbsp;"); // ï¿½ï¿½ï¿½ï¿½Ó¢ï¿½Ä¿Õ¸ï¿½
 
 		return html;
 	}
 	
 	
 	/*
-	 * ½«StrÖÐµÄ×Ö·û´®str1Ìæ»»Îªstr2
+	 * ï¿½ï¿½Strï¿½Ðµï¿½ï¿½Ö·ï¿½ï¿½ï¿½str1ï¿½æ»»Îªstr2
 	 */
 	public static String replace(String Str, String str1, String str2) {
 		String temp = Str;
@@ -719,9 +718,9 @@ public class StringUtil {
 	
 	
 	/**
-	 * ½«Ä³Ò»¸ö×Ö·û·Ö¸îµÄ×Ö·û´®£¬×ª»»³Élist
-	 * @param str Òª·Ö¸îµÄ×Ö·û´®
-	 * @param split ·Ö¸ô·û
+	 * ï¿½ï¿½Ä³Ò»ï¿½ï¿½ï¿½Ö·ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½list
+	 * @param str Òªï¿½Ö¸ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
+	 * @param split ï¿½Ö¸ï¿½ï¿½ï¿½
 	 * @return
 	 */
 	public static List<String> str2list(String str,String split){

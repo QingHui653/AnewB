@@ -12,4 +12,6 @@ public interface UserService extends IService<User> {
     List<User> getUsers();
     
     int insertAll(List<User> userList);
+    
+    List<User> selectAllForUpdate();
 }

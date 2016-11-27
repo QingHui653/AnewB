@@ -21,4 +21,7 @@ public interface UserMapper extends MyMapper<User> {
     User testSelectByKey(int id);
 	
 	int insertAll(List<User> userList);
+	
+	@Select("select * from user where oid>=0 for update")
+	List<User> selectAllForUpdate();
 }

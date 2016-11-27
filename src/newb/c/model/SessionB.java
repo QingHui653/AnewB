@@ -1,6 +1,8 @@
 package newb.c.model;
 
-public class SessionB {
+import java.io.Serializable;
+
+public class SessionB implements Serializable {
 	private User user;  //用户
 
 	public SessionB(User user) {

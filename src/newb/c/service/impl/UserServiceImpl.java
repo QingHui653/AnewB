@@ -34,4 +34,9 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 	public int insertAll(List<User> userList) {
 		return userMapper.insertAll(userList);
 	}
+
+	@Override
+	public List<User> selectAllForUpdate() {
+		return userMapper.selectAllForUpdate();
+	}
 }
