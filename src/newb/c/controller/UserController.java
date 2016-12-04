@@ -81,15 +81,15 @@ public class UserController {
 	 * @return
 	 */
 	 @ApiOperation(value = "获取用户列表", notes = "") 
-	 @RequestMapping(value="/newb/{userId}",method= RequestMethod.GET)
+	 @RequestMapping(value="/newb/{userId}",method= {RequestMethod.GET,RequestMethod.POST})
 	 @ResponseBody
 	 public Object showUserInfo(ModelMap modelMap,@PathVariable int userId){
-//	        User user = userService.getUserById(userId);
-		 Example e= new Example(User.class);
-		 
-		 List<User> userList= userService.selectByExample(e);
+	        User user = userService.getUserById(userId);
+//		 Example e= new Example(User.class);
+//		 e.createCriteria().andGreaterThanOrEqualTo("oid", 0);
+//		 List<User> userList= userService.selectByExample(e);
 //	        modelMap.addAttribute("user", user);  
-	     return userList;  
+	     return user;  
 	    } 
 	 
 	 /**
@@ -105,7 +105,7 @@ public class UserController {
 		 	 * 测试插入10w数据，用时，在服务器开启后第一次用时10s，后面用时2-4s
 		 	 */
 		 	List<User> userList = new ArrayList<User>();
-		 	for (int i = 0; i < 400000; i++) {
+		 	for (int i = 0; i < 100000; i++) {
 		 		User user =new User();
 		 		user.setOid(i);
 		 		user.setUsername(i+"");

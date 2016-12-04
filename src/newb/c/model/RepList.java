@@ -21,9 +21,9 @@ import lombok.NoArgsConstructor;
  *
  */
 
-@Data
+/*@Data
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor*/
 public class RepList {
 	private String result;
 	private Long count;

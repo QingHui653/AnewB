@@ -4,8 +4,17 @@ import java.io.UnsupportedEncodingException;
 
 import sun.misc.*;
 
+/**
+ * Base64加密解密工具类
+ * @author woshizbh
+ *
+ */
 public class Base64 {
-	// 加密
+	/**
+	 * Base 加密
+	 * @param str
+	 * @return
+	 */
 	public static String getBase64(String str) {
 		byte[] b = null;
 		String s = null;
@@ -20,7 +29,12 @@ public class Base64 {
 		return s;
 	}
 
-	// 解密
+	/**
+	 *  base64 解密
+	 * @param s
+	 * @return
+	 */
+	
 	public static String getFromBase64(String s) {
 		byte[] b = null;
 		String result = null;
@@ -37,7 +51,10 @@ public class Base64 {
 	}
 	
 	public static void main(String[] args) {
-		String msg = new Base64().getBase64("cwj,123");
+		Base64  base64= new Base64();
+		String msg = base64.getBase64("cwj,123");
 		System.out.println(msg);
+		String dMsg=base64.getFromBase64(msg);
+		System.out.println(dMsg);
 	}
 }

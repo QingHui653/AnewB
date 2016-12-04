@@ -5,7 +5,7 @@
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:cache="http://www.springframework.org/schema/cache"
-	xmlns:rdb="http://www.dangdang.com/schema/ddframe/rdb" 
+	xmlns:rdb="http://www.dangdang.com/schema/ddframe/rdb"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans 
 		http://www.springframework.org/schema/beans/spring-beans.xsd 

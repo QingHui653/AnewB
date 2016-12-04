@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="Utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,36 +9,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>Login</title>
-</head>
+    <title>My JSP 'index.jsp' starting page</title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+  </head>
   
   <body>
-  	<form>
-  	<table>
-    <tr>username:<input type="text" name="username"></></tr>
-    <tr>password:<input type="password" name="password"></></tr>
-    <tr><input type="button" value="login" onclick="login()"></></tr>
-    <tr><input type="button" value="loginFor" onclick="loginFor()"></></tr>
-    </table>
-    </form>
-    
-    
-    <script type="text/javascript">
- 	function login(){
- 		alert("进入login")
- 		var form = document.forms[0]; 
- 		form.action = "${pageContext.request.contextPath}/user/login"; 
- 		form.method="post";
- 		form.submit();
- 	}
- 	
- 	function loginFor(){
- 		alert("进入loginFor")
- 		var form = document.forms[0]; 
- 		form.action = "${pageContext.request.contextPath}/user/loginFor"; 
- 		form.method="post";
- 		form.submit();
- 	}
-</script>
+    This is my JSP page. <br>
+     <a href="/user/getUserList">test</a>
   </body>
 </html>

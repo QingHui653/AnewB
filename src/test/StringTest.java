@@ -4,11 +4,7 @@ import org.junit.Test;
 
 public class StringTest {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
-	
 	@Test
 	public void test() {
 		String foo="1";
