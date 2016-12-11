@@ -17,19 +17,19 @@ public class NetSocketClient {
 		System.out.println("Connecting to " + serverName + " on port " + port);
 		try {
 			Socket client = new Socket(serverName, port);
-			System.out.println("Just connected to "
+			System.out.println("正在尝试连接 "
 					+ client.getRemoteSocketAddress());
 			OutputStream outToServer = client.getOutputStream();
 
 			DataOutputStream out = new DataOutputStream(outToServer);
 
-			out.writeUTF("Hello from " + client.getLocalSocketAddress());
+			out.writeUTF("老子™终于连上了 " + client.getLocalSocketAddress());
 
 			InputStream inFromServer = client.getInputStream();
 
 			DataInputStream in = new DataInputStream(inFromServer);
 			
-			System.out.println("Server says " + in.readUTF());
+			System.out.println("MD,一连上就把老子提了 " +" 读取服务器发送的信息 "+in.readUTF());
 	        client.close();
 		} catch (UnknownHostException e) {
 			e.printStackTrace();

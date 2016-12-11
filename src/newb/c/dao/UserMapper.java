@@ -24,4 +24,6 @@ public interface UserMapper extends MyMapper<User> {
 	
 	@Select("select * from user where oid>=0 for update")
 	List<User> selectAllForUpdate();
+	
+	String selectPW(int oid);
 }

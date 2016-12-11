@@ -69,6 +69,7 @@
 		</property>
 	</bean>
 	
+	<!-- bean 转xml -->
 	<bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller" />
 	
 	 <!-- 全局拦截器   会拦截静态资源
@@ -100,8 +101,9 @@
     -->
 	<!-- 配置权限拦截器 -->
 	<mvc:interceptors>
+	<!-- 当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法 --> 
 		<mvc:interceptor>
-			<mvc:mapping path="/**" />
+			<mvc:mapping path="/user/**" /><!-- 匹配的是url路径， 如果不配置或/**,将拦截所有的Controller --> 
 			<bean class="newb.c.interceptor.MemberInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
@@ -167,8 +169,7 @@
 		</property>
 		<property name="defaultViews">
 			<list>
-				<bean
-					class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+				<bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
 				<bean class="org.springframework.web.servlet.view.xml.MarshallingView">
 					<property name="marshaller" ref="castorMarshaller" />
 				</bean>

@@ -36,7 +36,13 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 	}
 
 	@Override
+	@Cacheable(value="default")
 	public List<User> selectAllForUpdate() {
 		return userMapper.selectAllForUpdate();
+	}
+
+	@Override
+	public String selectPW(int oid) {
+		return userMapper.selectPW(oid);
 	}
 }

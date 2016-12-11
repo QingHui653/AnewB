@@ -88,11 +88,11 @@
         </rdb:props>
     </rdb:data-source>
      
-	<!-- myBatis文件 -->
+	<!-- myBatis 使用 分页插件，通用插件 配置 开始 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="shardingDataSource" /><!-- parentDataSource shardingDataSource -->
 		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
-		<property name="mapperLocations" value="classpath:/newb/c/mapping/*.xml" />
+		<property name="mapperLocations" value="classpath*:/newb/c/mapping/*.xml" />
 		<property name="typeAliasesPackage" value="newb.c.model"/>
 		<!-- mybatis 分页插件 -->
 		<property name="plugins">
@@ -116,8 +116,6 @@
         </property>
 	</bean>
 	
-	
-	
 	<!--  通用mapper 插件 -->
 	<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="newb.c.dao"/>
@@ -135,14 +133,25 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
         <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
+    <!-- myBatis 使用 分页插件，通用插件 配置  结束-->
     
+    <!-- 不使用插件，普通配置mybatis方式  -->
+    <!-- 
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="parentDataSource" />
+		<property name="mapperLocations" value="classpath:/com/test/mapping/*.xml" />
+	</bean>
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.test.dao" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>
+     -->
     
     <!-- <aop:aspectj-autoproxy/> -->
     
 	<!-- Spring ===事务管理=================== -->
 	<!-- 配置事务管理器 -->
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="shardingDataSource" /><!-- parentDataSource  shardingDataSource-->
 	</bean>
 

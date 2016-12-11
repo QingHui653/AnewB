@@ -93,6 +93,19 @@ public class UserController {
 	    } 
 	 
 	 /**
+	  * 测试不同mapXML是否可行
+	  * @param modelMap
+	  * @param userId
+	  * @return
+	  */
+	 @RequestMapping("/selectQW/{userId}")
+	 @ResponseBody
+	 public String selectQW(ModelMap modelMap,@PathVariable int userId){
+	        String password = userService.selectPW(userId);	     
+	        return password;  
+	    } 
+	 
+	 /**
 	  * save 测试事务
 	  * @param modelMap
 	  * @param userId

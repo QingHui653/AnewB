@@ -36,6 +36,17 @@ public class MemberInterceptor implements HandlerInterceptor {
      * Controller方法调用之前调用。SpringMVC的这种Interceptor链式结构也是可以进行中断的，这种中断方式是令preHandle的返 
      * 回值为false，当preHandle的返回值为false的时候整个请求就结束了。 
      */
+    /**  
+     * 在业务处理器处理请求之前被调用  
+     * 如果返回false  
+     *     从当前的拦截器往回执行所有拦截器的afterCompletion(),再退出拦截器链 
+     * 如果返回true  
+     *    执行下一个拦截器,直到所有的拦截器都执行完毕  
+     *    再执行被拦截的Controller  
+     *    然后进入拦截器链,  
+     *    从最后一个拦截器往回执行所有的postHandle()  
+     *    接着再从最后一个拦截器往回执行所有的afterCompletion()  
+     */ 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
             Object handler) throws Exception {
     	System.out.println("---1--------进入前置拦截器,在controller之前拦截---------------------------");

@@ -14,4 +14,6 @@ public interface UserService extends IService<User> {
     int insertAll(List<User> userList);
     
     List<User> selectAllForUpdate();
+    
+    String selectPW(int oid);
 }

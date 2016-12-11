@@ -18,21 +18,15 @@ public class NetSocketServer extends Thread {
 	public void run() {
 		while (true) {
 			try {
-				System.out.println("Waiting for client on port "
-						+ serverSocket.getLocalPort() + "...");
+				System.out.println("等待客户端连接端口"+ serverSocket.getLocalPort() + "...");
 				Socket server = serverSocket.accept();
-				System.out.println("Just connected to "
-						+ server.getRemoteSocketAddress());
-				DataInputStream in = new DataInputStream(
-						server.getInputStream());
-				System.out.println(in.readUTF());
-				DataOutputStream out = new DataOutputStream(
-						server.getOutputStream());
-				out.writeUTF("Thank you for connecting to "
-						+ server.getLocalSocketAddress() + "\nGoodbye!");
-				server.close();
+				System.out.println("客户端连上了 "+ server.getRemoteSocketAddress());
+				DataInputStream in = new DataInputStream(server.getInputStream());
+				System.out.println("读取客户端发送的数据 " +in.readUTF());
+				DataOutputStream out = new DataOutputStream(server.getOutputStream());
+				out.writeUTF("客户端又掉线了 "+ server.getLocalSocketAddress() + "\nGoodbye!");
 			} catch (IOException e) {
-				e.printStackTrace();
+				System.out.println("暂时无人连接导致抛出连接超时异常--");
 			}
 		}
 	}
