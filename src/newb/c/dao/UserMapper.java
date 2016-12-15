@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
 import tk.mybatis.mapper.common.Mapper;
 import newb.c.model.User;
@@ -15,6 +16,7 @@ import newb.c.service.common.MyMapper;
  * @author woshizbh
  *
  */
+/*@Repository*/
 public interface UserMapper extends MyMapper<User> {
 	
 	@Select("select * from user where oid=#{id}")

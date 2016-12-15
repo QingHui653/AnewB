@@ -12,9 +12,11 @@
 	<!--引入配置属性文件 -->
 	<context:property-placeholder location="classpath*:*.properties" />
 	
+	
 	<import resource="spring-*.xml"/>
 	<!-- dubbo,activeMq等扩展 -->
-	<!-- <import resource="springhighGrade-*.xml"/> -->
+	<!-- <import resource="springhighGrade-dubboxRest.xml"/> -->
+	<!-- <import resource="springhighGrade-active*.xml"/> -->
 	<!--<import resource="springhighGrade-dubbo.xml"/>-->
 	
 	

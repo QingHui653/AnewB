@@ -24,7 +24,7 @@
 		</dependencies>
 	</dependencyManagement>
 	
-	<!-- Inherit defaults from Spring Boot -->
+	<!-- Spring Boot -->
     <!-- <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -32,86 +32,109 @@
     </parent> -->
 
 	<dependencies>
-		<!-- Spring -->
-		<!-- Spring 核心包 -->
+		<!-- **********************Spring -->
+		<!-- =================Spring core -->
+		<!-- spring-core：依赖注入IoC与DI的最基本实现 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 		</dependency>
-		<!-- Spring IOC的基础实现 -->
+		<!-- spring-beans：Bean工厂与bean的装配 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
 		</dependency>
-		<!-- Spring IOC的高级扩展,如任务调度等 -->
+		<!-- Spring IOC的高级扩展,如任务调度等 spring-context：spring的context上下文即IoC容器 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 		</dependency>
-		<!-- Spring AOP -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
-		</dependency>
-		<!--  提供对AspectJ的支持，以便可以方便的将面向方面的功能集成进IDE中，比如Eclipse AJDT。
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aspects</artifactId>
-		</dependency> -->
-		<!-- 应用程序上下文 -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-		</dependency>
+		<!-- spring-expression：spring表达式语言 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-expression</artifactId>
 		</dependency>
+		<!-- =================Spring core -->
+		<!-- =================Spring AOP -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+		</dependency>
+		<!--  提供对AspectJ的支持，以便可以方便的将面向方面的功能集成进IDE中，比如Eclipse AJDT。 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+		</dependency>
+		<!-- 提供一些类级的工具支持和ClassLoader级的实现，用于服务器 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-instrument</artifactId>
 		</dependency>
+		<!-- 针对tomcat的instrument实现 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-instrument-tomcat</artifactId>
 		</dependency>
+		<!-- =================Spring AOP -->
+		<!-- =================Spring data access -->
+		<!-- spring-jdbc：jdbc的支持 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-		</dependency>
+		<!-- spring-tx：事务控制 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
 		</dependency>
+		<!-- spring-orm：对象关系映射，集成orm框架-->
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
+			<artifactId>spring-orm</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc-portlet</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jms</artifactId>
-		</dependency>
+		<!-- spring-oxm：对象xml映射 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-oxm</artifactId>
 		</dependency>
+		<!-- spring-jms：java消息服务    队列 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+		</dependency>
+		<!-- =================Spring data access -->
+		<!-- =================Spring web-->
+		<!-- spring-web：基础web功能，如文件上传 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<!-- spring-webmvc：mvc实现 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<!-- spring-webmvc-portlet：基于portlet的mvc实现 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc-portlet</artifactId>
+		</dependency>
+		<!-- spring-struts：与struts的集成，不推荐，spring4不再提供 -->
+		<!-- =================Spring web-->
+		<!-- =================Spring test-->
+		<!-- spring-test：spring测试，提供junit与mock测试功能 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 		</dependency>
-		
+		<!-- spring-context-support：spring额外支持包，比如邮件服务、视图解析等 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+		<!-- =================Spring test-->
+		<!-- **********************Spring -->
+		<!-- spring 依赖************************ -->
 		<!--spring-oxm依赖-->
         <dependency>
             <groupId>org.codehaus.castor</groupId>
@@ -124,8 +147,52 @@
             	</exclusion>
             </exclusions>
         </dependency>
-	
-		<!-- WEB -->
+        <!---spring-aop依赖 -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.8.9</version>
+		</dependency>
+		<!-- 版本已最高  Spring依赖-->
+		<dependency>
+			<groupId>aopalliance</groupId>
+			<artifactId>aopalliance</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<!-- spring mvc json -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		<dependency>
+    		<groupId>com.fasterxml.jackson.core</groupId>
+    		<artifactId>jackson-core</artifactId>
+    		<version>2.8.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.8.5</version>
+		</dependency>
+		<!-- Springmvc,文件上传下载 -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		<!-- spring 依赖************************ -->
+		<!-- WEB................................ -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -138,7 +205,6 @@
 			<version>2.1</version>
 			<scope>provided</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>javax.ws.rs</groupId>
 			<artifactId>javax.ws.rs-api</artifactId>
@@ -172,28 +238,48 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		
-		<!-- 版本已最高 -->
-		<dependency>
-			<groupId>aopalliance</groupId>
-			<artifactId>aopalliance</artifactId>
-			<version>1.0</version>
-		</dependency>
-		
+		<!-- WEB................................ -->
+		<!-- 组件=============================== -->
+		<!-- Spring security 权限包 -->
+		<!-- <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-web</artifactId> 
+			<version>4.1.3.RELEASE</version> </dependency> <dependency> <groupId>org.springframework.security</groupId> 
+			<artifactId>spring-security-core</artifactId> <version>4.1.3.RELEASE</version> 
+			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
+			<artifactId>spring-security-acl</artifactId> <version>4.1.3.RELEASE</version> 
+			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
+			<artifactId>spring-security-aspects</artifactId> <version>4.1.3.RELEASE</version> 
+			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
+			<artifactId>spring-security-cas</artifactId> <version>4.1.3.RELEASE</version> 
+			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
+			<artifactId>spring-security-config</artifactId> <version>4.1.3.RELEASE</version> 
+			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
+			<artifactId>spring-security-crypto</artifactId> <version>4.1.3.RELEASE</version> 
+			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
+			<artifactId>spring-security-ldap</artifactId> <version>4.1.3.RELEASE</version> 
+			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
+			<artifactId>spring-security-openid</artifactId> <version>4.1.3.RELEASE</version> 
+			<exclusions> <exclusion> <artifactId>httpclient</artifactId> <groupId>org.apache.httpcomponents</groupId> 
+			</exclusion> </exclusions> </dependency> <dependency> <groupId>org.springframework.security</groupId> 
+			<artifactId>spring-security-remoting</artifactId> <version>4.1.3.RELEASE</version> 
+			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
+			<artifactId>spring-security-taglibs</artifactId> <version>4.1.3.RELEASE</version> 
+			</dependency> -->
+		<!-- Spring webflow -->
+		<!-- <dependency> <groupId>org.springframework.webflow</groupId> <artifactId>spring-faces</artifactId> 
+			<version>2.4.2.RELEASE</version> </dependency> <dependency> <groupId>org.springframework.webflow</groupId> 
+			<artifactId>spring-webflow</artifactId> <version>2.4.2.RELEASE</version> 
+			</dependency> <dependency> <groupId>org.springframework.webflow</groupId> 
+			<artifactId>spring-binding</artifactId> <version>2.4.2.RELEASE</version> 
+			</dependency> <dependency> <groupId>org.springframework.webflow</groupId> 
+			<artifactId>spring-js</artifactId> <version>2.4.2.RELEASE</version> </dependency> 
+			<dependency> <groupId>org.springframework.webflow</groupId> <artifactId>spring-js-resources</artifactId> 
+			<version>2.4.2.RELEASE</version> </dependency> -->
+		<!-- 连接池 -->
 		<dependency>
 			<groupId>commons-pool</groupId>
 			<artifactId>commons-pool</artifactId>
 			<version>1.6</version>
 		</dependency>
-		
-		<!---spring-aop依赖 -->
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-			<version>1.8.9</version>
-		</dependency>
-
-		<!-- 连接池 -->
 		<dependency>
 			<groupId>com.mchange</groupId>
 			<artifactId>c3p0</artifactId>
@@ -203,7 +289,7 @@
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
-			</dependency>
+		</dependency>
 		<dependency>
     		<groupId>com.cloudhopper.proxool</groupId>
    		 	<artifactId>proxool</artifactId>
@@ -230,91 +316,31 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- 连接池 -->
-		
+		<!-- test -->
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>6.9.10</version>
 		</dependency>
-
-		<!-- Spring security 权限包 -->
-
-		<!-- <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-web</artifactId> 
-			<version>4.1.3.RELEASE</version> </dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-core</artifactId> <version>4.1.3.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-acl</artifactId> <version>4.1.3.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-aspects</artifactId> <version>4.1.3.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-cas</artifactId> <version>4.1.3.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-config</artifactId> <version>4.1.3.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-crypto</artifactId> <version>4.1.3.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-ldap</artifactId> <version>4.1.3.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-openid</artifactId> <version>4.1.3.RELEASE</version> 
-			<exclusions> <exclusion> <artifactId>httpclient</artifactId> <groupId>org.apache.httpcomponents</groupId> 
-			</exclusion> </exclusions> </dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-remoting</artifactId> <version>4.1.3.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-taglibs</artifactId> <version>4.1.3.RELEASE</version> 
-			</dependency> -->
-			
-		<!-- shiro权限 -->
+		<!-- 测试 junit -->
 		<dependency>
-    		<groupId>org.apache.shiro</groupId>
-    		<artifactId>shiro-all</artifactId>
-    		<version>1.3.2</version>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
 		</dependency>
-
-		<!-- Spring webflow -->
-
-		<!-- <dependency> <groupId>org.springframework.webflow</groupId> <artifactId>spring-faces</artifactId> 
-			<version>2.4.2.RELEASE</version> </dependency> <dependency> <groupId>org.springframework.webflow</groupId> 
-			<artifactId>spring-webflow</artifactId> <version>2.4.2.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.webflow</groupId> 
-			<artifactId>spring-binding</artifactId> <version>2.4.2.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.webflow</groupId> 
-			<artifactId>spring-js</artifactId> <version>2.4.2.RELEASE</version> </dependency> 
-			<dependency> <groupId>org.springframework.webflow</groupId> <artifactId>spring-js-resources</artifactId> 
-			<version>2.4.2.RELEASE</version> </dependency> -->
+		<!-- OGNL -->
 		<dependency>
 			<groupId>opensymphony</groupId>
 			<artifactId>ognl</artifactId>
 			<version>2.6.11</version>
 		</dependency>
-
-		<!-- mybatis与spring -->
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
-			<version>3.4.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis-spring</artifactId>
-			<version>1.3.0</version>
-		</dependency>
-		
-		<!-- Spring 与 redis -->
-		<dependency>
-    		<groupId>org.springframework.data</groupId>
-    		<artifactId>spring-data-redis</artifactId>
-    		<version>1.7.3.RELEASE</version>
-		</dependency>
-		
-
+		<!-- 数据库 -->
 		<!-- MYSQL -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.34</version>
 		</dependency>
-
 		<!-- oracle -->
 		<dependency>
 			<groupId>com.oracle</groupId>
@@ -327,75 +353,31 @@
 			<artifactId>sqljdbc4</artifactId>
 			<version>4.0</version>
 		</dependency>
-
-		<!-- 测试 junit -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-		</dependency>
-
-		<!-- spring mvc json -->
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.13</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-core-asl</artifactId>
-			<version>1.9.13</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.5.4</version>
-		</dependency>
-
+		<!-- JSON -->
 		<!-- alibaba fastjson -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>1.2.8</version>
 		</dependency>
-
 		<!-- GSON -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>2.7</version>
 		</dependency>
-		
 		<!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
 		<dependency>
     		<groupId>net.sf.json-lib</groupId>
     		<artifactId>json-lib</artifactId>
     		<version>2.4</version>
 		</dependency>
-		
-
-		<!-- Springmvc,文件上传下载 -->
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.4</version>
-		</dependency>
-
-		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>1.2.2</version>
-		</dependency>
-
 		<!--apache 工具包 -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>3.4</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-configuration2</artifactId>
@@ -407,18 +389,154 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
 		<dependency>
     		<groupId>commons-beanutils</groupId>
     		<artifactId>commons-beanutils</artifactId>
     		<version>1.9.2</version>
 		</dependency>
-		
-		<!-- guava 使用缓存 -->
+		<!-- guava 工具包 使用缓存  -->
 		<dependency>
     		<groupId>com.google.guava</groupId>
     		<artifactId>guava</artifactId>
     		<version>19.0</version>
+		</dependency>
+		<!-- 日志 -->
+		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.21</version>
+		</dependency>
+		<dependency>
+    		<groupId>log4j</groupId>
+    		<artifactId>log4j</artifactId>
+    		<version>1.2.17</version>
+		</dependency>
+		<!-- logback-->
+		<!-- <dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.1.7</version>
+		</dependency> -->
+		<!-- log4j2 日志 -->
+		<!-- <dependency>
+    		<groupId>org.apache.logging.log4j</groupId>
+    		<artifactId>log4j-core</artifactId>
+    		<version>2.7</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.apache.logging.log4j</groupId>
+    		<artifactId>log4j-slf4j-impl</artifactId>
+    		<version>2.7</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.apache.logging.log4j</groupId>
+    		<artifactId>log4j-1.2-api</artifactId>
+    		<version>2.7</version>
+		</dependency> -->
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+		<!-- <dependency>
+    		<groupId>org.slf4j</groupId>
+    		<artifactId>slf4j-log4j12</artifactId>
+    		<version>1.7.21</version>
+		</dependency> -->
+		<!-- slf4j -->
+		<!-- 爬虫框架 -->
+		<dependency>
+			<groupId>us.codecraft</groupId>
+			<artifactId>webmagic-core</artifactId>
+			<version>0.5.3</version>
+			<exclusions> 
+					<exclusion> 
+ 						<artifactId>commons-lang</artifactId> 
+ 						<groupId>commons-lang</groupId> 
+ 					</exclusion>
+ 					<exclusion>
+            			<groupId>org.slf4j</groupId>
+            			<artifactId>slf4j-log4j12</artifactId>
+        			</exclusion>
+			</exclusions> 
+		</dependency>
+		<dependency>
+			<groupId>us.codecraft</groupId>
+			<artifactId>webmagic-extension</artifactId>
+			<version>0.5.3</version>
+		</dependency>
+		<!-- jxl 操作word,excel等-->
+		<dependency>
+    		<groupId>net.sourceforge.jexcelapi</groupId>
+    		<artifactId>jxl</artifactId>
+    		<version>2.6.12</version>
+    		<exclusions>
+    			<exclusion>
+    				<artifactId>log4j</artifactId>
+    				<groupId>log4j</groupId>
+    			</exclusion>
+    		</exclusions>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
+		<!-- Swagger -->
+		<!--springfox的基本信息文档: http://springfox.github.io/springfox/docs/current/#architecture-->
+		<dependency>
+    		<groupId>io.springfox</groupId>
+    		<artifactId>springfox-swagger-ui</artifactId>
+    		<version>2.6.0</version>
+		</dependency>
+		<dependency>
+    		<groupId>io.springfox</groupId>
+    		<artifactId>springfox-swagger2</artifactId>
+    		<version>2.6.0</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok  -->
+		<!-- 使用注解快速完成model配置 -->
+		<dependency>
+    		<groupId>org.projectlombok</groupId>
+    		<artifactId>lombok</artifactId>
+    		<version>1.16.10</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
+		<!--quartz 任务调度 -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.2.3</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.google.zxing/core -->
+		<!-- google 二维码 -->
+		<dependency>
+    		<groupId>com.google.zxing</groupId>
+    		<artifactId>core</artifactId>
+    		<version>3.3.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.google.zxing/javase -->
+		<dependency>
+    		<groupId>com.google.zxing</groupId>
+    		<artifactId>javase</artifactId>
+    		<version>3.3.0</version>
+		</dependency>
+		<!--  网络连接 url -->
+		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+		<dependency>
+    		<groupId>org.apache.httpcomponents</groupId>
+    		<artifactId>httpclient</artifactId>
+    		<version>4.5.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore -->
+		<dependency>
+    		<groupId>org.apache.httpcomponents</groupId>
+    		<artifactId>httpcore</artifactId>
+    		<version>4.4.5</version>
+		</dependency>
+		
+		<!-- shiro权限 -->
+		<dependency>
+    		<groupId>org.apache.shiro</groupId>
+    		<artifactId>shiro-all</artifactId>
+    		<version>1.3.2</version>
 		</dependency>
 		
 		<!-- redis -->
@@ -426,6 +544,12 @@
     		<groupId>redis.clients</groupId>
     		<artifactId>jedis</artifactId>
     		<version>2.9.0</version>
+		</dependency>
+		<!-- Spring 与 redis -->
+		<dependency>
+    		<groupId>org.springframework.data</groupId>
+    		<artifactId>spring-data-redis</artifactId>
+    		<version>1.7.3.RELEASE</version>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/io.netty/netty-all   netty网络编程框架 netsocket -->
@@ -436,11 +560,56 @@
     		<!-- <version>4.1.5.Final</version> -->
 		</dependency>
 		
+		<!-- mybatis与spring -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.3.0</version>
+		</dependency>
+		<!--通用Mapper-->
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper</artifactId>
+            <version>3.3.8</version>
+        </dependency>
+		<!-- mybaits 分页插件 -->
+		<dependency>
+    		<groupId>com.github.pagehelper</groupId>
+    		<artifactId>pagehelper</artifactId>
+    		<version>4.1.6</version>
+		</dependency>
+		<!-- 当当mybatis分库分表 -->
+		<dependency>
+    		<groupId>com.dangdang</groupId>
+    		<artifactId>sharding-jdbc-core</artifactId>
+    		<version>1.3.3</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.dangdang/sharding-jdbc-config-common -->
+		<dependency>
+    		<groupId>com.dangdang</groupId>
+    		<artifactId>sharding-jdbc-config-spring</artifactId>
+    		<version>1.3.3</version>
+		</dependency>
+		
 		<!--dubbo -->
+		<!-- 使用的为dubbox 需在github下载源码，使用maven编译 mvn install -Dmaven.test.skip=true -->
+		<!-- maven地址，需要配置server 镜像
+		<mirror>
+        	<id>nexus-aliyun</id>
+        	<mirrorOf>*</mirrorOf>
+        	<name>Nexus aliyun</name>
+        	<url>http://maven.aliyun.com/nexus/content/groups/public</url>
+    	</mirror> 	
+    	-->
 		<dependency>
     		<groupId>com.alibaba</groupId>
     		<artifactId>dubbo</artifactId>
-    		<version>2.5.3</version>
+    		<version>2.8.4</version>
     		<exclusions>
     			<exclusion>
     				<artifactId>spring</artifactId>
@@ -479,6 +648,93 @@
     			</exclusion>
     		</exclusions>
 		</dependency>
+
+		<!-- dubbox REST依赖 -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>3.0.7.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-client</artifactId>
+			<version>3.0.7.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
+		</dependency>
+
+		<!-- 如果要使用json序列化 -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jackson-provider</artifactId>
+			<version>3.0.7.Final</version>
+		</dependency>
+
+		<!-- 如果要使用xml序列化 -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxb-provider</artifactId>
+			<version>3.0.7.Final</version>
+		</dependency>
+
+		<!-- 如果要使用netty server -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-netty</artifactId>
+			<version>3.0.7.Final</version>
+		</dependency>
+
+		<!-- 如果要使用Sun HTTP server -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jdk-http</artifactId>
+			<version>3.0.7.Final</version>
+		</dependency>
+
+		<!-- 如果要使用tomcat server -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-core</artifactId>
+			<version>8.0.11</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-logging-juli</artifactId>
+			<version>8.0.11</version>
+		</dependency>
+		
+		<!-- dubbox Kyro序列化 -->
+		<dependency>
+    		<groupId>com.esotericsoftware.kryo</groupId>
+    		<artifactId>kryo</artifactId>
+    		<version>2.24.0</version>
+		</dependency>
+		<dependency>
+    		<groupId>de.javakaffee</groupId>
+    		<artifactId>kryo-serializers</artifactId>
+    		<version>0.26</version>
+		</dependency>
+		<!-- dubbox FST序列化 -->
+		<dependency>
+    		<groupId>de.ruedigermoeller</groupId>
+    		<artifactId>fst</artifactId>
+    		<version>1.55</version>
+		</dependency>
+		<!-- dubbox jackson -->
+		<!-- <dependency>
+    		<groupId>com.fasterxml.jackson.core</groupId>
+    		<artifactId>jackson-core</artifactId>
+    		<version>2.3.3</version>
+		</dependency>
+		<dependency>
+    		<groupId>com.fasterxml.jackson.core</groupId>
+    		<artifactId>jackson-databind</artifactId>
+    		<version>2.3.3</version>
+		</dependency> -->
+		
 		
 		<!-- <dependency>  
             <groupId>javax.annotation</groupId>  
@@ -489,51 +745,9 @@
             <groupId>org.apache.activemq</groupId>  
             <artifactId>activemq-core</artifactId>  
             <version>5.7.0</version>  
-        </dependency>  
-
-		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
-		<dependency>
-    		<groupId>log4j</groupId>
-    		<artifactId>log4j</artifactId>
-    		<version>1.2.17</version>
-		</dependency>
-		<!-- logback-->
-		<!-- <dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.1.7</version>
-		</dependency> -->
-		<!-- log4j2 日志 -->
-		<!-- <dependency>
-    		<groupId>org.apache.logging.log4j</groupId>
-    		<artifactId>log4j-core</artifactId>
-    		<version>2.7</version>
-		</dependency>
-		<dependency>
-    		<groupId>org.apache.logging.log4j</groupId>
-    		<artifactId>log4j-slf4j-impl</artifactId>
-    		<version>2.7</version>
-		</dependency>
-		<dependency>
-    		<groupId>org.apache.logging.log4j</groupId>
-    		<artifactId>log4j-1.2-api</artifactId>
-    		<version>2.7</version>
-		</dependency> -->
-		
-		<!-- slf4j -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.7.21</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
-		<!-- <dependency>
-    		<groupId>org.slf4j</groupId>
-    		<artifactId>slf4j-log4j12</artifactId>
-    		<version>1.7.21</version>
-		</dependency> -->
-				
+        </dependency>
+        
+		<!-- 组件=============================== -->
 		
 		<!-- https://mvnrepository.com/artifact/org.fusesource.jansi/jansi  日志控制台颜色 -->
 		<!-- <dependency>
@@ -541,119 +755,12 @@
     		<artifactId>jansi</artifactId>
     		<version>1.13</version>
 		</dependency> -->
-		
-		<!--通用Mapper-->
-        <dependency>
-            <groupId>tk.mybatis</groupId>
-            <artifactId>mapper</artifactId>
-            <version>3.3.8</version>
-        </dependency>
-		<!-- mybaits 分页插件 -->
-		<dependency>
-    		<groupId>com.github.pagehelper</groupId>
-    		<artifactId>pagehelper</artifactId>
-    		<version>4.1.6</version>
-		</dependency>
-		
-
-		<!-- 爬虫框架 -->
-		<dependency>
-			<groupId>us.codecraft</groupId>
-			<artifactId>webmagic-core</artifactId>
-			<version>0.5.3</version>
-			<exclusions> 
-					<exclusion> 
- 						<artifactId>commons-lang</artifactId> 
- 						<groupId>commons-lang</groupId> 
- 					</exclusion>
- 					<exclusion>
-            			<groupId>org.slf4j</groupId>
-            			<artifactId>slf4j-log4j12</artifactId>
-        			</exclusion>
-			</exclusions> 
-		</dependency>
-		<dependency>
-			<groupId>us.codecraft</groupId>
-			<artifactId>webmagic-extension</artifactId>
-			<version>0.5.3</version>
-		</dependency>
-		
-		<!-- jxl 操作word,excel等-->
-		<dependency>
-    		<groupId>net.sourceforge.jexcelapi</groupId>
-    		<artifactId>jxl</artifactId>
-    		<version>2.6.12</version>
-    		<exclusions>
-    			<exclusion>
-    				<artifactId>log4j</artifactId>
-    				<groupId>log4j</groupId>
-    			</exclusion>
-    		</exclusions>
-		</dependency>
-		
+		<!-- Spring boot -->
 		<!-- <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>1.4.1.RELEASE</version>
         </dependency> -->
-        
-        <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
-		<!-- Swagger -->
-		<!--springfox的基本信息文档: http://springfox.github.io/springfox/docs/current/#architecture-->
-		<dependency>
-    		<groupId>io.springfox</groupId>
-    		<artifactId>springfox-swagger-ui</artifactId>
-    		<version>2.6.0</version>
-		</dependency>
-		<dependency>
-    		<groupId>io.springfox</groupId>
-    		<artifactId>springfox-swagger2</artifactId>
-    		<version>2.6.0</version>
-		</dependency>
-		
-		
-		<!-- 当当mybatis分库分表 -->
-		<dependency>
-    		<groupId>com.dangdang</groupId>
-    		<artifactId>sharding-jdbc-core</artifactId>
-    		<version>1.3.3</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.dangdang/sharding-jdbc-config-common -->
-		<dependency>
-    		<groupId>com.dangdang</groupId>
-    		<artifactId>sharding-jdbc-config-spring</artifactId>
-    		<version>1.3.3</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok  -->
-		<!-- 使用注解快速完成model配置 -->
-		<dependency>
-    		<groupId>org.projectlombok</groupId>
-    		<artifactId>lombok</artifactId>
-    		<version>1.16.10</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
-		<!--quartz 任务调度 -->
-		<dependency>
-			<groupId>org.quartz-scheduler</groupId>
-			<artifactId>quartz</artifactId>
-			<version>2.2.3</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/com.google.zxing/core -->
-		<!-- google 二维码 -->
-		<dependency>
-    		<groupId>com.google.zxing</groupId>
-    		<artifactId>core</artifactId>
-    		<version>3.3.0</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.google.zxing/javase -->
-		<dependency>
-    		<groupId>com.google.zxing</groupId>
-    		<artifactId>javase</artifactId>
-    		<version>3.3.0</version>
-		</dependency>
 		
 	</dependencies>
 	
@@ -713,6 +820,8 @@
                         <version>3.3.8</version>
                     </dependency>
                 </dependencies>
+                
+                
 			</plugin>
 
 			<!-- 部署至本机 -->

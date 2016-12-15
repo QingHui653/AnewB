@@ -31,7 +31,6 @@ import java.util.List;
 /**
  * 通用接口
  */
-@Service
 public interface IService<T> {
 
     T selectByKey(Object key);

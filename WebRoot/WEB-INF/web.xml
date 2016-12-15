@@ -4,10 +4,12 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	id="WebApp_ID" version="3.1">
 	<display-name>AnewB</display-name>
+	
 	<!-- Spring context应用 配置Spring与 mybatis -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:spring.xml</param-value>
+		<param-value>classpath*:spring.xml</param-value>
+		<!-- <param-value>classpath*:spring.xml,classpath:springhighGrade-dubboxRest.xml</param-value> -->
 <!-- 		<param-value>classpath:spring.xml,classpath:spring-mybatis.xml,classpath:spring-cache.xml</param-value> -->
 	</context-param>
 	
@@ -84,7 +86,13 @@
 	<listener>  
          <listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>  
 	</listener>  -->
-
+	<!-- dubbox REST  使用service="servlet"-->
+	<!-- 注意：如果你是用spring的ContextLoaderListener来加载spring，则必须保证BootstrapListener配置在ContextLoaderListener之前，否则dubbo初始化会出错。 -->
+	<!-- <listener>
+        <listener-class>com.alibaba.dubbo.remoting.http.servlet.BootstrapListener</listener-class>
+    </listener> -->
+    
+	<!-- spring上下文加载监听器 -->
 	<listener>
 		<description>spring监听器</description>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -94,6 +102,17 @@
 	<listener>
 		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
 	</listener>
+	
+	<!-- dubbox REST 使用service="servlet"-->
+	<!-- <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>com.alibaba.dubbo.remoting.http.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/AnewB/*</url-pattern>
+    </servlet-mapping> -->
 	<!-- proxool 连接池配置 -->
 	<servlet>
 		<servlet-name>ServletConfigurator</servlet-name>
@@ -120,7 +139,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>rest</servlet-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 	<!-- <servlet-mapping> <servlet-name>rest</servlet-name> <url-pattern>/</url-pattern> 
 		</servlet-mapping> -->

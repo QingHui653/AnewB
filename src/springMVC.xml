@@ -14,8 +14,12 @@
 		http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
 		">
 	<!-- 自动扫描下的包自动装配 -->
-	<context:component-scan base-package="newb.c.controller"/>
-    <context:component-scan base-package="newb.c.api"/> 
+	<!--resource-pattern="api/*.class" 基类包下的所有类-->
+	<context:component-scan base-package="newb.c.controller" />
+    <context:component-scan base-package="newb.c.api">
+    	<!-- <context:exclude-filter type="regex" expression="com.jek.*"/> --><!-- 过滤 -->
+    	<!-- <context:include-filter type="aspectj" expression="com.jike..*Controller+"/> --><!-- 包括 -->
+    </context:component-scan>
 	<!-- 启用spring mvc 注解 -->
     <!--
     @Controller 声明Action组件
