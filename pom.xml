@@ -793,11 +793,6 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
-			
-			<plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
 
 			<!-- mybatis orm插件 -->
 			<plugin>
@@ -820,16 +815,22 @@
                         <version>3.3.8</version>
                     </dependency>
                 </dependencies>
-                
-                
+
 			</plugin>
 
 			<!-- 部署至本机 -->
-			<!--<plugin> <groupId>org.codehaus.cargo</groupId> <artifactId>cargo-maven2-plugin</artifactId> 
-				<version>1.0</version> <configuration> <container> <containerId>tomcat8x</containerId> 
-				<home>D:\tool\apache-tomcat-8.0.30</home> </container> <configuration> <type>existing</type> 
-				<home>D:\tool\apache-tomcat-8.0.30</home> </configuration> </configuration> 
-				</plugin> -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<port>8081</port>
+					<path>/AnewB</path>
+					<uriEncoding>UTF-8</uriEncoding>
+					<finalName>AnewB</finalName>
+					<server>tomcat7</server>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>

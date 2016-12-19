@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import newb.c.model.User;
+import newb.c.model.UserTrin;
 
 public interface UserService extends IService<User> {  
 	
@@ -16,4 +17,8 @@ public interface UserService extends IService<User> {
     List<User> selectAllForUpdate();
     
     String selectPW(int oid);
+    
+    UserTrin selectUserCacheByUser(int oid);
+    
+    UserTrin selectUserCacheByDao(int oid);
 }

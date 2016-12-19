@@ -29,6 +29,7 @@ import newb.c.model.SessionB;
 import newb.c.model.User;
 import newb.c.model.UserCache;
 import newb.c.model.UserData;
+import newb.c.model.UserTrin;
 import newb.c.model.UserXL;
 import newb.c.service.ResultService;
 import newb.c.service.TestCacheService;
@@ -98,12 +99,41 @@ public class UserController {
 	  * @param userId
 	  * @return
 	  */
-	 @RequestMapping("/selectQW/{userId}")
+	 @RequestMapping(value="/selectQW/{userId}",method=RequestMethod.GET)
 	 @ResponseBody
 	 public String selectQW(ModelMap modelMap,@PathVariable int userId){
 	        String password = userService.selectPW(userId);	     
 	        return password;  
+	    }
+	 
+	 /**
+	  * 测试dao关联查询
+	  * 关联查询暂时没找到方法使用注解的方式
+	  * @param modelMap
+	  * @param userId
+	  * @return
+	  */
+	 @RequestMapping(value="/selectUserDao/{userId}",method=RequestMethod.GET)
+	 @ResponseBody
+	 public Object selectUserCacheByDao(ModelMap modelMap,@PathVariable int userId){
+	        UserTrin userTrin = userService.selectUserCacheByDao(userId);	     
+	        return userTrin;  
 	    } 
+	 
+	 /**
+	  * 
+	  * 测试XML关联查询是否可行
+	  * @param modelMap
+	  * @param userId
+	  * @return
+	  */
+	 @RequestMapping(value="/selectUserCache/{userId}",method=RequestMethod.GET)
+	 @ResponseBody
+	 public Object selectUserCacheByUser(ModelMap modelMap,@PathVariable int userId){
+	        UserTrin userTrin = userService.selectUserCacheByUser(userId);	     
+	        return userTrin;  
+	    } 
+	 
 	 
 	 /**
 	  * save 测试事务
@@ -118,7 +148,7 @@ public class UserController {
 		 	 * 测试插入10w数据，用时，在服务器开启后第一次用时10s，后面用时2-4s
 		 	 */
 		 	List<User> userList = new ArrayList<User>();
-		 	for (int i = 0; i < 100000; i++) {
+		 	for (int i = 0; i < 10000; i++) {
 		 		User user =new User();
 		 		user.setOid(i);
 		 		user.setUsername(i+"");
@@ -163,10 +193,10 @@ public class UserController {
 		 	 * 测试插入10w数据，用时，在服务器开启后第一次用时10s，后面用时2-4s
 		 	 */
 		 	List<UserCache> userCacheList = new ArrayList<UserCache>();
-		 	for (int i = 0; i < 1000000; i++) {
+		 	for (int i = 0; i < 10000; i++) {
 		 		UserCache userCache =new UserCache();
 		 		userCache.setId(i);
-		 		userCache.setName(i+"");
+		 		userCache.setName("关联查询"+i);
 		 		userCache.setAge(i);
 		 		userCacheList.add(userCache);
 			}

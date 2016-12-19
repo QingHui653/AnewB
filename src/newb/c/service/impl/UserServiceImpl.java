@@ -4,6 +4,7 @@ import java.util.List;
 
 import newb.c.dao.UserMapper;
 import newb.c.model.User;
+import newb.c.model.UserTrin;
 import newb.c.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,15 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 	@Override
 	public String selectPW(int oid) {
 		return userMapper.selectPW(oid);
+	}
+
+	@Override
+	public UserTrin selectUserCacheByUser(int oid) {
+		return userMapper.selectUserAndUserCacheByUser(oid);
+	}
+
+	@Override
+	public UserTrin selectUserCacheByDao(int oid) {
+		return userMapper.selectUserAndUserCacheByDao(oid);
 	}
 }

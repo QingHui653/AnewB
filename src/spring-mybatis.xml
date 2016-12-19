@@ -32,7 +32,7 @@
 		<!-- 初始化连接大小 -->
 		<property name="initialSize" value="1" />
 		<!-- 连接池最大使用连接数量 -->
-		<property name="maxActive" value="20" />
+		<property name="maxActive" value="50" />
 		<!-- 连接池最小空闲 -->
 		<property name="minIdle" value="1" />
 		<!-- 获取连接最大等待时间 -->
@@ -43,9 +43,9 @@
 		<property name="validationQuery" value="${validationQuery}" />
 		<property name="testOnBorrow" value="false" />
 		<property name="testOnReturn" value="false" />
-		<property name="testWhileIdle" value="true" />
+		<property name="testWhileIdle" value="false" />
 		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
-		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+		<property name="timeBetweenEvictionRunsMillis" value="180000" />
 		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
 		<property name="minEvictableIdleTimeMillis" value="25200000" />
 		<!-- 打开removeAbandoned功能 -->

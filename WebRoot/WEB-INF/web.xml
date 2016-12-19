@@ -139,7 +139,8 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>rest</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<!--<url-pattern>/*</url-pattern> 不能使用/*会导致jsp页面无法编译，直接显示源码  -->
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	<!-- <servlet-mapping> <servlet-name>rest</servlet-name> <url-pattern>/</url-pattern> 
 		</servlet-mapping> -->

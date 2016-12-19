@@ -13,7 +13,9 @@
 	<context:property-placeholder location="classpath*:*.properties" />
 	
 	
-	<import resource="spring-*.xml"/>
+	<import resource="spring-mybatis.xml"/>
+	<import resource="spring-cache.xml"/>
+	<!-- <import resource="spring-*.xml"/> -->
 	<!-- dubbo,activeMq等扩展 -->
 	<!-- <import resource="springhighGrade-dubboxRest.xml"/> -->
 	<!-- <import resource="springhighGrade-active*.xml"/> -->
