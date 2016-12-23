@@ -56,43 +56,98 @@ import com.google.gson.reflect.TypeToken;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-	
-	@Autowired 
+
+	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private ResultService resultService;
-	
+
 	@Autowired
 	private TestCacheService userCacheService;
-	
-	
+
+
 	//常用工具类   时间不能用在这 ,不然每次进入不会重新new 一个对象,
 	//会使得时间有BUG
 //	GregorianCalendar cal=new GregorianCalendar();
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	
+	//google JSON工具
+	Gson gson = new Gson();
+
 	/**
 	 *  访问/user/newb/2
 	 *  将user 绑定到modelMap
 	 *  在JSP页面 使用 ${user.username}等访问
 	 *  跳转到/user/showInfo
+	 *  // 测试页面在/web/mvc/indexMvc下，不知道为什么后台会有运行，但前台会自动刷新
 	 * @param modelMap
 	 * @param userId
 	 * @return
 	 */
-	 @ApiOperation(value = "获取用户列表", notes = "") 
+	 @ApiOperation(value = "获取用户列表 REST风格", notes = "")
 	 @RequestMapping(value="/newb/{userId}",method= {RequestMethod.GET,RequestMethod.POST})
 	 @ResponseBody
-	 public Object showUserInfo(ModelMap modelMap,@PathVariable int userId){
+	 public Object showUserInfoRest(ModelMap modelMap,@PathVariable int userId){
 	        User user = userService.getUserById(userId);
-//		 Example e= new Example(User.class);
-//		 e.createCriteria().andGreaterThanOrEqualTo("oid", 0);
-//		 List<User> userList= userService.selectByExample(e);
-//	        modelMap.addAttribute("user", user);  
-	     return user;  
-	    } 
+		 	Example e= new Example(User.class);
+		 	e.createCriteria().andGreaterThanOrEqualTo("oid", 0);
+		 	List<User> userList= userService.selectByExample(e);
+		 	modelMap.addAttribute("user", user);
+	     	return "/user/showInfo";
+	 }
 	 
+	 /**
+	  *  访问/user/newb/2
+	  *  将user 绑定到modelMap
+	  *  在JSP页面 使用 ${user.username}等访问
+	  *  跳转到/user/showInfo
+	  *  // 测试页面在/web/mvc/indexMvc下，不知道为什么后台会有运行，但前台会自动刷新
+	  * @param modelMap
+	  * @param userId
+	  * @return
+	  */
+	@ApiOperation(value = "获取用户列表 http风格", notes = "")
+	@RequestMapping(value="/newb",method= {RequestMethod.GET,RequestMethod.POST})
+	@ResponseBody
+	public Object showUserInfoHttp(ModelMap modelMap,int userId){
+		   User user = userService.getUserById(userId);
+		   Example e= new Example(User.class);
+		   e.createCriteria().andGreaterThanOrEqualTo("oid", 0);
+		   List<User> userList= userService.selectByExample(e);
+		   modelMap.addAttribute("user", user);
+		   return "/user/showInfo";
+	}
+	
+	@ApiOperation(value = "测试参数为单个bean", notes = "")
+	@RequestMapping(value="/bean",method= {RequestMethod.POST})
+	@ResponseBody
+	// 测试页面在/web/mvc/indexMvc下，不知道为什么后台会有运行，但前台会自动刷新
+	public Object showUserInfoBean(ModelMap modelMap,User user){
+		System.out.println("Spring mvc自动序列化得到的user "+user.getOid()+"  "+user.getUsername());
+		return "/user/showInfo";
+	}
+	
+	/**
+	 * Spring MVC无法完成对多个参数,需要序列化和不需要序列化的参数进行注入
+	 * 这时传入JSON手动进行反序列化
+	 * 或 /AnewB/user/morebean?userId=3&json="+JSON.stringify(user),data:user,
+	 * 这样不用序列化的直接传入,需要序列化通过ajax data传入
+	 * 测试页面在/web/mvc/indexMvc下，不知道为什么后台会有运行，但前台会自动刷新
+	 * @param userId
+	 * @param user
+	 * @param json
+	 * @return
+	 */
+	@ApiOperation(value = "测试参数为多个bean", notes = "")
+	@RequestMapping(value="/morebean",method= {RequestMethod.POST})
+	@ResponseBody
+	public Object showUserInfoMoreBean(ModelMap modelMap,Integer userId,User user,String json){
+			System.out.println("接受到的 userId "+userId);
+		    System.out.println("json序列化 "+json);
+		    User userFromJson=gson.fromJson(json, User.class);
+		    System.out.println("反序列化得到的user "+userFromJson.getOid()+"  "+userFromJson.getUsername());
+		    return "/user/showInfo";
+	}
 	 /**
 	  * 测试不同mapXML是否可行
 	  * @param modelMap
@@ -102,10 +157,10 @@ public class UserController {
 	 @RequestMapping(value="/selectQW/{userId}",method=RequestMethod.GET)
 	 @ResponseBody
 	 public String selectQW(ModelMap modelMap,@PathVariable int userId){
-	        String password = userService.selectPW(userId);	     
-	        return password;  
+	        String password = userService.selectPW(userId);
+	        return password;
 	    }
-	 
+
 	 /**
 	  * 测试dao关联查询
 	  * 关联查询暂时没找到方法使用注解的方式
@@ -116,12 +171,12 @@ public class UserController {
 	 @RequestMapping(value="/selectUserDao/{userId}",method=RequestMethod.GET)
 	 @ResponseBody
 	 public Object selectUserCacheByDao(ModelMap modelMap,@PathVariable int userId){
-	        UserTrin userTrin = userService.selectUserCacheByDao(userId);	     
-	        return userTrin;  
-	    } 
-	 
+	        UserTrin userTrin = userService.selectUserCacheByDao(userId);
+	        return userTrin;
+	    }
+
 	 /**
-	  * 
+	  *
 	  * 测试XML关联查询是否可行
 	  * @param modelMap
 	  * @param userId
@@ -130,11 +185,11 @@ public class UserController {
 	 @RequestMapping(value="/selectUserCache/{userId}",method=RequestMethod.GET)
 	 @ResponseBody
 	 public Object selectUserCacheByUser(ModelMap modelMap,@PathVariable int userId){
-	        UserTrin userTrin = userService.selectUserCacheByUser(userId);	     
-	        return userTrin;  
-	    } 
-	 
-	 
+	        UserTrin userTrin = userService.selectUserCacheByUser(userId);
+	        return userTrin;
+	    }
+
+
 	 /**
 	  * save 测试事务
 	  * @param modelMap
@@ -163,9 +218,9 @@ public class UserController {
 		 	e.createCriteria().andGreaterThanOrEqualTo("oid", 0);
 		 	List<User> userList = userService.selectByExample(e);
 		 	System.out.println("有索引--"+userList.size());*/
-	        return "/user/showInfo";  
-	    } 
-	 
+	        return "/user/showInfo";
+	    }
+
 	 /**
 	  * save 测试事务
 	  * @param modelMap
@@ -177,9 +232,9 @@ public class UserController {
 	 public String selectUserForUpdate(ModelMap modelMap){
 		 	List<User> userList = userService.selectAllForUpdate();
 		 	System.out.println("有索引 forupdate--"+userList.size());
-	        return "/user/showInfo";  
+	        return "/user/showInfo";
 	    }
-	 
+
 	 /**
 	  * userCahce表，测试插入10w条数据
 	  * @param modelMap
@@ -201,7 +256,7 @@ public class UserController {
 		 		userCacheList.add(userCache);
 			}
 		 	userCacheService.insertAll(userCacheList);
-		 	
+
 		 	/**
 		 	 * 测试查询10w条数据，user_cache 未加索引
 		 	 */
@@ -209,9 +264,9 @@ public class UserController {
 		 	e.createCriteria().andGreaterThanOrEqualTo("id", 0);
 		 	List<UserCache> userCacheList =userCacheService.selectByExample(e);
 		 	System.out.println("无索引--"+userCacheList.size());*/
-	        return "userCacheList";  
-	    } 
-	 
+	        return "userCacheList";
+	    }
+
 	 /**
 	  * del 测试事务 具体看BaseServiceImpl
 	  * @param modelMap
@@ -222,7 +277,7 @@ public class UserController {
 	 @ResponseBody
 	 public String del(ModelMap modelMap){
 		 	int test=userService.delete(null);
-	        return test+"";  
+	        return test+"";
 	    }
 	 /**
 	  *  返回中文字符串,需要在MVC中配置 不然会自动加引号
@@ -232,11 +287,11 @@ public class UserController {
 	  */
 	 @RequestMapping(value="/newbb",method= RequestMethod.POST) //,produces ="text/html;charset=UTF-8" 返回UTF-格式
 	 @ResponseBody
-	 public String showUser(ModelMap modelMap, int userId){  
+	 public String showUser(ModelMap modelMap, int userId){
 	        User user = userService.getUserById(userId);
 	        modelMap.addAttribute("user", user);
 	        String str="hello word 你好世界";
-	        return str;  
+	        return str;
 	    }
 	 /**
 	  * 返回JSON ,需要在MVC中配置
@@ -244,26 +299,26 @@ public class UserController {
 	  */
 	 @RequestMapping(value="/newbs",method=RequestMethod.GET)
 	 @ResponseBody   //注释返回JSON 或 String 必须加此注解
-	 public Object showUserInfos(){  
-	        List<User> user = userService.getUsers();  
-	        return user;  
-	    } 
-	 
+	 public Object showUserInfos(){
+	        List<User> user = userService.getUsers();
+	        return user;
+	    }
+
 	 @RequestMapping(value="/newbs2",method=RequestMethod.GET)   //未加会返回 user 至 newbs2.jsp 页面
-	 public Object showUserInfo(){  
-	        List<User> user = userService.getUsers();  
-	        return user;  
-	    } 
-	 
-	 @RequestMapping(value="/login",method=RequestMethod.POST) 
-	 public String login(ModelMap modelMap, String username, String password,HttpSession httpSession){  
+	 public Object showUserInfo(){
+	        List<User> user = userService.getUsers();
+	        return user;
+	    }
+
+	 @RequestMapping(value="/login",method=RequestMethod.POST)
+	 public String login(ModelMap modelMap, String username, String password,HttpSession httpSession){
 		 	int userId=2;
 		 	User user = userService.getUserById(userId);
 		 	SessionB session = new SessionB(user);
 	        modelMap.addAttribute("user", user);
 	        //添加到session
 	        httpSession.setAttribute("session", session);
-	        return "/admin/showInfo";  
+	        return "/admin/showInfo";
 	    }
 	 /**
 	  * session测试,关闭浏览器服务器端的session不会丢失,但浏览器
@@ -274,7 +329,7 @@ public class UserController {
 	  * @throws ServletException
 	  * @throws IOException
 	  */
-	 @RequestMapping(value="/sessionTest",method=RequestMethod.POST) 
+	 @RequestMapping(value="/sessionTest",method=RequestMethod.POST)
 	 public void doGet(HttpServletRequest request, HttpServletResponse response)
 			 throws ServletException, IOException {
 			 response.setContentType("text/html;charset=UTF-8");
@@ -323,35 +378,34 @@ public class UserController {
 	  * @param password
 	  * @return
 	  */
-	 @RequestMapping(value="/loginFor",method=RequestMethod.POST) 
-	 public String loginFor(ModelMap modelMap, String username, String password){  
+	 @RequestMapping(value="/loginFor",method=RequestMethod.POST)
+	 public String loginFor(ModelMap modelMap, String username, String password){
 		 	int userId=2;
 		 	User user = userService.getUserById(userId);
-	        modelMap.addAttribute("user", user);  
-	        return "forward:/user/newbs";  
+	        modelMap.addAttribute("user", user);
+	        return "forward:/user/newbs";
 	    }
-	 
+
 	 /**
 	  *  使用JQ serializeArray 表单格式化传入  这个看views下xzjl的JS
 	  *  Spring MVC自动转换失败 只能使用Map<String Object>接受
 	  *  使用GSON 转换为 bean
-	  * @param 
+	  * @param
 	  * Spring MVC自动转换失败 使用Map<String Object>接受
 	  * @return success字符串
 	  */
 	 @RequestMapping(value="/xzjl",method=RequestMethod.POST)
 	 @ResponseBody
-	 public String xzjl(@RequestBody Map<String, Object> userjl)  {  
-		 	Gson gson= new Gson();
+	 public String xzjl(@RequestBody Map<String, Object> userjl)  {
 		 	//GSON 转换JSON to bean
 		 	UserData userdata =gson.fromJson(userjl.get("userData").toString(), UserData.class);
 		 	//GSON 转换JSON to List<T>
 		 	List<UserXL> userxlList =	gson.fromJson(userjl.get("userXL").toString(), new TypeToken<List<UserXL>>(){}.getType());
-		 
-	        return "success";  
+
+	        return "success";
 	    }
-	 
-	 
+
+
 /*从上个项目复制的文件上传下载   开始----------------------------------------*/
 	 /**
 	  * 上传文件1  使用上传文件2
@@ -359,7 +413,7 @@ public class UserController {
 	  * @throws IllegalStateException
 	  * @throws IOException
 	  */
-	 @RequestMapping(value = "/upLoadFile.do", method = RequestMethod.POST)  
+	 @RequestMapping(value = "/upLoadFile.do", method = RequestMethod.POST)
 	    public void upLoadFile(HttpServletRequest request)  throws IllegalStateException, IOException {
 		// @RequestParam("file") MultipartFile file,
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
@@ -386,47 +440,47 @@ public class UserController {
 			}
 		}
 	}
-	 
-	 
+
+
 	 @RequestMapping(value="/imgfile",method=RequestMethod.POST)
 	 @ResponseBody
-	    public String imageUpload(@RequestParam("file") CommonsMultipartFile file,HttpServletRequest request, ModelMap model,HttpSession httpSession) {  
-	        // 获得原始文件名  
-	        String fileName = file.getOriginalFilename();  
+	    public String imageUpload(@RequestParam("file") CommonsMultipartFile file,HttpServletRequest request, ModelMap model,HttpSession httpSession) {
+	        // 获得原始文件名
+	        String fileName = file.getOriginalFilename();
 	        System.out.println("原始文件名:" + fileName);
 	        int pkid =(Integer) httpSession.getAttribute("PKID");
-	        // 新文件名  
+	        // 新文件名
 	        int cc=fileName.lastIndexOf(".");
 	        String newFileName ="tx"+fileName.substring(cc);
-	        // 获得项目的路径  
-	        ServletContext sc = request.getSession().getServletContext();  
-	        // 上传位置  
-	        String path = sc.getRealPath("\\img") + "\\"+pkid+"\\"; // 设定文件保存的目录  
-	        File f = new File(path);  
-	        if (!f.exists())  
-	            f.mkdirs();  
-	        if (!file.isEmpty()) {  
-	            try {  
-	                FileOutputStream fos = new FileOutputStream(path + newFileName);  
-	                InputStream in = file.getInputStream();  
-	                int b = 0;  
-	                while ((b = in.read()) != -1) {  
-	                    fos.write(b);  
-	                }  
-	                fos.close();  
-	                in.close();  
-	            } catch (Exception e) {  
-	                e.printStackTrace();  
-	            }  
-	        }  
-	        System.out.println("上传图片到:" + path + newFileName);  
-	        // 保存文件地址，用于JSP页面回显  
+	        // 获得项目的路径
+	        ServletContext sc = request.getSession().getServletContext();
+	        // 上传位置
+	        String path = sc.getRealPath("\\img") + "\\"+pkid+"\\"; // 设定文件保存的目录
+	        File f = new File(path);
+	        if (!f.exists())
+	            f.mkdirs();
+	        if (!file.isEmpty()) {
+	            try {
+	                FileOutputStream fos = new FileOutputStream(path + newFileName);
+	                InputStream in = file.getInputStream();
+	                int b = 0;
+	                while ((b = in.read()) != -1) {
+	                    fos.write(b);
+	                }
+	                fos.close();
+	                in.close();
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        System.out.println("上传图片到:" + path + newFileName);
+	        // 保存文件地址，用于JSP页面回显
 	        model.addAttribute("fileUrl", path + newFileName);
 //	        int re = userdataService.updateZp(pkid);
-	        return "success";  
+	        return "success";
 	    }
-	 
-	 
+
+
 	 /**
 	  * 上传文件2
 	  * @param file
@@ -434,68 +488,68 @@ public class UserController {
 	  * @param model
 	  * @return
 	  */
-	 
-	 
+
+
 	 @RequestMapping(value="/onefile",method=RequestMethod.POST)
 	 @ResponseBody
-	    public String oneFileUpload(@RequestParam("file") CommonsMultipartFile file,HttpServletRequest request, ModelMap model,HttpSession httpSession) {  
-	        // 获得原始文件名  
-	        String fileName = file.getOriginalFilename();  
+	    public String oneFileUpload(@RequestParam("file") CommonsMultipartFile file,HttpServletRequest request, ModelMap model,HttpSession httpSession) {
+	        // 获得原始文件名
+	        String fileName = file.getOriginalFilename();
 	        System.out.println("原始文件名:" + fileName);
-	        
+
 	        int pkid =(Integer) httpSession.getAttribute("PKID");
-	        // 新文件名  
-	        String newFileName =fileName;  
-	        // 获得项目的路径  
-	        ServletContext sc = request.getSession().getServletContext();  
-	        // 上传位置  
-	        String path = sc.getRealPath("\\img") + "\\"+pkid+"\\"; // 设定文件保存的目录  
-	        File f = new File(path);  
-	        if (!f.exists())  
-	            f.mkdirs();  
-	        if (!file.isEmpty()) {  
-	            try {  
-	                FileOutputStream fos = new FileOutputStream(path + newFileName);  
-	                InputStream in = file.getInputStream();  
-	                int b = 0;  
-	                while ((b = in.read()) != -1) {  
-	                    fos.write(b);  
-	                }  
-	                fos.close();  
-	                in.close();  
-	            } catch (Exception e) {  
-	                e.printStackTrace();  
-	            }  
-	        }  
-	        System.out.println("上传图片到:" + path + newFileName);  
-	        // 保存文件地址，用于JSP页面回显  
-	        model.addAttribute("fileUrl", path + newFileName);  
-	        return "success";  
+	        // 新文件名
+	        String newFileName =fileName;
+	        // 获得项目的路径
+	        ServletContext sc = request.getSession().getServletContext();
+	        // 上传位置
+	        String path = sc.getRealPath("\\img") + "\\"+pkid+"\\"; // 设定文件保存的目录
+	        File f = new File(path);
+	        if (!f.exists())
+	            f.mkdirs();
+	        if (!file.isEmpty()) {
+	            try {
+	                FileOutputStream fos = new FileOutputStream(path + newFileName);
+	                InputStream in = file.getInputStream();
+	                int b = 0;
+	                while ((b = in.read()) != -1) {
+	                    fos.write(b);
+	                }
+	                fos.close();
+	                in.close();
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        System.out.println("上传图片到:" + path + newFileName);
+	        // 保存文件地址，用于JSP页面回显
+	        model.addAttribute("fileUrl", path + newFileName);
+	        return "success";
 	    }
-	 
-	 @RequestMapping(value="/listFile",method=RequestMethod.GET)  
+
+	 @RequestMapping(value="/listFile",method=RequestMethod.GET)
 	 public String listFile(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession) {
 	     // 获取上传文件的目录
 		 int pkid =(Integer) httpSession.getAttribute("PKID");
-	     ServletContext sc = request.getSession().getServletContext();  
-	     // 上传位置  
-	     String uploadFilePath = sc.getRealPath("\\img") + "\\"+pkid+""; // 设定文件保存的目录  
+	     ServletContext sc = request.getSession().getServletContext();
+	     // 上传位置
+	     String uploadFilePath = sc.getRealPath("\\img") + "\\"+pkid+""; // 设定文件保存的目录
 	     // 存储要下载的文件名
-	     Map<String, String> fileNameMap = new HashMap<String, String>();  
-	     // 递归遍历filepath目录下的所有文件和目录，将文件的文件名存储到map集合中 
+	     Map<String, String> fileNameMap = new HashMap<String, String>();
+	     // 递归遍历filepath目录下的所有文件和目录，将文件的文件名存储到map集合中
 	     File fileList = new File(uploadFilePath);
-	     
+
 	     if(!fileList.exists()&&!fileList.isDirectory()){
 	    	 fileList.mkdir();
 	     }
 	     System.out.println("路径"+uploadFilePath);
 //	     File f=new File(uploadFilePath+"2zhang.gif");
-	     listfile(fileList, fileNameMap);// File既可以代表一个文件也可以代表一个目录  
-	     // 将Map集合发送到listfile.jsp页面进行显示  
-	     request.setAttribute("fileNameMap", fileNameMap);  
-	     return "listFile";  
+	     listfile(fileList, fileNameMap);// File既可以代表一个文件也可以代表一个目录
+	     // 将Map集合发送到listfile.jsp页面进行显示
+	     request.setAttribute("fileNameMap", fileNameMap);
+	     return "listFile";
 	 }
-	 
+
 	public void listfile(File file, Map<String, String> map) {
 		// 如果file代表的不是一个文件，而是一个目录
 		if (!file.isFile()) {
@@ -521,57 +575,57 @@ public class UserController {
 		}
 
 	}
-	 
-	 @RequestMapping(value="/downFile",method=RequestMethod.POST)  
-	 public void downFile(HttpServletRequest request,  HttpServletResponse response,HttpSession httpSession) {  
-	     System.out.println("1");  
-	     // 得到要下载的文件名  
-	     String fileName = request.getParameter("filename");  
-	     System.out.println("2");  
-	     try {  
-	         fileName = new String(fileName.getBytes("iso8859-1"), "UTF-8");  
-	         System.out.println("3");  
-	         // 获取上传文件的目录  
-	         ServletContext sc = request.getSession().getServletContext();  
-	         System.out.println("4");  
-	         // 上传位置 
+
+	 @RequestMapping(value="/downFile",method=RequestMethod.POST)
+	 public void downFile(HttpServletRequest request,  HttpServletResponse response,HttpSession httpSession) {
+	     System.out.println("1");
+	     // 得到要下载的文件名
+	     String fileName = request.getParameter("filename");
+	     System.out.println("2");
+	     try {
+	         fileName = new String(fileName.getBytes("iso8859-1"), "UTF-8");
+	         System.out.println("3");
+	         // 获取上传文件的目录
+	         ServletContext sc = request.getSession().getServletContext();
+	         System.out.println("4");
+	         // 上传位置
 	         int pkid =(Integer) httpSession.getAttribute("PKID");
-	         String fileSaveRootPath = sc.getRealPath("\\img") + "\\"+pkid+"\\";   
-	           
-	         System.out.println(fileSaveRootPath + "\\" + fileName);  
-	         // 得到要下载的文件  
-	         File file = new File(fileSaveRootPath + "\\" + fileName);  
-	           
-	         // 如果文件不存在  
-	         if (!file.exists()) {  
-	             request.setAttribute("message", "您要下载的资源已被删除！！");  
-	             System.out.println("您要下载的资源已被删除！！");  
-	             return;  
-	         }  
-	         // 处理文件名  
-	         String realname = fileName.substring(fileName.indexOf("_") + 1);  
-	         // 设置响应头，控制浏览器下载该文件  
-	         response.setHeader("content-disposition", "attachment;filename="  
-	                 + URLEncoder.encode(realname, "UTF-8"));  
-	         // 读取要下载的文件，保存到文件输入流  
-	         FileInputStream in = new FileInputStream(fileSaveRootPath + "\\" + fileName);  
-	         // 创建输出流  
-	         OutputStream out = response.getOutputStream();  
-	         // 创建缓冲区  
-	         byte buffer[] = new byte[1024];  
-	         int len = 0;  
-	         // 循环将输入流中的内容读取到缓冲区当中  
-	         while ((len = in.read(buffer)) > 0) {  
-	             // 输出缓冲区的内容到浏览器，实现文件下载  
-	             out.write(buffer, 0, len);  
-	         }  
-	         // 关闭文件输入流  
-	         in.close();  
-	         // 关闭输出流  
-	         out.close();  
-	     } catch (Exception e) {  
-	     }  
+	         String fileSaveRootPath = sc.getRealPath("\\img") + "\\"+pkid+"\\";
+
+	         System.out.println(fileSaveRootPath + "\\" + fileName);
+	         // 得到要下载的文件
+	         File file = new File(fileSaveRootPath + "\\" + fileName);
+
+	         // 如果文件不存在
+	         if (!file.exists()) {
+	             request.setAttribute("message", "您要下载的资源已被删除！！");
+	             System.out.println("您要下载的资源已被删除！！");
+	             return;
+	         }
+	         // 处理文件名
+	         String realname = fileName.substring(fileName.indexOf("_") + 1);
+	         // 设置响应头，控制浏览器下载该文件
+	         response.setHeader("content-disposition", "attachment;filename="
+	                 + URLEncoder.encode(realname, "UTF-8"));
+	         // 读取要下载的文件，保存到文件输入流
+	         FileInputStream in = new FileInputStream(fileSaveRootPath + "\\" + fileName);
+	         // 创建输出流
+	         OutputStream out = response.getOutputStream();
+	         // 创建缓冲区
+	         byte buffer[] = new byte[1024];
+	         int len = 0;
+	         // 循环将输入流中的内容读取到缓冲区当中
+	         while ((len = in.read(buffer)) > 0) {
+	             // 输出缓冲区的内容到浏览器，实现文件下载
+	             out.write(buffer, 0, len);
+	         }
+	         // 关闭文件输入流
+	         in.close();
+	         // 关闭输出流
+	         out.close();
+	     } catch (Exception e) {
+	     }
 	 }
-/*从上个项目复制的文件上传下载   结束----------------------------------------*/ 
-	 
+/*从上个项目复制的文件上传下载   结束----------------------------------------*/
+
 }

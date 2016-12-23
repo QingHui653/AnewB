@@ -15,7 +15,7 @@
 		">
 	<!-- 自动扫描下的包自动装配 -->
 	<!--resource-pattern="api/*.class" 基类包下的所有类-->
-	<context:component-scan base-package="newb.c.controller" />
+	<!-- <context:component-scan base-package="newb.c.controller" /> -->
     <context:component-scan base-package="newb.c.api">
     	<!-- <context:exclude-filter type="regex" expression="com.jek.*"/> --><!-- 过滤 -->
     	<!-- <context:include-filter type="aspectj" expression="com.jike..*Controller+"/> --><!-- 包括 -->
@@ -107,12 +107,12 @@
     
 	<!-- 配置权限拦截器 -->
 	<!-- 当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法 --> 
-	 <mvc:interceptors>
+	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/user/**" /><!--匹配的是url路径， 如果不配置或/**,将拦截所有的Controller -->
+			<mvc:mapping path="/user/**" /><!-- 匹配的是url路径， 如果不配置或/**,将拦截所有的Controller -->
 			<bean class="newb.c.interceptor.MemberInterceptor"></bean>
 		</mvc:interceptor>
-	</mvc:interceptors>
+	 </mvc:interceptors>
 	
 	<!-- 总错误处理
 		   这里主要的类是SimpleMappingExceptionResolver类，和他的父类AbstractHandlerExceptionResolver类。

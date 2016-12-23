@@ -8,7 +8,7 @@
 	<!-- Spring context应用 配置Spring与 mybatis -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath*:spring.xml</param-value>
+		<param-value>classpath*:main/resources/spring.xml</param-value>
 		<!-- <param-value>classpath*:spring.xml,classpath:springhighGrade-dubboxRest.xml</param-value> -->
 <!-- 		<param-value>classpath:spring.xml,classpath:spring-mybatis.xml,classpath:spring-cache.xml</param-value> -->
 	</context-param>
@@ -133,7 +133,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:springMVC.xml</param-value>
+			<param-value>classpath*:main/resources/springMVC.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -172,9 +172,9 @@
 	</session-config>
 	
 	<!-- welcome  -->
-	<welcome-file-list>
+	<!-- <welcome-file-list>
 		<welcome-file>/comm/index.html</welcome-file>
-	</welcome-file-list>
+	</welcome-file-list> -->
 	<!-- <error-page>
     	<error-code>404</error-code>
     	<location>/comm/404.jsp</location>

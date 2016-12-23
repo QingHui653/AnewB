@@ -22,16 +22,13 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController {
 
 	/**
-	 * 登录
-	 * @MethodName execute 
-	 * @param request
-	 * @param response
-	 * @param username
-	 * @param password
+	 *  访问/user/newb/2
+	 *  将user 绑定到modelMap
+	 *  在JSP页面 使用 ${user.username}等访问
+	 *  跳转到/user/showInfo
+	 * @param modelMap
+	 * @param userId
 	 * @return
-	 * @author yuan
-	 * @date 2016年6月27日 下午2:29:23
-	 * @return ModelAndView
 	 */
 	@RequestMapping("/login")
 	public Object execute(ModelAndView mv ,HttpServletRequest request,HttpServletResponse response, String username, String password) {
@@ -66,7 +63,7 @@ public class LoginController {
 			mv.addObject("msg", "登录异常");
 //			e.printStackTrace();
 		}
-		
+
 		// 验证是否成功登录的方法
 		if (subject.isAuthenticated()) {
 //			mv.setViewName("index");

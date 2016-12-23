@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="newb.c.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="newb.c.model.User">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="oid" jdbcType="INTEGER" property="oid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+  </resultMap>
+  
+  <resultMap id="trinMap" type="newb.c.model.UserTrin">
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <!-- 一对一关联查询 -->
+    <association property="user" javaType="User" resultMap="BaseResultMap"/>
+    <!-- 一对多关联查询 -->
+    <!-- <collection property=""></collection> -->
+  </resultMap>
+  
+	  
+  <insert id="insertAll" parameterType="java.util.List">
+  	insert user(oid,username,password) values
+  	<foreach collection="list" item="user" index="index" separator=",">
+  		(#{user.oid},#{user.username},#{user.password})
+  	</foreach>
+  </insert>
+  
+  <select id="selectUserAndUserCacheByUser" parameterType="int" resultMap="trinMap">
+  	<!-- 第一种SQL写法 -->
+  	<!-- select id,name,age,user.oid,user.username,user.password 
+  		from user_cache 
+  	left join user on user_cache.id=user.oid
+  	where user_cache.id = #{id}  -->
+  	<!-- 第二种 -->
+  	<!-- select user_cache.id,user_cache.name,user_cache.age,user.oid,user.username,user.password 
+  		from user_cache,user 
+  	where user_cache.id=user.oid and user.oid=#{id} -->
+  	select user_cache.*,user.*
+  		from user_cache,user 
+  	where user_cache.id=user.oid and user.oid=#{id}
+  </select>
+</mapper>
