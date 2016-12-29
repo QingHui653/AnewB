@@ -400,18 +400,36 @@
     		<artifactId>guava</artifactId>
     		<version>19.0</version>
 		</dependency>
+		<!--  ehcache缓存 -->
+		<dependency>
+    		<groupId>org.ehcache</groupId>
+    		<artifactId>ehcache</artifactId>
+    		<version>3.2.0</version>
+		</dependency>
+		<!-- mybatis-ehcache -->
+		<dependency>
+    		<groupId>org.mybatis</groupId>
+    		<artifactId>mybatis-ehcache</artifactId>
+    		<version>1.0.0</version>
+		</dependency>
+		
 		<!-- 日志 -->
 		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
 		<dependency>
+    		<groupId>org.slf4j</groupId>
+    		<artifactId>slf4j-log4j12</artifactId>
+    		<version>1.7.21</version>
+		</dependency>
+		<!-- <dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.21</version>
-		</dependency>
-		<dependency>
+		</dependency> -->
+		<!-- <dependency>
     		<groupId>log4j</groupId>
     		<artifactId>log4j</artifactId>
     		<version>1.2.17</version>
-		</dependency>
+		</dependency> -->
 		<!-- logback-->
 		<!-- <dependency>
 			<groupId>ch.qos.logback</groupId>

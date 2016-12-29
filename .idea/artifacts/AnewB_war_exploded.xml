@@ -77,7 +77,11 @@
           <element id="library" level="project" name="Maven: org.apache.commons:commons-configuration2:2.1" />
           <element id="library" level="project" name="Maven: commons-beanutils:commons-beanutils:1.9.2" />
           <element id="library" level="project" name="Maven: com.google.guava:guava:19.0" />
-          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.21" />
+          <element id="library" level="project" name="Maven: org.ehcache:ehcache:3.2.0" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.7" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis-ehcache:1.0.0" />
+          <element id="library" level="project" name="Maven: net.sf.ehcache:ehcache-core:2.0.0" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.7.21" />
           <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
           <element id="library" level="project" name="Maven: us.codecraft:webmagic-core:0.5.3" />
           <element id="library" level="project" name="Maven: us.codecraft:xsoup:0.3.1" />
@@ -142,7 +146,6 @@
           <element id="library" level="project" name="Maven: org.apache.curator:curator-framework:2.5.0" />
           <element id="library" level="project" name="Maven: org.apache.curator:curator-client:2.5.0" />
           <element id="library" level="project" name="Maven: com.101tec:zkclient:0.9" />
-          <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.6.1" />
           <element id="library" level="project" name="Maven: org.apache.zookeeper:zookeeper:3.5.2-alpha" />
           <element id="library" level="project" name="Maven: commons-cli:commons-cli:1.2" />
           <element id="library" level="project" name="Maven: net.java.dev.javacc:javacc:5.0" />

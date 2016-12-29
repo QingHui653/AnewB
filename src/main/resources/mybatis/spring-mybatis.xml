@@ -22,7 +22,7 @@
        	">
        	
     <!-- 扫描目录下的包自动装配 -->  	
-    <context:component-scan base-package="newb.c.service" /> 
+    <context:component-scan base-package="newb.c.backend.service" /> 
 	
 	<!-- 配置数据源 使用的是Druid数据源 -->
 	<bean name="parentDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
@@ -91,9 +91,10 @@
 	<!-- myBatis 使用 分页插件，通用插件 配置 开始 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="shardingDataSource" /><!-- parentDataSource shardingDataSource -->
+		<!-- <property name="configLocation" value="classpath:mybatis-config.xml"/> -->
 		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
-		<property name="mapperLocations" value="classpath*:/newb/c/mapping/*.xml" />
-		<property name="typeAliasesPackage" value="newb.c.model"/>
+		<property name="mapperLocations" value="classpath*:/newb/c/backend/mapping/*.xml" />
+		<property name="typeAliasesPackage" value="newb.c.backend.model.basemodel"/>
 		<!-- mybatis 分页插件 -->
 		<property name="plugins">
             <array>
@@ -118,14 +119,14 @@
 	
 	<!--  通用mapper 插件 -->
 	<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="newb.c.dao"/>
+        <property name="basePackage" value="newb.c.backend.dao"/>
         <!-- 3.2.2版本新特性，markerInterface可以起到mappers配置的作用，详细情况需要看Marker接口类 -->
         <!-- <property name="markerInterface" value="newb.c.service.common.MyMapper"/> -->
         <!-- 通用Mapper通过属性注入进行配置，默认不配置时会注册Mapper<T>接口  -->
         <property name="properties">
             <value>
                 <!-- mappers=tk.mybatis.mapper.common.Mapper -->
-                mappers=newb.c.service.common.MyMapper
+                mappers=newb.c.backend.service.common.MyMapper
             </value>
         </property>
     </bean>
@@ -133,6 +134,11 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
         <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
+    
+    <!-- ehcache 缓存 -->
+    <!-- <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath*:main/resources/mybatis/ehcache.xml" />
+    </bean> -->
     <!-- myBatis 使用 分页插件，通用插件 配置  结束-->
     
     <!-- 不使用插件，普通配置mybatis方式  -->
@@ -186,7 +192,7 @@
 	
 	<!--把事务控制在Service层-->
 	<aop:config>
-		<aop:pointcut id="transactionPointcut" expression="execution(* newb.c.service..*Impl.*(..))" />
+		<aop:pointcut id="transactionPointcut" expression="execution(* newb.c.backend.service..*Impl.*(..))" />
 		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
 	</aop:config>
 

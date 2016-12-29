@@ -2,10 +2,10 @@ package newb.c.backend.service.impl;
 
 import java.util.List;
 
-import newb.c.dao.UserMapper;
-import newb.c.model.User;
-import newb.c.model.UserTrin;
-import newb.c.service.UserService;
+import newb.c.backend.dao.UserMapper;
+import newb.c.backend.model.UserTrin;
+import newb.c.backend.model.basemodel.User;
+import newb.c.backend.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -19,7 +19,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 	private UserMapper userMapper;
 	
 	@Override
-	@Cacheable(value="default")
+	@Cacheable(value="userCache")
 	public User getUserById(int id) {
 		User user = userMapper.selectByPrimaryKey(id);
 		return user;

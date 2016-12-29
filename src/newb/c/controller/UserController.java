@@ -24,16 +24,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import newb.c.model.RepList;
-import newb.c.model.SessionB;
-import newb.c.model.User;
-import newb.c.model.UserCache;
-import newb.c.model.UserData;
-import newb.c.model.UserTrin;
-import newb.c.model.UserXL;
-import newb.c.service.ResultService;
-import newb.c.service.TestCacheService;
-import newb.c.service.UserService;
+import newb.c.backend.model.RepList;
+import newb.c.backend.model.SessionBean;
+import newb.c.backend.model.basemodel.User;  
+import newb.c.backend.model.basemodel.UserCache;
+import newb.c.backend.model.UserData;
+import newb.c.backend.model.UserTrin;
+import newb.c.backend.model.UserXL;
+import newb.c.backend.service.ResultService;
+import newb.c.backend.service.TestCacheService;
+import newb.c.backend.service.UserService;
 import tk.mybatis.mapper.entity.Example;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -285,7 +285,7 @@ public class UserController {
 	  * @param userId
 	  * @return
 	  */
-	 @RequestMapping(value="/newbb",method= RequestMethod.POST) //,produces ="text/html;charset=UTF-8" 返回UTF-格式
+	 @RequestMapping(value="/newbcache",method= RequestMethod.POST) //,produces ="text/html;charset=UTF-8" 返回UTF-格式
 	 @ResponseBody
 	 public String showUser(ModelMap modelMap, int userId){
 	        User user = userService.getUserById(userId);
@@ -314,7 +314,7 @@ public class UserController {
 	 public String login(ModelMap modelMap, String username, String password,HttpSession httpSession){
 		 	int userId=2;
 		 	User user = userService.getUserById(userId);
-		 	SessionB session = new SessionB(user);
+		 	SessionBean session = new SessionBean(user);
 	        modelMap.addAttribute("user", user);
 	        //添加到session
 	        httpSession.setAttribute("session", session);

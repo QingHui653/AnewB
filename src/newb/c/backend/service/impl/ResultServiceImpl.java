@@ -2,10 +2,10 @@ package newb.c.backend.service.impl;
 
 import java.util.List;
 
-import newb.c.dao.ResultMapper;
-import newb.c.model.RepList;
-import newb.c.model.Result;
-import newb.c.service.ResultService;
+import newb.c.backend.dao.ResultMapper;
+import newb.c.backend.model.RepList;
+import newb.c.backend.model.basemodel.Result;
+import newb.c.backend.service.ResultService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;

@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import newb.c.model.User;
-
+import newb.c.backend.model.basemodel.User;  
 public class ObjectSort {
 	
 	public static void main(String[] args) {

@@ -14,8 +14,8 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import newb.c.model.User;
-import newb.c.service.UserService;
+import newb.c.backend.model.basemodel.User;
+import newb.c.backend.service.UserService;
 
 
 

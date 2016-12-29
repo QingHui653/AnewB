@@ -1,6 +1,6 @@
 package newb.c.api;
 
-import newb.c.service.ResultService;
+import newb.c.backend.service.ResultService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

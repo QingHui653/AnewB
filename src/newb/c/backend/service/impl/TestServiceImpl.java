@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import newb.c.dao.UserCacheMapper;
-import newb.c.model.UserCache;
-import newb.c.service.TestCacheService;
+import newb.c.backend.dao.UserCacheMapper;
+import newb.c.backend.model.basemodel.UserCache;
+import newb.c.backend.service.TestCacheService;
 
 @Service("TestService")
 public class TestServiceImpl extends BaseServiceImpl<UserCache> implements TestCacheService{

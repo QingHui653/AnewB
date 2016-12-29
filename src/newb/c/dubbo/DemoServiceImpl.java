@@ -3,8 +3,7 @@ package newb.c.dubbo;
 import java.util.ArrayList;
 import java.util.List;
 
-import newb.c.model.User;
-
+import newb.c.backend.model.basemodel.User;  
 public class DemoServiceImpl implements DemoService {
 
 	@Override

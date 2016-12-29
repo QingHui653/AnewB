@@ -4,8 +4,8 @@ package newb.c.controller.component;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import newb.c.model.Result;
-import newb.c.service.ResultService;
+import newb.c.backend.model.basemodel.Result;
+import newb.c.backend.service.ResultService;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;

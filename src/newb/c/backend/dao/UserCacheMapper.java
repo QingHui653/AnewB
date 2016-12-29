@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import newb.c.model.UserCache;
-import newb.c.service.common.MyMapper;
+import newb.c.backend.model.basemodel.UserCache;
+import newb.c.backend.service.common.MyMapper;
 
 /*@Repository*/
 public interface UserCacheMapper extends MyMapper<UserCache> {

@@ -4,8 +4,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
-import newb.c.model.TOrder;
-import newb.c.service.common.MyMapper;
+import newb.c.backend.model.basemodel.TOrder;
+import newb.c.backend.service.common.MyMapper;
 
 /*@Repository*/
 public interface TOrderMapper extends MyMapper<TOrder> {

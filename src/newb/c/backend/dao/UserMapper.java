@@ -3,14 +3,16 @@ package newb.c.backend.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import tk.mybatis.mapper.common.Mapper;
-import newb.c.model.User;
-import newb.c.model.UserData;
-import newb.c.model.UserTrin;
-import newb.c.service.common.MyMapper;
+import newb.c.backend.model.basemodel.User;
+import newb.c.backend.model.UserData;
+import newb.c.backend.model.UserTrin;
+import newb.c.backend.service.common.MyMapper;
 
 /**
  *  使用了通用mapper插件
@@ -26,6 +28,8 @@ public interface UserMapper extends MyMapper<User> {
 	int insertAll(List<User> userList);
 	
 	@Select("select * from user where oid>=0 for update")
+	/*@Options(useCache = false,timeout = 10000,flushCache = false)
+    @ResultMap("BaseResultMap")*/
 	List<User> selectAllForUpdate();
 	
 	String selectPW(int oid);

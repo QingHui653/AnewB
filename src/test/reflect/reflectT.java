@@ -11,8 +11,7 @@ import java.util.Map.Entry;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import newb.c.model.User;
-import test.aa.a_99;
+import newb.c.backend.model.basemodel.User;  import test.aa.a_99;
 
 public class reflectT {
 	public static void main(String[] args){

@@ -4,8 +4,7 @@ import java.util.List;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;  
 
-import newb.c.model.User;
-  
+import newb.c.backend.model.basemodel.User;    
 public class ConsumerRest {  
   
     public static void main(String[] args) throws Exception {  

@@ -3,8 +3,8 @@ package newb.c.backend.service;
 import java.util.List;
 
 
-import newb.c.model.User;
-import newb.c.model.UserTrin;
+import newb.c.backend.model.UserTrin;
+import newb.c.backend.model.basemodel.User;
 
 public interface UserService extends IService<User> {  
 	

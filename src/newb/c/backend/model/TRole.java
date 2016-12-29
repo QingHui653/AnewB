@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;  
 import javax.persistence.Table;  
 import javax.persistence.Transient;  
+
+import newb.c.backend.model.basemodel.User;
   
 @Entity  
 @Table(name="t_role")  

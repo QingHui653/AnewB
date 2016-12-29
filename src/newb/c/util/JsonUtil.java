@@ -5,7 +5,7 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
-import newb.c.model.UserXL;
+import newb.c.backend.model.UserXL;
 
 public class JsonUtil {
 	

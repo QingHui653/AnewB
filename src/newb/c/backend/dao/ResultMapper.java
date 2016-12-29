@@ -5,9 +5,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
-import newb.c.model.RepList;
-import newb.c.model.Result;
-import newb.c.service.common.MyMapper;
+import newb.c.backend.model.RepList;
+import newb.c.backend.model.basemodel.Result;
+import newb.c.backend.service.common.MyMapper;
 
 /*@Repository*/
 public interface ResultMapper extends MyMapper<Result> {

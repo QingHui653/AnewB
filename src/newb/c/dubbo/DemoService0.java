@@ -2,8 +2,7 @@ package newb.c.dubbo;
 
 import java.util.List;
 
-import newb.c.model.User;
-
+import newb.c.backend.model.basemodel.User;  
 public interface DemoService0 {
 	
 	Object sayHello(String name);

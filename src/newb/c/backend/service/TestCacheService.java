@@ -2,7 +2,8 @@ package newb.c.backend.service;
 
 import java.util.List;
 
-import newb.c.model.UserCache;
+import newb.c.backend.model.basemodel.UserCache;
+
 
 public interface TestCacheService extends IService<UserCache>{
 	

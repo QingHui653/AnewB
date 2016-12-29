@@ -24,9 +24,9 @@
 
 package newb.c.backend.service.impl;
 
-import newb.c.model.User;
-import newb.c.service.IService;
-import newb.c.service.common.MyMapper;
+import newb.c.backend.model.basemodel.User;
+import newb.c.backend.service.IService;
+import newb.c.backend.service.common.MyMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;

@@ -15,8 +15,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.alibaba.dubbo.rpc.RpcContext;
 
-import newb.c.model.User;
-
+import newb.c.backend.model.basemodel.User;  
 /**
  * 但是，如后文所述，如果我们要用dubbo直接开发的消费端来访问此服务，则annotation必须放到接口上。
  * 如果接口和实现类都同时添加了annotation，则实现类的annotation配置会生效，接口上的annotation被直接忽略。

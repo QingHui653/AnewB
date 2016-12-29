@@ -126,6 +126,23 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	
+	<servlet>
+		<servlet-name>AnnotationHandleServlet</servlet-name>
+		<servlet-class>newb.c.mycontroller.AnnotationHandleServlet</servlet-class>
+		<init-param>
+			<description>配置要扫描包及其子包, 如果有多个包,以逗号分隔</description>
+			<param-name>basePackage</param-name>
+			<param-value>newb.c.mycontroller</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+  <servlet-mapping>
+    <servlet-name>AnnotationHandleServlet</servlet-name>
+    <!-- 拦截所有以.do后缀结尾的请求 -->
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+	
 	<!-- Spring MVC 配置 -->
 	<servlet>
 		<description>spring mvc servlet</description>

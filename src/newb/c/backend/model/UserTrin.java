@@ -1,5 +1,7 @@
 package newb.c.backend.model;
 
+import newb.c.backend.model.basemodel.User;
+
 public class UserTrin{
 	private Integer id;
 

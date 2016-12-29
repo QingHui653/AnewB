@@ -12,10 +12,10 @@
 	<!--引入配置属性文件 -->
 	<context:property-placeholder location="classpath*:main/resources/*.properties" />
 	
-	
 	<import resource="mybatis/spring-mybatis.xml" />
-	<import resource="cache/spring-cache.xml"/>
-	<!-- <import resource="spring-*.xml"/> -->
+	<import resource="cache/spring-redis.xml"/>
+	<import resource="cache/spring-ehcache.xml"/>
+	<!-- <import resource="cache/spring-guava.xml"/> -->
 	<!-- dubbo,activeMq等扩展 -->
 	<!-- <import resource="springhighGrade-dubboxRest.xml"/> -->
 	<!-- <import resource="springhighGrade-active*.xml"/> -->
