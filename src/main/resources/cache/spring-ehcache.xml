@@ -11,7 +11,6 @@
         <property name="cacheManager" ref="ehCacheManager" />
     </bean>
     
-	<!-- ehcache 缓存集成配置 -->
     <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
         <property name="configLocation" value="classpath:main/resources/cache/ehcache.xml" />
         <property name="shared" value="false" />

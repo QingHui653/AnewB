@@ -13,8 +13,7 @@ public class Test1 {
         try {
         	File f=new File(fileName);
         	if(f.exists()){f.createNewFile();}
-            BufferedWriter writer = new BufferedWriter(
-                    new FileWriter(new File(fileName), true));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(fileName), true));
             
             for(int i=0;i<=100000;i++){
                 String temp = "单线程: " + i + "----------------------------------我是一条华丽的小尾巴";
@@ -28,6 +27,8 @@ public class Test1 {
         } 
         
         long millis2 = System.currentTimeMillis();
+        System.out.println(millis1);
+        System.out.println(millis2);
         System.out.println(millis2 - millis1);  //大约162-168ms
     }
  

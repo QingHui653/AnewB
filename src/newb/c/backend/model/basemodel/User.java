@@ -90,6 +90,9 @@ public class User implements Serializable,Comparable<User> {
 		return "User["+oid+","+username+","+password+"]";
 	}
     
-	
+	@SuppressWarnings("unused")
+	private String invMen(String username,String password) {
+		return "User["+username+","+password+"]";
+	}
     
 }

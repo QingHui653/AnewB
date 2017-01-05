@@ -1,6 +1,7 @@
 package test.collection;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -21,7 +22,6 @@ public class TestCollection {
     }
   }
    
-  @Test
   public void demo1(){
     Set<String> set = new HashSet<String>();
     set.add("AAA");
@@ -75,6 +75,62 @@ public class TestCollection {
     for (Map.Entry<String, String> entry : map.entrySet()) {
       System.out.println("Map two "+entry.getKey()+" : "+entry.getValue());
     }
+  }
+  
+  public void listContain() {
+	List<Integer> list1=new ArrayList<Integer>();
+	list1.add(1);
+	list1.add(2);
+	list1.add(3);
+	list1.add(4);
+	list1.add(5);
+	
+	List<Integer> list2=new ArrayList<Integer>();
+	list2.add(2);
+	list2.add(3);
+	list2.add(4);
+	
+	for (Integer integer : list1) {
+		for (Integer integer2 : list2) {
+			if(integer==integer2){
+				list1.remove(integer);
+			}
+		}
+	}
+	
+	System.out.println(list1.toString());
+  }
+  
+  @Test
+  public void listContainIter() {
+	List<Integer> list1=new ArrayList<Integer>();
+	list1.add(1);
+	list1.add(2);
+	list1.add(3);
+	list1.add(4);
+	list1.add(5);
+	
+	List<Integer> list2=new ArrayList<Integer>();
+	list2.add(2);
+	list2.add(3);
+	list2.add(4);
+	
+	Iterator<Integer> it1 = list1.iterator();
+
+      while(it1.hasNext()){
+          Integer i1=it1.next();
+          Iterator<Integer> it2 = list2.iterator();
+          while(it2.hasNext()){
+			Integer i2=it2.next();
+			System.out.println("it1 "+ i1+"  it2 " +i2);
+			if(i1==i2){
+				it1.remove();
+			}
+		}
+      }
+	
+	System.out.println(list1.toString());
+
   }
 }
 

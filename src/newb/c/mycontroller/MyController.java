@@ -13,5 +13,5 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MyController {
-	public String value() default "";
+	public String value() default "hh 默认";
 }

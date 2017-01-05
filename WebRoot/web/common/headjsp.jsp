@@ -15,6 +15,10 @@
 <script src="//cdn.bootcss.com/tether/1.3.7/js/tether.min.js"></script>
 <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.1.8/vue.min.js"></script>
+<!-- 引入组件库 -->
+<!-- <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+<script src="https://unpkg.com/element-ui/lib/index.js"></script> -->
 <%
 String urlx = request.getScheme() + "://" + request.getServerName()+ ":" + request.getServerPort() + request.getContextPath();
 String path = request.getContextPath();

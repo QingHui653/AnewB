@@ -26,7 +26,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 	}
 
 	@Override
-	@Cacheable(value="guavaCache1hour")
+//	@Cacheable(value="guavaCache1hour")
 	public List<User> getUsers() {
 		return userMapper.selectAll();
 	}

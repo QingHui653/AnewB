@@ -19,6 +19,8 @@ public class Test {
         }
  
         long millis2 = System.currentTimeMillis();
+        System.out.println(millis2);
+        System.out.println(millis1);
         System.out.println(millis2 - millis1);  //大约1-2ms
     }
  

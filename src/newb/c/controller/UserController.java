@@ -29,6 +29,7 @@ import newb.c.backend.model.SessionBean;
 import newb.c.backend.model.basemodel.User;  
 import newb.c.backend.model.basemodel.UserCache;
 import newb.c.backend.model.UserData;
+import newb.c.backend.model.UserList;
 import newb.c.backend.model.UserTrin;
 import newb.c.backend.model.UserXL;
 import newb.c.backend.service.ResultService;
@@ -36,9 +37,11 @@ import newb.c.backend.service.TestCacheService;
 import newb.c.backend.service.UserService;
 import tk.mybatis.mapper.entity.Example;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -300,7 +303,13 @@ public class UserController {
 	 @RequestMapping(value="/newbs",method=RequestMethod.GET)
 	 @ResponseBody   //注释返回JSON 或 String 必须加此注解
 	 public Object showUserInfos(){
-	        List<User> user = userService.getUsers();
+		 	Example userExample = new Example(User.class);
+//		 	userExample.createCriteria().andLessThan("oid", "5");
+		 	userExample.createCriteria().andLessThan("oid", "5");
+	        List<User> user = userService.selectByExample(userExample);
+//	        UserList userList = new UserList(user);
+//	        String userJson= gson.toJson(userList);
+	        boolean isempty=ObjectUtils.isEmpty(user);
 	        return user;
 	    }
 

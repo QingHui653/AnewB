@@ -11,7 +11,7 @@
     <a href="user/newb?userId=2">HTTP</a><br/>
     <a href="" onclick="morebean()">MoreBean</a><br>
     <a href="" onclick="bean()">Bean</a>
-    
+    <button onclick="ajaxcc()">我擦嘞</button>
     
   </body>
 <script>
@@ -51,5 +51,22 @@
 			}
 		})
 	}
+	
+	function ajaxcc(){
+  		console.info("进入ajax");
+  		$.ajax({
+    	type: "GET",
+    	url: "/AnewB/user/newbs",
+    	dataType: "JSON",
+  		success : function(data) {
+  			console.log(data);
+  			for(var i =0,length=data.length;i<length;i++){
+  				console.log(data[i]);
+  				var result =JSON.stringify(data[i]);
+  				console.log(data[i].username);
+  			}
+  			}
+  		})
+  	}
 </script>
 </html>
