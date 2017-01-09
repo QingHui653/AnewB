@@ -168,7 +168,7 @@
 			<list>
 				<bean
 					class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-					<property name="prefix" value="/WEB-INF/views/" />  <!-- 前缀 -->
+					<property name="prefix" value="/" />  <!-- 前缀 -->
 					<property name="suffix" value=".jsp" />				<!-- 后缀 -->
 				</bean>
 			</list>

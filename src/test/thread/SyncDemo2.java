@@ -1,5 +1,10 @@
 package test.thread;
 
+/**
+ * 
+ * @author woshizbh
+ *
+ */
 class MyThread8 implements Runnable {
 	private int ticket = 100;
 

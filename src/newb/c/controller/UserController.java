@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -76,6 +77,13 @@ public class UserController {
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	//google JSON工具
 	Gson gson = new Gson();
+	
+	@InitBinder
+	  public void dataBinder(WebDataBinder binder) {
+	    DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+	    PropertyEditor propertyEditor = new CustomDateEditor(dateFormat, true); // 第二个参数表示是否允许为空
+	    binder.registerCustomEditor(Date.class, propertyEditor);
+	  }
 
 	/**
 	 *  访问/user/newb/2
@@ -394,6 +402,15 @@ public class UserController {
 	        modelMap.addAttribute("user", user);
 	        return "forward:/user/newbs";
 	    }
+	 
+	 @RequestMapping(value="/commonSel",method=RequestMethod.POST)
+	 @ResponseBody
+	 public Object commonSel(ModelMap modelMap){
+		 	List<User> userList = userService.CommonSelMapper("select * from user");
+	        return userList;
+	    }
+	 
+	 
 
 	 /**
 	  *  使用JQ serializeArray 表单格式化传入  这个看views下xzjl的JS
@@ -413,7 +430,6 @@ public class UserController {
 
 	        return "success";
 	    }
-
 
 /*从上个项目复制的文件上传下载   开始----------------------------------------*/
 	 /**
@@ -457,14 +473,14 @@ public class UserController {
 	        // 获得原始文件名
 	        String fileName = file.getOriginalFilename();
 	        System.out.println("原始文件名:" + fileName);
-	        int pkid =(Integer) httpSession.getAttribute("PKID");
+	        UUID pkid =UUID.randomUUID();
 	        // 新文件名
 	        int cc=fileName.lastIndexOf(".");
-	        String newFileName ="tx"+fileName.substring(cc);
+	        String newFileName =pkid+fileName.substring(cc);
 	        // 获得项目的路径
 	        ServletContext sc = request.getSession().getServletContext();
 	        // 上传位置
-	        String path = sc.getRealPath("\\img") + "\\"+pkid+"\\"; // 设定文件保存的目录
+	        String path = sc.getRealPath("\\img") + "\\"; // 设定文件保存的目录
 	        File f = new File(path);
 	        if (!f.exists())
 	            f.mkdirs();
@@ -485,8 +501,7 @@ public class UserController {
 	        System.out.println("上传图片到:" + path + newFileName);
 	        // 保存文件地址，用于JSP页面回显
 	        model.addAttribute("fileUrl", path + newFileName);
-//	        int re = userdataService.updateZp(pkid);
-	        return "success";
+	        return "/AnewB/img/"+newFileName;
 	    }
 
 
@@ -539,10 +554,9 @@ public class UserController {
 	 @RequestMapping(value="/listFile",method=RequestMethod.GET)
 	 public String listFile(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession) {
 	     // 获取上传文件的目录
-		 int pkid =(Integer) httpSession.getAttribute("PKID");
 	     ServletContext sc = request.getSession().getServletContext();
 	     // 上传位置
-	     String uploadFilePath = sc.getRealPath("\\img") + "\\"+pkid+""; // 设定文件保存的目录
+	     String uploadFilePath = sc.getRealPath("\\img") + "\\"; // 设定文件保存的目录
 	     // 存储要下载的文件名
 	     Map<String, String> fileNameMap = new HashMap<String, String>();
 	     // 递归遍历filepath目录下的所有文件和目录，将文件的文件名存储到map集合中
@@ -556,7 +570,7 @@ public class UserController {
 	     listfile(fileList, fileNameMap);// File既可以代表一个文件也可以代表一个目录
 	     // 将Map集合发送到listfile.jsp页面进行显示
 	     request.setAttribute("fileNameMap", fileNameMap);
-	     return "listFile";
+	     return "web/upload";
 	 }
 
 	public void listfile(File file, Map<String, String> map) {
@@ -585,7 +599,7 @@ public class UserController {
 
 	}
 
-	 @RequestMapping(value="/downFile",method=RequestMethod.POST)
+	 @RequestMapping(value="/downFile",method=RequestMethod.GET)
 	 public void downFile(HttpServletRequest request,  HttpServletResponse response,HttpSession httpSession) {
 	     System.out.println("1");
 	     // 得到要下载的文件名
@@ -598,8 +612,7 @@ public class UserController {
 	         ServletContext sc = request.getSession().getServletContext();
 	         System.out.println("4");
 	         // 上传位置
-	         int pkid =(Integer) httpSession.getAttribute("PKID");
-	         String fileSaveRootPath = sc.getRealPath("\\img") + "\\"+pkid+"\\";
+	         String fileSaveRootPath = sc.getRealPath("\\img") + "\\";
 
 	         System.out.println(fileSaveRootPath + "\\" + fileName);
 	         // 得到要下载的文件
@@ -614,8 +627,7 @@ public class UserController {
 	         // 处理文件名
 	         String realname = fileName.substring(fileName.indexOf("_") + 1);
 	         // 设置响应头，控制浏览器下载该文件
-	         response.setHeader("content-disposition", "attachment;filename="
-	                 + URLEncoder.encode(realname, "UTF-8"));
+	         response.setHeader("content-disposition", "attachment;filename="+ URLEncoder.encode(realname, "UTF-8"));
 	         // 读取要下载的文件，保存到文件输入流
 	         FileInputStream in = new FileInputStream(fileSaveRootPath + "\\" + fileName);
 	         // 创建输出流
@@ -633,6 +645,7 @@ public class UserController {
 	         // 关闭输出流
 	         out.close();
 	     } catch (Exception e) {
+	    	 e.printStackTrace();
 	     }
 	 }
 /*从上个项目复制的文件上传下载   结束----------------------------------------*/

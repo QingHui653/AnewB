@@ -1,5 +1,12 @@
 package test.thread;
 
+/**
+ * 退出demo
+ * 三种退出方式
+ * @author woshizbh
+ *
+ */
+
 public class ExitDemo implements Runnable {
 	
 	public volatile boolean exit = false; 

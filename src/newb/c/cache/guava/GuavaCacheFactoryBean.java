@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.cache.guava.GuavaCacheManager;
 import org.springframework.util.StringUtils;
 import com.google.common.cache.CacheBuilder;
 

@@ -73,14 +73,20 @@ class ComputerConsumer implements Runnable{
 	
 }
 
+/**
+ * 消费者与生产者demo
+ * @author woshizbh
+ *
+ */
 public class Demo3 {
 
 	public static void main(String[] args) {
 		Computer computer = new Computer();
 		ComputerProducer producer = new ComputerProducer(computer);
 		ComputerConsumer consumer = new ComputerConsumer(computer);
-		
+		//生产者
 		new Thread(producer).start();
+		//消费者
 		new Thread(consumer).start();
 
 	}

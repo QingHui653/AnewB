@@ -1,7 +1,7 @@
 package test.thread;
 
 class MyThread9 implements Runnable {
-	private int ticket = 10;
+	private int ticket = 100;
 
 	public void run() {
 		sale();
@@ -12,11 +12,11 @@ class MyThread9 implements Runnable {
 	 * */
 	public synchronized void sale() {
 		while (ticket > 0) {
-			try {
+			/*try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}
+			}*/
 			System.out.println(Thread.currentThread().getName()
 					+ "卖票，剩余票数： ticket = " + --ticket);
 		}

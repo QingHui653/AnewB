@@ -23,11 +23,11 @@
     -->
     <defaultCache
             maxElementsInMemory="10000"
+            maxElementsOnDisk="10000000"
             eternal="false"
             timeToIdleSeconds="60"
             timeToLiveSeconds="60"
             overflowToDisk="true"
-            maxElementsOnDisk="10000000"
             diskPersistent="false"
             diskExpiryThreadIntervalSeconds="120"
             memoryStoreEvictionPolicy="LRU"

@@ -25,15 +25,54 @@ public class AnnotationHandleServlet extends HttpServlet {
         String lasturl = midUrl.substring(0, midUrl.lastIndexOf("."));
         return lasturl;
     }
-    
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        /**
+         * 重写了Servlet的init方法后一定要记得调用父类的init方法，
+         * 否则在service/doGet/doPost方法中使用getServletContext()方法获取ServletContext对象时
+         * 就会出现java.lang.NullPointerException异常
+         */
+        super.init(config);
+        System.out.println("---初始化开始---");
+        //获取web.xml中配置的要扫描的包
+        String basePackage = config.getInitParameter("basePackage");
+        //如果配置了多个包，例如：<param-value>me.gacl.web.controller,me.gacl.web.UI</param-value>
+        if (basePackage.indexOf(",")>0) {
+            //按逗号进行分隔
+            String[] packageNameArr = basePackage.split(",");
+            for (String packageName : packageNameArr) {
+                initRequestMapingMap(packageName);
+            }
+        }else {
+            initRequestMapingMap(basePackage);
+        }
+        System.out.println("----初始化结束---");
+    }
+
+    @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         this.excute(request, response);
     }
 
+    @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         this.excute(request, response);
+    }
+    
+    public void Service(HttpServletRequest req, HttpServletResponse resp){
+    	/**
+    	 * 流程1.进入init，init在运行tomcat是运行一次，且仅运行一次，
+    	 * 2.进入service，service根据http协议，分别进入doget，dopost
+    	 * 3.destroy,tomcat停止时运行一次
+    	 */
+    	System.out.println("进入service方法");
+    }
+    @Override
+    public void destroy() {
+    	System.out.println("进入destroy方法");
     }
     
     private void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -88,35 +127,10 @@ public class AnnotationHandleServlet extends HttpServlet {
         }
     }
 
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        /**
-         * 重写了Servlet的init方法后一定要记得调用父类的init方法，
-         * 否则在service/doGet/doPost方法中使用getServletContext()方法获取ServletContext对象时
-         * 就会出现java.lang.NullPointerException异常
-         */
-        super.init(config); 
-        System.out.println("---初始化开始---");
-        //获取web.xml中配置的要扫描的包
-        String basePackage = config.getInitParameter("basePackage");
-        //如果配置了多个包，例如：<param-value>me.gacl.web.controller,me.gacl.web.UI</param-value>
-        if (basePackage.indexOf(",")>0) {
-            //按逗号进行分隔
-            String[] packageNameArr = basePackage.split(",");
-            for (String packageName : packageNameArr) {
-                initRequestMapingMap(packageName);
-            }
-        }else {
-            initRequestMapingMap(basePackage);
-        }
-        System.out.println("----初始化结束---");
-    }
     
     /**
     * @Method: initRequestMapingMap
     * @Description:添加使用了Controller注解的Class到RequestMapingMap中
-    * @Anthor:孤傲苍狼
-    * @param packageName
     */ 
     private void initRequestMapingMap(String packageName){
         Set<Class<?>> setClasses =  ScanClassUtil.getClasses(packageName);
@@ -137,4 +151,5 @@ public class AnnotationHandleServlet extends HttpServlet {
             }
         }
     }
+
 }

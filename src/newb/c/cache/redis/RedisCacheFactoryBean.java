@@ -7,8 +7,11 @@ import java.io.ObjectOutputStream;
 import java.util.concurrent.Callable;
 
 import org.springframework.cache.Cache;
+import org.springframework.cache.Cache.ValueWrapper;
 import org.springframework.cache.support.SimpleValueWrapper;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.cache.RedisCacheElement;
+import org.springframework.data.redis.cache.RedisCacheKey;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -42,6 +45,24 @@ public class RedisCacheFactoryBean implements Cache {
     });
     return (object != null ? new SimpleValueWrapper(object) : null);
   }
+  
+  @Override
+	public <T> T get(Object key, Class<T> type) {
+		ValueWrapper wrapper = get(key);
+		return wrapper == null ? null : (T) wrapper.get();
+	}
+
+	@Override
+	public <T> T get(Object arg0, Callable<T> arg1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ValueWrapper putIfAbsent(Object arg0, Object arg1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
   @Override
   public void put(Object key, Object value) {
@@ -156,22 +177,5 @@ public class RedisCacheFactoryBean implements Cache {
 	public void setLiveTime(long liveTime) {
 		this.liveTime = liveTime;
 	}
-
-	@Override
-	public <T> T get(Object key, Class<T> type) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public <T> T get(Object arg0, Callable<T> arg1) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ValueWrapper putIfAbsent(Object arg0, Object arg1) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }

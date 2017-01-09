@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="google" value="notranslate">
+    <meta name="robots" content="index,follow">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,shrink-to-fit=no,minimal-ui">
+    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>flvJs demo</title>
+    <link rel="stylesheet" type="text/css" href="/AnewB/css/Mo.css">
+    <link rel="stylesheet" type="text/css" href="/AnewB/css/styleMo.css">
+</head>
+<body>
+	<div class="mo-wrap">
+        <div class="mo-box">
+            <div class="mo-video">
+                <video id="videoElement" controls autoplay width="1024" height="576">>
+                	Your browser is too old which doesn't support HTML5 video.
+                </video>
+            </div>
+            <div class="mo-controls" style="text-align: center;">
+                <button onclick="flv_load()">Load</button>
+                <button onclick="flv_start()">Start</button>
+                <button onclick="flv_pause()">Pause</button>
+                <input style="width:100px" type="text" name="seekpoint"/>
+                <button onclick="flv_seekto()">SeekTo</button>
+            </div>
+        </div>
+	</div>
+<script type="text/javascript" src="/AnewB/js/flv/flv.js"></script>    
+<script>
+    if (flvjs.isSupported()) {
+        var videoElement = document.getElementById('videoElement');
+        var flvPlayer = flvjs.createPlayer({
+            type: 'flv',
+            url: '/AnewB/web/flv/video.flv'
+        });
+        flvPlayer.attachMediaElement(videoElement);
+        function flv_load () {
+            flvPlayer.load();
+        }
+        function flv_start () {
+            flvPlayer.play();
+        }
+        function flv_pause() {
+            flvPlayer.pause();
+        }
+        function flv_destroy() {
+            flvplayer.pause();
+            flvplayer.unload();
+            flvplayer.detachMediaElement();
+            flvplayer.destroy();
+            flvplayer = null;
+        }
+        function flv_seekto() {
+            var input = document.getElementsByName('seekpoint')[0];
+            flvplayer.currentTime = parseFloat(input.value);
+        }
+    }
+</script>
+</body>
+</html>

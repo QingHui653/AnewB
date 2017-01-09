@@ -1,0 +1,154 @@
+/* MoUI power by www.riricho.com */
+/* Code : Y */
+/* Version : 0.2 */
+/* MoUI 遵循MIT开源协议 */
+
+/*reset css*/
+* {padding:0;margin:0;}
+html{-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;}
+html{min-width: 300px;font-family: "Microsoft YaHei",sans-serif;}
+a{background-color: transparent;-webkit-text-decoration-skip: objects;text-decoration: none;color: inherit;}
+a:active{-webkit-tap-highlight-color: rgba(0, 0, 0, 0);}
+a:active,a:hover{outline-width: 0;color: inherit;}
+a:focus,a:hover {text-decoration: none;color: inherit;}
+img{border-style: none;}
+button,input{padding: 0;}
+textarea{outline:none;resize:none;border:0;}
+
+/*common css*/
+.mo-wrap{font-size: 0.8rem;background-color: #fff;width: 100%;position: relative;}
+.mo-hide{display: none;}
+.mo-show{display: block;}
+.mo-clear-margin{margin-top: 0 !important;}
+.mo-text-ctr{text-align: center;}
+.mo-text-left{text-align: left;}
+.mo-text-right{text-align: right;}
+.mo-margin-ctr{margin: 0 auto;}
+.mo-box,.mo-box-row,.mo-box-around,.mo-box-center,.mo-box-between{width: 100%;}
+.mo-box-row,.mo-box-wrap{display: flex;}
+.mo-box-row{flex-flow: row;}
+.mo-box-wrap{flex-flow: wrap;}
+.mo-box-around{justify-content: space-around;}
+.mo-box-center{justify-content: center;}
+.mo-box-between{justify-content: space-between;}
+
+/*font size css*/
+.mo-h1{font-size: 1.6rem;}
+.mo-h2{font-size: 1.4rem;}
+.mo-h3{font-size: 1.2rem;}
+.mo-h4{font-size: 1.0rem;}
+.mo-h5{font-size: 0.8rem;}
+
+/*Title css*/
+.mo-title-btm,.mo-title{width: 100%;border-bottom: 1px #e6e6e6 solid;text-align: center;font-weight: bold;height: 2rem;line-height: 2rem;}
+.mo-title{border-bottom: 0;}
+
+/*button css*/
+.mo-button{width: 40%;height: 2.2rem;line-height: 2.2rem;border: 1px #e6e6e6 solid;text-align: center;}
+
+/*tab css*/
+.mo-tab-nav{height: 2rem;line-height: 2rem;width: 100%;text-align: center;border-bottom: 1px #e6e6e6 solid}
+.mo-tab-active{color: #20a0ff;border-bottom: 2px #20a0ff solid}
+.mo-tab-item{width: 100%;line-height: 1.4rem;}
+
+/*Shade css*/
+.mo-shade{width: 100%;height: 100%;background-color: #000;opacity: 0.8;position: fixed;top: 0;left: 0;max-width: 1000px;z-index: 2}
+
+/*Modal css*/
+.mo-modal-ctr,.mo-modal-btm{width: 100%;position: fixed;max-width: 720px;z-index: 3}
+.mo-modal-ctr{top: 50%;}
+
+.mo-modalBox-ctr,.mo-modalBox-btm{width: 90%;max-width: 648px;background-color: #fff;position: relative;}
+.mo-modalBox-ctr{margin: 0 auto;}
+.mo-modalBox-btm{width: 100%;}
+
+.mo-modal-title{padding: 2%;max-width: 619.2px;width: 96%;}
+.mo-modal-content{padding: 2%;max-width: 619.2px;width: 96%;}
+.mo-modal-close{position: absolute;top: 2%;right: 2%;font-size: 1.2rem;color: #888888;line-height: 1.2rem;}
+
+
+
+/*Margin Common*/
+.mo-box-padding{padding: 0.4rem 0;}
+.mo-box-margin{margin: 0.4rem auto;}
+
+/*@media css*/
+@media screen and (min-width:300px) and (max-width: 324px){
+	html{font-size: 100%}
+} 
+
+@media screen and (min-width: 325px) and (max-width:349px){
+	html{font-size: 108%}
+}
+
+@media screen and (min-width: 350px) and (max-width:374px){
+	html{font-size: 116%}
+}
+
+@media screen and (min-width: 375px) and (max-width:399px){
+	html{font-size: 124%}
+}
+
+@media screen and (min-width: 400px) and (max-width:424px){
+	html{font-size: 132%}
+}
+
+@media screen and (min-width: 425px) and (max-width:449px){
+	html{font-size: 140%}
+}
+
+@media screen and (min-width: 450px) and (max-width:474px){
+	html{font-size: 148%}
+}
+
+@media screen and (min-width: 475px) and (max-width:499px){
+	html{font-size: 156%}
+}
+
+@media screen and (min-width: 500px) and (max-width:524px){
+	html{font-size: 164%}
+}
+
+@media screen and (min-width: 525px) and (max-width:549px){
+	html{font-size: 172%}
+}
+
+@media screen and (min-width: 550px) and (max-width:574px){
+	html{font-size: 180%}
+}
+
+@media screen and (min-width: 575px) and (max-width:599px){
+	html{font-size: 188%}
+}
+
+@media screen and (min-width: 600px) and (max-width:624px){
+	html{font-size: 196%}
+}
+
+@media screen and (min-width: 625px) and (max-width:649px){
+	html{font-size: 204%}
+}
+
+@media screen and (min-width: 650px) and (max-width:674px){
+	html{font-size: 212%}
+}
+
+@media screen and (min-width: 675px) and (max-width:699px){
+	html{font-size: 220%}
+}
+
+@media screen and (min-width: 700px) and (max-width:724px){
+	html{font-size: 228%}
+}
+
+@media screen and (min-width: 725px) and (max-width:749px){
+	html{font-size: 236%}
+}
+
+@media screen and (min-width: 750px) and (max-width:774px){
+	html{font-size: 244%}
+}
+
+@media screen and (min-width: 775px){
+	html{font-size: 110%;max-width: initial;}
+}

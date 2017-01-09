@@ -16,9 +16,10 @@ public class config {
 	public static void main(String[] args) {
 		Configurations configs = new Configurations();
 		try {
-			PropertiesConfiguration config = configs.properties(new File("config.properties"));
-			
-			String url = config.getString("cs");
+//			PropertiesConfiguration config = configs.properties(new File("log4j.properties"));
+//			String url = config.getString("log4j.rootLogger");
+			PropertiesConfiguration config = configs.properties(new File("src/main/resources/config.properties"));
+			String url = config.getString("jdbc.url");
 			
 			System.out.println("url--"+url);
 

@@ -98,6 +98,7 @@ class Consumer implements Runnable {
 
 /**
  * 要求是：生产者生产出一个产品后消费者才能消费，否则等待，一直到生产者生产出产品后将消费者唤醒；反之亦然。关于等待和唤醒分别是这两个方法：wait()和notify()。代码如下：
+ * 生产者与消费者demo
  * @author woshizbh
  *
  */

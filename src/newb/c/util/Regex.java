@@ -104,4 +104,9 @@ public class Regex {
 	public static final String REGEX_NEGATIVE_FLOAT       = "^-[1-9]\\d*\\.\\d*|-0\\.\\d*[1-9]\\d*$";
 
 	/************** If u want more please visit http://toutiao.com/i6231678548520731137/ **************/
+	String chinese = "^[\\u4E00-\\u9FA5\\uF900-\\uFA2D]+$";                     /**这个正则表达式用来判断是否为中文**/
+	
+	String username = "^\\w+$";             /**此正则表达式判断单词字符是否为：[a-zA-Z_0-9]**/
+	
+	String all  = "^[\\u4E00-\\u9FA5\\uF900-\\uFA2D\\w]{2,10}$";     /**此正则表达式将上面二者结合起来进行判断，中文、大小写字母和数字，{2，10}字符的长度为2-10**/
 }

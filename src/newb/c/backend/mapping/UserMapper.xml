@@ -23,6 +23,17 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="age" property="age" jdbcType="INTEGER" />
     <!-- 一对一关联查询 -->
+    <!-- 实现对用户信息进行延迟加载
+    select：指定延迟加载需要执行的statement的id（是根据user_id查询用户信息的statement）
+        要使用userMapper.xml中findUserById完成根据用户id(user_id)用户信息的查询，如果findUserById不在本mapper中需要前边加namespace
+    column：订单信息中关联用户信息查询的列，是user_id
+        关联查询的sql理解为：
+    SELECT orders.*,
+    (SELECT username FROM USER WHERE orders.user_id = user.id)username,
+    (SELECT sex FROM USER WHERE orders.user_id = user.id)sex
+     FROM orders
+         与非延迟加载的主要区别就在association标签属性多了select和column
+     -->
     <association property="user" javaType="User" resultMap="BaseResultMap"/>
     <!-- 一对多关联查询 -->
     <!-- <collection property=""></collection> -->
@@ -50,4 +61,5 @@
   		from user_cache,user 
   	where user_cache.id=user.oid and user.oid=#{id}
   </select>
+  
 </mapper>

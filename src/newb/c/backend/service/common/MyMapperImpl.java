@@ -38,7 +38,7 @@ public class MyMapperImpl<T> extends MapperTemplate{
 //        sql.append(SqlHelper.selectAllColumns(entityClass));
 //        sql.append(SqlHelper.fromTable(entityClass, tableName(entityClass)));
 //        sql.append(SqlHelper.whereAllIfColumns(entityClass, isNotEmpty()));
-        sql.append("#{0}");
+        sql.append("${_parameter}");
 		return sql.toString();
 	}
 	
