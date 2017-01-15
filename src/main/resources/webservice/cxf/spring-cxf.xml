@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd"
+       >
+
+	<import resource="classpath:META-INF/cxf/cxf.xml"/>
+    
+    <!-- 服务端 -->
+    <jaxws:endpoint id="helloWorld" implementor="newb.c.webservice.cxf.HelloServiceImpl" address="/helloWorld" />
+	
+	<!-- 客户端 -->
+	<!-- <bean id="client" class="newb.c.webservice.cxf.HelloService" factory-bean="clientFactory" factory-method="create" />
+	<bean id="clientFactory" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+		<property name="serviceClass" value="newb.c.webservice.cxf.HelloService" />
+		<property name="address" value="http://localhost:8081/AnewB/services/helloWorld" />
+	</bean> -->
+</beans>

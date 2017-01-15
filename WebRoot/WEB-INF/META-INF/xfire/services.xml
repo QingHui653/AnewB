@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!-- 服务发布文件 -->  
+<beans xmlns="http://xfire.codehaus.org/config/1.0">  
+    <service> <!-- service标签和它所包含的xml内容为发布成Web服务的POJO提供完整的描述 -->  
+        <name>sayHello</name> <!-- Web服务被发布时所采用的唯一名称 -->   
+	    <serviceClass>newb.c.webservice.xfire.HelloService</serviceClass> <!-- Web服务接口类的全名 -->  
+        <implementationClass>newb.c.webservice.xfire.IHelloService</implementationClass> <!-- Web服务实现类的全名 -->  
+        <!-- 不需要接口时，把业务写在serviceClass标签中 -->
+    </service>  
+</beans>

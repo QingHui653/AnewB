@@ -11,14 +11,15 @@
     <!-- 具体的实现bean -->  
     <bean id="demoService" class="newb.c.dubbo.DemoServiceImpl" />  
     
-    <bean id="demoService2" class="newb.c.dubbo.DemoServiceImpl2" />
-    <bean id="demoService3" class="newb.c.dubbo.DemoServiceImpl3" />
+    <!-- <bean id="demoService2" class="newb.c.dubbo.DemoServiceImpl2" />
+    <bean id="demoService3" class="newb.c.dubbo.DemoServiceImpl3" /> -->
       
     <!-- 提供方应用信息，用于计算依赖关系 -->  
     <dubbo:application name="qinghui_provider"  />  
    
-    <!-- 使用multicast广播注册中心暴露服务地址   
-    <dubbo:registry address="multicast://224.5.6.7:1234" />-->  
+    <!-- 使用multicast广播注册中心暴露服务地址    -->
+    <!-- 使用多播 multicast 注册不知道为什么消费者无法 获取bean 报错 -->  
+    <!-- <dubbo:registry address="multicast://224.5.6.7:1234" />   -->
     
     <!-- 使用zookeeper注册中心暴露服务地址 -->  
     <dubbo:registry address="zookeeper://127.0.0.1:2181" />   
@@ -28,7 +29,7 @@
    
     <!-- 声明需要暴露的服务接口 -->  
     <dubbo:service interface="newb.c.dubbo.DemoService" ref="demoService" />  
-    <dubbo:service interface="newb.c.dubbo.DemoService2" ref="demoService2" />  
+    <!-- <dubbo:service interface="newb.c.dubbo.DemoService2" ref="demoService2" />   -->
     <!-- <dubbo:service interface="newb.c.dubbo.DemoService3" ref="demoService3" />-->
       
 </beans>

@@ -14,7 +14,7 @@ public class TOrderServiceImpl extends BaseServiceImpl<TOrder> implements TOrder
 	private TOrderMapper mapper;
 	
 	public int insertByMapper(TOrder model) {
-		return mapper.insert(model);
+		return mapper.insertByMapper(model);
 	}
 	
 	public int insertByXML(TOrder model) {

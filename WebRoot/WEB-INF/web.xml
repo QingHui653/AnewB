@@ -142,7 +142,7 @@
     <!-- 拦截所有以.do后缀结尾的请求 -->
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
-	
+  
 	<!-- Spring MVC 配置 -->
 	<servlet>
 		<description>spring mvc servlet</description>
@@ -161,6 +161,15 @@
 	</servlet-mapping>
 	<!-- <servlet-mapping> <servlet-name>rest</servlet-name> <url-pattern>/</url-pattern> 
 		</servlet-mapping> -->
+		
+	<servlet>
+		<servlet-name>CXFServlet</servlet-name>
+		<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CXFServlet</servlet-name>
+		<url-pattern>/webservice/*</url-pattern>
+	</servlet-mapping>
 		
 	<!-- 不拦截这些静态资源 -->
 	<!-- <servlet-mapping>

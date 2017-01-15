@@ -1,6 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="../web/common/headjsp.jsp" %>
+<!-- 上传插件 -->
 <script type="text/javascript" src="<%=path%>/js/uploadify/jquery.uploadify.js"></script>
+<!-- 表单验证 -->
+<script type="text/javascript" src="<%=path%>/js/validate/jquery.validate.min.js"></script>
+<script type="text/javascript" src="<%=path%>/js/validate/messages_zh.js"></script>
 <script>
 $(function() {
 		$('#pictureUp').uploadify({
@@ -17,6 +21,36 @@ $(function() {
                     },
 		});
 	});
+
+function doUpload(url) {  
+     var formData = new FormData($("#uploadForm2")[0]);  
+     $.ajax({  
+          url: url ,  
+          type: 'POST',  
+          data: formData,  
+          async: false,  
+          cache: false,  
+          contentType: false,  
+          processData: false,  
+          success: function (returndata) {  
+              alert(returndata); 
+          },  
+          error: function (returndata) {  
+              alert(returndata); 
+          }  
+     });  
+}
+
+function allsub(){
+		/* vali(); */
+		$("#userData").validate({debug:true});
+		$("#userData").submit();
+	};
+
+function vali() {
+    	$("#userData").validate();
+	};	
+ 
 </script>
 
 </head>
@@ -27,6 +61,21 @@ $(function() {
 			<td><input id="pictureUp" type="file" name="file" style="left: 10%" /></td>
 			<td><img id="picture" alt="头像" src="/AnewB/images/Loginimage/avtar.png"></td>
 		</tr>
+	</form>
+	
+	<form id="uploadForm2">  
+           上传简历：<input type="file" name="file"/>  
+      <input type="button" value="提交" onclick="doUpload('../user/imgfile')"/>  
+   	</form>
+	
+	<form id="userData">
+		<span class="name">账号：</span>
+		<input name="zh" type="text" required/>
+		<br/>
+		<span class="password">密码：</span>
+		<input name="mm" type="email" />
+		<br/>
+		<input class="submit" type="submit" value="提交简历" onclick="allsub()"/>
 	</form>
 	
 	<c:forEach var="me" items="${fileNameMap}">  

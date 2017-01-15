@@ -11,7 +11,7 @@ public class Consumer {
   
     public static void main(String[] args) throws Exception {  
         @SuppressWarnings("resource")
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "springhighGradeT-dubbo-test.xml" });  
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "main/resources/dubbo/springhighGradeT-dubbo-test.xml" });  
         context.start();  
   
         DemoService demoService = (DemoService) context.getBean("demoService"); //  

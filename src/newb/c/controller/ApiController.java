@@ -243,22 +243,22 @@ public class ApiController {
 	@RequestMapping(value="/sharding",method=RequestMethod.GET)
 	@ResponseBody
 	public Object shardingTest() {
-		/*TOrder tO0=new TOrder(0, 0, "第0条数据");
+		TOrder tO0=new TOrder(0, 2, "第0条数据");
 		int bool0= tOrderService.insertByXML(tO0);
-		TOrder tO1=new TOrder(1, 1, "第1条数据");
+		TOrder tO1=new TOrder(1, 3, "第1条数据");
 		int bool1= tOrderService.insertByXML(tO1);
-		TOrder tO2=new TOrder(2, 2, "第2条数据");
-		int bool2= tOrderService.insertByXML(tO2);*/
+		TOrder tO2=new TOrder(2, 4, "第2条数据");
+		int bool2= tOrderService.insertByXML(tO2);
 		
-//		TOrder tO1=new TOrder(1, 1, "第1条数据");
-//		int bool1= tOrderService.insertByMapper(tO1);
-//		TOrder tO2=new TOrder(2, 2, "第2条数据");
-//		int bool2= tOrderService.insertByComm(tO2); 
+		/*TOrder tO1=new TOrder(1, 1, "第1条数据");
+		int bool1= tOrderService.insertByMapper(tO1);
+		TOrder tO2=new TOrder(2, 2, "第2条数据");
+		int bool2= tOrderService.insertByComm(tO2); */
 		/**
 		 * 分页插件不支持主键自增,SELECT LAST_INSERT_ID();配置在model中
 		 */
-		User u = new User(10, "xx", "cc");
-		int bool0=userService.save(u);
+		/*User u = new User(10, "xx", "cc");
+		int bool0=userService.save(u);*/
 		
 		return bool0;
 	}

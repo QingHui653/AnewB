@@ -15,11 +15,13 @@
 	<import resource="mybatis/spring-mybatis.xml" />
 	<import resource="cache/spring-redis.xml"/>
 	<import resource="cache/spring-ehcache.xml"/>
+	<!-- <import resource="webservice/cxf/spring-cxf.xml"/> -->
+	<!-- <import resource="rmi/spring-rmi.xml"/> -->
 	<!-- <import resource="cache/spring-guava.xml"/> -->
 	<!-- dubbo,activeMq等扩展 -->
 	<!-- <import resource="springhighGrade-dubboxRest.xml"/> -->
 	<!-- <import resource="springhighGrade-active*.xml"/> -->
-	<!--<import resource="springhighGrade-dubbo.xml"/>-->
+	<!-- <import resource="dubbo/springhighGrade-dubbo.xml"/> -->
 	
 	
 	<!--配置注解  -->

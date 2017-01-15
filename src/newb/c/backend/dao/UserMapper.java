@@ -21,21 +21,21 @@ import newb.c.backend.service.common.MyMapper;
  */
 /*@Repository*/
 public interface UserMapper extends MyMapper<User> {
-	
+
 	@Select("select * from user where oid=#{id}")
     User testSelectByKey(int id);
-	
+
 	int insertAll(List<User> userList);
-	
+
 	@Select("select * from user where oid>=0 for update")
 	/*@Options(useCache = false,timeout = 10000,flushCache = false)
     @ResultMap("BaseResultMap")*/
 	List<User> selectAllForUpdate();
-	
+
 	String selectPW(int oid);
-	
+
 	UserTrin selectUserAndUserCacheByUser(int oid);
-	
+
 	@Select("select id,name,age,user.oid,user.username,user.password from user_cache left join user on user_cache.id=user.oid where user_cache.id=#{oid}")
 	UserTrin selectUserAndUserCacheByDao(int oid);
 }

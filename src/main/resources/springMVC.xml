@@ -105,7 +105,7 @@
      <aop:aspectj-autoproxy proxy-target-class="true"/>
     <bean id="caFaceAuthAspect" class="newb.c.proxy.log.LogProxy"/>
     
-	<!-- 配置权限拦截器 -->
+	<!-- 配置权限拦截器  多个拦截器,顺序执行-->
 	<!-- 当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法 --> 
 	<mvc:interceptors>
 		<mvc:interceptor>

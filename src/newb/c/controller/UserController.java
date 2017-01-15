@@ -2,6 +2,7 @@ package newb.c.controller;
 
 import io.swagger.annotations.ApiOperation;
 
+import java.beans.PropertyEditor;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -10,6 +11,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,9 +42,13 @@ import tk.mybatis.mapper.entity.Example;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -79,11 +85,11 @@ public class UserController {
 	Gson gson = new Gson();
 	
 	@InitBinder
-	  public void dataBinder(WebDataBinder binder) {
+	public void dataBinder(WebDataBinder binder) {
 	    DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 	    PropertyEditor propertyEditor = new CustomDateEditor(dateFormat, true); // 第二个参数表示是否允许为空
 	    binder.registerCustomEditor(Date.class, propertyEditor);
-	  }
+	}
 
 	/**
 	 *  访问/user/newb/2
@@ -517,17 +523,17 @@ public class UserController {
 	 @RequestMapping(value="/onefile",method=RequestMethod.POST)
 	 @ResponseBody
 	    public String oneFileUpload(@RequestParam("file") CommonsMultipartFile file,HttpServletRequest request, ModelMap model,HttpSession httpSession) {
-	        // 获得原始文件名
+		 	// 获得原始文件名
 	        String fileName = file.getOriginalFilename();
 	        System.out.println("原始文件名:" + fileName);
-
-	        int pkid =(Integer) httpSession.getAttribute("PKID");
+	        UUID pkid =UUID.randomUUID();
 	        // 新文件名
-	        String newFileName =fileName;
+	        int cc=fileName.lastIndexOf(".");
+	        String newFileName =pkid+fileName.substring(cc);
 	        // 获得项目的路径
 	        ServletContext sc = request.getSession().getServletContext();
 	        // 上传位置
-	        String path = sc.getRealPath("\\img") + "\\"+pkid+"\\"; // 设定文件保存的目录
+	        String path = sc.getRealPath("\\img") + "\\"; // 设定文件保存的目录
 	        File f = new File(path);
 	        if (!f.exists())
 	            f.mkdirs();
@@ -649,5 +655,5 @@ public class UserController {
 	     }
 	 }
 /*从上个项目复制的文件上传下载   结束----------------------------------------*/
-
+	 
 }

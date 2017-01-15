@@ -22,10 +22,11 @@
        	">
        	
     <!-- 扫描目录下的包自动装配 -->  	
-    <context:component-scan base-package="newb.c.backend.service" /> 
+    <context:component-scan base-package="newb.c.backend.service" />
+	<context:property-placeholder location="classpath*:main/resources/*.properties" />
 	
 	<!-- 配置数据源 使用的是Druid数据源 -->
-	<bean name="parentDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+	<bean name="parentDataSource" class="com.alibaba.druid.pool.DruidDataSource"><!--init-method="init" destroy-method="close" -->
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
@@ -38,12 +39,12 @@
 		<!-- 获取连接最大等待时间 -->
 		<property name="maxWait" value="60000" />
 		<property name="poolPreparedStatements" value="true" />
-		<property name="maxPoolPreparedStatementPerConnectionSize" value="33" />
+		<property name="maxPoolPreparedStatementPerConnectionSize" value="50" />
 		<!-- 用来检测有效sql -->
 		<property name="validationQuery" value="${validationQuery}" />
 		<property name="testOnBorrow" value="false" />
 		<property name="testOnReturn" value="false" />
-		<property name="testWhileIdle" value="false" />
+		<property name="testWhileIdle" value="true" />
 		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
 		<property name="timeBetweenEvictionRunsMillis" value="180000" />
 		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
@@ -70,8 +71,11 @@
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
     </bean>
-    	
-    <rdb:strategy id="databaseShardingStrategy" sharding-columns="user_id" algorithm-class="newb.c.sharding.SingleKeyModuloDatabaseShardingAlgorithm"/>
+
+	<!--<rdb:master-slave-data-source id="rbb_0" master-data-source-ref="ds_0" slave-data-sources-ref="ds_1"/>
+	<rdb:master-slave-data-source id="rbb_1" master-data-source-ref="ds_1" slave-data-sources-ref="ds_0"/>-->
+
+	<rdb:strategy id="databaseShardingStrategy" sharding-columns="user_id" algorithm-class="newb.c.sharding.SingleKeyModuloDatabaseShardingAlgorithm"/>
     <rdb:strategy id="tableShardingStrategy" sharding-columns="order_id" algorithm-class="newb.c.sharding.SingleKeyModuloTableShardingAlgorithm"/>
     
     <rdb:data-source id="shardingDataSource">
@@ -91,6 +95,7 @@
 	<!-- myBatis 使用 分页插件，通用插件 配置 开始 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="shardingDataSource" /><!-- parentDataSource shardingDataSource -->
+		<property name="configLocation" value="classpath:main/resources/mybatis/SqlMapConfig.xml" />
 		<!-- <property name="configLocation" value="classpath:mybatis-config.xml"/> -->
 		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
 		<property name="mapperLocations" value="classpath*:/newb/c/backend/mapping/*.xml" />
