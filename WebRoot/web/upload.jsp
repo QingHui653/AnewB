@@ -43,7 +43,7 @@ function doUpload(url) {
 
 function allsub(){
 		/* vali(); */
-		$("#userData").validate({debug:true});
+		$("#userData").validate();
 		$("#userData").submit();
 	};
 
@@ -68,12 +68,12 @@ function vali() {
       <input type="button" value="提交" onclick="doUpload('../user/imgfile')"/>  
    	</form>
 	
-	<form id="userData">
+	<form id="userData" action="../user/bean" method="post">
 		<span class="name">账号：</span>
-		<input name="zh" type="text" required/>
+		<input name="username" type="text" required/>
 		<br/>
 		<span class="password">密码：</span>
-		<input name="mm" type="email" />
+		<input name="password"/>${ERR_password }
 		<br/>
 		<input class="submit" type="submit" value="提交简历" onclick="allsub()"/>
 	</form>

@@ -26,6 +26,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import newb.c.backend.model.RepList;
 import newb.c.backend.model.SessionBean;
@@ -43,10 +44,13 @@ import tk.mybatis.mapper.entity.Example;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.ObjectUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -69,78 +73,45 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-
 	@Autowired
 	private ResultService resultService;
-
 	@Autowired
 	private TestCacheService userCacheService;
 
 
 	//常用工具类   时间不能用在这 ,不然每次进入不会重新new 一个对象,
 	//会使得时间有BUG
-//	GregorianCalendar cal=new GregorianCalendar();
+	//GregorianCalendar cal=new GregorianCalendar();
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	//google JSON工具
 	Gson gson = new Gson();
 	
+	/**
+	 * 转换时间类型现在使用@DateTimeFormat代替
+	 * 数字使用@NumberFormat 
+	 * @param binder
+	 */
 	@InitBinder
 	public void dataBinder(WebDataBinder binder) {
 	    DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 	    PropertyEditor propertyEditor = new CustomDateEditor(dateFormat, true); // 第二个参数表示是否允许为空
 	    binder.registerCustomEditor(Date.class, propertyEditor);
 	}
-
-	/**
-	 *  访问/user/newb/2
-	 *  将user 绑定到modelMap
-	 *  在JSP页面 使用 ${user.username}等访问
-	 *  跳转到/user/showInfo
-	 *  // 测试页面在/web/mvc/indexMvc下，不知道为什么后台会有运行，但前台会自动刷新
-	 * @param modelMap
-	 * @param userId
-	 * @return
-	 */
-	 @ApiOperation(value = "获取用户列表 REST风格", notes = "")
-	 @RequestMapping(value="/newb/{userId}",method= {RequestMethod.GET,RequestMethod.POST})
-	 @ResponseBody
-	 public Object showUserInfoRest(ModelMap modelMap,@PathVariable int userId){
-	        User user = userService.getUserById(userId);
-		 	Example e= new Example(User.class);
-		 	e.createCriteria().andGreaterThanOrEqualTo("oid", 0);
-		 	List<User> userList= userService.selectByExample(e);
-		 	modelMap.addAttribute("user", user);
-	     	return "/user/showInfo";
-	 }
-	 
-	 /**
-	  *  访问/user/newb/2
-	  *  将user 绑定到modelMap
-	  *  在JSP页面 使用 ${user.username}等访问
-	  *  跳转到/user/showInfo
-	  *  // 测试页面在/web/mvc/indexMvc下，不知道为什么后台会有运行，但前台会自动刷新
-	  * @param modelMap
-	  * @param userId
-	  * @return
-	  */
-	@ApiOperation(value = "获取用户列表 http风格", notes = "")
-	@RequestMapping(value="/newb",method= {RequestMethod.GET,RequestMethod.POST})
-	@ResponseBody
-	public Object showUserInfoHttp(ModelMap modelMap,int userId){
-		   User user = userService.getUserById(userId);
-		   Example e= new Example(User.class);
-		   e.createCriteria().andGreaterThanOrEqualTo("oid", 0);
-		   List<User> userList= userService.selectByExample(e);
-		   modelMap.addAttribute("user", user);
-		   return "/user/showInfo";
-	}
 	
 	@ApiOperation(value = "测试参数为单个bean", notes = "")
 	@RequestMapping(value="/bean",method= {RequestMethod.POST})
-	@ResponseBody
+	/*@ResponseBody*/
 	// 测试页面在/web/mvc/indexMvc下，不知道为什么后台会有运行，但前台会自动刷新
-	public Object showUserInfoBean(ModelMap modelMap,User user){
-		System.out.println("Spring mvc自动序列化得到的user "+user.getOid()+"  "+user.getUsername());
+	public Object showUserInfoBean(ModelMap modelMap,@Valid User user,BindingResult result){
+		if(result.hasErrors()){
+			List<FieldError> erroeList= result.getFieldErrors();
+			for (FieldError error : erroeList) {
+				System.out.println(error.getField()+" * "+error.getDefaultMessage());
+				modelMap.put("ERR_"+error.getField(), error.getDefaultMessage());
+			}
+			return "web/upload";
+		}
+		System.out.println("Spring mvc自动序列化得到的user "+user.getOid()+"  "+user.getUsername()+" "+user.getPassword());
 		return "/user/showInfo";
 	}
 	
@@ -296,43 +267,15 @@ public class UserController {
 		 	int test=userService.delete(null);
 	        return test+"";
 	    }
+	 
 	 /**
-	  *  返回中文字符串,需要在MVC中配置 不然会自动加引号
+	  * 测试session
 	  * @param modelMap
-	  * @param userId
+	  * @param username
+	  * @param password
+	  * @param httpSession
 	  * @return
 	  */
-	 @RequestMapping(value="/newbcache",method= RequestMethod.POST) //,produces ="text/html;charset=UTF-8" 返回UTF-格式
-	 @ResponseBody
-	 public String showUser(ModelMap modelMap, int userId){
-	        User user = userService.getUserById(userId);
-	        modelMap.addAttribute("user", user);
-	        String str="hello word 你好世界";
-	        return str;
-	    }
-	 /**
-	  * 返回JSON ,需要在MVC中配置
-	  * @return
-	  */
-	 @RequestMapping(value="/newbs",method=RequestMethod.GET)
-	 @ResponseBody   //注释返回JSON 或 String 必须加此注解
-	 public Object showUserInfos(){
-		 	Example userExample = new Example(User.class);
-//		 	userExample.createCriteria().andLessThan("oid", "5");
-		 	userExample.createCriteria().andLessThan("oid", "5");
-	        List<User> user = userService.selectByExample(userExample);
-//	        UserList userList = new UserList(user);
-//	        String userJson= gson.toJson(userList);
-	        boolean isempty=ObjectUtils.isEmpty(user);
-	        return user;
-	    }
-
-	 @RequestMapping(value="/newbs2",method=RequestMethod.GET)   //未加会返回 user 至 newbs2.jsp 页面
-	 public Object showUserInfo(){
-	        List<User> user = userService.getUsers();
-	        return user;
-	    }
-
 	 @RequestMapping(value="/login",method=RequestMethod.POST)
 	 public String login(ModelMap modelMap, String username, String password,HttpSession httpSession){
 		 	int userId=2;
@@ -406,6 +349,7 @@ public class UserController {
 		 	int userId=2;
 		 	User user = userService.getUserById(userId);
 	        modelMap.addAttribute("user", user);
+	        //return "redi:/user/newbs";
 	        return "forward:/user/newbs";
 	    }
 	 
@@ -433,7 +377,6 @@ public class UserController {
 		 	UserData userdata =gson.fromJson(userjl.get("userData").toString(), UserData.class);
 		 	//GSON 转换JSON to List<T>
 		 	List<UserXL> userxlList =	gson.fromJson(userjl.get("userXL").toString(), new TypeToken<List<UserXL>>(){}.getType());
-
 	        return "success";
 	    }
 

@@ -15,11 +15,10 @@
 		">
 	<!-- 自动扫描下的包自动装配 -->
 	<!--resource-pattern="api/*.class" 基类包下的所有类-->
-	<!-- <context:component-scan base-package="newb.c.controller" /> -->
-    <context:component-scan base-package="newb.c.api">
+	<!-- <context:component-scan base-package="newb.c.controller.test" /> -->
+    <context:component-scan base-package="newb.c.api"/>
     	<!-- <context:exclude-filter type="regex" expression="com.jek.*"/> --><!-- 过滤 -->
     	<!-- <context:include-filter type="aspectj" expression="com.jike..*Controller+"/> --><!-- 包括 -->
-    </context:component-scan>
 	<!-- 启用spring mvc 注解 -->
     <!--
     @Controller 声明Action组件
@@ -34,16 +33,25 @@
     @Scope("prototype")   设定bean的作用域 -->
     
     
-
+	
 	<!--RequestMappingHandlerAdapter 返回映射处理适配器-->
-	<mvc:annotation-driven>
+	<mvc:annotation-driven validator="validator">
 		<mvc:message-converters>
 			<ref bean="stringHttpMessageConverter" />
 			<ref bean="marshallingHttpMessageConverter" />
 			<ref bean="mappingJackson2HttpMessageConverter" />
 		</mvc:message-converters>
 	</mvc:annotation-driven>
-
+	
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="providerClass" value="org.hibernate.validator.HibernateValidator"></property>
+		<!-- 国际化 -->
+		<!-- <property name="validationMessageSource" ref="messageSource"></property> -->
+	</bean>
+	
+	<!-- validator 国际化 -->
+	<!-- <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"
+		p:basename="i18n/messages" /> -->
 
 	<!--解决Spring MVC返回字符串自动加"引号"和 中文乱码 -->
 	<bean id="stringHttpMessageConverter"
@@ -102,7 +110,7 @@
     </mvc:interceptors>  
     -->
     <!-- 日志代理配置 -->
-     <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
     <bean id="caFaceAuthAspect" class="newb.c.proxy.log.LogProxy"/>
     
 	<!-- 配置权限拦截器  多个拦截器,顺序执行-->
@@ -190,7 +198,7 @@
 		</property>
 		<property name="maxUploadSize">
 			<!-- 上传文件大小限制为31M，31*1024*1024 -->
-			<value>32505856</value>
+			<value>512051200</value>
 		</property>
 		<property name="maxInMemorySize">
 			<value>4096</value>

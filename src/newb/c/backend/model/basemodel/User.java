@@ -3,6 +3,11 @@ package newb.c.backend.model.basemodel;
 import java.io.Serializable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.validation.annotation.Validated;
 
 public class User implements Serializable,Comparable<User> {
     /**
@@ -18,7 +23,8 @@ public class User implements Serializable,Comparable<User> {
     private Integer oid;
 
     private String username;
-
+    
+    @NotEmpty(message="不能为null")
     private String password;
     
     

@@ -79,12 +79,10 @@ import newb.c.utilDb.DataHandle;
 
 @Controller
 @RequestMapping("api")
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"spring*.xml"})
 public class ApiController {
-	
-	@Autowired
-	private RedisTemplate<String, String> redisTemplate;
+	//redis
+	/*@Autowired
+	private RedisTemplate<String, String> redisTemplate;*/
 	@Autowired
 	private ResultService resultService;
 	@Autowired 
@@ -180,12 +178,12 @@ public class ApiController {
 		return "forward:/web/bootstrap.jsp";
 	}
 	
-	@RequestMapping(value="/redis/add",method=RequestMethod.GET)
+	/*@RequestMapping(value="/redis/add",method=RequestMethod.GET)
 	public void add() {
 		ValueOperations<String, String> valueOper = redisTemplate.opsForValue();
 		valueOper.set("CC", "测试中文");
 		System.out.println("redis 查询"+valueOper.get("CC"));
-    }
+    }*/
 	
 	@RequestMapping(value="/sendmq",method=RequestMethod.GET)
 	@ResponseBody

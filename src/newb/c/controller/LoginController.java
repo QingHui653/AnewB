@@ -11,6 +11,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -30,7 +31,7 @@ public class LoginController {
 	 * @param userId
 	 * @return
 	 */
-	@RequestMapping("/login")
+	@RequestMapping(value="/login",method={RequestMethod.GET})
 	public Object execute(ModelAndView mv ,HttpServletRequest request,HttpServletResponse response, String username, String password) {
 		UsernamePasswordToken token = new UsernamePasswordToken(username,
 				password);
@@ -77,7 +78,7 @@ public class LoginController {
 	}
 
 	// 退出
-	@RequestMapping("/logout")
+	@RequestMapping(value="/logout",method={RequestMethod.GET})
 	public void logout() {
 		Subject subject = SecurityUtils.getSubject();
 		subject.logout();
