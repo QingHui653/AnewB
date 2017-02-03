@@ -11,10 +11,10 @@ public class Singleton1 {
 
 	 private Singleton1() {
 	 }
-
-	 public static Singleton1 getInstance() {
+	 //保证 线程安全直接加锁即可，但影响效率
+	 public static /*synchronized*/ Singleton1 getInstance() {
 	  if (singleton == null) {
-	   singleton = new Singleton1();
+		  singleton = new Singleton1();
 	  }
 	  return singleton;
 	 }

@@ -36,7 +36,7 @@ public class TestCollection {
       System.out.println("set one"+it1.next());
     }
 
-    //Set的第一种遍历方式:利用foreach
+    //Set的第二种遍历方式:利用foreach
     for (String sss : set) {
       System.out.println("set two"+sss);
     }
@@ -67,16 +67,22 @@ public class TestCollection {
     map.put("Kizi", "30000");
     print(map.entrySet());
     //Map的第一种遍历方式：先获得key,再获得值value
-    Set<String> sett = map.keySet();
-    for (String s : sett) {
+//    Set<String> sett = map.keySet();
+    for (String s : map.keySet()) {
       System.out.println("Map one "+s+":"+map.get(s));
     }
+    //在某些情况下，比如在使用配置map时，我们可能会预先知道保存在map中键值。如果这个键值非常小，我们就应该考虑使用 EnumSet 或 EnumMap，而并非使用我们常用的 HashSet 或 HashMap。
     //Map的第二种遍历方式：获得键值对
+    //在需要迭代键值对形式的Map时一定要用 entrySet() 方法。
     for (Map.Entry<String, String> entry : map.entrySet()) {
       System.out.println("Map two "+entry.getKey()+" : "+entry.getValue());
     }
   }
   
+  /**
+   * 去掉list中包含另一个list的值
+   * 错误示范
+   */
   public void listContain() {
 	List<Integer> list1=new ArrayList<Integer>();
 	list1.add(1);
@@ -102,6 +108,10 @@ public class TestCollection {
   }
   
   @Test
+  /**
+   * 去掉list中包含另一个list的值
+   * 正确示范 （使用迭代器）
+   */
   public void listContainIter() {
 	List<Integer> list1=new ArrayList<Integer>();
 	list1.add(1);

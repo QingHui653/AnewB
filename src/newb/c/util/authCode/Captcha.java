@@ -95,6 +95,7 @@ public abstract class Captcha extends Randoms {
 	 * @return string
 	 */
 	public String text() {
+		alphas();
 		return chars;
 	}
 }

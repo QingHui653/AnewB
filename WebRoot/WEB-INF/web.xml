@@ -114,7 +114,7 @@
         <url-pattern>/AnewB/*</url-pattern>
     </servlet-mapping> -->
 	<!-- proxool 连接池配置 -->
-	<servlet>
+	<!-- <servlet>
 		<servlet-name>ServletConfigurator</servlet-name>
 		<servlet-class>
 			org.logicalcobwebs.proxool.configuration.ServletConfigurator
@@ -124,9 +124,10 @@
 			<param-value>WEB-INF/proxool.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
-	</servlet>
+	</servlet> -->
 	
 	<servlet>
+		<description>自定义的简单的springmvc</description>
 		<servlet-name>AnnotationHandleServlet</servlet-name>
 		<servlet-class>newb.c.mycontroller.AnnotationHandleServlet</servlet-class>
 		<init-param>
@@ -171,7 +172,7 @@
 		<url-pattern>/webservice/*</url-pattern>
 	</servlet-mapping>
 		
-	<!-- 不拦截这些静态资源 -->
+	<!-- 不拦截这些静态资源   使用springmvc标签-->
 	<!-- <servlet-mapping>
     	<servlet-name>default</servlet-name>
     	<url-pattern>*.html</url-pattern>

@@ -6,5 +6,8 @@ public class Test {
      VehicleFactory factory = new BroomFactory();
      Moveable m = factory.create();
      m.run();
+     VehicleFactory factory2 = new PlaneFactory();
+     Moveable m2 = factory2.create();
+     m2.run();
  }
 }

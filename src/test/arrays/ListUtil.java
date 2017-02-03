@@ -19,7 +19,8 @@ public class ListUtil {
      * @param <T>
      * @return
      */
-    public static <T> Map<String, List<T>> getMapByKeyProperty(List<T> list, String keyPropertyName) {
+    @SuppressWarnings("null")
+	public static <T> Map<String, List<T>> getMapByKeyProperty(List<T> list, String keyPropertyName) {
         if (list == null && list.size() <= 0) {
             return null;
         }
@@ -35,7 +36,8 @@ public class ListUtil {
     }
 
 
-    public static <T> Map<String, List<T>> getMapByModKeyProperty(List<T> list, String keyPropertyName, int modNumber) {
+    @SuppressWarnings("null")
+	public static <T> Map<String, List<T>> getMapByModKeyProperty(List<T> list, String keyPropertyName, int modNumber) {
         if (list == null && list.size() <= 0) {
             return null;
         }

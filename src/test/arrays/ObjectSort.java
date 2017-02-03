@@ -24,7 +24,7 @@ public class ObjectSort {
 		Arrays.sort(UserList,new ComparatorDemo());
 		System.out.println("---"+Arrays.toString(UserList));
 		//通常使用这种方式，因为排序大部分是不同的
-		/*Comparator<Object> c = new Comparator<Object>(){  
+		Comparator<Object> c = new Comparator<Object>(){  
             @Override  
             public int compare(Object arg0, Object arg1) { //这里实现按照用户年龄大小来排序  
   
@@ -39,12 +39,12 @@ public class ObjectSort {
               
         }; 
 		Collections.sort(userList,c);
-		System.out.println(userList.toString());*/
+		System.out.println(userList.toString());
 		
 		//使用外部类的方式
-		/*ComparatorDemo comparatorDemo =new ComparatorDemo();
+		ComparatorDemo comparatorDemo =new ComparatorDemo();
 		Collections.sort(userList,comparatorDemo);
-		System.out.println(userList.toString());*/
+		System.out.println(userList.toString());
 		
 //		Collections.sort(userList,(a,b) -> a.getOid()-b.getOid());
 //		System.out.println(userList.toString());

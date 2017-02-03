@@ -19,7 +19,6 @@ public class array {
      * 
      */
     //去掉数组中重复的值  
-    //TODO可考虑增加泛型实用于各种arrays型
     public static void testA() {  
         String [] str = {"Java", "C++", "Php", "C#", "Python", "C++", "Java"};  
         for (String elementA:str ) {  

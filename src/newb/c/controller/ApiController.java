@@ -266,7 +266,7 @@ public class ApiController {
 	 * @param response
 	 */
 	@RequestMapping(value="getGifCode",method=RequestMethod.GET)
-	public void getGifCode(HttpServletResponse response,HttpServletRequest request){
+	public void getGifCode(HttpServletResponse response,HttpServletRequest request,HttpSession session){
 		try {
 			response.setHeader("Pragma", "No-cache");  
 	        response.setHeader("Cache-Control", "no-cache");  
@@ -277,12 +277,16 @@ public class ApiController {
 	         * 宽，高，位数。
 	         */
 	        Captcha captcha = new GifCaptcha(146,33,4);
+	        //存入Session
+	        session = request.getSession(true);
+	        System.out.println("hhh 1"+captcha);
+	        System.out.println("hhh 2"+captcha.text());
+	        System.out.println("hhh 3"+captcha.text().toLowerCase());
+	        session.setAttribute("_code",captcha.text().toLowerCase());  
 	        //输出
 	        captcha.out(response.getOutputStream());
-	        HttpSession session = request.getSession(true);  
-	        //存入Session
-	        session.setAttribute("_code",captcha.text().toLowerCase());  
 		} catch (Exception e) {
+			e.printStackTrace();
 			logger.error("获取验证码异常：%s",e.getMessage());
 		}
 	}
@@ -303,13 +307,13 @@ public class ApiController {
 			 * 宽，高，位数。
 			 */
 			Captcha captcha = new SpecCaptcha(146,33,4);
-			//输出
-			captcha.out(response.getOutputStream());
 			HttpSession session = request.getSession(true);  
 			//存入Session
 			session.setAttribute("_code",captcha.text().toLowerCase());  
+			//输出
+			captcha.out(response.getOutputStream());
 		} catch (Exception e) {
-			logger.error("获取验证码异常：%s",e.getMessage());
+			logger.error("获取验证码异常：%s",e.toString());
 		}
 	}
 }

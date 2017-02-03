@@ -33,10 +33,6 @@ public class WordStatistics {
 	public static void main(String[] args) {
 		WordStatistics wordStatistics = new WordStatistics();
 		Map<String, Integer> word_map = wordStatistics.readFile();
-		
-//		for(Map.Entry<String, Integer> mapping : word_map.entrySet()){
-//			System.out.println(mapping.getKey() + " : " + mapping.getValue());
-//		}
 		wordStatistics.sortAndWrite(word_map);
 		
 	}
@@ -86,10 +82,8 @@ public class WordStatistics {
 		Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
 			public int compare(Entry<String, Integer> o1,
 					Entry<String, Integer> o2) {
-				// TODO Auto-generated method stub
 				return o1.getValue().compareTo(o2.getValue());
 			}
-
 		});
 		
 		//写入文件		
