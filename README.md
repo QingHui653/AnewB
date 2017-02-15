@@ -6,13 +6,15 @@
   2. controller在newb.c.controller
   3. dao、mapping、service、model在newb.c.backend
   
-* 增加Mybatis 通用mapper，分页插件 newb.c.backend.service.common
+* 增加Mybatis 通用mapper，分页插件 newb.c.backend.service.common,增加swagger2 查看API
 
 * 增加dangdang 分库分表插件 具体查看spring-mybatis.xml 和newb.c.sharding
 
 * 增加guava缓存 查看spring-guava.xml newb.c.cache
 
 * 增加redis缓存 查看spring-redis.xml newb.c.cache
+
+* 增加ehcache缓存 spring-ehcache.xml
 
 * 增加dubbo 后转为 dubbox 需 zookeeper
 
