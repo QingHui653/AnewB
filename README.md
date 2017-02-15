@@ -26,6 +26,22 @@
 
 * 增加spring-session-data-redis
 
-* 增加rmi
-
+* 增加rmi，validator校验框架
 * 增加webservice cxf
+
+* 增加webmagic 爬虫框架，在newb.c.api下有github和80s的爬取程序
+
+#### 其他尝试工具
+* 增加Spring 的 Interceptor，增加LogProxy 日志代理切面
+
+* 增加qrcode zxing 二维码工具
+
+* 自行尝试实现SpringMVC，实现个简单的View层工具，自定义JSP标签
+
+* 尝试log4j,log4j2,logback
+
+#### Java基础
+在test包中有对Java8新特性，算法，Arrays，Collections，数据结构，日期，设计模式，异常，io，nio，bio，jdbc，NetSocket,netty框架，反射，序列化，动态代理，正则，多线程等等
+
+#### 前端
+flv.js,JQ插件select2，chosen使用，打印插件jqprint，上传插件uploadify，表单校验validate, vue.js的简单使用
