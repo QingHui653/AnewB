@@ -2,10 +2,7 @@ package test.dataStructure.LinkedList.doubleLinked;
 
 import test.dataStructure.LinkedList.ILinkedList;
 
-/**
- * Created by zejian on 2016/10/24.
- * 循环双链表,带空头结点(不含数据),循环链表可以不需要尾部指针
- */
+
 public class LoopHeadDILinkedList<T> implements ILinkedList<T> {
 
     public DNode<T> head; //不带数据的头结点

@@ -276,9 +276,9 @@ public class UserController {
 	  * @param httpSession
 	  * @return
 	  */
-	 @RequestMapping(value="/login",method=RequestMethod.POST)
+	 @RequestMapping(value="/login",method=RequestMethod.GET)
 	 public String login(ModelMap modelMap, String username, String password,HttpSession httpSession){
-		 	int userId=2;
+		 	int userId=3;
 		 	User user = userService.getUserById(userId);
 		 	SessionBean session = new SessionBean(user);
 	        modelMap.addAttribute("user", user);
@@ -295,11 +295,11 @@ public class UserController {
 	  * @throws ServletException
 	  * @throws IOException
 	  */
-	 @RequestMapping(value="/sessionTest",method=RequestMethod.POST)
-	 public void doGet(HttpServletRequest request, HttpServletResponse response)
+	 @RequestMapping(value="/sessionTest",method=RequestMethod.GET)
+	 public void doGet(HttpServletRequest request, HttpServletResponse response,HttpSession session)
 			 throws ServletException, IOException {
 			 response.setContentType("text/html;charset=UTF-8");
-			 HttpSession session = request.getSession(true);
+//			 HttpSession session = request.getSession(true);
 			 String heading = null;
 			 Integer accessCount = (Integer) session.getAttribute("accessCount");
 			 if (session.getAttribute("accessCount") == null) {
@@ -315,7 +315,7 @@ public class UserController {
 			 out.println("  <HEAD><TITLE>session tracking example</TITLE></HEAD>");
 			 out.println("  <BODY>");
 			 out.println("  <center>");
-			 out.println("<h4>" + heading + "<a href='session'>再次访问</a>"
+			 out.println("<h4>" + heading + "<a href='sessionTest'>再次访问</a>"
 			 + "</h4>");
 			 out.println("<table border='0'>");
 			 out.println("<tr bgcolor=\"ffad00\"><td>信息<td>值\n");

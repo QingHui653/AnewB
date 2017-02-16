@@ -7,8 +7,6 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 /**
- * Created by zejian on 2016/11/8.
- * Blog : http://blog.csdn.net/javazejian [请尊重原创,转载注明出处]
  * 改良的顺序表类似java集合类ArrayList
  */
 public class MyArrayList<T>  implements Serializable,IList<T>,Iterable<T>{
@@ -445,7 +443,7 @@ public static void main(String[] args){
     for(Integer data : myArrayList){
         System.out.println("data-->"+data);
     }
-    
+
 }
 
     public static void print(MyArrayList myArrayList){

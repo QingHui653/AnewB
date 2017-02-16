@@ -21,10 +21,7 @@ import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
-/**
- * @author advance
- *
- */
+
 public class Dom4jHelper {
 	/**
 	 *  解析url xml文档
@@ -60,7 +57,7 @@ public class Dom4jHelper {
         }
     }
 
-	/** 
+	/**
 	 * 解析文件，获得根元素
 	 * @param xmlPath
 	 * @param encoding
@@ -73,14 +70,14 @@ public class Dom4jHelper {
         if(!file.exists()){
         	throw new Exception("找不到xml文件："+xmlPath);
         }
-        
+
 		//解析
 		SAXReader reader = new SAXReader(false);
 		Document doc = reader.read(new FileInputStream(file),encoding);
 		Element root = doc.getRootElement();
 		return root;
 	}
-	
+
 	/**
 	 * 保存文档
 	 * @param doc
@@ -94,7 +91,7 @@ public class Dom4jHelper {
 	    XMLWriter writer = new XMLWriter(new OutputStreamWriter(new FileOutputStream(xmlPath),encoding),format);
 		writer.write(doc);
 		writer.flush();
-		writer.close();	
+		writer.close();
 	}
 	/**
 	 * 修改xml某节点的值
@@ -132,8 +129,8 @@ public class Dom4jHelper {
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
-	}	
-	
+	}
+
 	/**
 	 * xml转换为字符串
 	 * @param doc
@@ -148,9 +145,9 @@ public class Dom4jHelper {
 	    XMLWriter writer = new XMLWriter(new OutputStreamWriter(byteOS,encoding),format);
 		writer.write(doc);
 		writer.flush();
-		writer.close();		
+		writer.close();
 		writer=null;
-		
+
 		return byteOS.toString(encoding);
 	}
 	/**

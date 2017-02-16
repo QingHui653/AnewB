@@ -23,13 +23,16 @@
        	
     <!-- 扫描目录下的包自动装配 -->  	
     <context:component-scan base-package="newb.c.backend.service" />
+	<!-- 由于inline表达式内使用Groovy语法，Groovy语法的变量占位符为`${}`,与Spring的Property占位符冲突。
+ +故需要在Spring的配置文件中增加<context:property-placeholder location="classpath:conf/rdb/conf.properties" **ignore-unresolvable="true"**/> -->
 	<context:property-placeholder location="classpath*:main/resources/*.properties" />
 	
 	<!-- 配置数据源 使用的是Druid数据源 -->
-	<bean name="parentDataSource" class="com.alibaba.druid.pool.DruidDataSource"><!--init-method="init" destroy-method="close" -->
-		<property name="url" value="${jdbc.url}" />
+	<bean name="parentDataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close"><!--init-method="init" destroy-method="close" -->
+		<property name="driverClassName" value="${jdbc.driver}"/>
+		<!-- <property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
+		<property name="password" value="${jdbc.password}" /> -->
 		<!-- 初始化连接大小 -->
 		<property name="initialSize" value="1" />
 		<!-- 连接池最大使用连接数量 -->
@@ -60,28 +63,30 @@
 	</bean>
 	
 	<bean id="ds_0" parent="parentDataSource">
-        <property name="driverClassName" value="${jdbc.driver}"/>
-        <property name="url" value="${jdbc.url}"/>
-        <property name="username" value="${jdbc.username}"/>
-        <property name="password" value="${jdbc.password}"/>
+        <property name="url" value="${jdbc.url-1}"/>
+        <property name="username" value="${jdbc.username-1}"/>
+        <property name="password" value="${jdbc.password-1}"/>
     </bean>
 	<bean id="ds_1" parent="parentDataSource">
-        <property name="driverClassName" value="${jdbc.driver}"/>
-        <property name="url" value="${jdbc.url}"/>
-        <property name="username" value="${jdbc.username}"/>
-        <property name="password" value="${jdbc.password}"/>
+        <property name="url" value="${jdbc.url-2}"/>
+        <property name="username" value="${jdbc.username-2}"/>
+        <property name="password" value="${jdbc.password-2}"/>
     </bean>
 
 	<!--<rdb:master-slave-data-source id="rbb_0" master-data-source-ref="ds_0" slave-data-sources-ref="ds_1"/>
 	<rdb:master-slave-data-source id="rbb_1" master-data-source-ref="ds_1" slave-data-sources-ref="ds_0"/>-->
-
+	
+	<!-- 读写分离配置 -->
+	<rdb:master-slave-data-source id="dbtb" master-data-source-ref="ds_0" slave-data-sources-ref="ds_1"/>
+	
+	<!-- 分库分表规则 -->
 	<rdb:strategy id="databaseShardingStrategy" sharding-columns="user_id" algorithm-class="newb.c.sharding.SingleKeyModuloDatabaseShardingAlgorithm"/>
     <rdb:strategy id="tableShardingStrategy" sharding-columns="order_id" algorithm-class="newb.c.sharding.SingleKeyModuloTableShardingAlgorithm"/>
     
     <rdb:data-source id="shardingDataSource">
-        <rdb:sharding-rule data-sources="ds_0,ds_1" default-data-source="ds_0">
-            <rdb:table-rules>
-                <rdb:table-rule logic-table="t_order" actual-tables="t_order_0,t_order_1" database-strategy="databaseShardingStrategy" table-strategy="tableShardingStrategy"/>
+        <rdb:sharding-rule data-sources="dbtb"><!--  default-data-source="ds_0"  -->
+            <rdb:table-rules>													<!-- database-strategy="databaseShardingStrategy" -->
+                <rdb:table-rule logic-table="t_order" actual-tables="t_order_0,t_order_1" table-strategy="tableShardingStrategy"/>
             </rdb:table-rules>
             <rdb:binding-table-rules>
                 <rdb:binding-table-rule logic-tables="t_order"/>

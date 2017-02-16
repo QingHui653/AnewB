@@ -1,5 +1,10 @@
 package test.DesignMode.Adapter;
 
+/**
+ * 适配器模式
+ * @author woshizbh
+ *
+ */
 public class Adapter {
     public static void main(String[] args) {
         Phone phone = new Phone();

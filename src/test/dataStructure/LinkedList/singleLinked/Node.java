@@ -1,7 +1,6 @@
 package test.dataStructure.LinkedList.singleLinked;
 
 /**
- * Created by zejian on 2016/10/21.
  * 单向链表节点
  */
 public class Node<T> {

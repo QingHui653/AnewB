@@ -10,7 +10,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath*:main/resources/spring.xml</param-value>
 		<!-- <param-value>classpath*:spring.xml,classpath:springhighGrade-dubboxRest.xml</param-value> -->
-<!-- 		<param-value>classpath:spring.xml,classpath:spring-mybatis.xml,classpath:spring-cache.xml</param-value> -->
+		<!-- <param-value>classpath:spring.xml,classpath:spring-mybatis.xml,classpath:spring-cache.xml</param-value> -->
 	</context-param>
 	
 	<!--编码拦截器  -->
@@ -65,6 +65,15 @@
 		<filter-name>DruidWebStatFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	<!-- 分布式 session -->
+	<filter>
+        <filter-name>springSessionRepositoryFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSessionRepositoryFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 	
 	<!-- <filter>
 		<filter-name>logFilter</filter-name>

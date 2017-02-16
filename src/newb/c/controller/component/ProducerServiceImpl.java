@@ -16,9 +16,9 @@ public class ProducerServiceImpl{
 	
 	//ActiveMq
 	/*@Autowired
-	private JmsTemplate jmsTemplate; 
+	private JmsTemplate jmsTemplate; */
 	
-	public void sendMessage(Destination destination, final String message) {   
+	/*public void sendMessage(Destination destination, final String message) {   
         System.out.println("---------------生产者发送消息-----------------");   
         System.out.println("---------------生产者发了一个消息：" + message);   
         jmsTemplate.send(destination, new MessageCreator() {   
@@ -30,5 +30,5 @@ public class ProducerServiceImpl{
   
     public JmsTemplate getJmsTemplate() {   
         return jmsTemplate;   
-    }*/    
+    } */   
 }

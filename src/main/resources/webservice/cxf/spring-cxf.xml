@@ -14,6 +14,20 @@
     
     <!-- 服务端 -->
     <jaxws:endpoint id="helloWorld" implementor="newb.c.webservice.cxf.HelloServiceImpl" address="/helloWorld" />
+    
+    <!-- 返回json格式 -->
+    <jaxrs:server id="helloWorldRest" address="/rest/helloWorld">
+        <jaxrs:serviceBeans>
+            <bean class="newb.c.webservice.cxf.HelloServiceImpl" />
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
+        </jaxrs:providers>
+        <jaxrs:extensionMappings>
+            <entry key="json" value="application/json" />
+            <entry key="xml" value="application/xml" />
+        </jaxrs:extensionMappings>
+    </jaxrs:server>
 	
 	<!-- 客户端 -->
 	<!-- <bean id="client" class="newb.c.webservice.cxf.HelloService" factory-bean="clientFactory" factory-method="create" />

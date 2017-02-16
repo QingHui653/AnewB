@@ -5,12 +5,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
-* 
+*
 * @ClassName: LoginServlet2
 * @Description:处理用户登录的Servlet，
 * LoginServlet现在就是一个普通的java类，不是一个真正的Servlet
-* @author: 孤傲苍狼
-* @date: 2014-10-8 上午12:07:58
 *
 */
 @MyController //使用Controller注解标注LoginServlet2
@@ -44,12 +42,12 @@ public class LoginServlet2 {
             return new View("/web/MyMvc/login2.jsp");
         }
     }
-    
+
     /**
     * @Method: ajaxLoginHandle
     * @Description: 处理以AJAX方式提交的请求
     * @throws IOException
-    */ 
+    */
     //使用RequestMapping注解标注ajaxLoginHandle方法，指明ajaxLoginHandle方法的访问路径是ajaxLogin/handle
     @MyRequestMapping("ajaxLogin/handle")
     public void ajaxLoginHandle() throws IOException{

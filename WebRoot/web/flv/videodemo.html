@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <title>videoJs demo</title>
+    <link rel="stylesheet" type="text/css" href="/AnewB/css/Mo.css">
+    <link rel="stylesheet" type="text/css" href="/AnewB/css/styleMo.css">
+</head>
+<body>
+	<div class="mo-wrap">
+        <div class="mo-box">
+            <div class="mo-video">
+                <video id="my_video_1" class="video-js vjs-default-skin" controls preload="auto"  width="640" height="264" data-setup="{}">
+					<source src="/AnewB/web/flv/video.flv" type='video/mp4'>
+				</video>
+            </div>
+        </div>
+	</div>
+
+<script src="http://cdn.bootcss.com/video.js/6.0.0-RC.0/video.js"></script>
+<script src="http://cdn.bootcss.com/video.js/6.0.0-RC.0/lang/zh-CN.js"></script>
+<link href="http://cdn.bootcss.com/video.js/6.0.0-RC.0/alt/video-js-cdn.css" rel="stylesheet">
+<script>
+videojs("my_video_1", {}, function(){
+  // Player (this) is initialized and ready.
+});
+</script>
+</body>
+</html>

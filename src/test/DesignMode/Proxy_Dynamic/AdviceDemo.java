@@ -5,7 +5,11 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.Collection;
-
+/**
+ * 动态代理模式
+ * @author woshizbh
+ *
+ */
 public class AdviceDemo {
 	public static void main(String[] args) {
 		Collection<Object> proxy3=(Collection) getproxy(new ArrayList<>(), new MyAdvice());

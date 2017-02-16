@@ -5,8 +5,6 @@ import test.dataStructure.LinkedList.singleLinked.Node;
 import java.io.Serializable;
 
 /**
- * Created by zejian on 2016/11/27.
- * Blog : http://blog.csdn.net/javazejian/article/details/53362993 [原文地址,请尊重原创]
  * 栈的链式实现
  */
 public class LinkedStack<T> implements Stack<T> ,Serializable{

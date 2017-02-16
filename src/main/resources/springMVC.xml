@@ -13,6 +13,9 @@
 		http://www.springframework.org/schema/aop 
 		http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
 		">
+	
+	<!-- 此处必须存在不能删除，不然使用@vaule(${})取不到值 -->	
+	<context:property-placeholder location="classpath*:main/resources/*.properties" />
 	<!-- 自动扫描下的包自动装配 -->
 	<!--resource-pattern="api/*.class" 基类包下的所有类-->
 	<!-- <context:component-scan base-package="newb.c.controller.test" /> -->
@@ -35,6 +38,7 @@
     
 	
 	<!--RequestMappingHandlerAdapter 返回映射处理适配器-->
+	<!-- validator="validator" 校验 -->
 	<mvc:annotation-driven validator="validator">
 		<mvc:message-converters>
 			<ref bean="stringHttpMessageConverter" />
@@ -122,21 +126,40 @@
 		</mvc:interceptor>
 	 </mvc:interceptors>
 	
-	<!-- 总错误处理
+	<!-- 总错误处理   异常处理方式一：使用spring自带clss
 		   这里主要的类是SimpleMappingExceptionResolver类，和他的父类AbstractHandlerExceptionResolver类。
 		   具体可以配置哪些属性，我是通过查看源码知道的。
 		   你也可以实现HandlerExceptionResolver接口，写一个自己的异常处理程序。-->
-    <!-- <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-        <property name="defaultErrorView">
-           <value>/error/error</value> error页面可以通过Exception e = (Exception)request.getAttribute("exception")获得异常信息
-        </property>
-        <property name="defaultStatusCode">
-           <value>500</value>
-        </property>
-        <property name="warnLogCategory">
-           <value>org.springframework.web.servlet.handler.SimpleMappingExceptionResolver</value>
-        </property>
-    </bean> -->
+    <!--
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<!- - 定义默认的异常处理页面，当该异常类型的注册时使用 - ->
+		<property name="defaultErrorView" value="error"></property>
+		<!- - 定义异常处理页面用来获取异常信息的变量名，默认名为exception - ->
+		<property name="exceptionAttribute" value="ex"></property>
+		<!- - 定义需要特殊处理的异常，用类名或完全路径名作为key，异常也页名作为值 - ->
+		<property name="exceptionMappings">
+			<props>
+				<prop key="cn.basttg.core.exception.BusinessException">error-business</prop>
+				<prop key="cn.basttg.core.exception.ParameterException">error-parameter</prop>
+			</props>
+		</property>
+
+		<!- - 相关状态码对应的错误页面 - ->
+		<property name="statusCodes">
+			<props>
+				<prop key="errors/500">500</prop>
+				<prop key="errors/404">404</prop>
+			</props>
+		</property>
+		<!- - 设置日志输出级别，不定义则默认不输出警告等错误日志信息 - ->
+		<property name="warnLogCategory" value="WARN" />
+		<!- - 默认HTTP状态码 - ->
+		<property name="defaultStatusCode" value="500" />
+	</bean>
+	 -->
+	 <!-- 异常处理第二种：自定义 -->
+    <!-- <bean id="exceptionHandler" class="newb.c.controller.component.ErrorLogSendEmail"/> -->
 	
 	<!-- 对静态资源文件的访问  方案一 （二选一）
                        会把"/**" url,注册到SimpleUrlHandlerMapping的urlMap中,把对静态资源的访问由HandlerMapping转到
@@ -204,5 +227,5 @@
 			<value>4096</value>
 		</property>
 	</bean>
-
+	
 </beans>

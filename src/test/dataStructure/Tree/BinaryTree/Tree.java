@@ -1,9 +1,6 @@
 package test.dataStructure.Tree.BinaryTree;
 
-/**
- * Created by zejian on 2016/12/14.
- * Blog : http://blog.csdn.net/javazejian [原文地址,请尊重原创]
- */
+
 public interface Tree<T extends Comparable> {
 
     /**

@@ -4,10 +4,7 @@ import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
-/**
- * @author advance
- * 
- */
+
 public class DealString {
 
 	public DealString() {
@@ -15,7 +12,7 @@ public class DealString {
 
 	/**
 	 * 判断字符串是否为空
-	 * 
+	 *
 	 * @param tempSql
 	 * @return
 	 */
@@ -27,7 +24,7 @@ public class DealString {
 
 	/**
 	 * 字符串替换操作
-	 * 
+	 *
 	 * @param originString
 	 *            原字符串
 	 * @param oldString
@@ -51,7 +48,7 @@ public class DealString {
 
 	/**
 	 * 代码转换，GBK转换为ISO-8859-1
-	 * 
+	 *
 	 * @param tempSql
 	 *            要转换的字符串
 	 * @return
@@ -71,7 +68,7 @@ public class DealString {
 
 	/**
 	 * 代码转换，ISO-8859-1转换为GBK
-	 * 
+	 *
 	 * @param tempSql
 	 *            要转换的字符串
 	 * @return
@@ -89,7 +86,7 @@ public class DealString {
 
 	/**
 	 * 代码转换 从srcCode转换为destCode
-	 * 
+	 *
 	 * @param srcCode
 	 *            原编码
 	 * @param destCode
@@ -112,7 +109,7 @@ public class DealString {
 
 	/**
 	 * 代码转换，GBK转换为big5
-	 * 
+	 *
 	 * @param tempSql
 	 *            要转换的字符串
 	 * @return
@@ -188,7 +185,7 @@ public class DealString {
 	 * This method takes a string which may contain HTML tags (ie, &lt;b&gt;,
 	 * &lt;table&gt;, etc) and converts the '&lt'' and '&gt;' characters to
 	 * their HTML escape sequences.
-	 * 
+	 *
 	 * @param in
 	 *            the text to be converted.
 	 * @return the input string with the characters '&lt;' and '&gt;' replaced
@@ -250,7 +247,7 @@ public class DealString {
 
 	/**
 	 * 数字的金额表达式
-	 * 
+	 *
 	 * @param num
 	 * @return
 	 */

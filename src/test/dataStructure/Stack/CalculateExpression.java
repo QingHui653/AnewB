@@ -1,10 +1,6 @@
 package test.dataStructure.Stack;
 
-/**
- * Created by zejian on 2016/11/28.
- * Blog : http://blog.csdn.net/javazejian [原文地址,请尊重原创]
- * 中缀转后缀,然后计算后缀表达式的值
- */
+
 public class CalculateExpression {
 
     /**

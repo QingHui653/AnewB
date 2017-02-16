@@ -1,11 +1,23 @@
 package newb.c.controller.component;
 
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.annotation.Resource;
+
+import org.apache.http.HttpHost;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import newb.c.backend.dao.ResultMapper;
 import newb.c.backend.model.basemodel.Result;
 import newb.c.backend.service.ResultService;
+import newb.c.util.Regex;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
@@ -13,22 +25,33 @@ import us.codecraft.webmagic.pipeline.FilePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
 
 @Component
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration({"classpath:main/resources/mybatis/spring-mybatis.xml"})
 public class GithubRepoPageProcessor implements PageProcessor {
 	
 	@Autowired
 	private ResultService resultService;
 	
-    private Site site = Site.me().setRetryTimes(3).setSleepTime(100);
+	/*@Resource
+	private ResultMapper resultMapper;*/
+	
+	public HttpHost httpHost =new HttpHost("113.117.204.99", 9999);
+	private Site site = Site.me().setTimeOut(60000).setRetryTimes(10)//.setHttpProxy(httpHost)
+            .setSleepTime(1000).setCharset("UTF-8").addHeader("Accept-Encoding", "/");
 
     @Override
     public void process(Page page) { //(https://github\\.com/\\w+/\\w+)
-    	String name;
+    	
+    	page.addTargetRequests(page.getHtml().links().regex("(https://github\\.com/\\w+/\\w+)").all());
+    	page.addTargetRequests(page.getHtml().links().regex("(https://github\\.com/[\\w\\-]+/[\\w\\-]+)").all());
+        page.addTargetRequests(page.getHtml().links().regex("(https://github\\.com/[\\w\\-])").all());
+    	/*String name;
     	if (page.getUrl().toString().contains("?")) {
     		name=page.getUrl().toString().substring(page.getUrl().toString().lastIndexOf("/")+1,page.getUrl().toString().indexOf("?"));
 		}else {
 			name=page.getUrl().toString().substring(page.getUrl().toString().lastIndexOf("/")+1);
-		}
-        page.addTargetRequests(page.getHtml().links().regex("(https://github\\.com/"+name+"/\\w+)").all());
+		}*/
+//    	page.addTargetRequests(page.getHtml().links().regex("(https://github\\.com/"+name+"/\\w+)").all());
 //        page.addTargetRequest(page.getHtml().links().regex(""));
 //        page.addTargetRequests(page.getHtml().links().regex(regexUrl).all());
         Result r = new Result();
@@ -41,7 +64,8 @@ public class GithubRepoPageProcessor implements PageProcessor {
 //        page.putField("readme", page.getHtml().xpath("//div[@id='readme']/tidyText()").toString());
         page.putField("result", r);
         if (r.getF3()!=null) {
-        	resultService.save(r);
+        		resultService.save(r);
+//        	resultMapper.insert(r);
 		}
 //        System.out.println(page.getResultItems().getAll());
     }
@@ -54,9 +78,8 @@ public class GithubRepoPageProcessor implements PageProcessor {
     public static void main(String[] args) {
         Spider.create(new GithubRepoPageProcessor())//https://github.com/QingHui653
         .addUrl("https://github.com/QingHui653")//https://github.com/code4craft
-        .addPipeline(new FilePipeline("G:\\bean\\")).thread(5).run();
-//        .addPipeline(new JsonFilePipeline("G:\\CM\\")).thread(5).run();
-//        .addPipeline(new resultPipe()).thread(5).run();
+        .addPipeline(new FilePipeline("G:\\bean\\"))
+        .thread(10).run();
         System.out.println("****************************************************");
     }
 }

@@ -1,5 +1,10 @@
 package test.DesignMode.Observer;
 
+/**
+ * 观察者模式
+ * @author woshizbh
+ *
+ */
 public class Test {
     public static void main(String[] args) {
 

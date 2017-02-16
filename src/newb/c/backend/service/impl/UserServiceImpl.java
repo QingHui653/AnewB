@@ -9,10 +9,11 @@ import newb.c.backend.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service("UserService")
+@Repository("UserService")
 public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
 	
 	@Autowired

@@ -3,7 +3,6 @@ package test.dataStructure.LinkedList.SeqList;
 import test.dataStructure.LinkedList.ISeqList;
 
 /**
- * Created by zejian on 2016/10/29.
  * 顺序表
  */
 public class SeqList<T> implements ISeqList<T>{

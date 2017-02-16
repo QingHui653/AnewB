@@ -6,8 +6,6 @@ import java.io.Serializable;
 
 
 /**
- * Created by zejian on 2016/11/27.
- * Blog : http://blog.csdn.net/javazejian/article/details/53362993 [原文地址,请尊重原创]
  * 顺序栈的实现(利用顺序表实现作为内部实现)
  */
 public class StackByArrayList<T> implements Stack<T>,Serializable {

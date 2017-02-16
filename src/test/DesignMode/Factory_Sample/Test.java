@@ -1,5 +1,10 @@
 package test.DesignMode.Factory_Sample;
 
+/**
+ * 简单工厂模式
+ * @author woshizbh
+ *
+ */
 public class Test {
 
     public static void main(String[] args) {

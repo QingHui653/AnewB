@@ -5,8 +5,6 @@ import java.util.Iterator;
 import java.util.ListIterator;
 
 /**
- * Created by zejian on 2016/12/3.
- * Blog : http://blog.csdn.net/javazejian [原文地址,请尊重原创]
  * 排序list的简单实现
  */
 public class SortMyLinkedList<T extends Comparable<? extends T>> extends MylinkeList<T> implements Serializable {

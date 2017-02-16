@@ -1,5 +1,10 @@
 package test.DesignMode.Decorate;
 
+/**
+ * 装饰者模式
+ * @author woshizbh
+ *
+ */
 public class Test {
     public static void main(String[] args) {
         Food food = new Bread(new Vegetable(new Cream(new Food("香肠"))));

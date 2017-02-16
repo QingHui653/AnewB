@@ -3,8 +3,6 @@ package test.dataStructure.Tree.BinaryTree;
 import java.io.Serializable;
 
 /**
- * Created by zejian on 2016/12/14.
- * Blog : http://blog.csdn.net/javazejian [原文地址,请尊重原创]
  * 二叉树结点
  */
 public class BinaryNode<T extends Comparable> implements Serializable{

@@ -1,8 +1,6 @@
 package test.dataStructure.Tree.AVLTree;
 
 /**
- * Created by zejian on 2016/12/25.
- * Blog : http://blog.csdn.net/javazejian [原文地址,请尊重原创]
  * 平衡二叉搜索树(AVL树)节点
  */
 public class AVLNode<T extends Comparable> {

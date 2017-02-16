@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
- * Created by zejian on 2016/11/10.
- * Blog : http://blog.csdn.net/javazejian [请尊重原创,转载注明出处]
  * 改良的双链表表(带头结点和尾结点)类似java集合类LinkedList
  */
 public class MylinkeList<T> implements Serializable,IList<T>, Iterable<T>{

@@ -10,11 +10,15 @@
 ">
 	
 	<!--引入配置属性文件 -->
+	<!-- 记得以前这里也报过错，暂时不要删除 -->
 	<context:property-placeholder location="classpath*:main/resources/*.properties" />
 	
+	<import resource="mail/spring-mail.xml"/>
 	<import resource="mybatis/spring-mybatis.xml" />
 	<import resource="cache/spring-redis.xml"/>
 	<import resource="cache/spring-ehcache.xml"/>
+	<import resource="session/spring-session.xml"/>
+	<!-- <import resource="mq/springhighGrade-active*.xml"/>  -->
 	<!-- <import resource="webservice/cxf/spring-cxf.xml"/> -->
 	<!-- <import resource="rmi/spring-rmi.xml"/> -->
 	<!-- <import resource="cache/spring-guava.xml"/> -->

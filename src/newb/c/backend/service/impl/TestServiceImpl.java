@@ -4,13 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import newb.c.backend.dao.UserCacheMapper;
 import newb.c.backend.model.basemodel.UserCache;
 import newb.c.backend.service.TestCacheService;
 
-@Service("TestService")
+@Repository("TestService")
 public class TestServiceImpl extends BaseServiceImpl<UserCache> implements TestCacheService{
 
 	@Autowired

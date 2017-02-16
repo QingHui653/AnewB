@@ -33,19 +33,17 @@ import org.springframework.core.io.Resource;
 /**
  * 创建时间：2016年11月9日 下午4:16:32
  * 
- * @author andy
- * @version 2.2
  */
 public class HttpUtils {
 
 	private static final String DEFAULT_CHARSET = "UTF-8";
-	
+
 	private static final int CONNECT_TIME_OUT = 5000; //链接超时时间3秒
-	
+
 	private static final RequestConfig REQUEST_CONFIG = RequestConfig.custom().setConnectTimeout(CONNECT_TIME_OUT).build();
-	
+
 	private static SSLContext wx_ssl_context = null; //微信支付ssl证书
-	
+
 	static{
 		Resource resource = new ClassPathResource("wx_apiclient_cert.p12");
 		Configurations configs = new Configurations();
@@ -82,7 +80,7 @@ public class HttpUtils {
 					param.append("&");
 				}
 				param.append(entry.getKey()).append("=");
-				
+
 				try {
 					param.append(URLEncoder.encode(entry.getValue(), DEFAULT_CHARSET));
 				} catch (UnsupportedEncodingException e) {
@@ -276,7 +274,7 @@ public class HttpUtils {
 		}
 		return body;
 	}
-	
+
 	/**
 	 * @description 功能描述: post https请求，服务器双向证书验证
 	 * @param url 请求地址
@@ -293,7 +291,7 @@ public class HttpUtils {
 					.setDefaultRequestConfig(REQUEST_CONFIG)
 					.setSSLSocketFactory(getSSLConnectionSocket())
 					.build();
-			httpPost.setEntity(new StringEntity(s, DEFAULT_CHARSET)); 
+			httpPost.setEntity(new StringEntity(s, DEFAULT_CHARSET));
 			response = httpClient.execute(httpPost);
 			body = EntityUtils.toString(response.getEntity(), DEFAULT_CHARSET);
 		} catch (Exception e) {

@@ -21,44 +21,43 @@ import newb.c.backend.service.UserService;
 
 /**
  * @ClassName UserRealm
- * @author yuan
  * @version 1.0
  */
 
 public class UserRealm extends AuthorizingRealm{
-	
+
 	@Autowired
 	private UserService userService;
-	
-	/** 
+
+	/**
 	 * 授权
-	 * <p>Title: doGetAuthorizationInfo</p> 
-	 * <p>Description: </p> 
+	 * <p>Title: doGetAuthorizationInfo</p>
+	 * <p>Description: </p>
 	 * @param principals
-	 * @return 
-	 * @see org.apache.shiro.realm.AuthorizingRealm#doGetAuthorizationInfo(org.apache.shiro.subject.PrincipalCollection) 
+	 * @return
+	 * @see org.apache.shiro.realm.AuthorizingRealm#doGetAuthorizationInfo(org.apache.shiro.subject.PrincipalCollection)
 	*/
-	
+
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();//未进行授权处理
 		return authorizationInfo;
 	}
 
-	/** 
+	/**
 	 * 认证
-	 * <p>Title: doGetAuthenticationInfo</p> 
-	 * <p>Description: </p> 
+	 * <p>Title: doGetAuthenticationInfo</p>
+	 * <p>Description: </p>
 	 * @param token
 	 * @return
-	 * @throws AuthenticationException 
-	 * @see org.apache.shiro.realm.AuthenticatingRealm#doGetAuthenticationInfo(org.apache.shiro.authc.AuthenticationToken) 
+	 * @throws AuthenticationException
+	 * @see org.apache.shiro.realm.AuthenticatingRealm#doGetAuthenticationInfo(org.apache.shiro.authc.AuthenticationToken)
 	*/
-	
+
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(
 			AuthenticationToken token) throws AuthenticationException {
-		UsernamePasswordToken usernamePasswordToke = (UsernamePasswordToken)token; 
+		UsernamePasswordToken usernamePasswordToke = (UsernamePasswordToken)token;
 		String account = usernamePasswordToke.getUsername();
 		String pwd = String.valueOf(usernamePasswordToke.getPassword());
 		User user =userService.selectByKey(Integer.valueOf(account));
@@ -75,7 +74,7 @@ public class UserRealm extends AuthorizingRealm{
 				account,pwd,this.getName()); //此处未进行密码加密处理
 		return authenticationInfo;
 	}
-	
+
 	 @Override
 	    public void clearCachedAuthorizationInfo(PrincipalCollection principals) {
 	        super.clearCachedAuthorizationInfo(principals);

@@ -4,7 +4,6 @@ import test.dataStructure.LinkedList.ILinkedList;
 
 
 /**
- * Created by zejian on 2016/10/25.
  * 循环单链表
  */
 public class CircularHeadSILinkedList<T> implements ILinkedList<T> {

@@ -1,7 +1,6 @@
 package test.dataStructure.LinkedList;
 
 /**
- * Created by zejian on 2016/10/21.
  * 链表顶级接口
  */
 public interface ILinkedList<T> {

@@ -1,8 +1,6 @@
 package test.dataStructure.recursion;
 
 /**
- * Created by zejian on 2016/12/11.
- * Blog : http://blog.csdn.net/javazejian [原文地址,请尊重原创]
  * 汉诺塔的递归算法实现
  */
 public class HanoiRecursion {

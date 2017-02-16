@@ -42,9 +42,6 @@ import java.util.Map;
  * // Invoke methods using the call() method:
  * .call("toString")
  * // Retrieve the wrapped object
- *
- * @author Lukas Eder
- * @author Irek Matysiewicz
  */
 public class Reflect {
 

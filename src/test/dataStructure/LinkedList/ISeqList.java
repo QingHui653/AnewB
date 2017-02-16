@@ -1,7 +1,6 @@
 package test.dataStructure.LinkedList;
 
 /**
- * Created by zejian on 2016/10/30.
  * 顺序表顶级接口
  */
 public interface ISeqList<T> {

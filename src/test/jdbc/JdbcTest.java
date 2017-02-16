@@ -25,20 +25,20 @@ public class JdbcTest {
         try {
         	//读取数据库配置
         	PropertiesConfiguration config = configs.properties(new File("src/main/resources/config.properties"));
-			String url = config.getString("url");
-			String username = config.getString("username");
-			String password = config.getString("password");
+			String url = config.getString("jdbc.url-1");
+			String username = config.getString("jdbc.username-1");
+			String password = config.getString("jdbc.password-1");
             //加载数据库驱动
             Class.forName("com.mysql.jdbc.Driver");
             //通过驱动管理类获取数据库链接
-//            connection =  DriverManager.getConnection("jdbc:mysql://120.25.162.238:3306/mybatis001?characterEncoding=utf-8", "root", "123");
-            connection =  DriverManager.getConnection(url, username, password);
+            connection =  DriverManager.getConnection("jdbc:mysql://localhost:3306/newb?useUnicode=true&characterEncoding=utf-8", username, password);
+//            connection =  DriverManager.getConnection(url, username, password);
             //定义sql语句 ?表示占位符
-            String sql = "select * from user where username = ?";
+            String sql = "select * from user where oid = ?";
             //获取预处理statement
             preparedStatement = connection.prepareStatement(sql);
             //设置参数，第一个参数为sql语句中参数的序号（从1开始），第二个参数为设置的参数值
-            preparedStatement.setString(1, "2");
+            preparedStatement.setString(1, "3");
             //向数据库发出sql执行查询，查询出结果集
             resultSet =  preparedStatement.executeQuery();
             //遍历查询结果集
@@ -53,7 +53,6 @@ public class JdbcTest {
                 try {
                     resultSet.close();
                 } catch (SQLException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
@@ -61,7 +60,6 @@ public class JdbcTest {
                 try {
                     preparedStatement.close();
                 } catch (SQLException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
@@ -69,7 +67,6 @@ public class JdbcTest {
                 try {
                     connection.close();
                 } catch (SQLException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }

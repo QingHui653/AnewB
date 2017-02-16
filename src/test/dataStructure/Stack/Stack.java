@@ -1,8 +1,6 @@
 package test.dataStructure.Stack;
 
 /**
- * Created by zejian on 2016/11/27.
- * Blog : http://blog.csdn.net/javazejian/article/details/53362993 [原文地址,请尊重原创]
  * 栈接口抽象数据类型
  */
 public interface Stack<T> {

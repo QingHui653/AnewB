@@ -13,11 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * <p>ClassName: AnnotationHandleServlet<p>
  * <p>Description: AnnotationHandleServlet作为自定义注解的核心处理器以及负责调用目标业务方法处理用户请求<p>
- * @author xudp
- * @version 1.0 V
  */
 public class AnnotationHandleServlet extends HttpServlet {
-    
+
     private String pareRequestURI(HttpServletRequest request){
         String path = request.getContextPath()+"/";
         String requestUri = request.getRequestURI();
@@ -34,7 +32,7 @@ public class AnnotationHandleServlet extends HttpServlet {
          * 就会出现java.lang.NullPointerException异常
          */
         super.init(config);
-        System.out.println("---初始化开始---");
+        System.out.println("---初始化开始start---");
         //获取web.xml中配置的要扫描的包
         String basePackage = config.getInitParameter("basePackage");
         //如果配置了多个包，例如：<param-value>me.gacl.web.controller,me.gacl.web.UI</param-value>
@@ -47,7 +45,7 @@ public class AnnotationHandleServlet extends HttpServlet {
         }else {
             initRequestMapingMap(basePackage);
         }
-        System.out.println("----初始化结束---");
+        System.out.println("----初始化结束end---");
     }
 
     @Override
@@ -61,7 +59,7 @@ public class AnnotationHandleServlet extends HttpServlet {
             throws ServletException, IOException {
         this.excute(request, response);
     }
-    
+
     public void Service(HttpServletRequest req, HttpServletResponse resp){
     	/**
     	 * 流程1.进入init，init在运行tomcat是运行一次，且仅运行一次，
@@ -74,7 +72,7 @@ public class AnnotationHandleServlet extends HttpServlet {
     public void destroy() {
     	System.out.println("进入destroy方法");
     }
-    
+
     private void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         //将当前线程中HttpServletRequest对象存储到ThreadLocal中，以便在Controller类中使用
         WebContext.requestHodler.set(request);
@@ -127,11 +125,11 @@ public class AnnotationHandleServlet extends HttpServlet {
         }
     }
 
-    
+
     /**
     * @Method: initRequestMapingMap
     * @Description:添加使用了Controller注解的Class到RequestMapingMap中
-    */ 
+    */
     private void initRequestMapingMap(String packageName){
         Set<Class<?>> setClasses =  ScanClassUtil.getClasses(packageName);
         for (Class<?> clazz :setClasses) {

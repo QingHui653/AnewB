@@ -9,9 +9,10 @@ import newb.c.backend.service.ResultService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-@Service("ResultService")
+@Repository("ResultService")
 public class ResultServiceImpl extends BaseServiceImpl<Result> implements ResultService {
 	
 	@Autowired

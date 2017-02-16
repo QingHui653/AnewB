@@ -6,8 +6,6 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
- * Created by zejian on 2016/11/28.
- * Blog : http://blog.csdn.net/javazejian/article/details/53375004 [原文地址,请尊重原创]
  * 链式队列的实现
  */
 public class LinkedQueue<T> implements Queue<T> ,Serializable{
@@ -124,7 +122,7 @@ public class LinkedQueue<T> implements Queue<T> ,Serializable{
         size--;
         return x;
     }
-    
+
     /**
      * 出队,执行删除操作,若队列为空,抛出异常:NoSuchElementException
      * @return

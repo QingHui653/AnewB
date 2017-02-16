@@ -178,8 +178,8 @@ public class mail {
 
 	public static void main(String[] args) {
 		List<String> recipients = new ArrayList<String>();
-//		recipients.add("910944453@qq.com");
-		recipients.add("466021662@qq.com");
+		recipients.add("910944453@qq.com");
+//		recipients.add("466021662@qq.com");
 		String subject = "这封邮件是为了测试SMTP的SSL加密传输";
 		String content = "这是这封邮件的正文";
 		List<String> attachmentNames = new ArrayList<String>();

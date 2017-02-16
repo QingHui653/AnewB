@@ -2,30 +2,14 @@ package newb.c.utilcopy;
 
 import java.io.UnsupportedEncodingException;
 
-/**
- * <p>
- * Title:字符编码工具类
- * </p>
- * <p>
- * Description:
- * </p>
- * <p>
- * Copyright: Copyright (c) 2007
- * </p>
- * <p>
- * Company:
- * </p>
- * 
- * @author:
- * @version 1.0
- */
+
 public class CharTools {
-	
+
 	public CharTools(){};
-	
+
 	/**
 	 * 转换编码 ISO-8859-1到GB2312
-	 * 
+	 *
 	 * @param text
 	 * @return
 	 */
@@ -41,7 +25,7 @@ public class CharTools {
 
 	/**
 	 * 转换编码 GB2312到ISO-8859-1
-	 * 
+	 *
 	 * @param text
 	 * @return
 	 */
@@ -57,7 +41,7 @@ public class CharTools {
 
 	/**
 	 * Utf8URL编码
-	 * 
+	 *
 	 * @param s
 	 * @return
 	 */
@@ -92,7 +76,7 @@ public class CharTools {
 
 	/**
 	 * Utf8URL解码
-	 * 
+	 *
 	 * @param text
 	 * @return
 	 */
@@ -124,7 +108,7 @@ public class CharTools {
 
 	/**
 	 * utf8URL编码转字符
-	 * 
+	 *
 	 * @param text
 	 * @return
 	 */
@@ -150,7 +134,7 @@ public class CharTools {
 
 	/**
 	 * 编码是否有效
-	 * 
+	 *
 	 * @param text
 	 * @return
 	 */
@@ -169,7 +153,7 @@ public class CharTools {
 
 	/**
 	 * 判断是否Utf8Url编码
-	 * 
+	 *
 	 * @param text
 	 * @return
 	 */
@@ -184,7 +168,7 @@ public class CharTools {
 
 	/**
 	 * 测试
-	 * 
+	 *
 	 * @param args
 	 */
 	public static void main(String[] args) {

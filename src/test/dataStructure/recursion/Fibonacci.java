@@ -3,8 +3,6 @@ package test.dataStructure.recursion;
 import java.math.BigInteger;
 
 /**
- * Created by zejian on 2016/12/11.
- * Blog : http://blog.csdn.net/javazejian [原文地址,请尊重原创]
  * 斐波那契数列的实现
  */
 public class Fibonacci  {

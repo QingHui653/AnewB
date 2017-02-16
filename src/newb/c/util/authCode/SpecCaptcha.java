@@ -11,8 +11,6 @@ import javax.imageio.ImageIO;
 /**
  * <p>png格式验证码</p>
  *
- * @author: wuhongjun
- * @version:1.0
  */
 public class SpecCaptcha extends Captcha
 {

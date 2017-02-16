@@ -26,7 +26,6 @@ import org.w3c.dom.NodeList;
 
 /**
  * 微信支付工具类
- * Created by xiek on 15-3-5.
  */
 public class CommonUtil {
     /**

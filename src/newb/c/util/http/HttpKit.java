@@ -22,17 +22,15 @@ import com.ning.http.client.Response;
 /**
  * 创建时间：2016年11月8日 下午5:16:32
  * 
- * @author andy
- * @version 2.2
  */
 public class HttpKit {
-	
+
 	private static final String DEFAULT_CHARSET = "UTF-8";
-	
+
 	private static final int CONNECT_TIME_OUT = 5000; //链接超时时间3秒
 
 	private static SSLContext wx_ssl_context = null; //微信支付ssl证书
-	
+
 	static{
 		Configurations configs = new Configurations();
 		Resource resource = new ClassPathResource("wx_apiclient_cert.p12"); //获取微信证书 或者直接从文件流读取

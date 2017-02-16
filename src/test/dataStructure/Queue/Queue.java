@@ -1,8 +1,6 @@
 package test.dataStructure.Queue;
 
 /**
- * Created by zejian on 2016/11/28.
- * Blog :http://blog.csdn.net/javazejian/article/details/53375004 [原文地址,请尊重原创]
  * 队列抽象数据类型
  */
 public interface Queue<T> {

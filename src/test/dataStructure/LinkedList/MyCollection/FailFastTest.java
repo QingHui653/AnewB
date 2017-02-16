@@ -3,10 +3,7 @@ package test.dataStructure.LinkedList.MyCollection;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/**
- * Created by zejian on 2016/11/20.
- * Blog : http://blog.csdn.net/javazejian [请尊重原创,转载注明出处]
- */
+
 public class FailFastTest {
 
     public static void main(String[] args){

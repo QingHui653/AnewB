@@ -3,8 +3,6 @@ package test.dataStructure.Tree.BinaryTree;
 import test.dataStructure.Queue.LinkedQueue;
 
 /**
- * Created by zejian on 2016/12/17.
- * Blog : http://blog.csdn.net/javazejian [原文地址,请尊重原创]
  * 利用层次遍历原理构造完全二叉树
  */
 public class CompleteBinaryTree<T extends Comparable> extends BinarySearchTree <T>  {

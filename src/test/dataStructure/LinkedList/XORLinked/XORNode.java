@@ -1,7 +1,6 @@
 package test.dataStructure.LinkedList.XORLinked;
 
 /**
- * Created by zejian on 2016/11/6.
  * 异或结点
  */
 public class XORNode<T> {

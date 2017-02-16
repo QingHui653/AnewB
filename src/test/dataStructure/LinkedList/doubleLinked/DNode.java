@@ -1,9 +1,6 @@
 package test.dataStructure.LinkedList.doubleLinked;
 
-/**
- * Created by zejian on 2016/10/23.
- * 双链表结点
- */
+
 public class DNode<T> {
 
     public T data;

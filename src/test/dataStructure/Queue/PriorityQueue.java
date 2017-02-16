@@ -6,8 +6,6 @@ import java.io.Serializable;
 import java.util.NoSuchElementException;
 
 /**
- * Created by zejian on 2016/11/30.
- * Blog : http://blog.csdn.net/javazejian [原文地址,请尊重原创]
  * 优先队列的简单实现,采用排序双链表,T必须实现Comparable接口
  */
 public class PriorityQueue<T extends Comparable<? extends T>> implements Queue<T> ,Serializable {

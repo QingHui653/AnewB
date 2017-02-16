@@ -1,8 +1,6 @@
 package test.dataStructure.Stack;
 
 /**
- * Created by zejian on 2016/11/27.
- * Blog : http://blog.csdn.net/javazejian [原文地址,请尊重原创]
  * 表达式检测
  */
 public class CheckExpression {

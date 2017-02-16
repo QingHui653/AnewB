@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -23,9 +24,12 @@ import java.util.List;
 
 
 import java.util.Properties;
+import java.util.Set;
 import java.util.concurrent.Callable;
 
+import javax.annotation.Resource;
 import javax.jms.Destination;
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -59,15 +63,23 @@ import io.swagger.annotations.ApiOperation;
 import tk.mybatis.mapper.common.base.select.SelectMapper;
 import tk.mybatis.mapper.entity.Example;
 import us.codecraft.webmagic.Spider;
+import us.codecraft.webmagic.pipeline.ConsolePipeline;
+import us.codecraft.webmagic.pipeline.FilePipeline;
 import us.codecraft.webmagic.pipeline.JsonFilePipeline;
+import newb.c.api.mail.EmailSendManager;
+import newb.c.api.mail.SimpleEmail;
 import newb.c.api.weather.weather;
 import newb.c.controller.component.GithubRepoPageProcessor;
+import newb.c.controller.component.MovieProcessor;
 import newb.c.controller.component.ProducerServiceImpl;
+import newb.c.controller.component.service.SaveMoviePipeline;
 import newb.c.dubbo.DemoService0;
 import newb.c.backend.model.RepList;
+import newb.c.backend.model.basemodel.Movie;
 import newb.c.backend.model.basemodel.Result;
 import newb.c.backend.model.basemodel.TOrder;
-import newb.c.backend.model.basemodel.User;  
+import newb.c.backend.model.basemodel.User;
+import newb.c.backend.service.MovieService;
 import newb.c.backend.service.ResultService;
 import newb.c.backend.service.TOrderService;
 import newb.c.backend.service.UserService;
@@ -81,8 +93,8 @@ import newb.c.utilDb.DataHandle;
 @RequestMapping("api")
 public class ApiController {
 	//redis
-	/*@Autowired
-	private RedisTemplate<String, String> redisTemplate;*/
+	@Autowired
+	private RedisTemplate<String, String> redisTemplate;
 	@Autowired
 	private ResultService resultService;
 	@Autowired 
@@ -91,6 +103,10 @@ public class ApiController {
 	private GithubRepoPageProcessor g;
 	@Autowired
 	private TOrderService tOrderService;
+	@Autowired
+	private SaveMoviePipeline saveMoviePipeline;
+	@Resource(name = "simpleEmailSendManagerImpl")
+	private EmailSendManager emailSendManager;
 	//ActiveMQ
 	/*@Autowired
 	private ProducerServiceImpl producerServiceImpl;
@@ -146,19 +162,12 @@ public class ApiController {
 	}
 	
 	@RequestMapping(value="/rep",method=RequestMethod.GET)
-	public void rep() {//alibaba  QingHui653
-		String[] urls =new String[9];
-		for (int i = 1; i < 10; i++) {
-			String url="https://github.com/alibaba";
-			if (i!=1) {
-				url=url+"?page="+i;
-			}
-			urls[i-1]=url;
-		}
-		System.out.println("--"+Arrays.toString(urls));
+	public void rep() throws Exception {//alibaba  QingHui653
 		Spider.create(g)
-		.addUrl(urls)
-		.thread(5).run();
+		.addUrl("https://github.com/alibaba")
+		.addPipeline(new FilePipeline("G:\\movie\\"))
+        .addPipeline(new ConsolePipeline())
+		.thread(10).run();
 	}
 	
 	@RequestMapping(value="/getrep",method=RequestMethod.GET)
@@ -178,12 +187,12 @@ public class ApiController {
 		return "forward:/web/bootstrap.jsp";
 	}
 	
-	/*@RequestMapping(value="/redis/add",method=RequestMethod.GET)
+	@RequestMapping(value="/redis",method=RequestMethod.GET)
 	public void add() {
 		ValueOperations<String, String> valueOper = redisTemplate.opsForValue();
-		valueOper.set("CC", "测试中文");
-		System.out.println("redis 查询"+valueOper.get("CC"));
-    }*/
+		valueOper.set("2b", "测试中文");
+		System.out.println("redis 查询"+valueOper.get("降临"));
+    }
 	
 	@RequestMapping(value="/sendmq",method=RequestMethod.GET)
 	@ResponseBody
@@ -315,5 +324,52 @@ public class ApiController {
 		} catch (Exception e) {
 			logger.error("获取验证码异常：%s",e.toString());
 		}
+	}
+	
+	
+	/**
+	 * 电影爬虫
+	 * @param response
+	 */
+	@RequestMapping(value="getMovie",method=RequestMethod.GET)
+	public void getMovie(){
+		Spider.create(new MovieProcessor())
+        .addUrl("http://www.80s.tw/movie/list/-2016---")
+        .addPipeline(new FilePipeline("G:\\movie\\"))
+        .addPipeline(new ConsolePipeline())
+        .addPipeline(saveMoviePipeline)
+        .thread(10)
+        .run();
+	}
+	
+	
+	/**
+	 * 发送简单邮件
+	 * @throws MessagingException
+	 */
+	@RequestMapping(value="sendSimpleEmail",method=RequestMethod.GET)
+	public void sendSimpleEmail() throws MessagingException {
+		SimpleEmail simpleEmail = new SimpleEmail();
+		simpleEmail.setSubject("测试在Spring中发送邮件");
+		Set<String> receivers = new HashSet<>();
+		receivers.add("910944453@qq.com");
+		simpleEmail.setToSet(receivers);
+		simpleEmail.setHtml(false);
+		simpleEmail.setContent("Netty是由JBOSS提供的一个java开源框架。Netty提供异步的、"+ "事件驱动的网络应用程序框架和工具，用以快速开发高性能、高可靠性的网络服务器和客户端程序。");
+		simpleEmail.setAttachment(false);
+
+		emailSendManager.sendEmail(simpleEmail);
+		
+		System.out.println("       发送简单邮件成功");
+	}
+	
+	@RequestMapping(value="throwEx",method=RequestMethod.GET)
+	public void throwEx() throws Exception {
+		switch(1) {  
+        case 1:  
+            throw new Exception("浙江温州，浙江温州，浙江温州。最大皮革厂倒闭了");  
+        default:
+        	throw new Exception("22222222222");  
+        }
 	}
 }

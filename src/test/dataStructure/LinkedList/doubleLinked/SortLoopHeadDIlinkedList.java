@@ -1,9 +1,6 @@
 package test.dataStructure.LinkedList.doubleLinked;
 
-/**
- * Created by zejian on 2016/11/6.
- * 升序排序链表
- */
+
 public class SortLoopHeadDIlinkedList<T extends Comparable<? extends T>> extends LoopHeadDILinkedList<T> {
 
     /**

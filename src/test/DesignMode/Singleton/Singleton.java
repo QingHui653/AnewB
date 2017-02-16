@@ -1,6 +1,7 @@
 package test.DesignMode.Singleton;
 
 /**
+ * 单例模式
  * @author woshizbh
  *
  */

@@ -5,8 +5,6 @@ import java.util.Random;
 /**
  * <p>随机工具类</p>
  *
- * @author: wuhongjun
- * @version:1.0
  */
 public class Randoms
 {

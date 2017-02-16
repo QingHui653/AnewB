@@ -9,8 +9,6 @@ import java.util.Queue;
 
 
 /**
- * Created by zejian on 2016/12/14.
- * Blog : http://blog.csdn.net/javazejian [原文地址,请尊重原创]
  * 二叉查找树
  */
 public class BinarySearchTree<T extends Comparable>  implements Tree<T> {

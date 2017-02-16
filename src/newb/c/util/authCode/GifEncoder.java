@@ -26,9 +26,6 @@ import java.io.OutputStream;
  * on use of the associated Encoder class.  Please forward any corrections
  * to questions at fmsware.com.
  *
- * @author wuhongjun
- * @version 1.03 November 2003
- *
  */
 public class GifEncoder
 {

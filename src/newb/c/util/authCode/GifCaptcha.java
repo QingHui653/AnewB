@@ -6,12 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
-/**
- * <p>Gif验证码类</p>
- *
- * @author: wuhongjun
- * @version:1.0
- */
+
 public class GifCaptcha extends Captcha
 {
     public GifCaptcha()

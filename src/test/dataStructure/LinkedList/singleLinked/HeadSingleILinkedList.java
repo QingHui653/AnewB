@@ -3,7 +3,6 @@ package test.dataStructure.LinkedList.singleLinked;
 import test.dataStructure.LinkedList.ILinkedList;
 
 /**
- * Created by zejian on 2016/10/22.
  * 带头结点并含有尾指针的链表
  */
 public class HeadSingleILinkedList<T> implements ILinkedList<T> {

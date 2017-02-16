@@ -23,9 +23,6 @@ import static com.google.common.base.Predicates.or;
 import static com.google.common.collect.Lists.newArrayList;
 import static springfox.documentation.builders.PathSelectors.regex;
 
-/**
- * Created by DCLab on 12/17/2015.
- */
 @Configuration
 @EnableWebMvc //NOTE: Only needed in a non-springboot application
 @EnableSwagger2 //Enable swagger 2.0 spec
@@ -46,7 +43,7 @@ public class SpringfoxDocConfig {
                 .build()
                 .apiInfo(apiInfo());
     }
-	
+
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("AnewB的API目录页面")

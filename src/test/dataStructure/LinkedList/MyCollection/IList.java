@@ -3,10 +3,7 @@ package test.dataStructure.LinkedList.MyCollection;
 import java.util.*;
 
 
-/**
- * Created by zejian on 2016/11/10.
- * Blog : http://blog.csdn.net/javazejian [请尊重原创,转载注明出处]
- */
+
 public interface IList<T> {
     /**
      * list大小

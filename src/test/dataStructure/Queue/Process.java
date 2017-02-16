@@ -1,8 +1,6 @@
 package test.dataStructure.Queue;
 
 /**
- * Created by zejian on 2016/12/3.
- * Blog : http://blog.csdn.net/javazejian [原文地址,请尊重原创]
  * 模拟进程
  */
 public class Process implements Comparable<Process> {

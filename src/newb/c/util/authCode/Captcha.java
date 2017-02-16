@@ -8,9 +8,6 @@ import java.io.OutputStream;
  * <p>
  * 验证码抽象类,暂时不支持中文
  * </p>
- * 
- * @author: wuhongjun
- * @version:1.0
  */
 public abstract class Captcha extends Randoms {
 	protected Font font = new Font("Verdana", Font.ITALIC | Font.BOLD, 28); // 字体
@@ -21,7 +18,7 @@ public abstract class Captcha extends Randoms {
 
 	/**
 	 * 生成随机字符数组
-	 * 
+	 *
 	 * @return 字符数组
 	 */
 	protected char[] alphas() {
@@ -67,7 +64,7 @@ public abstract class Captcha extends Randoms {
 
 	/**
 	 * 给定范围获得随机颜色
-	 * 
+	 *
 	 * @return Color 随机颜色
 	 */
 	protected Color color(int fc, int bc) {
@@ -83,7 +80,7 @@ public abstract class Captcha extends Randoms {
 
 	/**
 	 * 验证码输出,抽象方法，由子类实现
-	 * 
+	 *
 	 * @param os
 	 *            输出流
 	 */
@@ -91,7 +88,7 @@ public abstract class Captcha extends Randoms {
 
 	/**
 	 * 获取随机字符串
-	 * 
+	 *
 	 * @return string
 	 */
 	public String text() {

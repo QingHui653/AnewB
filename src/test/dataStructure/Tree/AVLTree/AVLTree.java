@@ -7,8 +7,6 @@ import test.dataStructure.Tree.BinaryTree.Tree;
 
 
 /**
- * Created by zejian on 2016/12/25.
- * Blog : http://blog.csdn.net/javazejian [原文地址,请尊重原创]
  * 平衡二叉搜索树(AVL树)
  */
 public class AVLTree<T extends Comparable> implements Tree<T>{

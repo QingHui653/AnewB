@@ -1,5 +1,10 @@
 package test.DesignMode.Builder;
 
+/**
+ * 建造者模式
+ * @author woshizbh
+ *
+ */
 public class BuilderPatternDemo {
 	public static void main(String[] args) {
 		MealBuilder mealBuilder = new MealBuilder();

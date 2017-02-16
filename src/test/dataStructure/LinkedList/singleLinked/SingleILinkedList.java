@@ -4,7 +4,6 @@ import test.dataStructure.LinkedList.ILinkedList;
 
 
 /**
- * Created by zejian on 2016/10/21.
  *  单项链表的实现,不含独立头结点,不含尾部指针
  */
 public class SingleILinkedList<T> implements ILinkedList<T> {
