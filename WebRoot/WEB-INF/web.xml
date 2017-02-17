@@ -101,7 +101,7 @@
         <listener-class>com.alibaba.dubbo.remoting.http.servlet.BootstrapListener</listener-class>
     </listener> -->
     
-	<!-- spring上下文加载监听器 -->
+	<!-- spring上下文加载监听器  初始化IOC容器-->
 	<listener>
 		<description>spring监听器</description>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
