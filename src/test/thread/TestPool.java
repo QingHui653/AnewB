@@ -35,7 +35,6 @@ future.get();
 //使用线程池写入文件
 public class TestPool {
 	/**
-	 * 
 	 * @param args
 	 * @throws IOException 
 	 */
@@ -74,7 +73,6 @@ public class TestPool {
 			writer.close();
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
