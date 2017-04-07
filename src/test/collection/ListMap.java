@@ -25,10 +25,13 @@ public class ListMap {
 		map2.put("id", 2);
 		map2.put("name", "wangwu");
 		
+		map2.put("name", "wangwu2");
+		
 		mapList.add(map2);
 		
 		for (Map<String, Object> m : mapList) {
-			System.out.println(m.get("id"));
+			System.out.print(m.get("id")+"  ");
+			System.out.println(m.get("name"));
 		}
 		
 	}

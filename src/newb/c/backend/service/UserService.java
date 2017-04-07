@@ -21,4 +21,6 @@ public interface UserService extends IService<User> {
     UserTrin selectUserCacheByUser(int oid);
     
     UserTrin selectUserCacheByDao(int oid);
+    
+    String testMock(String name);
 }

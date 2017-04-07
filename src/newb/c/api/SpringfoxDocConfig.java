@@ -47,7 +47,7 @@ public class SpringfoxDocConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("AnewB的API目录页面")
-                .description("可查看所以的api说明")
+                .description("可查看所有的api说明")
                 .termsOfServiceUrl("AnewB")
                 .contact("AnewB")
                 .license("i just want run")

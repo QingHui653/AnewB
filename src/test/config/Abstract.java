@@ -1,4 +1,4 @@
-package test.api;
+package test.config;
 
 public abstract class Abstract implements Comparable<Abstract> {
 	private String name;

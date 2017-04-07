@@ -66,7 +66,15 @@
         p:host-name="${redis.master.hostname}" p:port="${redis.master.port}" p:pool-config-ref="jedisPoolConfig" />
 
   <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
-    	  <property name="connectionFactory" ref="connectionRedisFactory" />
+    	<property name="connectionFactory" ref="connectionRedisFactory" />
+    	<!--如果不配置Serializer，那么存储的时候智能使用String，如果用User类型存储，那么会提示错误User can't cast to String！！！-->
+    	<!-- 不加，key vaule 会出现在redismanager中出现二进制 不加使用二进制-->
+        <property name="keySerializer">
+        	<bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="valueSerializer">
+        	<bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
   </bean>
 	
 	

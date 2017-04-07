@@ -57,4 +57,9 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 	public UserTrin selectUserCacheByDao(int oid) {
 		return userMapper.selectUserAndUserCacheByDao(oid);
 	}
+
+	@Override
+	public String testMock(String name) {
+		return name;
+	}
 }

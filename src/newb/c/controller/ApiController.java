@@ -47,6 +47,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.AbstractXmlApplicationContext;
+import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
@@ -58,6 +59,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
 
 import io.swagger.annotations.ApiOperation;
 import tk.mybatis.mapper.common.base.select.SelectMapper;
@@ -188,10 +191,17 @@ public class ApiController {
 	}
 	
 	@RequestMapping(value="/redis",method=RequestMethod.GET)
-	public void add() {
+	public void addRedis() {
+		Gson gson = new Gson();
+		User u= new User(1, "1", "1");
 		ValueOperations<String, String> valueOper = redisTemplate.opsForValue();
-		valueOper.set("2b", "测试中文");
-		System.out.println("redis 查询"+valueOper.get("降临"));
+		valueOper.set("2", "测试中文");
+		System.out.println("redis 查询"+valueOper.get("2"));
+		
+		//存储对象,有三种，序列化二进制， 序列化json，序列化map
+		valueOper.set("user", gson.toJson(u));
+		User u2 = gson.fromJson(valueOper.get("user"), User.class);
+		System.out.println( " user "+ u2.toString());
     }
 	
 	@RequestMapping(value="/sendmq",method=RequestMethod.GET)
@@ -371,5 +381,9 @@ public class ApiController {
         default:
         	throw new Exception("22222222222");  
         }
+	}
+	
+	@RequestMapping(value="redisQueue",method=RequestMethod.GET)
+	public void redisQueue() throws Exception {
 	}
 }

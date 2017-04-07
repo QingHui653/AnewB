@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lazyload 2</title>
+    <style>
+    img {
+        display: block;
+        margin-bottom: 50px;
+        height: 200px;
+    }
+    </style>
+</head>
+<body>
+    <img src="images/loading.gif" data-src="images/1.png">
+    <img src="images/loading.gif" data-src="images/2.png">
+    <img src="images/loading.gif" data-src="images/3.png">
+    <img src="images/loading.gif" data-src="images/4.png">
+    <img src="images/loading.gif" data-src="images/5.png">
+    <img src="images/loading.gif" data-src="images/6.png">
+    <img src="images/loading.gif" data-src="images/7.png">
+    <img src="images/loading.gif" data-src="images/8.png">
+    <img src="images/loading.gif" data-src="images/9.png">
+    <img src="images/loading.gif" data-src="images/10.png">
+    <img src="images/loading.gif" data-src="images/11.png">
+    <img src="images/loading.gif" data-src="images/12.png">
+    <script>
+    function throttle(fn, delay, atleast) {
+        var timeout = null,
+        startTime = new Date();
+        return function() {
+        var curTime = new Date();
+        clearTimeout(timeout);
+        if(curTime - startTime >= atleast) {
+            fn();
+            startTime = curTime;
+        }else {
+            timeout = setTimeout(fn, delay);
+        }
+        }
+    }
+    function lazyload() {
+        var images = document.getElementsByTagName('img');
+        var len    = images.length;
+        var n      = 0;      //存储图片加载到的位置，避免每次都从第一张图片开始遍历       
+        return function() {
+        var seeHeight = document.documentElement.clientHeight;
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        for(var i = n; i < len; i++) {
+            if(images[i].offsetTop < seeHeight + scrollTop) {
+                if(images[i].getAttribute('src') === 'images/loading.gif') {
+                 images[i].src = images[i].getAttribute('data-src');
+                }
+            n = n + 1;
+             }
+        }
+        }
+    }
+    var loadImages = lazyload();
+    loadImages();          //初始化首页的页面图片
+    window.addEventListener('scroll', throttle(loadImages, 500, 1000), false);
+    </script>
+</body>
+</html>
