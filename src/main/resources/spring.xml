@@ -15,6 +15,7 @@
 	
 	<import resource="mail/spring-mail.xml"/>
 	<import resource="mybatis/spring-mybatis.xml" />
+	<import resource="atomikos/spring-jta.xml" />
 	<!-- <import resource="cache/spring-ehcache.xml"/> -->
 	<!-- <import resource="cache/spring-redis.xml"/> -->
 	<!-- <import resource="session/spring-session.xml"/> -->

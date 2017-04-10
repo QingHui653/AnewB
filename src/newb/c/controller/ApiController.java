@@ -403,4 +403,42 @@ public class ApiController {
 	@ApiOperation("redis 队列 （未写）")
 	public void redisQueue() throws Exception {
 	}
+	
+	@RequestMapping(value="shardDatasource",method=RequestMethod.GET)
+	@ApiOperation("测试分库  为分布式事务先做 测试")
+	public Object shardDatasource() throws Exception {
+		TOrder t2= new TOrder(1,2 , "進入newb t_order_1"); //偶数进newb t_order_1
+		TOrder t1= new TOrder(2,1 , "進入newb2 t_order_0"); //奇数进newb2 t_order_0
+		tOrderService.save(t1);
+		
+		tOrderService.save(t2);
+		
+		return "测试分库表完成";
+	}
+	
+	/**
+	 * 未加分布式事务配置，事务暂时不可用
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value="shardDatasourceTestJTA",method=RequestMethod.GET)
+	@ApiOperation("测试分库  为分布式事务先做 测试")
+	public Object shardDatasourceTestJTA() throws Exception {
+		tOrderService.testJTA();
+		
+		return "测试分布式 事务";
+	}
+	
+	/**
+	 * 同一个库的事务是可用的
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value="TestOneData",method=RequestMethod.GET)
+	@ApiOperation("测试一个库下的事务情况")
+	public Object TestOneData() throws Exception {
+		tOrderService.testOneData();
+		
+		return "一个库下的事务情况";
+	}
 }

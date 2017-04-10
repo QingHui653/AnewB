@@ -8,4 +8,8 @@ public interface TOrderService extends IService<TOrder>{
 	int insertByXML(TOrder model);
 	
 	int insertByComm(TOrder model);
+	
+	int testJTA();
+
+	int testOneData();
 }

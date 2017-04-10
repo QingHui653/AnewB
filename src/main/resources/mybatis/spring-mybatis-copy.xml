@@ -78,16 +78,16 @@
 	<rdb:master-slave-data-source id="rbb_1" master-data-source-ref="ds_1" slave-data-sources-ref="ds_0"/>-->
 	
 	<!-- 读写分离配置 -->
-	<!-- <rdb:master-slave-data-source id="dbtb" master-data-source-ref="ds_0" slave-data-sources-ref="ds_1"/> -->
+	<rdb:master-slave-data-source id="dbtb" master-data-source-ref="ds_0" slave-data-sources-ref="ds_1"/>
 	
 	<!-- 分库分表规则 -->
 	<rdb:strategy id="databaseShardingStrategy" sharding-columns="user_id" algorithm-class="newb.c.sharding.SingleKeyModuloDatabaseShardingAlgorithm"/>
     <rdb:strategy id="tableShardingStrategy" sharding-columns="order_id" algorithm-class="newb.c.sharding.SingleKeyModuloTableShardingAlgorithm"/>
     
     <rdb:data-source id="shardingDataSource">
-        <rdb:sharding-rule data-sources="ds_0,ds_1" default-data-source="ds_0"><!--多库  data-sources="ds_0,ds_1"  default-data-source="ds_0"  --> <!-- 读写分离配置 data-sources="dbtb" -->
+        <rdb:sharding-rule data-sources="dbtb"><!--  default-data-source="ds_0"  -->
             <rdb:table-rules>													<!-- database-strategy="databaseShardingStrategy" -->
-                <rdb:table-rule logic-table="t_order" actual-tables="t_order_0,t_order_1" table-strategy="tableShardingStrategy" database-strategy="databaseShardingStrategy"/>
+                <rdb:table-rule logic-table="t_order" actual-tables="t_order_0,t_order_1" table-strategy="tableShardingStrategy"/>
             </rdb:table-rules>
             <rdb:binding-table-rules>
                 <rdb:binding-table-rule logic-tables="t_order"/>
@@ -142,10 +142,9 @@
         </property>
     </bean>
 	
-	<!-- 未清楚何用 可移除   -->
-	<!-- <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
         <constructor-arg index="0" ref="sqlSessionFactory"/>
-    </bean> -->
+    </bean>
     
     <!-- ehcache 缓存 -->
     <!-- <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
