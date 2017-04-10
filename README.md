@@ -1,4 +1,5 @@
 ####此项目已废弃不在更新，全线迁至Spring系列，预计使用Spring Boot+Spring Cloud，请查看AnewB_Boot.
+####此项目 重新启用 Spring Boot进展缓慢。。。
 # AnewB
 ### 一些所学技术的demo
 #### 所用技术
@@ -33,6 +34,8 @@
 * 增加webservice cxf
 
 * 增加webmagic 爬虫框架，在newb.c.api下有github和80s的爬取程序
+
+* 增加 atomikos 分布式事务。
 
 #### 其他尝试工具
 * 增加Spring 的 Interceptor，增加LogProxy 日志代理切面
