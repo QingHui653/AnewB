@@ -28,65 +28,50 @@
 	<context:property-placeholder location="classpath*:main/resources/*.properties" />
 	
 	<!-- 配置数据源 使用的是Druid数据源 -->
-	<bean id="abstractXADataSource" class="com.atomikos.jdbc.AtomikosDataSourceBean" destroy-method="close">
-		<property name="xaDataSourceClassName" value="com.alibaba.druid.pool.xa.DruidXADataSource"/>
-		<property name="poolSize" value="10" />    
-       	<property name="minPoolSize" value="10"/>    
-       	<property name="maxPoolSize" value="30"/>    
-       	<property name="borrowConnectionTimeout" value="60"/>    
-       	<property name="reapTimeout" value="20"/>    
-       	<property name="maxIdleTime" value="60"/>    
-       	<property name="maintenanceInterval" value="60"/>    
-       	<property name="loginTimeout" value="60"/>    
-       	<property name="testQuery" value="${validationQuery}"/> 
+	<bean name="parentDataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close"><!--init-method="init" destroy-method="close" -->
+		<property name="driverClassName" value="${jdbc.driver}"/>
+		<!-- <property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" /> -->
+		<!-- 初始化连接大小 -->
+		<property name="initialSize" value="1" />
+		<!-- 连接池最大使用连接数量 -->
+		<property name="maxActive" value="50" />
+		<!-- 连接池最小空闲 -->
+		<property name="minIdle" value="1" />
+		<!-- 获取连接最大等待时间 -->
+		<property name="maxWait" value="60000" />
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxPoolPreparedStatementPerConnectionSize" value="50" />
+		<!-- 用来检测有效sql -->
+		<property name="validationQuery" value="${validationQuery}" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+		<property name="testWhileIdle" value="true" />
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="180000" />
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="25200000" />
+		<!-- 打开removeAbandoned功能 -->
+		<property name="removeAbandoned" value="true" />
+		<!-- 1800秒，也就是30分钟 -->
+		<property name="removeAbandonedTimeout" value="1800" />
+		<!-- 关闭abanded连接时输出错误日志 -->
+		<property name="logAbandoned" value="true" />
+		<!-- 监控数据库   这个别名映射配置信息保存在druid-xxx.jar!/META-INF/druid-filter.properties-->
+		<property name="filters" value="mergeStat,log4j" />
 	</bean>
 	<!-- 主库 -->
-	<bean id="ds_0" parent="abstractXADataSource">
-		<property name="uniqueResourceName" value="masterDB1" />
-		<property name="xaProperties">
-			<props>
-				<prop key="driverClassName">org.gjt.mm.mysql.Driver</prop>  
-                <prop key="url">${jdbc.url-1}</prop>  
-                <prop key="username">${jdbc.username-1}</prop>   <!-- durid -->  
-                <prop key="password">${jdbc.password-1}</prop>  
-                <prop key="initialSize">0</prop>  
-                <prop key="maxActive">20</prop> <!-- 若不配置则代码执行"{dataSource-1} inited"此处停止  -->  
-                <prop key="minIdle">0</prop>  
-                <prop key="maxWait">60000</prop>  
-                <prop key="validationQuery">${validationQuery}</prop>  
-                <prop key="testOnBorrow">false</prop>  
-                <prop key="testOnReturn">false</prop>  
-                <prop key="testWhileIdle">true</prop>  
-                <prop key="removeAbandoned">true</prop>  
-                <prop key="removeAbandonedTimeout">1800</prop>  
-                <prop key="logAbandoned">true</prop>  
-                <prop key="filters">mergeStat,log4j</prop>
-			</props>
-		</property>
+	<bean id="ds_0" parent="parentDataSource">
+        <property name="url" value="${jdbc.url-1}"/>
+        <property name="username" value="${jdbc.username-1}"/>
+        <property name="password" value="${jdbc.password-1}"/>
     </bean>
     <!-- 从库 -->
-	<bean id="ds_1" parent="abstractXADataSource">
-        <property name="uniqueResourceName" value="slaveDB1" />
-		<property name="xaProperties">
-			<props>
-				<prop key="driverClassName">org.gjt.mm.mysql.Driver</prop>  
-                <prop key="url">${jdbc.url-2}</prop>  
-                <prop key="username">${jdbc.username-2}</prop>   <!-- durid -->  
-                <prop key="password">${jdbc.password-2}</prop>  
-                <prop key="initialSize">0</prop>  
-                <prop key="maxActive">20</prop> <!-- 若不配置则代码执行"{dataSource-1} inited"此处停止  -->  
-                <prop key="minIdle">0</prop>  
-                <prop key="maxWait">60000</prop>  
-                <prop key="validationQuery">${validationQuery}</prop>  
-                <prop key="testOnBorrow">false</prop>  
-                <prop key="testOnReturn">false</prop>  
-                <prop key="testWhileIdle">true</prop>  
-                <prop key="removeAbandoned">true</prop>  
-                <prop key="removeAbandonedTimeout">1800</prop>  
-                <prop key="logAbandoned">true</prop>  
-                <prop key="filters">mergeStat,log4j</prop>
-			</props>
-		</property>
+	<bean id="ds_1" parent="parentDataSource">
+        <property name="url" value="${jdbc.url-2}"/>
+        <property name="username" value="${jdbc.username-2}"/>
+        <property name="password" value="${jdbc.password-2}"/>
     </bean>
 
 	<!--<rdb:master-slave-data-source id="rbb_0" master-data-source-ref="ds_0" slave-data-sources-ref="ds_1"/>
@@ -183,14 +168,13 @@
     <!-- <aop:aspectj-autoproxy/> -->
     
 	<!-- Spring ===事务管理=================== -->
-	<!-- 使用分布式事务 配置文件单独在spring-jta.xml -->
 	<!-- 配置事务管理器 -->
-	<!-- <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="shardingDataSource" />parentDataSource  shardingDataSource
-	</bean> -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="shardingDataSource" /><!-- parentDataSource  shardingDataSource-->
+	</bean>
 
 	<!-- 开启注解方式支持配置事物 -->
-	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
 	
 	<!-- 拦截器方式配置事物 -->
 	<!-- 拦截代理对象，为了给业务逻辑对象增加事务处理 -->
@@ -205,7 +189,7 @@
 		PROPAGATION_NEVER － 不支持事务操作，如果存在事务环境会出错
 		PROPAGATION_NOT_SUPPORTED － 不支持事务操作。如果存在事务，则挂起
 	-->
-	<!-- <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="insert*" propagation="REQUIRED" />
 			<tx:method name="save*" propagation="REQUIRED" />
@@ -216,12 +200,12 @@
 			<tx:method name="find*" propagation="SUPPORTS" read-only="true" />
 			<tx:method name="select*" propagation="SUPPORTS" read-only="true" />
 		</tx:attributes>
-	</tx:advice> -->
+	</tx:advice>
 	
 	<!--把事务控制在Service层-->
-	<!-- <aop:config>
+	<aop:config>
 		<aop:pointcut id="transactionPointcut" expression="execution(* newb.c.backend.service..*Impl.*(..))" />
 		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
-	</aop:config> -->
+	</aop:config>
 
 </beans>

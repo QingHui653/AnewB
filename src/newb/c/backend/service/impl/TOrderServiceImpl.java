@@ -33,12 +33,8 @@ public class TOrderServiceImpl extends BaseServiceImpl<TOrder> implements TOrder
 		TOrder t2= new TOrder(3,4 , "進入newb t_order_1"); //偶数进newb t_order_1
 		TOrder t1= new TOrder(4,3 , "進入newb2 t_order_0"); //奇数进newb2 t_order_0
 		mapper.insert(t2);
-		try {
-			int t= 100/0;
-			mapper.insert(t1);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		mapper.insert(t1);
+		mapper.insert(t2);
 		return 0;
 	}
 	

@@ -31,18 +31,23 @@
         <!-- 必须设置，否则程序出现异常 JtaTransactionManager does not support custom isolation levels by default -->  
         <property name="allowCustomIsolationLevels" value="true"/>   
     </bean>  
-  
+  	
+  	<tx:annotation-driven transaction-manager="springTransactionManager" /> 
+  	
     <aop:config  proxy-target-class="true">  
-        <aop:advisor pointcut="(execution(* com.tx.service.*.* (..)))" advice-ref="txAdvice" />  
+        <aop:advisor pointcut="(execution(* newb.c.backend.service..*Impl.*(..)))" advice-ref="txAdvice" />  
     </aop:config>  
    
     <tx:advice id="txAdvice" transaction-manager="springTransactionManager">  
-        <tx:attributes>  
-            <tx:method name="get*"  propagation="REQUIRED"  read-only="true" />  
-            <tx:method name="find*"  propagation="REQUIRED"  read-only="true" />  
-            <tx:method name="has*"  propagation="REQUIRED"  read-only="true" />  
-            <tx:method name="locate*"  propagation="REQUIRED"  read-only="true" />  
-            <tx:method name="register*" propagation="REQUIRED" rollback-for="java.lang.Exception" />  
-        </tx:attributes>  
+        <tx:attributes>
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="get*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="query*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="find*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="select*" propagation="SUPPORTS" read-only="true" />
+		</tx:attributes>  
     </tx:advice>  
 </beans>
