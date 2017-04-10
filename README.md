@@ -1,5 +1,7 @@
-####此项目已废弃不在更新，全线迁至Spring系列，预计使用Spring Boot+Spring Cloud，请查看AnewB_Boot.
-####此项目 重新启用 Spring Boot进展缓慢。。。
+#### 此项目已废弃不在更新，全线迁至Spring系列，预计使用Spring Boot+Spring Cloud，请查看AnewB_Boot.
+
+#### 此项目 重新启用 Spring Boot进展缓慢。。。
+
 # AnewB
 ### 一些所学技术的demo
 #### 所用技术
