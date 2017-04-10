@@ -96,8 +96,8 @@ import newb.c.utilDb.DataHandle;
 @RequestMapping("api")
 public class ApiController {
 	//redis
-	@Autowired
-	private RedisTemplate<String, String> redisTemplate;
+	/*@Autowired
+	private RedisTemplate<String, String> redisTemplate;*/
 	@Autowired
 	private ResultService resultService;
 	@Autowired 
@@ -106,8 +106,8 @@ public class ApiController {
 	private GithubRepoPageProcessor g;
 	@Autowired
 	private TOrderService tOrderService;
-	@Autowired
-	private SaveMoviePipeline saveMoviePipeline;
+	/*@Autowired
+	private SaveMoviePipeline saveMoviePipeline;*/
 	@Resource(name = "simpleEmailSendManagerImpl")
 	private EmailSendManager emailSendManager;
 	//ActiveMQ
@@ -134,6 +134,7 @@ public class ApiController {
 	 * @throws WriteException
 	 */
 	@RequestMapping(value="/getExc",method=RequestMethod.GET)
+	@ApiOperation("测试使用POI获取excel文档")
 	@Test   
 	public void getExc() throws SQLException,
 			IOException, RowsExceededException, WriteException {
@@ -165,6 +166,7 @@ public class ApiController {
 	}
 	
 	@RequestMapping(value="/rep",method=RequestMethod.GET)
+	@ApiOperation("测试使用spider爬取github alibaba的项目")
 	public void rep() throws Exception {//alibaba  QingHui653
 		Spider.create(g)
 		.addUrl("https://github.com/alibaba")
@@ -174,12 +176,14 @@ public class ApiController {
 	}
 	
 	@RequestMapping(value="/getrep",method=RequestMethod.GET)
+	@ApiOperation("测试使用通用mapper,自定义通用接口删除数据,重定向到bootstarap")
 	public String getrep() {
 		resultService.CommonDelMapper("50");
 		return "forward:/web/bootstrap.jsp";
 	}
 	
 	@RequestMapping(value="/getrep2",method=RequestMethod.GET)
+	@ApiOperation("测试使用通用mapper获取表值,重定向到bootstarap")
 	public Object getrep2(ModelMap modelMap) {
 		Example example = new Example(Result.class);
 		example.createCriteria().andEqualTo("f1", "QingHui653").andCondition("oid>50");
@@ -190,7 +194,8 @@ public class ApiController {
 		return "forward:/web/bootstrap.jsp";
 	}
 	
-	@RequestMapping(value="/redis",method=RequestMethod.GET)
+	/*@RequestMapping(value="/redis",method=RequestMethod.GET)
+	@ApiOperation("测试存储Java对象到redis")
 	public void addRedis() {
 		Gson gson = new Gson();
 		User u= new User(1, "1", "1");
@@ -202,9 +207,10 @@ public class ApiController {
 		valueOper.set("user", gson.toJson(u));
 		User u2 = gson.fromJson(valueOper.get("user"), User.class);
 		System.out.println( " user "+ u2.toString());
-    }
+    }*/
 	
 	@RequestMapping(value="/sendmq",method=RequestMethod.GET)
+	@ApiOperation("测试mq发送消息")
 	@ResponseBody
 	public String sendmq() {
 		//ActiveMq
@@ -213,6 +219,7 @@ public class ApiController {
 	}
 	
 	@RequestMapping(value="/rep/getRes",method=RequestMethod.GET)
+	@ApiOperation("获取爬虫爬取信息")
 	public String getRepRes(ModelMap modelMap) {
 		List<RepList> repList= resultService.getRepList();
 		modelMap.addAttribute("repList", repList);
@@ -220,6 +227,7 @@ public class ApiController {
 	}
 	
 	@RequestMapping(value="/rep/{group}",method=RequestMethod.GET)
+	@ApiOperation("通过公司名获取爬虫爬取信息")
 	public String getGroupRes(ModelMap modelMap,@PathVariable String group) {
 		Example  example =new Example(Result.class);
 		example.createCriteria().andEqualTo("f1", group);
@@ -229,6 +237,7 @@ public class ApiController {
 	}
 	
 	@RequestMapping(value="/rep/{group}/{project}",method=RequestMethod.GET)
+	@ApiOperation("通过公司名和工程名，获取爬虫爬取信息")
 	public String getProject(ModelMap modelMap,@PathVariable String group,@PathVariable String project) {
 		Example  example =new Example(Result.class);
 		example.createCriteria().andEqualTo("f1", group).andEqualTo("f4", project);
@@ -238,6 +247,7 @@ public class ApiController {
 	}
 	
 	@RequestMapping(value="/dubbo",method=RequestMethod.GET)
+	@ApiOperation("测试dubbo远程调用")
 	public Object getDubboServer(){
 		/*String hello = (String) demoService.sayHello("tom");  
         System.out.println(hello);   
@@ -258,6 +268,7 @@ public class ApiController {
 	}
 	
 	@RequestMapping(value="/sharding",method=RequestMethod.GET)
+	@ApiOperation("sharding-jdbc测试方法")
 	@ResponseBody
 	public Object shardingTest() {
 		TOrder tO0=new TOrder(0, 2, "第0条数据");
@@ -285,6 +296,7 @@ public class ApiController {
 	 * @param response
 	 */
 	@RequestMapping(value="getGifCode",method=RequestMethod.GET)
+	@ApiOperation("获取验证码 gif版")
 	public void getGifCode(HttpServletResponse response,HttpServletRequest request,HttpSession session){
 		try {
 			response.setHeader("Pragma", "No-cache");  
@@ -315,6 +327,7 @@ public class ApiController {
 	 * @param response
 	 */
 	@RequestMapping(value="getJPGCode",method=RequestMethod.GET)
+	@ApiOperation("获取验证码 jpg版")
 	public void getJPGCode(HttpServletResponse response,HttpServletRequest request){
 		try {
 			response.setHeader("Pragma", "No-cache");  
@@ -341,7 +354,8 @@ public class ApiController {
 	 * 电影爬虫
 	 * @param response
 	 */
-	@RequestMapping(value="getMovie",method=RequestMethod.GET)
+	/*@RequestMapping(value="getMovie",method=RequestMethod.GET)
+	 @ApiOperation("电影爬虫")
 	public void getMovie(){
 		Spider.create(new MovieProcessor())
         .addUrl("http://www.80s.tw/movie/list/-2016---")
@@ -350,7 +364,7 @@ public class ApiController {
         .addPipeline(saveMoviePipeline)
         .thread(10)
         .run();
-	}
+	}*/
 	
 	
 	/**
@@ -358,6 +372,7 @@ public class ApiController {
 	 * @throws MessagingException
 	 */
 	@RequestMapping(value="sendSimpleEmail",method=RequestMethod.GET)
+	@ApiOperation("发送 邮件")
 	public void sendSimpleEmail() throws MessagingException {
 		SimpleEmail simpleEmail = new SimpleEmail();
 		simpleEmail.setSubject("测试在Spring中发送邮件");
@@ -374,6 +389,7 @@ public class ApiController {
 	}
 	
 	@RequestMapping(value="throwEx",method=RequestMethod.GET)
+	@ApiOperation("测试 抛出异常")
 	public void throwEx() throws Exception {
 		switch(1) {  
         case 1:  
@@ -384,6 +400,7 @@ public class ApiController {
 	}
 	
 	@RequestMapping(value="redisQueue",method=RequestMethod.GET)
+	@ApiOperation("redis 队列 （未写）")
 	public void redisQueue() throws Exception {
 	}
 }

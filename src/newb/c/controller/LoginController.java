@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import io.swagger.annotations.ApiOperation;
+
 /**
  * @ClassName LoginController
  * @author yuan
@@ -32,6 +34,7 @@ public class LoginController {
 	 * @return
 	 */
 	@RequestMapping(value="/login",method={RequestMethod.GET})
+	@ApiOperation("使用shiro  进行登录调用")
 	public Object execute(ModelAndView mv ,HttpServletRequest request,HttpServletResponse response, String username, String password) {
 		UsernamePasswordToken token = new UsernamePasswordToken(username,
 				password);
@@ -79,6 +82,7 @@ public class LoginController {
 
 	// 退出
 	@RequestMapping(value="/logout",method={RequestMethod.GET})
+	@ApiOperation("使用shiro  进行退出")
 	public void logout() {
 		Subject subject = SecurityUtils.getSubject();
 		subject.logout();

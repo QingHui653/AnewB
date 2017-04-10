@@ -19,7 +19,7 @@ import newb.c.backend.service.common.MyMapper;
  * @author woshizbh
  *
  */
-/*@Repository*/
+@Repository
 public interface UserMapper extends MyMapper<User> {
 
 	@Select("select * from user where oid=#{id}")

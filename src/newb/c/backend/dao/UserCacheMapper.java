@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import newb.c.backend.model.basemodel.UserCache;
 import newb.c.backend.service.common.MyMapper;
 
-/*@Repository*/
+@Repository
 public interface UserCacheMapper extends MyMapper<UserCache> {
 	
 	int insertAll(List<UserCache> userCacheList);

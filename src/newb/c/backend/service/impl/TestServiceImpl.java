@@ -11,7 +11,7 @@ import newb.c.backend.dao.UserCacheMapper;
 import newb.c.backend.model.basemodel.UserCache;
 import newb.c.backend.service.TestCacheService;
 
-@Repository("TestService")
+@Service("TestService")
 public class TestServiceImpl extends BaseServiceImpl<UserCache> implements TestCacheService{
 
 	@Autowired

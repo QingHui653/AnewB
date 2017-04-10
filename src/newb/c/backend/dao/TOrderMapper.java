@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import newb.c.backend.model.basemodel.TOrder;
 import newb.c.backend.service.common.MyMapper;
 
-/*@Repository*/
+@Repository
 public interface TOrderMapper extends MyMapper<TOrder> {
 	
 	@Insert("insert into t_order(order_id,user_id,status) vaules(#{orderId},#{userId},#{status})")

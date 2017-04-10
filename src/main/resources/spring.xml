@@ -15,9 +15,9 @@
 	
 	<import resource="mail/spring-mail.xml"/>
 	<import resource="mybatis/spring-mybatis.xml" />
-	<import resource="cache/spring-redis.xml"/>
-	<import resource="cache/spring-ehcache.xml"/>
-	<import resource="session/spring-session.xml"/>
+	<!-- <import resource="cache/spring-ehcache.xml"/> -->
+	<!-- <import resource="cache/spring-redis.xml"/> -->
+	<!-- <import resource="session/spring-session.xml"/> -->
 	<!-- <import resource="mq/springhighGrade-active*.xml"/>  -->
 	<!-- <import resource="webservice/cxf/spring-cxf.xml"/> -->
 	<!-- <import resource="rmi/spring-rmi.xml"/> -->

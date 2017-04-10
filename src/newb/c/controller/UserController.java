@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -83,6 +84,8 @@ public class UserController {
 	//会使得时间有BUG
 	//GregorianCalendar cal=new GregorianCalendar();
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	//1.8
+	DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	//google JSON工具
 	Gson gson = new Gson();
 	
@@ -98,7 +101,7 @@ public class UserController {
 	    binder.registerCustomEditor(Date.class, propertyEditor);
 	}
 	
-	@ApiOperation(value = "测试参数为单个bean", notes = "")
+	@ApiOperation(value = "测试传入参数为单个bean 使用了 检验工具检验bean ", notes = "")
 	@RequestMapping(value="/bean",method= {RequestMethod.POST})
 	/*@ResponseBody*/
 	// 测试页面在/web/mvc/indexMvc下，不知道为什么后台会有运行，但前台会自动刷新
@@ -126,7 +129,7 @@ public class UserController {
 	 * @param json
 	 * @return
 	 */
-	@ApiOperation(value = "测试参数为多个bean", notes = "")
+	@ApiOperation(value = "测试传入参数为单个bean+其他参数", notes = "")
 	@RequestMapping(value="/morebean",method= {RequestMethod.POST})
 	@ResponseBody
 	public Object showUserInfoMoreBean(ModelMap modelMap,Integer userId,User user,String json){
@@ -143,6 +146,7 @@ public class UserController {
 	  * @return
 	  */
 	 @RequestMapping(value="/selectQW/{userId}",method=RequestMethod.GET)
+	 @ApiOperation("测试不同的mapxml是否可用")
 	 @ResponseBody
 	 public String selectQW(ModelMap modelMap,@PathVariable int userId){
 	        String password = userService.selectPW(userId);
@@ -157,6 +161,7 @@ public class UserController {
 	  * @return
 	  */
 	 @RequestMapping(value="/selectUserDao/{userId}",method=RequestMethod.GET)
+	 @ApiOperation("测试关联查询，直接使用@select")
 	 @ResponseBody
 	 public Object selectUserCacheByDao(ModelMap modelMap,@PathVariable int userId){
 	        UserTrin userTrin = userService.selectUserCacheByDao(userId);
@@ -171,6 +176,7 @@ public class UserController {
 	  * @return
 	  */
 	 @RequestMapping(value="/selectUserCache/{userId}",method=RequestMethod.GET)
+	 @ApiOperation("测试关联查询，使用xml")
 	 @ResponseBody
 	 public Object selectUserCacheByUser(ModelMap modelMap,@PathVariable int userId){
 	        UserTrin userTrin = userService.selectUserCacheByUser(userId);
@@ -179,12 +185,13 @@ public class UserController {
 
 
 	 /**
-	  * save 测试事务
+	  * save 测试批量插入
 	  * @param modelMap
 	  * @param userId
 	  * @return
 	  */
 	 @RequestMapping(value="/user/save",method= RequestMethod.GET)
+	 @ApiOperation("测试批量插入方法")
 	 @ResponseBody
 	 public String insertUser(ModelMap modelMap){
 		 	/**
@@ -210,12 +217,12 @@ public class UserController {
 	    }
 
 	 /**
-	  * save 测试事务
 	  * @param modelMap
 	  * @param userId
 	  * @return
 	  */
 	 @RequestMapping(value="/user/selectuser",method= RequestMethod.GET)
+	 @ApiOperation("测试 有索引的查询速度")
 	 @ResponseBody
 	 public String selectUserForUpdate(ModelMap modelMap){
 		 	List<User> userList = userService.selectAllForUpdate();
@@ -230,6 +237,7 @@ public class UserController {
 	  * @return
 	  */
 	 @RequestMapping(value="/userCache/save",method= RequestMethod.GET)
+	 @ApiOperation("测试usercache 批量插入数据")
 	 @ResponseBody
 	 public Object insertCache(ModelMap modelMap){
 		 /**
@@ -261,7 +269,9 @@ public class UserController {
 	  * @param userId
 	  * @return
 	  */
+	 
 	 @RequestMapping(value="/newb/del",method= RequestMethod.POST)
+	 @ApiOperation("测试通用mapper 的删除方法")
 	 @ResponseBody
 	 public String del(ModelMap modelMap){
 		 	int test=userService.delete(null);
@@ -277,6 +287,7 @@ public class UserController {
 	  * @return
 	  */
 	 @RequestMapping(value="/login",method=RequestMethod.GET)
+	 @ApiOperation("测试session")
 	 public String login(ModelMap modelMap, String username, String password,HttpSession httpSession){
 		 	int userId=3;
 		 	User user = userService.getUserById(userId);
@@ -296,6 +307,7 @@ public class UserController {
 	  * @throws IOException
 	  */
 	 @RequestMapping(value="/sessionTest",method=RequestMethod.GET)
+	 @ApiOperation("查看session")
 	 public void doGet(HttpServletRequest request, HttpServletResponse response,HttpSession session)
 			 throws ServletException, IOException {
 			 response.setContentType("text/html;charset=UTF-8");
@@ -345,6 +357,7 @@ public class UserController {
 	  * @return
 	  */
 	 @RequestMapping(value="/loginFor",method=RequestMethod.POST)
+	 @ApiOperation("登录后 重定向到主页")
 	 public String loginFor(ModelMap modelMap, String username, String password){
 		 	int userId=2;
 		 	User user = userService.getUserById(userId);
@@ -354,6 +367,7 @@ public class UserController {
 	    }
 	 
 	 @RequestMapping(value="/commonSel",method=RequestMethod.POST)
+	 @ApiOperation("测试通用mapper 自定义的查询方法")
 	 @ResponseBody
 	 public Object commonSel(ModelMap modelMap){
 		 	List<User> userList = userService.CommonSelMapper("select * from user");
@@ -371,6 +385,7 @@ public class UserController {
 	  * @return success字符串
 	  */
 	 @RequestMapping(value="/xzjl",method=RequestMethod.POST)
+	 @ApiOperation("招聘系统多表单序列化 ")
 	 @ResponseBody
 	 public String xzjl(@RequestBody Map<String, Object> userjl)  {
 		 	//GSON 转换JSON to bean
@@ -388,6 +403,7 @@ public class UserController {
 	  * @throws IOException
 	  */
 	 @RequestMapping(value = "/upLoadFile.do", method = RequestMethod.POST)
+	 @ApiOperation("招聘系统中的文件上传1")
 	    public void upLoadFile(HttpServletRequest request)  throws IllegalStateException, IOException {
 		// @RequestParam("file") MultipartFile file,
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
@@ -417,6 +433,7 @@ public class UserController {
 
 
 	 @RequestMapping(value="/imgfile",method=RequestMethod.POST)
+	 @ApiOperation("招聘系统中的文件上传3")
 	 @ResponseBody
 	    public String imageUpload(@RequestParam("file") CommonsMultipartFile file,HttpServletRequest request, ModelMap model,HttpSession httpSession) {
 	        // 获得原始文件名
@@ -464,6 +481,7 @@ public class UserController {
 
 
 	 @RequestMapping(value="/onefile",method=RequestMethod.POST)
+	 @ApiOperation("招聘系统中的文件上传2")
 	 @ResponseBody
 	    public String oneFileUpload(@RequestParam("file") CommonsMultipartFile file,HttpServletRequest request, ModelMap model,HttpSession httpSession) {
 		 	// 获得原始文件名
@@ -501,6 +519,7 @@ public class UserController {
 	    }
 
 	 @RequestMapping(value="/listFile",method=RequestMethod.GET)
+	 @ApiOperation("列出此id中所上传的全部文件 ")
 	 public String listFile(HttpServletRequest request, HttpServletResponse response,HttpSession httpSession) {
 	     // 获取上传文件的目录
 	     ServletContext sc = request.getSession().getServletContext();
@@ -521,7 +540,7 @@ public class UserController {
 	     request.setAttribute("fileNameMap", fileNameMap);
 	     return "web/upload";
 	 }
-
+	/* 列出文件   */
 	public void listfile(File file, Map<String, String> map) {
 		// 如果file代表的不是一个文件，而是一个目录
 		if (!file.isFile()) {
@@ -547,8 +566,9 @@ public class UserController {
 		}
 
 	}
-
+	
 	 @RequestMapping(value="/downFile",method=RequestMethod.GET)
+	 @ApiOperation("下载文件")
 	 public void downFile(HttpServletRequest request,  HttpServletResponse response,HttpSession httpSession) {
 	     System.out.println("1");
 	     // 得到要下载的文件名

@@ -8,7 +8,7 @@ import newb.c.backend.dao.TOrderMapper;
 import newb.c.backend.model.basemodel.TOrder;
 import newb.c.backend.service.TOrderService;
 
-@Repository("TOrderService")
+@Service("TOrderService")
 public class TOrderServiceImpl extends BaseServiceImpl<TOrder> implements TOrderService{
 	
 	@Autowired

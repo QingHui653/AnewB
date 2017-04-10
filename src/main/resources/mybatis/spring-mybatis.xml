@@ -61,12 +61,13 @@
 		<!-- 监控数据库   这个别名映射配置信息保存在druid-xxx.jar!/META-INF/druid-filter.properties-->
 		<property name="filters" value="mergeStat,log4j" />
 	</bean>
-	
+	<!-- 主库 -->
 	<bean id="ds_0" parent="parentDataSource">
         <property name="url" value="${jdbc.url-1}"/>
         <property name="username" value="${jdbc.username-1}"/>
         <property name="password" value="${jdbc.password-1}"/>
     </bean>
+    <!-- 从库 -->
 	<bean id="ds_1" parent="parentDataSource">
         <property name="url" value="${jdbc.url-2}"/>
         <property name="username" value="${jdbc.username-2}"/>

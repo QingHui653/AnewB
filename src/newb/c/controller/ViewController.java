@@ -41,6 +41,7 @@ public class ViewController {
 	  * @return
 	  */
 	 @RequestMapping(value="/string",method= RequestMethod.GET) //,produces ="text/html;charset=UTF-8" 返回UTF-格式
+	 @ApiOperation("返回中文字符串，是否自动加引号 demo ")
 	 @ResponseBody
 	 public String showUserByString(){
 	        String str="hello word 你好世界";
@@ -52,6 +53,7 @@ public class ViewController {
 	  * @return
 	  */
 	 @RequestMapping(value="/json",method=RequestMethod.GET)
+	 @ApiOperation("返回 json demo ")
 	 @ResponseBody   //注释返回JSON 或 String 必须加此注解
 	 public Object showUserInfoByJson(){
 		 	Example userExample = new Example(User.class);
@@ -72,6 +74,7 @@ public class ViewController {
 	  * @return
 	  */
 	 @RequestMapping(value="/newbs2",method=RequestMethod.GET)   
+	 @ApiOperation("跳转页面")
 	 //@ResponseBody //未加会返回 user 至 newbs2.jsp 页面
 	 public Object showUserInfoByMapping(){
 	        List<User> user = userService.getUsers();
@@ -79,6 +82,7 @@ public class ViewController {
 	    }
 	 
 	 @RequestMapping(value="/objectToView",method=RequestMethod.GET)   
+	 @ApiOperation(" 跳转页面2")
 	 //@ResponseBody //未加会返回 user 至 newbs2.jsp 页面
 	 public Object showUserInfoByView(ModelMap model){
 	        List<User> userList = userService.getUsers();
