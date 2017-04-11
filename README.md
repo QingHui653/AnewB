@@ -39,6 +39,8 @@
 
 * 增加 atomikos 分布式事务。
 
+* 增加 activiti 工作流，暂时还未和分库表结合。
+
 #### 其他尝试工具
 * 增加Spring 的 Interceptor，增加LogProxy 日志代理切面
 
