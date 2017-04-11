@@ -13,7 +13,7 @@ public class ComparatorDemo implements Comparator<Object>{
       
     	if(temp1.getOid()>temp2.getOid())return 1;  
     	else if(temp1.getOid()<temp2.getOid())return -1;  
-    	else if(temp1.getOid()==temp2.getOid())return 0;  
+    	else if(temp1.getOid().equals(temp2.getOid()))return 0;  
     	return 0;
 	}
 

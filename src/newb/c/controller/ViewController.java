@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import newb.c.backend.model.basemodel.User;
 import newb.c.backend.service.ResultService;
 import newb.c.backend.service.TestCacheService;
@@ -113,6 +114,7 @@ public class ViewController {
 	 * @return
 	 */
 	@ApiOperation(value = "获取用户列表 http风格", notes = "")
+	@ApiParam(value="userId",required=true)
 	@RequestMapping(value = "/newb", method = { RequestMethod.GET})
 	public Object showUserInfoHttp(ModelMap modelMap, int userId) {
 		User user = userService.getUserById(userId);

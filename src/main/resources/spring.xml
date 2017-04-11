@@ -14,18 +14,28 @@
 	<context:property-placeholder location="classpath*:main/resources/*.properties" />
 	
 	<import resource="mail/spring-mail.xml"/>
-	<import resource="mybatis/spring-mybatis.xml" />
-	<import resource="atomikos/spring-jta.xml" />
+	<import resource="mybatis/spring-mybatis-One.xml" />
+	<!-- 分布式事务 -->
+	<!-- <import resource="atomikos/spring-jta.xml" /> -->
+	<!-- activiti工作流 -->
+	<import resource="activiti/spring-activiti.xml" />
+	<!-- ehcache 缓存 -->
 	<!-- <import resource="cache/spring-ehcache.xml"/> -->
+	<!-- redis -->
 	<!-- <import resource="cache/spring-redis.xml"/> -->
+	<!-- 分布式session 存redis中 -->
 	<!-- <import resource="session/spring-session.xml"/> -->
+	<!-- activeMQ -->
 	<!-- <import resource="mq/springhighGrade-active*.xml"/>  -->
-	<!-- <import resource="webservice/cxf/spring-cxf.xml"/> -->
-	<!-- <import resource="rmi/spring-rmi.xml"/> -->
-	<!-- <import resource="cache/spring-guava.xml"/> -->
-	<!-- dubbo,activeMq等扩展 -->
-	<!-- <import resource="springhighGrade-dubboxRest.xml"/> -->
 	<!-- <import resource="springhighGrade-active*.xml"/> -->
+	<!-- cxf webservice -->
+	<!-- <import resource="webservice/cxf/spring-cxf.xml"/> -->
+	<!-- rmi java远程调用 -->
+	<!-- <import resource="rmi/spring-rmi.xml"/> -->
+	<!-- guava缓存 -->
+	<!-- <import resource="cache/spring-guava.xml"/> -->
+	<!-- dubbo -->
+	<!-- <import resource="springhighGrade-dubboxRest.xml"/> -->
 	<!-- <import resource="dubbo/springhighGrade-dubbo.xml"/> -->
 	
 	

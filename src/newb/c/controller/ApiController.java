@@ -402,6 +402,7 @@ public class ApiController {
 	@RequestMapping(value="redisQueue",method=RequestMethod.GET)
 	@ApiOperation("redis 队列 （未写）")
 	public void redisQueue() throws Exception {
+		//TODO redis 做为mq使用 
 	}
 	
 	@RequestMapping(value="shardDatasource",method=RequestMethod.GET)

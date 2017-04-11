@@ -13,6 +13,8 @@
     http://www.springframework.org/schema/tx/spring-tx-4.0.xsd  
     http://www.springframework.org/schema/aop   
     http://www.springframework.org/schema/aop/spring-aop-4.0.xsd" default-lazy-init="true">  
+    
+    
     <description>配置事务</description>  
     <!-- atomikos事务管理器 -->  
     <bean id="atomikosTransactionManager" class="com.atomikos.icatch.jta.UserTransactionManager" init-method="init" destroy-method="close">  
@@ -25,20 +27,20 @@
         <property name="transactionTimeout" value="300" />  
     </bean>  
     <!-- spring 事务管理器 -->    
-    <bean id="springTransactionManager" class="org.springframework.transaction.jta.JtaTransactionManager">  
+    <bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager">  
         <property name="transactionManager" ref="atomikosTransactionManager" />  
         <property name="userTransaction" ref="atomikosUserTransaction" />  
         <!-- 必须设置，否则程序出现异常 JtaTransactionManager does not support custom isolation levels by default -->  
         <property name="allowCustomIsolationLevels" value="true"/>   
     </bean>  
   	
-  	<tx:annotation-driven transaction-manager="springTransactionManager" /> 
+  	<tx:annotation-driven transaction-manager="transactionManager" /> 
   	
     <aop:config  proxy-target-class="true">  
         <aop:advisor pointcut="(execution(* newb.c.backend.service..*Impl.*(..)))" advice-ref="txAdvice" />  
     </aop:config>  
    
-    <tx:advice id="txAdvice" transaction-manager="springTransactionManager">  
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">  
         <tx:attributes>
 			<tx:method name="insert*" propagation="REQUIRED" />
 			<tx:method name="save*" propagation="REQUIRED" />

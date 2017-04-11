@@ -21,6 +21,8 @@
         http://www.dangdang.com/schema/ddframe/rdb/rdb.xsd
        	">
        	
+    <!-- 分库分表与分布式事务配置 独自配置方便切换 -->
+       	
     <!-- 扫描目录下的包自动装配 -->  	
     <context:component-scan base-package="newb.c.backend.service" />
 	<!-- 由于inline表达式内使用Groovy语法，Groovy语法的变量占位符为`${}`,与Spring的Property占位符冲突。
@@ -29,7 +31,7 @@
 	
 	<!-- 配置数据源 使用的是Druid数据源 -->
 	<bean id="abstractXADataSource" class="com.atomikos.jdbc.AtomikosDataSourceBean" destroy-method="close">
-		<property name="xaDataSourceClassName" value="com.alibaba.druid.pool.xa.DruidXADataSource"/>
+		<property name="xaDataSourceClassName" value="${jdbc.xaDataSourceClassName}"/>
 		<property name="poolSize" value="10" />    
        	<property name="minPoolSize" value="10"/>    
        	<property name="maxPoolSize" value="30"/>    
@@ -42,10 +44,10 @@
 	</bean>
 	<!-- 主库 -->
 	<bean id="ds_0" parent="abstractXADataSource">
-		<property name="uniqueResourceName" value="masterDB1" />
+		<property name="uniqueResourceName" value="masterDB" />
 		<property name="xaProperties">
 			<props>
-				<prop key="driverClassName">org.gjt.mm.mysql.Driver</prop>  
+				<prop key="driverClassName">${jdbc.driverClassName}</prop>  
                 <prop key="url">${jdbc.url-1}</prop>  
                 <prop key="username">${jdbc.username-1}</prop>   <!-- durid -->  
                 <prop key="password">${jdbc.password-1}</prop>  
@@ -66,10 +68,10 @@
     </bean>
     <!-- 从库 -->
 	<bean id="ds_1" parent="abstractXADataSource">
-        <property name="uniqueResourceName" value="slaveDB1" />
+        <property name="uniqueResourceName" value="slaveDB" />
 		<property name="xaProperties">
 			<props>
-				<prop key="driverClassName">org.gjt.mm.mysql.Driver</prop>  
+				<prop key="driverClassName">${jdbc.driverClassName}</prop>  
                 <prop key="url">${jdbc.url-2}</prop>  
                 <prop key="username">${jdbc.username-2}</prop>   <!-- durid -->  
                 <prop key="password">${jdbc.password-2}</prop>  

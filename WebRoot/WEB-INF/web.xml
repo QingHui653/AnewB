@@ -136,6 +136,19 @@
 	</servlet> -->
 	
 	<servlet>
+        <servlet-name>RestletServlet</servlet-name>
+        <servlet-class>org.restlet.ext.servlet.ServerServlet</servlet-class>
+        <init-param>
+            <param-name>org.restlet.application</param-name>
+            <param-value>org.activiti.rest.editor.application.ModelerRestApplication</param-value>
+        </init-param>
+    </servlet>
+	<servlet-mapping>
+		<servlet-name>RestletServlet</servlet-name>
+		<url-pattern>/service/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<description>自定义的简单的springmvc</description>
 		<servlet-name>AnnotationHandleServlet</servlet-name>
 		<servlet-class>newb.c.mycontroller.AnnotationHandleServlet</servlet-class>
@@ -150,7 +163,7 @@
   <servlet-mapping>
     <servlet-name>AnnotationHandleServlet</servlet-name>
     <!-- 拦截所有以.do后缀结尾的请求 -->
-    <url-pattern>*.do</url-pattern>
+    <url-pattern>*.action</url-pattern>
   </servlet-mapping>
   
 	<!-- Spring MVC 配置 -->

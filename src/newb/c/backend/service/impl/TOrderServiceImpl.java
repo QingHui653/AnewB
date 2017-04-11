@@ -29,6 +29,7 @@ public class TOrderServiceImpl extends BaseServiceImpl<TOrder> implements TOrder
 
 	@Override
 	@Transactional
+	/* 通过主键重复可以测试回滚，数据没问题，正常提交不同数据库 */
 	public int testJTA() {
 		TOrder t2= new TOrder(3,4 , "進入newb t_order_1"); //偶数进newb t_order_1
 		TOrder t1= new TOrder(4,3 , "進入newb2 t_order_0"); //奇数进newb2 t_order_0
