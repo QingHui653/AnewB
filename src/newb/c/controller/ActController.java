@@ -64,7 +64,10 @@ public class ActController {
             stencilSetNode.put("namespace",  "http://b3mn.org/stencilset/bpmn2.0#");  
             editorNode.put("stencilset", stencilSetNode);  
             repositoryService.addModelEditorSource(newModel.getId(), editorNode.toString().getBytes("utf-8"));  
+            //5.16版本
             response.sendRedirect(request.getContextPath()+ "/service/editor?id=" + newModel.getId());  
+            //5.22版本
+//            response.sendRedirect(request.getContextPath()+ "/modeler.html?modelId=" + newModel.getId()); 
         } catch (Exception e) {  
             e.getStackTrace();  
         }

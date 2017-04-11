@@ -20,7 +20,10 @@
 	<!--resource-pattern="api/*.class" 基类包下的所有类-->
 	<!-- <context:component-scan base-package="newb.c.controller.test" /> -->
     <!-- 加载controller的时候,不加载service,因为此时事物并未生效,若此时加载了service,那么事物无法对service进行拦截 -->
-    <context:component-scan base-package="newb.c.api"/>
+    <context:component-scan base-package="newb.c.api" >
+    	<context:exclude-filter type="aspectj" expression="newb.c.controller.activiti"/>
+    </context:component-scan>
+    
     	<!-- <context:exclude-filter type="regex" expression="com.jek.*"/> --><!-- 过滤 -->
     	<!-- <context:include-filter type="aspectj" expression="com.jike..*Controller+"/> --><!-- 包括 -->
 	<!-- 启用spring mvc 注解 -->

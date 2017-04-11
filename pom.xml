@@ -10,6 +10,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<activiti.version>5.16</activiti.version>
 	</properties>
 
 	<dependencyManagement>
@@ -877,42 +878,65 @@
 		<!-- activiti工作流  -->
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml -->
 		<dependency>
-		    <groupId>com.fasterxml.jackson.dataformat</groupId>
-		    <artifactId>jackson-dataformat-xml</artifactId>
-		    <version>2.8.5</version>
+			<groupId>javax.activation</groupId>
+			<artifactId>activation</artifactId>
+			<version>1.1</version>
 		</dependency>
-		<dependency>  
-        	<groupId>org.activiti</groupId>  
-        	<artifactId>activiti-modeler</artifactId>  
-        	<version>5.16</version>  
-    	</dependency>   
-		<dependency>  
-        	<groupId>org.activiti</groupId>  
-        	<artifactId>activiti-engine</artifactId>  
-        	<version>5.16</version>  
-    	</dependency>  
-	    <dependency>  
-	        <groupId>org.activiti</groupId>  
-	        <artifactId>activiti-explorer</artifactId>  
-	        <version>5.16</version>  
-	    </dependency>  
-	    <dependency>  
-	        <groupId>org.activiti</groupId>  
-	        <artifactId>activiti-rest</artifactId>  
-	        <version>5.16</version>  
-	    </dependency>  
-	    <dependency>  
-        	<groupId>org.activiti</groupId>  
-        	<artifactId>activiti-spring</artifactId>  
-        	<version>5.16</version>  
-    	</dependency>
-    	<!-- https://mvnrepository.com/artifact/org.activiti/activiti-diagram-rest -->
 		<dependency>
-		    <groupId>org.activiti</groupId>
-		    <artifactId>activiti-diagram-rest</artifactId>
-		    <version>5.16</version>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-bpmn-model</artifactId>
+			<version>${activiti.version}</version>
 		</dependency>
-    	
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-bpmn-converter</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-bpmn-layout</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-common-rest</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-crystalball</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-diagram-rest</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-explorer</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-image-generator</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-json-converter</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-modeler</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-simple-workflow</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
 		
 	</dependencies>
 	

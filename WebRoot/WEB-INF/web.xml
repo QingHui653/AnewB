@@ -135,6 +135,7 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet> -->
 	
+	<!-- activiti 5.16 -->
 	<servlet>
         <servlet-name>RestletServlet</servlet-name>
         <servlet-class>org.restlet.ext.servlet.ServerServlet</servlet-class>
@@ -143,7 +144,7 @@
             <param-value>org.activiti.rest.editor.application.ModelerRestApplication</param-value>
         </init-param>
     </servlet>
-	<servlet-mapping>
+	<servlet-mapping>     
 		<servlet-name>RestletServlet</servlet-name>
 		<url-pattern>/service/*</url-pattern>
 	</servlet-mapping>
