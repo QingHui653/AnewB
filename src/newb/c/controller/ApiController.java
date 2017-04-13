@@ -1,5 +1,6 @@
 package newb.c.controller;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -7,22 +8,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.Callable;
@@ -30,6 +19,7 @@ import java.util.concurrent.Callable;
 import javax.annotation.Resource;
 import javax.jms.Destination;
 import javax.mail.MessagingException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -61,6 +51,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
 
 import io.swagger.annotations.ApiOperation;
 import tk.mybatis.mapper.common.base.select.SelectMapper;
@@ -77,6 +72,7 @@ import newb.c.controller.component.MovieProcessor;
 import newb.c.controller.component.ProducerServiceImpl;
 import newb.c.controller.component.service.SaveMoviePipeline;
 import newb.c.dubbo.DemoService0;
+import newb.c.qrcode.MatrixToImageWriter;
 import newb.c.backend.model.RepList;
 import newb.c.backend.model.basemodel.Movie;
 import newb.c.backend.model.basemodel.Result;
@@ -441,5 +437,30 @@ public class ApiController {
 		tOrderService.testOneData();
 		
 		return "一个库下的事务情况";
+	}
+	
+	@RequestMapping(value="ZxingTest",method=RequestMethod.GET)
+	@ApiOperation("测试二维码")
+	public void zxingTest(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			OutputStream out = response.getOutputStream();
+
+			String content = "这是测试xing二维码生成";
+			MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+			Map<EncodeHintType,Object> hints = new HashMap<EncodeHintType,Object> ();
+			// 内容所使用编码
+			hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+			BitMatrix bitMatrix;
+			bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 200, 200, hints);
+			// 生成二维码
+			MatrixToImageWriter.writeToStream(bitMatrix, "png", out);
+			
+			out.close();
+		} catch (WriterException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 }

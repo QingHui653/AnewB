@@ -13,6 +13,8 @@ import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,6 +48,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -89,17 +92,26 @@ public class UserController {
 	//google JSON工具
 	Gson gson = new Gson();
 	
+	
+	@RequestMapping("date")
+	@ResponseBody
+	public Object date(@DateTimeFormat(iso=ISO.DATE) Date date) {
+		String dateString = sdf.format(date);
+		return dateString;
+	}
+	
 	/**
 	 * 转换时间类型现在使用@DateTimeFormat代替
 	 * 数字使用@NumberFormat 
 	 * @param binder
 	 */
-	@InitBinder
+	/* 与@DateTimeFormat注解只能存在一种 */
+	/*@InitBinder
 	public void dataBinder(WebDataBinder binder) {
 	    DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 	    PropertyEditor propertyEditor = new CustomDateEditor(dateFormat, true); // 第二个参数表示是否允许为空
 	    binder.registerCustomEditor(Date.class, propertyEditor);
-	}
+	}*/
 	
 	@ApiOperation(value = "测试传入参数为单个bean 使用了 检验工具检验bean ", notes = "")
 	@RequestMapping(value="/bean",method= {RequestMethod.POST})

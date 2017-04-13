@@ -1,19 +1,23 @@
-package newb.c.dubbo;
+package newb.c.dubbo.test;
 
-import java.util.List;  
+import java.util.List;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import newb.c.backend.model.basemodel.User;  
+import newb.c.backend.model.basemodel.User;
+import newb.c.dubbo.DemoService;
 
-  
-public class Consumer {  
-  
-    public static void main(String[] args) throws Exception {  
-        @SuppressWarnings("resource")
+public class RegisterAndLoader {  
+	  
+	@SuppressWarnings("resource")
+    public static void main(String[] args) throws Exception {
+    	
+    	ClassPathXmlApplicationContext RegistContext = new ClassPathXmlApplicationContext(new String[] { "main/resources/dubbo/springhighGrade-dubbo.xml" });  
+    	RegistContext.start();
+    	
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "main/resources/dubbo/springhighGradeT-dubbo-test.xml" });  
         context.start(); 
-  
+        
         DemoService demoService = (DemoService) context.getBean("demoService"); //  
         String hello = demoService.sayHello("tom"); // 
         System.out.println(hello); //   

@@ -9,10 +9,21 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath*:main/resources/spring.xml</param-value>
-		<!-- <param-value>classpath*:spring.xml,classpath:springhighGrade-dubboxRest.xml</param-value> -->
+		<!-- 使用 service="servlet" 一定要配置在这里，但我这不知道为什么一直报错 -->
+		<!-- <param-value>/WEB-INF/classes/main/resources/dubbo/springhighGrade-dubboxRest.xml,classpath*:spring.xml</param-value> -->
 		<!-- <param-value>classpath:spring.xml,classpath:spring-mybatis.xml,classpath:spring-cache.xml</param-value> -->
 	</context-param>
 	
+	<!-- 分布式 session -->
+	<!-- <filter>
+        <filter-name>springSessionRepositoryFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSessionRepositoryFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping> -->
+    
 	<!--编码拦截器  -->
 	<filter>
 		<description>字符集过滤器</description>
@@ -65,15 +76,6 @@
 		<filter-name>DruidWebStatFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	<!-- 分布式 session -->
-	<!-- <filter>
-        <filter-name>springSessionRepositoryFilter</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>springSessionRepositoryFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping> -->
 	
 	<!-- <filter>
 		<filter-name>logFilter</filter-name>
@@ -120,7 +122,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
-        <url-pattern>/AnewB/*</url-pattern>
+        <url-pattern>/*</url-pattern>
     </servlet-mapping> -->
 	<!-- proxool 连接池配置 -->
 	<!-- <servlet>
@@ -136,7 +138,7 @@
 	</servlet> -->
 	
 	<!-- activiti 5.16 -->
-	<servlet>
+	<!-- <servlet>
         <servlet-name>RestletServlet</servlet-name>
         <servlet-class>org.restlet.ext.servlet.ServerServlet</servlet-class>
         <init-param>
@@ -147,7 +149,7 @@
 	<servlet-mapping>     
 		<servlet-name>RestletServlet</servlet-name>
 		<url-pattern>/service/*</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping> -->
 	
 	<servlet>
 		<description>自定义的简单的springmvc</description>

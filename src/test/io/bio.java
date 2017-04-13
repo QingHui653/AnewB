@@ -135,8 +135,12 @@ public class bio {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			fio.close();
-			ops.close();
+			if(fio!=null){
+				fio.close();
+			}
+			if(ops!=null){
+				ops.close();
+			}
 		}
 		   System.out.println(" io4 "+"图片写入成功");
 	}

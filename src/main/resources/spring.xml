@@ -13,16 +13,18 @@
 	<!-- 记得以前这里也报过错，暂时不要删除 -->
 	<context:property-placeholder location="classpath*:main/resources/*.properties" />
 	
-	<import resource="mail/spring-mail.xml"/>
 	<import resource="mybatis/spring-mybatis-One.xml" />
+	<import resource="mail/spring-mail.xml"/>
 	<!-- 分布式事务 -->
 	<!-- <import resource="atomikos/spring-jta.xml" /> -->
 	<!-- activiti工作流 -->
-	<import resource="activiti/spring-activiti.xml" />
+	<!-- <import resource="activiti/spring-activiti.xml" /> -->
 	<!-- ehcache 缓存 -->
 	<!-- <import resource="cache/spring-ehcache.xml"/> -->
 	<!-- redis -->
-	<!-- <import resource="cache/spring-redis.xml"/> -->
+	<import resource="cache/spring-redis.xml"/>
+	<!-- aop -->
+	<!-- <import resource="spring-aop.xml" /> -->
 	<!-- 分布式session 存redis中 -->
 	<!-- <import resource="session/spring-session.xml"/> -->
 	<!-- activeMQ -->
@@ -35,7 +37,7 @@
 	<!-- guava缓存 -->
 	<!-- <import resource="cache/spring-guava.xml"/> -->
 	<!-- dubbo -->
-	<!-- <import resource="springhighGrade-dubboxRest.xml"/> -->
+	<!-- <import resource="dubbo/springhighGrade-dubboxRest.xml"/> -->
 	<!-- <import resource="dubbo/springhighGrade-dubbo.xml"/> -->
 	
 	

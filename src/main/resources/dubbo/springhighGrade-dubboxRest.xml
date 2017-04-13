@@ -14,9 +14,12 @@
     <dubbo:registry address="multicast://224.5.6.7:1234" />-->  
     
     <!-- 使用zookeeper注册中心暴露服务地址 -->  
-    <dubbo:registry address="zookeeper://127.0.0.1:2181" />   
+    <!-- <dubbo:registry address="zookeeper://127.0.0.1:2181" />    -->
+    <dubbo:registry address="zookeeper://119.29.248.44:2181" />   
     
-    <dubbo:protocol name="rest" port="8088" contextpath="AnewB" server="tomcat" />  
+    <dubbo:protocol name="rest" port="8089" contextpath="AnewB" server="tomcat" />
+    
+    <!-- <dubbo:protocol name="dubbo,rest" server="servlet"/>  -->  
    
     <!-- 具体的实现bean -->  
     <bean id="restService" class="newb.c.dubbo.RestServiceImpl" />  

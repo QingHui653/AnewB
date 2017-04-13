@@ -20,7 +20,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 	private UserMapper userMapper;
 	
 	@Override
-	@Cacheable(value="userCache")
+//	@Cacheable(value="userCache")
 	public User getUserById(int id) {
 		User user = userMapper.selectByPrimaryKey(id);
 		return user;
@@ -38,7 +38,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 	}
 
 	@Override
-	@Cacheable(value="default")
+//	@Cacheable(value="default")
 	public List<User> selectAllForUpdate() {
 		return userMapper.selectAllForUpdate();
 	}

@@ -9,7 +9,7 @@ public class ConsumerRest {
   
     public static void main(String[] args) throws Exception {  
         @SuppressWarnings("resource")
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "springhighGradeT-dubbox-test.xml" });  
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "main/resources/dubbo/springhighGradeT-dubbox-test.xml" });  
         context.start();  
   
         RestService restService = (RestService) context.getBean("restService"); //  

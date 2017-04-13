@@ -3,6 +3,7 @@ package newb.c.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ import newb.c.backend.model.basemodel.User;
 import newb.c.backend.service.ResultService;
 import newb.c.backend.service.TestCacheService;
 import newb.c.backend.service.UserService;
+import newb.c.util.annotation.RequestLimit;
 import tk.mybatis.mapper.entity.Example;
 
 @Controller
@@ -44,7 +46,8 @@ public class ViewController {
 	 @RequestMapping(value="/string",method= RequestMethod.GET) //,produces ="text/html;charset=UTF-8" 返回UTF-格式
 	 @ApiOperation("返回中文字符串，是否自动加引号 demo ")
 	 @ResponseBody
-	 public String showUserByString(){
+	 @RequestLimit(count=3)
+	 public String showUserByString(HttpServletRequest request){
 	        String str="hello word 你好世界";
 	        return str;
 	 	}

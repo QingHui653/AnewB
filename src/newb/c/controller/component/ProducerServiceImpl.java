@@ -23,7 +23,7 @@ public class ProducerServiceImpl{
         System.out.println("---------------生产者发了一个消息：" + message);   
         jmsTemplate.send(destination, new MessageCreator() {   
             public Message createMessage(Session session) throws JMSException {   
-                return session.createTextMessage(message);   
+                return session.createTextMessage(message);     
             }   
         });   
     }    
