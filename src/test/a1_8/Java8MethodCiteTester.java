@@ -27,5 +27,6 @@ cars.forEach( police::follow );
 	      names.add("Sina");
 	        
 	      names.forEach(System.out::println);
+	      
 	   }
 	}

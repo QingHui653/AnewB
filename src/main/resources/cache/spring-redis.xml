@@ -60,10 +60,12 @@
 		    <constructor-arg index="0" ref="jedisPoolConfig" />
 		    <constructor-arg index="1" value="${redis.master.hostname}" type="java.lang.String"/>
 		    <constructor-arg index="2" value="${redis.master.port}" type="int"/>
+		    <constructor-arg index="3" value="${redis.timeOut}" type="int"/>
+		    <constructor-arg index="4" value="${redis.master.password}" type="java.lang.String"/>
 	</bean>
 	
   <bean id="connectionRedisFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
-        p:host-name="${redis.master.hostname}" p:port="${redis.master.port}" p:pool-config-ref="jedisPoolConfig" />
+        p:host-name="${redis.master.hostname}" p:port="${redis.master.port}" p:pool-config-ref="jedisPoolConfig" p:password="${redis.master.password}" />
 
   <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
     	<property name="connectionFactory" ref="connectionRedisFactory" />

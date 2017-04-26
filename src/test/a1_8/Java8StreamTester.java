@@ -6,7 +6,6 @@ import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
-import java.util.Map;
  
 public class Java8StreamTester {
 	/**
@@ -189,7 +188,7 @@ parallelStream() − 为集合创建并行流。
       return min;
    }
     
-   private static int getSum(List numbers){
+   private static int getSum(List<Integer> numbers){
       int sum = (int)(numbers.get(0));
         
       for(int i=1;i < numbers.size();i++){

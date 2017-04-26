@@ -10,7 +10,6 @@
 })();
 
 /**
- * @author 孤傲苍狼
  * 获得项目根路径，等价于jsp页面中
  *  <%
         String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -29,13 +28,12 @@ function getBasePath() {
 }
 
 /**
- * @author 孤傲苍狼
  * 获取Web应用的contextPath，等价于jsp页面中
  *  <%
         String path = request.getContextPath();
     %>
  * 使用方法:getContextPath();
- * @returns /项目名称(/EasyUIStudy_20141104)
+ * @returns /项目名称(/EasyUIStudy_20161104)
  */
 function getContextPath() {
     return window.document.location.pathname.substring(0, window.document.location.pathname.indexOf('\/', 1));

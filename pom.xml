@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>AnewB</groupId>
 	<artifactId>AnewB</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>war</packaging>
 	<name>AnewB</name>
 	<description />
@@ -24,14 +24,6 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
-	<!-- Spring Boot -->
-    <!-- <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.1.RELEASE</version>
-    </parent> -->
-    
 
 	<dependencies>
 		<!-- **********************Spring -->
@@ -483,7 +475,7 @@
 		<dependency>
 			<groupId>us.codecraft</groupId>
 			<artifactId>webmagic-core</artifactId>
-			<version>0.5.3</version>
+			<version>0.6.1</version>
 			<exclusions> 
 					<exclusion> 
  						<artifactId>commons-lang</artifactId> 
@@ -498,7 +490,7 @@
 		<dependency>
 			<groupId>us.codecraft</groupId>
 			<artifactId>webmagic-extension</artifactId>
-			<version>0.5.3</version>
+			<version>0.6.1</version>
 		</dependency>
 		<!-- jxl 操作word,excel等-->
 		<dependency>
