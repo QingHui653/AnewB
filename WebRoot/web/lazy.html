@@ -12,31 +12,31 @@
     </style>
 </head>
 <body>
-    <img src="images/loading.gif" data-src="images/1.png">
-    <img src="images/loading.gif" data-src="images/2.png">
-    <img src="images/loading.gif" data-src="images/3.png">
-    <img src="images/loading.gif" data-src="images/4.png">
-    <img src="images/loading.gif" data-src="images/5.png">
-    <img src="images/loading.gif" data-src="images/6.png">
-    <img src="images/loading.gif" data-src="images/7.png">
-    <img src="images/loading.gif" data-src="images/8.png">
-    <img src="images/loading.gif" data-src="images/9.png">
-    <img src="images/loading.gif" data-src="images/10.png">
-    <img src="images/loading.gif" data-src="images/11.png">
-    <img src="images/loading.gif" data-src="images/12.png">
+    <img src="../images/loading.gif" data-src="../images/1.jpg">
+    <img src="../images/loading.gif" data-src="../images/2.jpg">
+    <img src="../images/loading.gif" data-src="../images/3.jpg">
+    <img src="../images/loading.gif" data-src="../images/1.jpg">
+    <img src="../images/loading.gif" data-src="../images/2.jpg">
+    <img src="../images/loading.gif" data-src="../images/3.jpg">
+    <img src="../images/loading.gif" data-src="../images/1.jpg">
+    <img src="../images/loading.gif" data-src="../images/2.jpg">
+    <img src="../images/loading.gif" data-src="../images/3.jpg">
+    <img src="../images/loading.gif" data-src="../images/1.jpg">
+    <img src="../images/loading.gif" data-src="../images/2.jpg">
+    <img src="../images/loading.gif" data-src="../images/3.jpg">
     <script>
     function throttle(fn, delay, atleast) {
         var timeout = null,
         startTime = new Date();
         return function() {
-        var curTime = new Date();
-        clearTimeout(timeout);
-        if(curTime - startTime >= atleast) {
-            fn();
-            startTime = curTime;
-        }else {
-            timeout = setTimeout(fn, delay);
-        }
+	        var curTime = new Date();
+	        clearTimeout(timeout);
+	        if(curTime - startTime >= atleast) {
+	            fn();
+	            startTime = curTime;
+	        }else {
+	            timeout = setTimeout(fn, delay);
+	        }
         }
     }
     function lazyload() {
@@ -48,7 +48,7 @@
         var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         for(var i = n; i < len; i++) {
             if(images[i].offsetTop < seeHeight + scrollTop) {
-                if(images[i].getAttribute('src') === 'images/loading.gif') {
+                if(images[i].getAttribute('src') === '../images/loading.gif') {
                  images[i].src = images[i].getAttribute('data-src');
                 }
             n = n + 1;

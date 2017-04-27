@@ -21,7 +21,7 @@ $(function() {
                     },
 		});
 	});
-
+//未兼容ie8
 function doUpload(url) {  
      var formData = new FormData($("#uploadForm2")[0]);  
      $.ajax({  

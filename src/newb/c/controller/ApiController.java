@@ -38,7 +38,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.test.context.ContextConfiguration;
@@ -70,7 +69,8 @@ import newb.c.api.weather.weather;
 import newb.c.controller.component.GithubRepoPageProcessor;
 import newb.c.controller.component.MovieProcessor;
 import newb.c.controller.component.ProducerServiceImpl;
-import newb.c.controller.component.service.SaveMoviePipeline;
+import newb.c.controller.component.service.MongoDbSaveMoviePipeline;
+import newb.c.controller.component.service.MysqlSaveMoviePipeline;
 import newb.c.dubbo.DemoService0;
 import newb.c.qrcode.MatrixToImageWriter;
 import newb.c.backend.model.RepList;
@@ -91,9 +91,7 @@ import newb.c.utilDb.DataHandle;
 @Controller
 @RequestMapping("api")
 public class ApiController {
-	//redis
-	/*@Autowired
-	private RedisTemplate<String, String> redisTemplate;*/
+	
 	@Autowired
 	private ResultService resultService;
 	@Autowired 
@@ -102,8 +100,8 @@ public class ApiController {
 	private GithubRepoPageProcessor g;
 	@Autowired
 	private TOrderService tOrderService;
-	/*@Autowired
-	private SaveMoviePipeline saveMoviePipeline;*/
+	@Autowired
+	private MongoDbSaveMoviePipeline mongoDbSaveMoviePipeline;
 	@Resource(name = "simpleEmailSendManagerImpl")
 	private EmailSendManager emailSendManager;
 	//ActiveMQ
@@ -161,16 +159,6 @@ public class ApiController {
 		logger.info("保存成功");
 	}
 	
-	@RequestMapping(value="/rep",method=RequestMethod.GET)
-	@ApiOperation("测试使用spider爬取github alibaba的项目")
-	public void rep() throws Exception {//alibaba  QingHui653
-		Spider.create(g)
-		.addUrl("https://github.com/alibaba")
-		.addPipeline(new FilePipeline("G:\\movie\\"))
-        .addPipeline(new ConsolePipeline())
-		.thread(10).run();
-	}
-	
 	@RequestMapping(value="/getrep",method=RequestMethod.GET)
 	@ApiOperation("测试使用通用mapper,自定义通用接口删除数据,重定向到bootstarap")
 	public String getrep() {
@@ -189,21 +177,6 @@ public class ApiController {
 		modelMap.addAttribute("result", r1);
 		return "forward:/web/bootstrap.jsp";
 	}
-	
-	/*@RequestMapping(value="/redis",method=RequestMethod.GET)
-	@ApiOperation("测试存储Java对象到redis")
-	public void addRedis() {
-		Gson gson = new Gson();
-		User u= new User(1, "1", "1");
-		ValueOperations<String, String> valueOper = redisTemplate.opsForValue();
-		valueOper.set("2", "测试中文");
-		System.out.println("redis 查询"+valueOper.get("2"));
-		
-		//存储对象,有三种，序列化二进制， 序列化json，序列化map
-		valueOper.set("user", gson.toJson(u));
-		User u2 = gson.fromJson(valueOper.get("user"), User.class);
-		System.out.println( " user "+ u2.toString());
-    }*/
 	
 	@RequestMapping(value="/sendmq",method=RequestMethod.GET)
 	@ApiOperation("测试mq发送消息")
@@ -345,22 +318,32 @@ public class ApiController {
 		}
 	}
 	
+
+	@RequestMapping(value="/rep",method=RequestMethod.GET)
+	@ApiOperation("测试使用spider爬取github alibaba的项目")
+	public void rep() throws Exception {//alibaba  QingHui653
+		Spider.create(g)
+		.addUrl("https://github.com/alibaba")
+		.addPipeline(new FilePipeline("G:\\movie\\"))
+        .addPipeline(new ConsolePipeline())
+		.thread(10).run();
+	}
 	
 	/**
 	 * 电影爬虫
 	 * @param response
 	 */
-	/*@RequestMapping(value="getMovie",method=RequestMethod.GET)
-	 @ApiOperation("电影爬虫")
+	@RequestMapping(value="getMovie",method=RequestMethod.GET)
+	@ApiOperation("电影爬虫")
 	public void getMovie(){
 		Spider.create(new MovieProcessor())
-        .addUrl("http://www.80s.tw/movie/list/-2016---")
-        .addPipeline(new FilePipeline("G:\\movie\\"))
+        .addUrl("http://www.80s.tw/movie/list/-2014---")
+//        .addPipeline(new FilePipeline("G:\\movie\\"))
         .addPipeline(new ConsolePipeline())
-        .addPipeline(saveMoviePipeline)
+        .addPipeline(mongoDbSaveMoviePipeline)
         .thread(10)
         .run();
-	}*/
+	}
 	
 	
 	/**
@@ -376,7 +359,7 @@ public class ApiController {
 		receivers.add("910944453@qq.com");
 		simpleEmail.setToSet(receivers);
 		simpleEmail.setHtml(false);
-		simpleEmail.setContent("wowowowo擦，别被网易配置");
+		simpleEmail.setContent("wowowowo擦，别被网易屏蔽");
 		simpleEmail.setAttachment(false);
 
 		emailSendManager.sendEmail(simpleEmail);
@@ -393,12 +376,6 @@ public class ApiController {
         default:
         	throw new Exception("22222222222");  
         }
-	}
-	
-	@RequestMapping(value="redisQueue",method=RequestMethod.GET)
-	@ApiOperation("redis 队列 （未写）")
-	public void redisQueue() throws Exception {
-		//TODO redis 做为mq使用 
 	}
 	
 	@RequestMapping(value="shardDatasource",method=RequestMethod.GET)

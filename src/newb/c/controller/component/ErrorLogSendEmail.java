@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import newb.c.api.mail.EmailSendManager;
 import newb.c.api.mail.SimpleEmail;
-import newb.c.controller.component.service.SaveMoviePipeline;
+import newb.c.controller.component.service.MysqlSaveMoviePipeline;
 
 //@Component
 public class ErrorLogSendEmail implements HandlerExceptionResolver{

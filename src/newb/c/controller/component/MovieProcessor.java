@@ -26,7 +26,7 @@ public class MovieProcessor implements PageProcessor {
     @Override
     public void process(Page page) {
         String url =  page.getUrl().toString();
-        Pattern pattern1 = Pattern.compile("http://www.80s.tw/movie/list/-2016---(-p\\d*)?");
+        Pattern pattern1 = Pattern.compile("http://www.80s.tw/movie/list/-2014---(-p\\d*)?");
         Matcher matcher1 = pattern1.matcher(url);
 
         Pattern pattern2 = Pattern.compile("/movie/\\d+");
@@ -49,13 +49,16 @@ public class MovieProcessor implements PageProcessor {
                 page.addTargetRequests(listUrls);
             }
 
-        }else if(matcher2.find()){  //电影页面    
+        }else if(matcher2.find()){  //电影页面   
+        	String movieId = page.getUrl().toString().substring(page.getUrl().toString().lastIndexOf("/")+1);
             //获取电影名字
-            String movieName = page.getHtml().xpath("//div[@class='info']/h1/text()").toString();
+            String movieName= page.getHtml().xpath("//div[@class='info']/h1/text()").toString()+  "----  "+page.getUrl().toString();
             //获取电影播放链接
             String movieUrl = page.getHtml().xpath("//li[@class='clearfix dlurlelement backcolor1']/span[@class='dlname nm']/input/@value").toString();
 
             Movie movie = new Movie(movieName, movieUrl);
+            movie.setId(Integer.valueOf(movieId));
+            
             page.putField("movie", movie);  //后面做数据的持久化
         }    
     }

@@ -23,6 +23,8 @@
 	<!-- <import resource="cache/spring-ehcache.xml"/> -->
 	<!-- redis -->
 	<import resource="cache/spring-redis.xml"/>
+	<!-- mongodb -->
+	<import resource="mongodb/spring-mongodb.xml"/>
 	<!-- aop -->
 	<!-- <import resource="spring-aop.xml" /> -->
 	<!-- 分布式session 存redis中 -->

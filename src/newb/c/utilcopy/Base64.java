@@ -9,6 +9,7 @@ import sun.misc.*;
  * @author woshizbh
  *
  */
+@SuppressWarnings("restriction")
 public class Base64 {
 	/**
 	 * Base 加密

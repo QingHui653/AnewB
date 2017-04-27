@@ -25,6 +25,12 @@ import newb.c.backend.service.UserService;
 import newb.c.util.annotation.RequestLimit;
 import tk.mybatis.mapper.entity.Example;
 
+/**
+ * springmvc页面的跳转 
+ * 数据的返回 范例
+ * @author woshizbh
+ *
+ */
 @Controller
 @RequestMapping("view")
 public class ViewController {
