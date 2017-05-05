@@ -1,13 +1,14 @@
 package newb.c.controller;
 
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
@@ -54,6 +55,14 @@ public class ViewController {
 	 @ResponseBody
 	 @RequestLimit(count=3)
 	 public String showUserByString(HttpServletRequest request){
+		 	//获取request接受的全部参数
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+			Enumeration<String> enu = request.getParameterNames();
+			while (enu.hasMoreElements()) {
+				Object paraName = (Object) enu.nextElement();
+				paramMap.put((String) paraName, request.getParameter((String) paraName));
+				System.out.println(paraName + ": " + request.getParameter((String) paraName));
+			}
 	        String str="hello word 你好世界";
 	        return str;
 	 	}

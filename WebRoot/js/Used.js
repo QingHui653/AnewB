@@ -113,6 +113,34 @@
             return false;};
 	}
     
-    
+    //返回yyyy-MM-dd HH:mm:ss
+    function getNowFormatDate() {
+	    var date = new Date();
+	    var seperator1 = "-";
+	    var seperator2 = ":";
+	    var month = date.getMonth() + 1;
+	    var strDate = date.getDate();
+	    var strHours = date.getHours();
+	    var strMin = date.getMinutes();
+	    var strSec =date.getSeconds();
+	    if (month >= 1 && month <= 9) {
+	        month = "0" + month;
+	    }
+	    if (strDate >= 0 && strDate <= 9) {
+	        strDate = "0" + strDate;
+	    }
+	    if (strHours >= 0 && strHours <= 9) {
+            strHours = "0" + strHours;
+        }
+        if (strMin >= 0 && strMin <= 9) {
+            strMin = "0" + strMin;
+        }
+        if (strSec >= 0 && strSec <= 9) {
+            strSec = "0" + strSec;
+        }
+	    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+	            + " " + strHours + seperator2 + strMin+ seperator2 + strSec;
+        return currentdate;
+    }
     
     

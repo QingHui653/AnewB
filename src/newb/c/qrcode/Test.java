@@ -18,7 +18,7 @@ public class Test {
 	public static void main(String[] args) {
 
 		try {
-			String content = "这是测试xing二维码生成";
+			String content = "http://www.baidu.com";
 			// String path = "D:/tt";
 			String path = "D:/";
 			MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
