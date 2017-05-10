@@ -1,4 +1,4 @@
-package newb.c.controller.component;
+package newb.c.controller.component.webmagic;
 
 
 import java.util.regex.Matcher;

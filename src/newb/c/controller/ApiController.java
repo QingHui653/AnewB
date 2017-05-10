@@ -66,8 +66,6 @@ import us.codecraft.webmagic.pipeline.JsonFilePipeline;
 import newb.c.api.mail.EmailSendManager;
 import newb.c.api.mail.SimpleEmail;
 import newb.c.api.weather.weather;
-import newb.c.controller.component.GithubRepoPageProcessor;
-import newb.c.controller.component.MovieProcessor;
 import newb.c.controller.component.ProducerServiceImpl;
 import newb.c.controller.component.service.MongoDbSaveMoviePipeline;
 import newb.c.controller.component.service.MysqlSaveMoviePipeline;
@@ -96,14 +94,10 @@ public class ApiController {
 	private ResultService resultService;
 	@Autowired 
 	private UserService userService;
-	@Autowired
-	private GithubRepoPageProcessor g;
+	
 	@Autowired
 	private TOrderService tOrderService;
-	@Autowired
-	private MongoDbSaveMoviePipeline mongoDbSaveMoviePipeline;
-	@Resource(name = "simpleEmailSendManagerImpl")
-	private EmailSendManager emailSendManager;
+	
 	//ActiveMQ
 	/*@Autowired
 	private ProducerServiceImpl producerServiceImpl;
@@ -318,54 +312,6 @@ public class ApiController {
 		}
 	}
 	
-
-	@RequestMapping(value="/rep",method=RequestMethod.GET)
-	@ApiOperation("测试使用spider爬取github alibaba的项目")
-	public void rep() throws Exception {//alibaba  QingHui653
-		Spider.create(g)
-		.addUrl("https://github.com/alibaba")
-		.addPipeline(new FilePipeline("G:\\movie\\"))
-        .addPipeline(new ConsolePipeline())
-		.thread(10).run();
-	}
-	
-	/**
-	 * 电影爬虫
-	 * @param response
-	 */
-	@RequestMapping(value="getMovie",method=RequestMethod.GET)
-	@ApiOperation("电影爬虫")
-	public void getMovie(){
-		Spider.create(new MovieProcessor())
-        .addUrl("http://www.80s.tw/movie/list/-2014---")
-//        .addPipeline(new FilePipeline("G:\\movie\\"))
-        .addPipeline(new ConsolePipeline())
-        .addPipeline(mongoDbSaveMoviePipeline)
-        .thread(10)
-        .run();
-	}
-	
-	
-	/**
-	 * 发送简单邮件
-	 * @throws MessagingException
-	 */
-	@RequestMapping(value="sendSimpleEmail",method=RequestMethod.GET)
-	@ApiOperation("发送 邮件")
-	public void sendSimpleEmail() throws MessagingException {
-		SimpleEmail simpleEmail = new SimpleEmail();
-		simpleEmail.setSubject("测试在项目中发送邮件");
-		Set<String> receivers = new HashSet<>();
-		receivers.add("910944453@qq.com");
-		simpleEmail.setToSet(receivers);
-		simpleEmail.setHtml(false);
-		simpleEmail.setContent("wowowowo擦，别被网易屏蔽");
-		simpleEmail.setAttachment(false);
-
-		emailSendManager.sendEmail(simpleEmail);
-		
-		System.out.println("       发送简单邮件成功");
-	}
 	
 	@RequestMapping(value="throwEx",method=RequestMethod.GET)
 	@ApiOperation("测试 抛出异常")

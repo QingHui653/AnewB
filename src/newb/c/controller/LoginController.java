@@ -33,7 +33,7 @@ public class LoginController {
 	 * @param userId
 	 * @return
 	 */
-	@RequestMapping(value="/login",method={RequestMethod.GET})
+	@RequestMapping(value="/login",method={RequestMethod.GET,RequestMethod.POST})
 	@ApiOperation("使用shiro  进行登录调用")
 	public Object execute(ModelAndView mv ,HttpServletRequest request,HttpServletResponse response, String username, String password) {
 		UsernamePasswordToken token = new UsernamePasswordToken(username,

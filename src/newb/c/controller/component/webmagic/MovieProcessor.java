@@ -1,4 +1,4 @@
-package newb.c.controller.component;
+package newb.c.controller.component.webmagic;
 
 
 import java.util.List;
@@ -26,12 +26,15 @@ public class MovieProcessor implements PageProcessor {
     @Override
     public void process(Page page) {
         String url =  page.getUrl().toString();
-        Pattern pattern1 = Pattern.compile("http://www.80s.tw/movie/list/-2014---(-p\\d*)?");
+        Pattern pattern1 = Pattern.compile("http://www.80s.tw/movie/list/-(\\d*)+---(-p\\d*)?");
         Matcher matcher1 = pattern1.matcher(url);
 
         Pattern pattern2 = Pattern.compile("/movie/\\d+");
         Matcher matcher2 = pattern2.matcher(url);
-
+//        page.addTargetRequests(page.getHtml().links().regex("(https://github\\.com/[\\w\\-]+/[\\w\\-]+)").all());
+        
+        page.addTargetRequests(page.getHtml().links().regex("http://www\\.80s\\.tw/movie/list/-[\\d*]+---[-p\\d*]?").all());
+        
         //列表页面
         if(matcher1.find()){
             //电影详情页URL集合
@@ -71,11 +74,11 @@ public class MovieProcessor implements PageProcessor {
 
     public static void main(String[] args) {
         Spider.create(new MovieProcessor())
-        .addUrl("http://www.80s.tw/movie/list/-2016---")
+        .addUrl("http://www.80s.tw/movie/list/")
         .addPipeline(new FilePipeline("G:\\movie\\"))
         .addPipeline(new ConsolePipeline())
 //        .addPipeline(new SaveDataPipeline())
-        .thread(5)
+        .thread(10)
         .run();
         System.out.println("****************************************************");
     }

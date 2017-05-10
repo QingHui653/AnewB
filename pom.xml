@@ -659,17 +659,17 @@
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-frontend-jaxws</artifactId>
-			<version>3.1.9</version>
+			<version>3.1.11</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
-			<version>3.1.9</version>
+			<version>3.1.11</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-transports-http</artifactId>
-			<version>3.1.9</version>
+			<version>3.1.11</version>
 		</dependency>
 		
 		<!--dubbo -->
@@ -992,6 +992,7 @@
 					<server>tomcat7</server>
 				</configuration> -->
 			</plugin>
+			
 		</plugins>
 	</build>
 </project>
