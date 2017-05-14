@@ -54,7 +54,6 @@ public class GlobalDefaultExceptionHandler {
 		}
 //		System.out.println(e.getCause().toString());
 		logger.warn("--全局捕获类捕获异常  ", e);
-		
 		return res;
 		// 打印异常信息：
 //		System.out.println("---------进入全局异常处理-------GlobalDefaultExceptionHandler.defaultErrorHandler()");

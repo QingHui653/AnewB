@@ -108,7 +108,8 @@ public class ReflectionUtil {
      * 直接调用对象方法, 无视private/protected修饰符.
      */
     public static Object invokeMethod(final Object object,
-                                      final String methodName, final Class<?>[] parameterTypes,
+                                      final String methodName, 
+                                      final Class<?>[] parameterTypes,
                                       final Object[] parameters) {
         Method method = getDeclaredMethod(object, methodName, parameterTypes);
         if (method == null) {

@@ -34,7 +34,7 @@ public class XmlRpcTest {
 	public static void main(String[] args) {
 		
 		XmlRpcTest test = new XmlRpcTest();
-//		test.testGetBalance();
+		test.testGetBalance();
 		//新增任务单
 		test.testAddTask();
 		//添加短信内容

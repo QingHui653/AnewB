@@ -94,23 +94,13 @@ public class ApiController {
 	private ResultService resultService;
 	@Autowired 
 	private UserService userService;
-	
 	@Autowired
 	private TOrderService tOrderService;
-	
-	//ActiveMQ
-	/*@Autowired
-	private ProducerServiceImpl producerServiceImpl;
-	@Autowired
-	private Destination destination;*/
-	//dubbo IOC
-	/*@Autowired
-	private DemoService0 demoService;*/
 	
 	weather weather = new weather();
 
 	private static final Logger logger = LoggerFactory.getLogger(ApiController.class);
-	
+	                        
 	DataHandle data =new DataHandle();
 	
 	/**
@@ -172,14 +162,6 @@ public class ApiController {
 		return "forward:/web/bootstrap.jsp";
 	}
 	
-	@RequestMapping(value="/sendmq",method=RequestMethod.GET)
-	@ApiOperation("测试mq发送消息")
-	@ResponseBody
-	public String sendmq() {
-		//ActiveMq
-//		producerServiceImpl.sendMessage(destination, "HHHHHworld");
-		return "OK";
-	}
 	
 	@RequestMapping(value="/rep/getRes",method=RequestMethod.GET)
 	@ApiOperation("获取爬虫爬取信息")
@@ -209,18 +191,6 @@ public class ApiController {
 		return "rep/GroupList";
 	}
 	
-	@RequestMapping(value="/dubbo",method=RequestMethod.GET)
-	@ApiOperation("测试dubbo远程调用")
-	public Object getDubboServer(){
-		/*String hello = (String) demoService.sayHello("tom");  
-        System.out.println(hello);   
-        List<User> list = (List<User>) demoService.getUsers();*/
-		//dubbo test
-//        Object hello =demoService.sayHello("tom");  
-//        System.out.println(hello);   
-//        Object list =demoService.getUsers();
-		return null;
-	}
 	
 	@ApiOperation(value="根据城市获取天气情况")
 	@RequestMapping(value="/weather/{cityname}",method=RequestMethod.GET)

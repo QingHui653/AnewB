@@ -14,6 +14,8 @@ public interface UserService extends IService<User> {
     
     int insertAll(List<User> userList);
     
+    int threadInsertAll(int page);
+    
     List<User> selectAllForUpdate();
     
     String selectPW(int oid);

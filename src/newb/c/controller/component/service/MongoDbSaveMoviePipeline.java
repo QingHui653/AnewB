@@ -1,5 +1,7 @@
 package newb.c.controller.component.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -7,7 +9,6 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
 import newb.c.backend.model.basemodel.Movie;
-import newb.c.backend.model.basemodel.User;
 import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
@@ -32,8 +33,8 @@ public class MongoDbSaveMoviePipeline implements Pipeline {
     	if (movie != null) {
     		criteria.where("movieLink").is(movie.getMovieLink());
     		query.addCriteria(criteria);
-    		Movie ext= mongoTemplate.findOne(query, Movie.class);
-    		if(ext!=null)
+    		List<Movie> ext= mongoTemplate.find(query, Movie.class);
+    		if(ext.size()>0)
     		mongoTemplate.insert(movie);
         }
     }

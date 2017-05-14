@@ -39,7 +39,8 @@ public class WebMagicController {
 	@ApiOperation("电影爬虫")
 	public void getMovie(){
 		Spider.create(new MovieProcessor())
-        .addUrl("http://www.80s.tw/movie/list/-2013---")
+//        .addUrl("http://www.80s.tw/movie/list/-2013---")
+        .addUrl("http://www.80s.tw/movie/list/")
 //        .addPipeline(new FilePipeline("G:\\movie\\"))
         .addPipeline(new ConsolePipeline())
         .addPipeline(mongoDbSaveMoviePipeline)

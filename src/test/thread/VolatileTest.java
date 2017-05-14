@@ -43,7 +43,7 @@ public class VolatileTest {
         inc++;
     }*/
     
-    //第三 lock 加锁可以保证原子性可保证有序性
+    //第三 lock 加锁可以保证原子性可见证有序性
     /*public volatile int inc = 0;
     Lock lock = new ReentrantLock();
     public  void increase() {
