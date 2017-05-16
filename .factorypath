@@ -285,5 +285,4 @@
     <factorypathentry kind="EXTJAR" id="D:\web7\AnewB\WebRoot\WEB-INF\lib\json-lib-2.4-jdk15.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="EXTJAR" id="D:\web7\AnewB\WebRoot\WEB-INF\lib\qrcode_swetake.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="EXTJAR" id="D:\web7\AnewB\WebRoot\WEB-INF\lib\qrcode.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="PLUGIN" id="org.eclipse.jst.ws.annotations.core" enabled="true" runInBatchMode="false"/>
 </factorypath>

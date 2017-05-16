@@ -16,6 +16,8 @@
 	<import resource="mybatis/spring-mybatis-One.xml" />
 	<!-- <import resource="mybatis/spring-mybatis-Shard.xml" /> -->
 	<import resource="mail/spring-mail.xml"/>
+	<!-- 定时任务 -->
+	<import resource="job/spring-task.xml" />
 	<!-- 分布式事务 -->
 	<!-- <import resource="atomikos/spring-jta.xml" /> -->
 	<!-- activiti工作流 -->
