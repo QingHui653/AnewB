@@ -4,14 +4,20 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.concurrent.Future;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,9 +26,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import newb.c.backend.model.basemodel.User;
-import newb.c.backend.service.ResultService;
-import newb.c.backend.service.TestCacheService;
 import newb.c.backend.service.UserService;
+import newb.c.controller.component.AyscTask;
 import newb.c.util.annotation.RequestLimit;
 import tk.mybatis.mapper.entity.Example;
 
@@ -34,14 +39,13 @@ import tk.mybatis.mapper.entity.Example;
  */
 @Controller
 @RequestMapping("view")
-public class ViewController {
+public class MvcController {
 	
-	@Resource
+	@Autowired
 	private UserService userService;
-	@Resource
-	private ResultService resultService;
-	@Resource
-	private TestCacheService userCacheService;
+	@Autowired
+	private AyscTask ayscTask;
+	
 	
 	
 	/**
@@ -139,5 +143,43 @@ public class ViewController {
 		modelMap.addAttribute("user", user);
 		return "/views/user/showInfo";
 	}
-	 
+	
+	/**
+	 * springmvc 返回异步任务
+	 * @throws Exception
+	 */
+	@ApiOperation("调用异步任务")
+	@GetMapping("/asycTest")
+	public void asycTest() throws Exception {
+		long start = System.currentTimeMillis();
+        Future<String> task1 = ayscTask.doTaskOne();
+        Future<String> task2 = ayscTask.doTaskTwo();
+        Future<String> task3 = ayscTask.doTaskThree();
+        while(true) {
+        	/*看时间好像是 spring 开了三个线程去做*/
+            if(task1.isDone() && task2.isDone() && task3.isDone()) {
+                // 三个任务都调用完成，退出循环等待
+                break;
+            }
+            Thread.sleep(1000);
+        }
+        long end = System.currentTimeMillis();
+        System.out.println("任务全部完成，总耗时：" + (end - start) + "毫秒");
+	}
+	
+	/**
+	 * springmvc 返回异步任务
+	 * 直接返回，任务后台继续做
+	 * @throws Exception
+	 */
+	@ApiOperation("调用异步任务")
+	@GetMapping("/asycTask")
+	@Async
+	public void asycTask() throws Exception {
+		long start = System.currentTimeMillis();
+        Thread.sleep(10000);
+        long end = System.currentTimeMillis();
+        System.out.println("任务全部完成，总耗时：" + (end - start) + "毫秒");
+	}
+	
 }

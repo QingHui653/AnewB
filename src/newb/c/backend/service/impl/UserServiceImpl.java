@@ -83,10 +83,10 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 					@Override
 					public void run() {
 							lock.lock();
-							List<User> userList = new ArrayList<User>();
-							userList = threadList(threadCount);
 							threadCount++;
 							lock.unlock();
+							List<User> userList = new ArrayList<User>();
+							userList = threadList(threadCount);
 							userMapper.insertAll(userList);
 					}
 				});

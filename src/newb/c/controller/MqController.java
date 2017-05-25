@@ -31,7 +31,7 @@ public class MqController {
 	@ResponseBody
 	public String sendmq() {
 //		ActiveMq
-//		producerServiceImpl.sendMessage(destination, "HHHHHworld");
+		producerServiceImpl.sendMessage(destination, "HHHHHworld");
 		return "OK";
 	}
 }

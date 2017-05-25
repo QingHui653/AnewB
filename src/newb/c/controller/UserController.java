@@ -2,7 +2,6 @@ package newb.c.controller;
 
 import io.swagger.annotations.ApiOperation;
 
-import java.beans.PropertyEditor;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,20 +10,14 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -33,33 +26,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import newb.c.backend.model.RepList;
 import newb.c.backend.model.SessionBean;
 import newb.c.backend.model.basemodel.User;  
-import newb.c.backend.model.basemodel.UserCache;
 import newb.c.backend.model.UserData;
-import newb.c.backend.model.UserList;
-import newb.c.backend.model.UserTrin;
 import newb.c.backend.model.UserXL;
-import newb.c.backend.service.ResultService;
-import newb.c.backend.service.TestCacheService;
 import newb.c.backend.service.UserService;
-import tk.mybatis.mapper.entity.Example;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -79,10 +58,6 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private ResultService resultService;
-	@Autowired
-	private TestCacheService userCacheService;
 
 	//常用工具类   时间不能用在这 ,不然每次进入不会重新new 一个对象,
 	//会使得时间有BUG
@@ -248,7 +223,8 @@ public class UserController {
 	  * Spring MVC自动转换失败 使用Map<String Object>接受
 	  * @return success字符串
 	  */
-	 @RequestMapping(value="/xzjl",method=RequestMethod.POST)
+	 @SuppressWarnings("unused")
+	@RequestMapping(value="/xzjl",method=RequestMethod.POST)
 	 @ApiOperation("招聘系统多表单序列化 ")
 	 @ResponseBody
 	 public String xzjl(@RequestBody Map<String, Object> userjl)  {

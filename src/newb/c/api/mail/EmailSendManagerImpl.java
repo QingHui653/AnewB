@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.Map;
 import java.util.Set;
 
-import javax.annotation.Resource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
@@ -23,7 +22,7 @@ public class EmailSendManagerImpl implements EmailSendManager {
 //	@Value("#{configProperties['mailserver.username']}") 
 	private String fromUser;  //发送者
 	
-	@Resource
+	@Autowired(required=false)
 	private JavaMailSender mailSender;
 	
 	private static final Logger logger= LoggerFactory.getLogger(EmailSendManagerImpl.class); 

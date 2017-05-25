@@ -35,9 +35,9 @@ public class RedisController {
     }
 	
 	@RequestMapping(value="redisQueue",method=RequestMethod.GET)
-	@ApiOperation("redis 队列 （未写）")
+	@ApiOperation("redis 队列")
 	public void redisQueue() throws Exception {
-		
+		//发送频道到 java
 		redisTemplate.convertAndSend("java", "java发布的消息");
 		
 		System.out.println(" --发送队列消息成功--- ");

@@ -27,14 +27,15 @@ public class MongoDbSaveMoviePipeline implements Pipeline {
     public void process(ResultItems resultItems, Task task) {
     	Movie movie = resultItems.get("movie");
     	
-    	Query query = new Query();
-        Criteria criteria =new Criteria();
+//    	Query query = new Query();
+//        Criteria criteria =new Criteria();
     	
     	if (movie != null) {
-    		criteria.where("movieLink").is(movie.getMovieLink());
-    		query.addCriteria(criteria);
-    		List<Movie> ext= mongoTemplate.find(query, Movie.class);
-    		if(ext.size()>0)
+    		//这样好像没用，会经常返回其他数据
+//    		criteria.where("movieLink").is(movie.getMovieLink());
+//    		query.addCriteria(criteria);
+//    		List<Movie> ext= mongoTemplate.find(query, Movie.class);
+//    		if(ext.size()==0)
     		mongoTemplate.insert(movie);
         }
     }

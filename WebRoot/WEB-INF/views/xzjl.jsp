@@ -185,9 +185,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</div>
 						</div>
 						<!-- <form id="uploadForm">  
-           &nbsp;&nbsp;&nbsp;&nbsp;上传简历附件：<input type="file" name="file"/>  
-                 			<input type="button" value="提交" onclick="doUpload('/hjsoft_zp/user/onefile')"/>  
-   						</form>  -->
+                                &nbsp;&nbsp;&nbsp;&nbsp;上传简历附件：<input type="file" name="file"/>  
+                 			    <input type="button" value="提交" onclick="doUpload('/hjsoft_zp/user/onefile')"/>  
+   						     </form>  -->
 						<form id="uploadForm">
 							<li style="height: auto;text-align: center;">
 								<div style="position:relative;width: 90px;height: 110px;margin: 0 auto; background: url(images/photo.jpg);">
@@ -204,7 +204,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<li>
 								<span class="name" >姓名：</span>
 								<input class="inputbox" name="xm" type="text"/>
-								<!-- <img alt="提交头像" src="img/2666/tx.jpg" width="90px" height="110px" style="position: relative; left: 60px"> -->
+								<!--<img alt="提交头像" src="img/2666/tx.jpg" width="90px" height="110px" style="position: relative; left: 60px"> -->
 								<span class="name">联系电话：</span>
 								 <input class="inputbox" name="lxdh" type="text" value=" "/>
 							</li>

@@ -1,35 +1,25 @@
-package newb.c.api.mail;
+package newb.c.controller;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import javax.annotation.Resource;
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.util.Assert;
-import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import io.swagger.annotations.ApiOperation;
-import newb.c.backend.model.basemodel.User;
-import newb.c.backend.service.ResultService;
-import newb.c.backend.service.TestCacheService;
-import newb.c.backend.service.UserService;
-import tk.mybatis.mapper.entity.Example;
+import newb.c.api.mail.EmailSendManager;
+import newb.c.api.mail.SimpleEmail;
 
 @Controller
 @RequestMapping("view")
-public class emailTestController {
+public class EmailTestController {
 	
-	@Resource(name = "simpleEmailSendManagerImpl")
+	@Autowired(required=false)
+	@Qualifier(value="simpleEmailSendManagerImpl")
 	private EmailSendManager emailSendManager;
 	
 	/**

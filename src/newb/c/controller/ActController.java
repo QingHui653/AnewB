@@ -12,7 +12,6 @@ import org.activiti.editor.constants.ModelDataJsonConstants;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.repository.Model;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,7 +41,8 @@ public class ActController {
     }
 
 
-    @RequestMapping(value = "/create.do", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
+    @SuppressWarnings("deprecation")
+	@RequestMapping(value = "/create.do", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     public void create(  @RequestParam("name") String name,  @RequestParam("key") String key,   @RequestParam(value = "description", required = false) String description,  HttpServletRequest request, HttpServletResponse response) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();

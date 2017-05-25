@@ -12,11 +12,15 @@ import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
 public class LogProxy {
+	
+	private static final Logger logger = LoggerFactory.getLogger(LogProxy.class);
 	
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
@@ -26,12 +30,23 @@ public class LogProxy {
 
 	@Before("Log()")
 	public void beforeAdvice(JoinPoint point) throws ClassNotFoundException {
+		/*logger.info("");
+		logger.info("");
+		logger.info("-------------------------------日志代理开始--------------------------------------------------");
+		logger.info("----------------进入的方法为 --- "+point.toString());
+		logger.info("----------------传入的参数为---" +Arrays.toString(point.getArgs()));
+		logger.info("----------------传入的参数为---" +Arrays.toString(point.getArgs()));
+		String curtime=sdf.format(Calendar.getInstance().getTime());
+		logger.info("----------------开始时间---"+curtime);*/
+		
+		
+		
 		System.out.println("");
 		System.out.println("");
 		System.out.println("-------------------------------日志代理开始--------------------------------------------------");
 		System.out.println("----------------进入的方法为 --- "+point.toString());
 		//Struts2的切面方法切不到,所以只能输出这个
-		System.out.println("----------------截取Struts2 --- "+point.getThis()+"+++"+point.toShortString());
+//		System.out.println("----------------截取Struts2 --- "+point.getThis()+"+++"+point.toShortString());
 		//Struts2的切面方法切不到,所以只能输出这个
 		System.out.println("----------------传入的参数为---" +Arrays.toString(point.getArgs()));
 //		System.out.println("1--"+point.toString());
@@ -47,6 +62,8 @@ public class LogProxy {
 	@After("Log()")
 	public void afterAdvice() {
 		String curtime=sdf.format(Calendar.getInstance().getTime());
+//		logger.info("----------------结束时间---"+curtime);
+//		logger.info("-------------------------------日志代理结束--------------------------------------------------");
 		System.out.println("----------------结束时间---"+curtime);
 		System.out.println("-------------------------------日志代理结束--------------------------------------------------");
 	}
@@ -65,6 +82,6 @@ public class LogProxy {
 
 	@AfterThrowing(pointcut = "Log()", throwing = "ex")
 	public void AfterThrowingAdvice(IllegalArgumentException ex) {
-		System.out.println("There has been an exception: " + ex.toString());
+		System.out.println("日志Aop出错了" + ex.toString());
 	}
 }

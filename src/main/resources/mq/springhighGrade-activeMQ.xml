@@ -17,9 +17,18 @@
     </bean>  
        
     <!-- 真正可以产生Connection的ConnectionFactory，由对应的 JMS服务厂商提供-->  
-    <bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">  
-        <property name="brokerURL" value="tcp://localhost:61616"/>  
-    </bean>  
+    <!-- 普通的连接方式 -->
+    <!-- <bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">  
+        <property name="brokerURL" value="${activemq.url}"/>  
+    </bean>  -->
+    <!-- 使用activemq 连接池 pool -->
+    <bean id="targetConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory">  
+        <property name="connectionFactory">  
+            <bean class="org.apache.activemq.ActiveMQConnectionFactory">  
+                <property name="brokerURL" value="${activemq.url}" />  
+            </bean>  
+        </property>
+    </bean> 
        
     <!-- Spring用于管理真正的ConnectionFactory的ConnectionFactory -->  
     <bean id="connectionJMSFactory" class="org.springframework.jms.connection.SingleConnectionFactory">  

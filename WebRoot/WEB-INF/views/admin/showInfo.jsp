@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>userInfo</title>
+<title>admin测试页面</title>
 </head>
 <body>
 

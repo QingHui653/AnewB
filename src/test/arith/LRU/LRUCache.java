@@ -36,8 +36,9 @@ public LRUCache (int cacheSize) {
    map = new LinkedHashMap<K,V>(hashTableCapacity, hashTableLoadFactor, true) {  
       // (an anonymous inner class)  
       private static final long serialVersionUID = 1;  
-      @Override protected boolean removeEldestEntry (Map.Entry<K,V> eldest) {  
-         return size() > LRUCache.this.cacheSize; 
+      @Override 
+      protected boolean removeEldestEntry (Map.Entry<K,V> eldest) {  
+    	  		return size() > LRUCache.this.cacheSize; 
          }
       }; 
 }  

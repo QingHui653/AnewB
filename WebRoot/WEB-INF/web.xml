@@ -9,7 +9,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath*:main/resources/spring.xml</param-value>
-		<!-- 使用 service="servlet" 一定要配置在这里，但我这不知道为什么一直报错 -->
+		<!-- 使用 dubbo service="servlet" 一定要配置在这里，但我这不知道为什么一直报错 -->
 		<!-- <param-value>/WEB-INF/classes/main/resources/dubbo/springhighGrade-dubboxRest.xml,classpath*:spring.xml</param-value> -->
 		<!-- <param-value>classpath:spring.xml,classpath:spring-mybatis.xml,classpath:spring-cache.xml</param-value> -->
 	</context-param>
@@ -165,7 +165,7 @@
 
     <servlet-mapping>
         <servlet-name>AnnotationHandleServlet</servlet-name>
-        <!-- 拦截所有以.do后缀结尾的请求 -->
+        <!-- 拦截所有以.action后缀结尾的请求 -->
         <url-pattern>*.action</url-pattern>
     </servlet-mapping>
   
@@ -179,6 +179,8 @@
 			<param-value>classpath*:main/resources/springMVC.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		<!-- 开启Cglib 代理 -->
+		<async-supported>true</async-supported>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>rest</servlet-name>
@@ -198,7 +200,7 @@
 		<url-pattern>/webservice/*</url-pattern>
 	</servlet-mapping> -->
 		
-	<!-- 不拦截这些静态资源   使用springmvc标签-->
+	<!-- 不拦截这些静态资源   目前使用springmvc标签-->
 	<!-- <servlet-mapping>
     	<servlet-name>default</servlet-name>
     	<url-pattern>*.html</url-pattern>

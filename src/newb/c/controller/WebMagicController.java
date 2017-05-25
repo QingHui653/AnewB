@@ -11,7 +11,6 @@ import newb.c.controller.component.webmagic.GithubRepoPageProcessor;
 import newb.c.controller.component.webmagic.MovieProcessor;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.pipeline.ConsolePipeline;
-import us.codecraft.webmagic.pipeline.FilePipeline;
 
 @Controller
 @RequestMapping("webmagic")
@@ -44,7 +43,7 @@ public class WebMagicController {
 //        .addPipeline(new FilePipeline("G:\\movie\\"))
         .addPipeline(new ConsolePipeline())
         .addPipeline(mongoDbSaveMoviePipeline)
-        .thread(10)
+        .thread(50)
         .run();
 	}
 }

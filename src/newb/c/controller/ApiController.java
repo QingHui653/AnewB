@@ -1,25 +1,15 @@
 package newb.c.controller;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
-import java.util.concurrent.Callable;
 
-import javax.annotation.Resource;
-import javax.jms.Destination;
-import javax.mail.MessagingException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -32,24 +22,16 @@ import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.AbstractXmlApplicationContext;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
@@ -57,29 +39,14 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
 import io.swagger.annotations.ApiOperation;
-import tk.mybatis.mapper.common.base.select.SelectMapper;
 import tk.mybatis.mapper.entity.Example;
-import us.codecraft.webmagic.Spider;
-import us.codecraft.webmagic.pipeline.ConsolePipeline;
-import us.codecraft.webmagic.pipeline.FilePipeline;
-import us.codecraft.webmagic.pipeline.JsonFilePipeline;
-import newb.c.api.mail.EmailSendManager;
-import newb.c.api.mail.SimpleEmail;
 import newb.c.api.weather.weather;
-import newb.c.controller.component.ProducerServiceImpl;
-import newb.c.controller.component.service.MongoDbSaveMoviePipeline;
-import newb.c.controller.component.service.MysqlSaveMoviePipeline;
-import newb.c.dubbo.DemoService0;
 import newb.c.qrcode.MatrixToImageWriter;
 import newb.c.backend.model.RepList;
-import newb.c.backend.model.basemodel.Movie;
 import newb.c.backend.model.basemodel.Result;
 import newb.c.backend.model.basemodel.TOrder;
-import newb.c.backend.model.basemodel.User;
-import newb.c.backend.service.MovieService;
 import newb.c.backend.service.ResultService;
 import newb.c.backend.service.TOrderService;
-import newb.c.backend.service.UserService;
 import newb.c.util.authCode.Captcha;
 import newb.c.util.authCode.GifCaptcha;
 import newb.c.util.authCode.SpecCaptcha;
@@ -90,16 +57,14 @@ import newb.c.utilDb.DataHandle;
 @RequestMapping("api")
 public class ApiController {
 	
+	private static final Logger logger = LoggerFactory.getLogger(ApiController.class);
+	
 	@Autowired
 	private ResultService resultService;
-	@Autowired 
-	private UserService userService;
 	@Autowired
 	private TOrderService tOrderService;
 	
 	weather weather = new weather();
-
-	private static final Logger logger = LoggerFactory.getLogger(ApiController.class);
 	                        
 	DataHandle data =new DataHandle();
 	
@@ -207,9 +172,9 @@ public class ApiController {
 		TOrder tO0=new TOrder(0, 2, "第0条数据");
 		int bool0= tOrderService.insertByXML(tO0);
 		TOrder tO1=new TOrder(1, 3, "第1条数据");
-		int bool1= tOrderService.insertByXML(tO1);
+		tOrderService.insertByXML(tO1);
 		TOrder tO2=new TOrder(2, 4, "第2条数据");
-		int bool2= tOrderService.insertByXML(tO2);
+		tOrderService.insertByXML(tO2);
 		
 		/*TOrder tO1=new TOrder(1, 1, "第1条数据");
 		int bool1= tOrderService.insertByMapper(tO1);

@@ -16,7 +16,7 @@ import org.junit.Test;
 
 public class bio {
 	
-	/*@Test*/
+	@Test
 	public void path() {
 		String path= bio.class.getResource("/").getPath();
 		System.out.println("当前class文件的路径  "+path);
@@ -37,7 +37,7 @@ public class bio {
 		System.out.println("当前绝对路径    "+relativelyPath);
 	}
 	
-	@Test
+	/*@Test*/
 	public void io1() throws IOException {
 	    String relativelyPath=System.getProperty("user.dir");
 		File f =new File(relativelyPath+"\\src\\test\\io\\1.txt");
@@ -60,7 +60,7 @@ public class bio {
 		System.out.println(" io3 "+"文件写入成功");
 	}
 	
-	@Test
+	/*@Test*/
 	public void io3Buff() throws IOException {
 		String a = "aaa测试中文buff";
 		String relativelyPath=System.getProperty("user.dir");
@@ -75,7 +75,7 @@ public class bio {
 		System.out.println(" io3Buff "+"文件写入成功");
 	}
 	
-	@Test
+	/*@Test*/
 	public void io4Buff() throws IOException {
 		String relativelyPath=System.getProperty("user.dir");
 		File f =new File(relativelyPath+"\\src\\test\\io\\1.jpg");

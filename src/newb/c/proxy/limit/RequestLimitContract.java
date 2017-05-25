@@ -15,7 +15,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import newb.c.exception.RequestLimitException;
-import newb.c.util.HttpRequestUtil;
+import newb.c.util.IpUtil;
 import newb.c.util.annotation.RequestLimit;
 
 /**
@@ -51,7 +51,7 @@ public class RequestLimitContract {
 				throw new RequestLimitException("方法中缺失HttpServletRequest参数");
 			}
 
-			String ip = HttpRequestUtil.getIpAddr(request);
+			String ip = IpUtil.getIpAddr(request);
 			String url = request.getRequestURL().toString();
 			String key = "req_limit_".concat(url).concat(ip);
 

@@ -1,13 +1,10 @@
 package newb.c.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import io.swagger.annotations.ApiOperation;
-import newb.c.dubbo.DemoService0;
-
 @Controller
 @RequestMapping("rpc")
 public class RpcController {
