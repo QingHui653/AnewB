@@ -69,7 +69,8 @@
 	</bean>
 	
   <bean id="connectionRedisFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
-        p:host-name="${redis.master.hostname}" p:port="${redis.master.port}" p:pool-config-ref="jedisPoolConfig" p:password="${redis.master.password}" />
+        p:host-name="${redis.master.hostname}" p:port="${redis.master.port}" 
+        p:pool-config-ref="jedisPoolConfig" p:password="${redis.master.password}" />
 
   <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
     	<property name="connectionFactory" ref="connectionRedisFactory" />
@@ -81,6 +82,13 @@
         <property name="valueSerializer">
         	<bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
         </property>
+        <property name="hashKeySerializer">     
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>     
+        </property>   
+        <property name="hashValueSerializer">   
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>  
+           <!-- <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/> -->     
+        </property> 
   </bean>
   
   <bean id="listener" class="newb.c.api.redisMQ.TestMessage"/>

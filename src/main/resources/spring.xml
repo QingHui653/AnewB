@@ -41,8 +41,8 @@
 	<!-- guava缓存 -->
 	<!-- <import resource="cache/spring-guava.xml"/> -->
 	<!-- dubbo -->
+	<import resource="dubbo/springhighGrade-dubbo.xml"/>
 	<!-- <import resource="dubbo/springhighGrade-dubboxRest.xml"/> -->
-	<!-- <import resource="dubbo/springhighGrade-dubbo.xml"/> -->
 	
 	
 	<!--配置注解  -->

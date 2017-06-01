@@ -143,4 +143,39 @@
         return currentdate;
     }
     
+    $(".labelName").select2({
+        tags: true,
+        ajax: {
+            url: "customerLabelController.do?select2Json",
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                q: params.term,
+                };
+            },
+            processResults: function (data) {
+                return {
+                    results: data
+                };
+            },
+            cache: true
+        },
+    });
+    
+    
+    <!--select2 -->
+    $(".labelName").change(function(){
+        var checkValue="";//获取value,多值使用逗号隔开
+        var checkText="";
+        var selected = $(".labelName").select2('data');//选择的值  
+            for (var i=0;i<selected.length;i++) {
+            checkValue+=selected[i].id+",";  
+            checkText+=selected[i].text+",";
+        } 
+        alert(checkValue+"--"+checkText);
+        $("#labelName").val(checkText);
+        $("#labelId").val(checkValue);
+    });
+    
     
