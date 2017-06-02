@@ -182,4 +182,41 @@ public class MvcController {
         System.out.println("任务全部完成，总耗时：" + (end - start) + "毫秒");
 	}
 	
+	/**
+	  * 使用forward 使之 重新进入另一个controller /user/newbs
+	  * 转发
+	  */
+	 @RequestMapping(value="/forward",method=RequestMethod.POST)
+	 @ApiOperation("登录后 转发到新的controller")
+	 public String loginFor(ModelMap modelMap, String username, String password){
+		 	int userId=2;
+		 	User user = userService.getUserById(userId);
+	        modelMap.addAttribute("user", user);
+	        //return "redi:/user/newbs";
+	        return "forward:/user/newbs";
+	 }
+	 
+	 
+	/**
+	 * forward与redirect的区别
+	 * 1.forward地址栏不会改变
+	 * 2.forward会共享上个controller的request数据
+	 * 3.forward主要用于跳转到其他模块，redirect用于注销或session过期，跳转到其他网站
+	 * 4.forward效率比redirect效率高
+	 */
+	 
+	 
+	 /**
+	  * 使用forward 使之 重新进入另一个controller /user/newbs
+	  * 转发
+	  */
+	 @RequestMapping(value="/redirect",method=RequestMethod.POST)
+	 @ApiOperation("登录后 重定向到新的页面")
+	 public String redirect(ModelMap modelMap, String username, String password){
+		 	int userId=2;
+		 	User user = userService.getUserById(userId);
+	        modelMap.addAttribute("user", user);
+	        //return "redi:/user/newbs";
+	        return "forward:/user/newbs";
+	 }
 }

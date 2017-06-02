@@ -49,7 +49,6 @@ public class SpringfoxDocConfig {
                 .title("AnewB的API目录页面")
                 .description("可查看所有的api说明")
                 .termsOfServiceUrl("AnewB")
-                .contact("AnewB")
                 .license("i just want run")
                 .licenseUrl("https://github.com/QingHui653")
                 .version("9999999")
