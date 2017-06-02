@@ -1,10 +1,6 @@
 eclipse.preferences.version=1
 encoding//WebRoot/comm/404.jsp=UTF-8
 encoding//WebRoot/web/main.jsp=UTF-8
-encoding//src/com/inmsg/adc_provision/util/XmlRpcClientProxy.java=GBK
-encoding//src/com/inmsg/test/XmlRpcTest.java=GBK
 encoding//src/main/resources/config.properties=GBK
-encoding//src/newb/c/api/XmlRpcTest.java=GBK
-encoding//src/newb/c/utilDb/StringHandle.java=GBK
 encoding/<project>=UTF-8
 encoding/src=UTF-8

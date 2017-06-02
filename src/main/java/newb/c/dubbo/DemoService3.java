@@ -3,7 +3,8 @@ package newb.c.dubbo;
 import java.util.List;
 
 import newb.c.backend.model.basemodel.User;  
-public interface DemoService2 {
+
+public interface DemoService3 {
 	
 	String sayHello(String name);
 

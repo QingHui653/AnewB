@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import newb.c.backend.model.basemodel.User;  
-public class DemoServiceImpl3 implements DemoService3 {
+
+public class DemoServiceImpl implements DemoService {
 
 	@Override
 	public String sayHello(String name) {
-		return "Hello3 " + name;
+		return "Hello1 " + name;
 	}
 
 	@Override

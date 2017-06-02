@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import newb.c.backend.model.basemodel.User;  
+
 public class DemoServiceImpl2 implements DemoService2 {
 
 	@Override

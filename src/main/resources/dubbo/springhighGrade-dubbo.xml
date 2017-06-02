@@ -7,7 +7,7 @@
         http://code.alibabatech.com/schema/dubbo  
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd  
         ">  
-      
+    
     <!-- 提供方应用信息，用于计算依赖关系 -->  
     <dubbo:application name="qinghui_provider"  />  
    
@@ -17,7 +17,7 @@
     
     <!-- 使用zookeeper注册中心暴露服务地址 -->  
     <!-- <dubbo:registry address="zookeeper://127.0.0.1:2181" />    -->
-    <dubbo:registry address="zookeeper://119.23.231.239:2181" /> 
+    <dubbo:registry address="${dubbo.url}" /> 
     
     <!-- 用dubbo协议在20880端口暴露服务 -->  
     <dubbo:protocol name="dubbo" port="20880" />  
@@ -32,5 +32,6 @@
     <dubbo:service interface="newb.c.dubbo.DemoService" ref="demoService" />  
     <dubbo:service interface="newb.c.dubbo.DemoService2" ref="demoService2" />  
     <dubbo:service interface="newb.c.dubbo.DemoService3" ref="demoService3" />
-      
+    
+    <dubbo:reference id="demoServiceTest"  interface="newb.c.dubbo.DemoService" />  
 </beans>
