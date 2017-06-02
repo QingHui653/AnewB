@@ -198,22 +198,6 @@ public class UserController {
 			 out.flush();
 			 out.close();
 		}
-	 /**
-	  * 使用forward 使之 重新进入另一个controller /user/newbs
-	  * @param modelMap
-	  * @param username
-	  * @param password
-	  * @return
-	  */
-	 @RequestMapping(value="/loginFor",method=RequestMethod.POST)
-	 @ApiOperation("登录后 重定向到主页")
-	 public String loginFor(ModelMap modelMap, String username, String password){
-		 	int userId=2;
-		 	User user = userService.getUserById(userId);
-	        modelMap.addAttribute("user", user);
-	        //return "redi:/user/newbs";
-	        return "forward:/user/newbs";
-	    }
 
 	 /**
 	  *  使用JQ serializeArray 表单格式化传入  这个看views下xzjl的JS
