@@ -34,7 +34,7 @@ public class GithubRepoPageProcessor implements PageProcessor {
     }
 
     public static void main(String[] args) {
-//        Spider.create(new GithubRepoPageProcessor()).addUrl("http://www.oschina.net/news/*").thread(5).run();
-        Spider.create(new GithubRepoPageProcessor()).addUrl("http://www.hao123.com").thread(5).run();
-    }
+//      Spider.create(new GithubRepoPageProcessor()).addUrl("http://www.oschina.net/news/*").thread(5).run();
+      Spider.create(new GithubRepoPageProcessor()).addUrl("http://www.hao123.com").thread(5).run();
+  }
 }

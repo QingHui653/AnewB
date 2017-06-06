@@ -1,10 +1,11 @@
-package newb.c.dubbo;
+package newb.c.dubbo.test;
 
-import java.util.List;  
+import java.util.List;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import newb.c.backend.model.basemodel.User;  
+import newb.c.dubbo.DemoService;
 
   
 public class Consumer {  

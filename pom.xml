@@ -827,6 +827,17 @@
 		    <artifactId>activemq-pool</artifactId>
 		    <version>5.7.0</version>
 		</dependency>
+		
+		<!-- elasticsearch -->
+		<!-- https://mvnrepository.com/artifact/org.elasticsearch/elasticsearch -->
+		<dependency>
+		    <groupId>org.elasticsearch</groupId>
+		    <artifactId>elasticsearch</artifactId>
+		    <version>2.4.0</version>
+		</dependency>
+
+
+		
         
         
 		<!-- 组件=============================== -->

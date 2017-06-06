@@ -9,7 +9,7 @@ import java.util.Date;
 public class DateUtil {
 
     public static String DATE ="yyyy-MM-dd HH:mm:ss";
-
+    
     /**
      * 获取yyyy-MM-dd HH:mm:ss格式时间字符串
      * @return

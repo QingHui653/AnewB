@@ -1,4 +1,4 @@
-package newb.c.dubbo;
+package newb.c.dubbo.test;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;

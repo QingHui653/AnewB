@@ -21,9 +21,9 @@ public class github {
 	private String readme;
 	
 	public static void main(String[] args) {
-        OOSpider.create(Site.me().setSleepTime(1000)
-                , new ConsolePageModelPipeline(), github.class)
+		OOSpider.create(Site.me().setSleepTime(1000)
+                ,new ConsolePageModelPipeline(), github.class)
                 .addUrl("https://github.com/QingHui653").thread(5).run();
         System.out.println("****************************************************");
-    }
+	}
 }

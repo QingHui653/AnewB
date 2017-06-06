@@ -2,6 +2,8 @@ package newb.c.backend.model.basemodel;
 
 import javax.persistence.*;
 
+import lombok.Data;
+
 public class Movie {
     @Id
     /*@GeneratedValue(strategy = GenerationType.IDENTITY)*/
@@ -60,6 +62,10 @@ public class Movie {
 		super();
 		this.movieName = movieName;
 		this.movieLink = movieLink;
+	}
+
+	public Movie() {
+		super();
 	}
 
 	@Override

@@ -11,6 +11,8 @@ import java.util.Map;
  * ResultBean:返回bean
  * ResultBeanList：返回bean
  * ResultMap:返回多种bean
+ * pageNo:分页页数
+ * pageSize :分页数
  * @author woshizbh
  *
  */
@@ -31,7 +33,13 @@ public class ResultUtil implements Serializable {
 	private List<Object> ResultBeanList; //返回ListBean
 	
 	private Map<String,Object> ResultMap; //返回Map
-
+	
+	private Integer pageNo;
+	
+	private Integer pageSize;
+	
+	private Integer totalCount;
+	
 	public ResultUtil() {
 		super();
 	}
@@ -87,6 +95,30 @@ public class ResultUtil implements Serializable {
 
 	public void setSuccessful(boolean successful) {
 		this.successful = successful;
+	}
+
+	public Integer getPageNo() {
+		return pageNo;
+	}
+
+	public void setPageNo(Integer pageNo) {
+		this.pageNo = pageNo;
+	}
+
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public Integer getTotalCount() {
+		return totalCount;
+	}
+
+	public void setTotalCount(Integer totalCount) {
+		this.totalCount = totalCount;
 	}
 
 	@Override

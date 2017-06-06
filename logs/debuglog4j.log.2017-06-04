@@ -1,0 +1,24 @@
+[INFO][22:49:26] org.elasticsearch.plugins.PluginsService.<init>(180) | [Mother Night] modules [], plugins [], sites []
+[INFO][22:49:58] org.elasticsearch.plugins.PluginsService.<init>(180) | [Franklin Hall] modules [], plugins [], sites []
+[INFO][22:50:37] org.elasticsearch.plugins.PluginsService.<init>(180) | [Lord Dark Wind] modules [], plugins [], sites []
+[INFO][22:50:57] org.elasticsearch.plugins.PluginsService.<init>(180) | [Shadow King] modules [], plugins [], sites []
+[INFO][22:51:04] org.elasticsearch.client.transport.TransportClientNodesService$SniffNodesSampler$1$1.handleException(455) | [Shadow King] failed to get local cluster state for {#transport#-1}{119.23.231.239}{119.23.231.239:9200}, disconnecting...
+ReceiveTimeoutTransportException[[][119.23.231.239:9200][cluster:monitor/state] request_id [0] timed out after [5016ms]]
+	at org.elasticsearch.transport.TransportService$TimeoutHandler.run(TransportService.java:696)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+[INFO][22:52:19] org.elasticsearch.plugins.PluginsService.<init>(180) | [Wind Dancer] modules [], plugins [], sites []
+[INFO][22:52:25] org.elasticsearch.client.transport.TransportClientNodesService$SniffNodesSampler$1$1.handleException(455) | [Wind Dancer] failed to get local cluster state for {#transport#-1}{119.23.231.239}{119.23.231.239:9200}, disconnecting...
+ReceiveTimeoutTransportException[[][119.23.231.239:9200][cluster:monitor/state] request_id [0] timed out after [5016ms]]
+	at org.elasticsearch.transport.TransportService$TimeoutHandler.run(TransportService.java:696)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+[INFO][22:53:08] org.elasticsearch.plugins.PluginsService.<init>(180) | [Pipeline] modules [], plugins [], sites []
+[WARN][22:53:10] org.elasticsearch.client.transport.TransportClientNodesService$SniffNodesSampler.doSample(479) | [Pipeline] node null not part of the cluster Cluster [sojson-application], ignoring...
+[INFO][22:53:44] org.elasticsearch.plugins.PluginsService.<init>(180) | [Headlok] modules [], plugins [], sites []
+[INFO][22:57:00] org.elasticsearch.plugins.PluginsService.<init>(180) | [Nanny] modules [], plugins [], sites []
+[WARN][22:57:01] org.elasticsearch.client.transport.TransportClientNodesService$SniffNodesSampler.doSample(479) | [Nanny] node null not part of the cluster Cluster [elasticsearch], ignoring...
+[INFO][22:59:14] org.elasticsearch.plugins.PluginsService.<init>(180) | [Phil Urich] modules [], plugins [], sites []
+[INFO][23:01:14] org.elasticsearch.plugins.PluginsService.<init>(180) | [Henry "Hank" McCoy] modules [], plugins [], sites []

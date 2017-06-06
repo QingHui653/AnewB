@@ -198,6 +198,7 @@ public class DataHandle {
 		ResultSet rs = null;
 		
 //		String sql = "insert into demo(pkid,clob) values('77',?)";
+		
 		try {
 			pstmt=conn.prepareStatement(sql);
 //			System.out.println("TEXT  "+text);
