@@ -2,7 +2,6 @@ package newb.c.test;
 
 import newb.c.backend.dao.UserMapper;
 import newb.c.backend.model.basemodel.User;
-import newb.c.dubbo.DemoService;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

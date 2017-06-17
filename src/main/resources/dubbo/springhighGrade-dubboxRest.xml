@@ -22,8 +22,8 @@
     <!-- <dubbo:protocol name="dubbo,rest" server="servlet"/>  -->  
    
     <!-- 具体的实现bean -->  
-    <bean id="restService" class="newb.c.dubbo.RestServiceImpl" />  
+    <bean id="restService" class="newb.c.a_module.dubbo.RestServiceImpl" />  
     <!-- 声明需要暴露的服务接口 -->  
-    <dubbo:service interface="newb.c.dubbo.RestService" ref="restService"/>  
+    <dubbo:service interface="newb.c.a_module.dubbo.RestService" ref="restService"/>  
       
 </beans>

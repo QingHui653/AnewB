@@ -23,6 +23,6 @@
     <dubbo:registry address="${dubbo.url}" />   
     
     <!-- 生成远程服务代理，可以像使用本地bean一样使用demoService -->  
-    <dubbo:reference id="restService"  interface="newb.c.dubbo.RestService" />  
+    <dubbo:reference id="restService"  interface="newb.c.a_module.dubbo.RestService" />  
   
 </beans>  

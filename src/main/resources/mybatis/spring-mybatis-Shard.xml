@@ -83,8 +83,8 @@
 	<!-- <rdb:master-slave-data-source id="dbtb" master-data-source-ref="ds_0" slave-data-sources-ref="ds_1"/> -->
 	
 	<!-- 分库分表规则 -->
-	<rdb:strategy id="databaseShardingStrategy" sharding-columns="user_id" algorithm-class="newb.c.sharding.SingleKeyModuloDatabaseShardingAlgorithm"/>
-    <rdb:strategy id="tableShardingStrategy" sharding-columns="order_id" algorithm-class="newb.c.sharding.SingleKeyModuloTableShardingAlgorithm"/>
+	<rdb:strategy id="databaseShardingStrategy" sharding-columns="user_id" algorithm-class="newb.c.a_module.sharding.SingleKeyModuloDatabaseShardingAlgorithm"/>
+    <rdb:strategy id="tableShardingStrategy" sharding-columns="order_id" algorithm-class="newb.c.a_module.sharding.SingleKeyModuloTableShardingAlgorithm"/>
     
     <rdb:data-source id="shardingDataSource">
         <rdb:sharding-rule data-sources="ds_0,ds_1" default-data-source="ds_0"><!--多库  data-sources="ds_0,ds_1"  default-data-source="ds_0"  --> <!-- 读写分离配置 data-sources="dbtb" -->

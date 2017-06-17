@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import io.swagger.annotations.ApiOperation;
-import newb.c.dubbo.DemoService;
+import newb.c.a_module.dubbo.DemoService;
+
 @Controller
 @RequestMapping("rpc")
 public class RpcController {

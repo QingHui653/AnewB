@@ -13,7 +13,7 @@
 ">
 
 
-    <context:component-scan base-package="newb.c.jobs" />
+    <context:component-scan base-package="newb.c.a_module.jobs" />
 	
     <task:annotation-driven scheduler="qbScheduler" mode="proxy" />
     <task:scheduler id="qbScheduler" pool-size="10" />

@@ -135,7 +135,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/user/**" /><!-- 匹配的是url路径， 如果不配置或/**,将拦截所有的Controller -->
-			<bean class="newb.c.interceptor.MemberInterceptor"></bean>
+			<bean class="newb.c.webmodule.interceptor.MemberInterceptor"></bean>
 		</mvc:interceptor>
 	 </mvc:interceptors>
 	

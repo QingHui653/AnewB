@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>AnewB</groupId>
 	<artifactId>AnewB</artifactId>
-	<version>2.0.0</version>
+	<version>3.0.0</version>
 	<packaging>war</packaging>
 	<name>AnewB</name>
 	<description />
@@ -835,6 +835,13 @@
 		    <artifactId>elasticsearch</artifactId>
 		    <version>2.4.0</version>
 		</dependency>
+		<!-- solr-solrj -->
+		<dependency>
+		    <groupId>org.apache.solr</groupId>
+		    <artifactId>solr-solrj</artifactId>
+		    <version>6.6.0</version>
+		</dependency>
+		
 
 
 		

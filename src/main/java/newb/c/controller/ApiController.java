@@ -40,8 +40,8 @@ import com.google.zxing.common.BitMatrix;
 
 import io.swagger.annotations.ApiOperation;
 import tk.mybatis.mapper.entity.Example;
+import newb.c.a_module.qrcode.MatrixToImageWriter;
 import newb.c.api.weather.weather;
-import newb.c.qrcode.MatrixToImageWriter;
 import newb.c.backend.model.RepList;
 import newb.c.backend.model.basemodel.Result;
 import newb.c.backend.model.basemodel.TOrder;

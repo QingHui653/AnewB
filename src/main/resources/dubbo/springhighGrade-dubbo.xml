@@ -24,14 +24,14 @@
    
    
     <!-- 具体的实现bean -->  
-    <bean id="demoService" class="newb.c.dubbo.DemoServiceImpl" />  
-    <bean id="demoService2" class="newb.c.dubbo.DemoServiceImpl2" />
-    <bean id="demoService3" class="newb.c.dubbo.DemoServiceImpl3" />
+    <bean id="demoService" class="newb.c.a_module.dubbo.DemoServiceImpl" />  
+    <bean id="demoService2" class="newb.c.a_module.dubbo.DemoServiceImpl2" />
+    <bean id="demoService3" class="newb.c.a_module.dubbo.DemoServiceImpl3" />
    
     <!-- 声明需要暴露的服务接口 -->  
-    <dubbo:service interface="newb.c.dubbo.DemoService" ref="demoService" />  
-    <dubbo:service interface="newb.c.dubbo.DemoService2" ref="demoService2" />  
-    <dubbo:service interface="newb.c.dubbo.DemoService3" ref="demoService3" />
+    <dubbo:service interface="newb.c.a_module.dubbo.DemoService" ref="demoService" />  
+    <dubbo:service interface="newb.c.a_module.dubbo.DemoService2" ref="demoService2" />  
+    <dubbo:service interface="newb.c.a_module.dubbo.DemoService3" ref="demoService3" />
     
     <dubbo:reference id="demoServiceTest"  interface="newb.c.dubbo.DemoService" />  
 </beans>
