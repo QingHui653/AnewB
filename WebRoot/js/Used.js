@@ -164,7 +164,7 @@
     });
     
     
-    <!--select2 -->
+    /*<!--select2 -->*/
     $(".labelName").change(function(){
         var checkValue="";//获取value,多值使用逗号隔开
         var checkText="";
@@ -177,5 +177,55 @@
         $("#labelName").val(checkText);
         $("#labelId").val(checkValue);
     });
+    
+    /*滚动到底部   加载页面*/
+    $(document).ready(function(){
+		var nScrollHight = 0; //滚动距离总长(注意不是滚动条的长度)
+        var nScrollTop = 0;   //滚动到的当前位置
+        var nDivHight = $(".table_grad").height();
+        var pageNum=1;
+		
+		$(".table_grad").on('scroll',function(){
+			console.info('滚动了');
+			var hight = $(this)[0].clientHeight; //滚动条高度
+			nScrollHight = $(this)[0].scrollHeight;//总长
+        	nScrollTop = $(this)[0].scrollTop; //位置
+        	var divH =$(this).height();
+        	console.info('总长'+nScrollHight +' 位置'+nScrollTop+' 高度'+nDivHight+ 'hight' +hight+'div h' +divH);
+        	
+        	//pageNum=(nScrollTop + hight)/nScrollHight +1;
+        	//console.info('页码 '+ pageNum);
+        	
+        	if(nScrollTop + hight >= nScrollHight){
+        		
+        		console.info("滚动条到底部了");
+           		pageNum+=1;
+           		console.info('页码 '+ pageNum);
+           		
+           		var ids = $("input:hidden[class='deaId']").map(function(index,elem) {
+           	        return $(elem).val();
+           	    }).get().join(',');
+           		
+           	    console.info(ids);
+           	    
+           	    var pricingType = $("#pricingType").val();
+           	    $.ajax({
+           	        type: "post",
+           	        url: baseURL + "/dealerPrice/add",
+           	        data: {"ids" : ids, "pricingType" : pricingType,"pageNum":pageNum},
+           	        dataType: "html",
+           	        success: function(returnHtml){
+           	            $("#custTable").append(returnHtml);
+           	        },
+           	    });
+        	}
+		});
+		
+	});
+    
+    function doubleClick(){
+    	//unbind  防止绑定两次点击事件
+    	$("#doubleClick").unbind("click").click();
+    };
     
     
