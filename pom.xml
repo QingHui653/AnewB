@@ -835,12 +835,28 @@
 		    <artifactId>elasticsearch</artifactId>
 		    <version>2.4.0</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-elasticsearch -->
+		<dependency>
+		    <groupId>org.springframework.data</groupId>
+		    <artifactId>spring-data-elasticsearch</artifactId>
+		    <version>2.1.0.RELEASE</version>
+		</dependency>
+		
 		<!-- solr-solrj -->
 		<dependency>
 		    <groupId>org.apache.solr</groupId>
 		    <artifactId>solr-solrj</artifactId>
 		    <version>6.6.0</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-solr -->
+		<dependency>
+		    <groupId>org.springframework.data</groupId>
+		    <artifactId>spring-data-solr</artifactId>
+		    <version>2.1.4.RELEASE</version>
+		</dependency>
+
+		
 		
 
 

@@ -11,10 +11,11 @@ public class CreateIndexAndMapping {
 
 	/**
 	 * 创建index索引
+	 * //首先创建索引
 	 */
 //	@Test
 	public void createIndex() {
-		//构建一个Index（索引）首字母不能大写
+		//构建一个Index（索引）首字母不能大写  
 		CreateIndexRequest request = new CreateIndexRequest("wow");
 		ESTools.client.admin().indices().create(request);
 		
@@ -24,6 +25,7 @@ public class CreateIndexAndMapping {
 	
 	/**
 	 * 创建mapping 索引中的mapping
+	 * 在index 中创建mapping
 	 */
 	@Test
 	public void createBangMapping(){
