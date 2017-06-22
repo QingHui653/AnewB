@@ -2,6 +2,9 @@ package newb.c.a_module.solr;
 
 import org.apache.solr.client.solrj.*;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
+import org.apache.solr.client.solrj.request.QueryRequest;
+import org.apache.solr.client.solrj.response.FacetField;
+import org.apache.solr.client.solrj.response.FacetField.Count;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
@@ -24,7 +27,13 @@ public class MySolr {
                                      "向搜索引擎服务器提交一定格式的XML文件生成索引",
                                     "也可以通过Http Get操作提出查找请求",
                                     "并得到XML格式的返回结果"};
- 
+    
+
+    public static void main(String[] args) {
+        createIndex();
+        search();
+    }
+    
     public static SolrClient getSolrClient(){
 //      return new HttpSolrClient(URL+"/"+SERVER);
     	return new HttpSolrClient.Builder(URL+"/"+SERVER).build();
@@ -52,14 +61,36 @@ public class MySolr {
             e.printStackTrace();
         }
     };
- 
+    
+    /**
+     * 全部删除
+     */
+    public static void remove(){
+        SolrClient client = getSolrClient();
+        SolrInputDocument doc = new SolrInputDocument();
+        
+        try {
+			client.deleteByQuery("*");
+			client.commit(); 
+		} catch (SolrServerException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}        
+
+        System.out.println("Documents deleted");
+    }
+    
     /**
      * 搜索
      */
     public static void search(){
         SolrClient client = getSolrClient();
         SolrQuery query = new SolrQuery();
-        query.setQuery("content_test:搜索");
+        
+        query.setQuery("content_test:搜索");//设置查询条件
+        //query.addField("*");//设置查询字段  默认全部
+        
         QueryResponse response = null;
         try {
             response = client.query(query);
@@ -77,9 +108,42 @@ public class MySolr {
             e.printStackTrace();
         }
     }
- 
-    public static void main(String[] args) {
-        createIndex();
-        search();
-    }
+    
+    /**
+     * 分组(faceting)指的是将搜索结果分类到各种类别中
+     */
+    public static void faceting() throws SolrServerException, IOException {
+    	SolrClient client = getSolrClient();
+    	//准备个文档
+    	SolrInputDocument doc = new SolrInputDocument(); 
+
+        SolrQuery query = new SolrQuery(); 
+
+        query.setQuery("*:*"); 
+        query.setRows(0); 
+
+        //新建个分组字段
+        query.addFacetField("author");        
+        //请求
+        QueryRequest qryReq = new QueryRequest(query); 
+        //回应
+        QueryResponse resp = qryReq.process(client);  
+        
+        System.out.println(resp.getFacetFields()); 
+
+        List<FacetField> facetFields = resp.getFacetFields(); 
+        for (int i = 0; i > facetFields.size(); i++) { 
+           FacetField facetField = facetFields.get(i); 
+           List<Count> facetInfo = facetField.getValues(); 
+
+           for (FacetField.Count facetInstance : facetInfo) { 
+              System.out.println(facetInstance.getName() + " : " + 
+                 facetInstance.getCount() + " [drilldown qry:" + 
+                 facetInstance.getAsFilterQuery()); 
+           } 
+           System.out.println("Hello"); 
+        } 
+     }
 }
+    
+

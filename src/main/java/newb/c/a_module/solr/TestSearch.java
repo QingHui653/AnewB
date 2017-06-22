@@ -32,7 +32,7 @@ public class TestSearch {
 		SolrInputDocument doc = new SolrInputDocument(filedMap);
 		doc.addField("id", 6666);
 		try {
-			// solrClient.deleteById("id");
+//			 solrClient.deleteById("id");
 			solrClient.add(doc);
 			solrClient.commit();
 		} catch (SolrServerException e) {
