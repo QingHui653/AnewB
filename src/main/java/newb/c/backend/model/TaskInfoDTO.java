@@ -117,8 +117,9 @@ public class TaskInfoDTO {
         this.taskState = taskState;    
         this.updateTime = updateTime;    
         this.userNickName = userNickName;    
-    }    
+    }   
+    
     public TaskInfoDTO() {    
-        // TODO Auto-generated constructor stub    
+    	
     }    
 }

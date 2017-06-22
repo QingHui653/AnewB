@@ -10,6 +10,12 @@ import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 必须使用非root 用户启动 用户名es
+ * head插件访问地址 /_plugin/head/
+ *
+ */
+
 public class ESTools {
 	
 	public final static Client client =  build();

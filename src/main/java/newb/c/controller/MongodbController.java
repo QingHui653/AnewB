@@ -72,7 +72,7 @@ public class MongodbController {
         Criteria criteria =new Criteria(); 
         criteria.where("oid").gt(22);    // 大于
 
-        // criteria.and("name").is("cuichongfei");等于
+//         criteria.and("name").is("cuichongfei");等于
         // List<String> interests = new ArrayList<String>();
         // interests.add("study");
         // interests.add("linux");

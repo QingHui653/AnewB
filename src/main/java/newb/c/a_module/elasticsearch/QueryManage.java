@@ -50,7 +50,7 @@ public class QueryManage {
 									   .setTypes(type)
 									   .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
 									   .setQuery(QueryBuilders.termQuery("id", id))// Query
-//								        .setPostFilter(QueryBuilders.rangeQuery("age").from(12).to(18))     // Filter
+								       .setPostFilter(QueryBuilders.rangeQuery("age").from(12).to(18))     // Filter
 									   .setFrom(0).setSize(60).setExplain(true)
 									   .execute()
 									   .actionGet();
@@ -81,8 +81,7 @@ public class QueryManage {
 		//判断非空
 		if(!response.isSourceEmpty()){
 			Map<String,Object> data = response.getSource();
-			entity = (Movie)JSONObject.toBean(JSONObject.fromObject(data)
-						,Movie.class);
+			entity = (Movie)JSONObject.toBean(JSONObject.fromObject(data),Movie.class);
 		}
 		return entity;
 	}
@@ -109,7 +108,7 @@ public class QueryManage {
 		SearchRequestBuilder srb = client.prepareSearch("hi");
 		srb.setSearchType(SearchType.DFS_QUERY_THEN_FETCH);
 		srb.setTypes("hello");
-//		srb.setQuery(resultMap);
+		srb.setQuery(resultMap);
 		srb.setFrom((pageNo - 1) * pageSize).setSize(pageSize)
 		.setExplain(true);
 		
@@ -129,7 +128,7 @@ public class QueryManage {
 		
 	}
 	/**
-	 * 分页查询 SOBangg
+	 * 分页查询
 	 * @param resultMap
 	 * @param pageSize
 	 * @param pageNo
