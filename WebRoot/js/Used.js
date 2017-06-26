@@ -1,4 +1,4 @@
-	
+
 	/**
 	 * jq ready 相当于在文档dom载入完成后就运行
 	 */
@@ -14,11 +14,11 @@
     		//通过这样可以获取父iframe里的元素
     		$("#ifr_right",parent.document).attr("src",url);
     	});
-	
+
 	/**
 	 * live('',function(){}) 这样可以保证使用ajax后面添加的元素，也能触发js
 	 * 从 jQuery 1.7 开始，不再建议使用 .live() 方法。请使用 .on() 来添加事件处理。使用旧版本的用户，应该优先使用 .delegate() 来替代 .live()。
-	 * on方法只能使用在页面上已有的标签；想获取未来元素，只能用delegate方法了，具体写法如下：
+	 * on方法只能使用在页面上已有的标签；想获取未来元素，需要绑定在他的父元素上，具体写法如下：
 	 */
 	//1
 	$(".menu-first li").live('click',function(){
@@ -35,7 +35,7 @@
     $(document).on('click', 'td a', function() {
         alert("Aha!");
       });
-    
+
     /**
      * AJAX 异步刷新页面
      * @param pageNo
@@ -56,7 +56,7 @@
 			}
 		})
 	}
-    
+
     /**
      *  获取多选框的选择情况
      * @param e
@@ -65,11 +65,11 @@
     function queryUserBase(e){
 		var num =[];
 		//name=staff 的多选框情况
-		$('input:checkbox[name="staff"]:checked').each(function(){    
-			num.push($(this).val());    
+		$('input:checkbox[name="staff"]:checked').each(function(){
+			num.push($(this).val());
 		});
 	}
-    
+
     /**
      * 单选框全选
      * @param e
@@ -83,8 +83,29 @@
 			$(".labelCheck")[i].checked = e.checked;
 		}
 	}
+
+	/**
+			*商品全选
+			**/
+			$(document).on('click','.selectAll_shop',function(){
+				var chknum = $("#list :checkbox").size();//选项总个数
+				var chk = 0;  //选中的商品个数
+				//将选定的id使用逗号隔开
+				$("#list :checkbox").each(function () {  
+			        if($(this).prop("checked")==true){
+						chk++;
+					}
+			    });
+				if(chknum==chk){//全不选
+					$('.notice_goodsUl li .aui-checkbox').prop("checked",false);
+					$('.yiSelected span').html(0);
+				}else{//全选
+					$('.notice_goodsUl li .aui-checkbox').prop("checked",true);
+					$('.yiSelected span').html($('.notice_goodsUl li').length);
+				}
+			});
     /**
-     * 
+     *
      * @param e
      * @returns
      */
@@ -104,7 +125,7 @@
      * @param s
      * @returns
      */
-    function reg(s) { 
+    function reg(s) {
     	var idcard=$("#staffIdCard").val();
         var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
         if (reg.test(idcard) === false) {
@@ -112,7 +133,7 @@
 			$(e).attr('href','#tishiModal');
             return false;};
 	}
-    
+
     //返回yyyy-MM-dd HH:mm:ss
     function getNowFormatDate() {
 	    var date = new Date();
@@ -142,7 +163,7 @@
 	            + " " + strHours + seperator2 + strMin+ seperator2 + strSec;
         return currentdate;
     }
-    
+
     $(".labelName").select2({
         tags: true,
         ajax: {
@@ -162,70 +183,21 @@
             cache: true
         },
     });
-    
-    
-    /*<!--select2 -->*/
+
+
+    <!--select2 -->
     $(".labelName").change(function(){
         var checkValue="";//获取value,多值使用逗号隔开
         var checkText="";
-        var selected = $(".labelName").select2('data');//选择的值  
+        var selected = $(".labelName").select2('data');//选择的值
             for (var i=0;i<selected.length;i++) {
-            checkValue+=selected[i].id+",";  
+            checkValue+=selected[i].id+",";
             checkText+=selected[i].text+",";
-        } 
+        }
         alert(checkValue+"--"+checkText);
         $("#labelName").val(checkText);
         $("#labelId").val(checkValue);
     });
-    
-    /*滚动到底部   加载页面*/
-    $(document).ready(function(){
-		var nScrollHight = 0; //滚动距离总长(注意不是滚动条的长度)
-        var nScrollTop = 0;   //滚动到的当前位置
-        var nDivHight = $(".table_grad").height();
-        var pageNum=1;
-		
-		$(".table_grad").on('scroll',function(){
-			console.info('滚动了');
-			var hight = $(this)[0].clientHeight; //滚动条高度
-			nScrollHight = $(this)[0].scrollHeight;//总长
-        	nScrollTop = $(this)[0].scrollTop; //位置
-        	var divH =$(this).height();
-        	console.info('总长'+nScrollHight +' 位置'+nScrollTop+' 高度'+nDivHight+ 'hight' +hight+'div h' +divH);
-        	
-        	//pageNum=(nScrollTop + hight)/nScrollHight +1;
-        	//console.info('页码 '+ pageNum);
-        	
-        	if(nScrollTop + hight >= nScrollHight){
-        		
-        		console.info("滚动条到底部了");
-           		pageNum+=1;
-           		console.info('页码 '+ pageNum);
-           		
-           		var ids = $("input:hidden[class='deaId']").map(function(index,elem) {
-           	        return $(elem).val();
-           	    }).get().join(',');
-           		
-           	    console.info(ids);
-           	    
-           	    var pricingType = $("#pricingType").val();
-           	    $.ajax({
-           	        type: "post",
-           	        url: baseURL + "/dealerPrice/add",
-           	        data: {"ids" : ids, "pricingType" : pricingType,"pageNum":pageNum},
-           	        dataType: "html",
-           	        success: function(returnHtml){
-           	            $("#custTable").append(returnHtml);
-           	        },
-           	    });
-        	}
-		});
-		
-	});
-    
-    function doubleClick(){
-    	//unbind  防止绑定两次点击事件
-    	$("#doubleClick").unbind("click").click();
-    };
-    
-    
+
+		<!--选择下拉框选中的值 -->
+		var id =$("#selectId option:selected").val();
