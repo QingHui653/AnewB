@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
 
 import org.junit.Test;
 
@@ -43,8 +44,9 @@ public class nio {
 	
 	@Test
 	public void nio2() throws IOException {
-		RandomAccessFile aFile = new RandomAccessFile(relativelyPath+"\\src\\test\\io\\1.txt", "rw");
+		RandomAccessFile aFile = new RandomAccessFile(relativelyPath+"\\src\\java\\test\\io\\1.txt", "rw");
 		FileChannel inChannel = aFile.getChannel();
+		Charset cs =Charset.forName("UTF-8");
 		//创建48bytes的缓存区
 		ByteBuffer buf = ByteBuffer.allocate(48);
 		//从buff读取数据
@@ -52,15 +54,17 @@ public class nio {
 		while (bytesRead != -1) {
 			
 			System.out.println("Read " + bytesRead);
-			//make buffer ready for read
+			//Buffer从写模式切换到读模式。
+			//调用flip()方法会将position设回0，并将limit设置成之前position的值。
 			buf.flip();
 
 			while (buf.hasRemaining()) {
-				System.out.print((char) buf.get()); // read 1 byte at a time
+//				System.out.print((char) buf.get()); // read 1 byte at a time
+				System.out.print(cs.decode(buf)); // 转utf-8
 			}
 			
-			//make buffer ready for writing
-			buf.clear();
+			buf.clear();//clear()方法会清空整个缓冲区
+//			buf.compact();//compact()方法只会清除已经读过的数据
 			bytesRead = inChannel.read(buf);
 		}
 		aFile.close();

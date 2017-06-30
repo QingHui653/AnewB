@@ -43,6 +43,8 @@
 	<!-- dubbo -->
 	<!-- <import resource="dubbo/springhighGrade-dubbo.xml"/> -->
 	<!-- <import resource="dubbo/springhighGrade-dubboxRest.xml"/> -->
+	<!-- elasticsearch -->
+	<import resource="elasticsearch/elasticsearch.xml"/>
 	
 	
 	<!--配置注解  -->

@@ -1,36 +1,48 @@
 package newb.c.controller;
 
-import java.util.ArrayList;    
-import java.util.Collection;    
-import java.util.List;    
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.elasticsearch.action.ActionFuture;
 import org.elasticsearch.action.admin.cluster.health.ClusterHealthRequest;
 import org.elasticsearch.action.admin.cluster.health.ClusterHealthResponse;
+import org.elasticsearch.action.search.SearchRequestBuilder;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.cluster.health.ClusterHealthStatus;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.QueryStringQueryBuilder;
+import org.elasticsearch.index.query.TermsQueryBuilder;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.sort.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.Criteria;
 import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
+import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.apache.commons.lang.StringUtils;    
-import org.elasticsearch.action.search.SearchRequestBuilder;    
-import org.elasticsearch.action.search.SearchResponse;    
-import org.elasticsearch.action.search.SearchType;    
-import org.elasticsearch.index.query.QueryBuilders;    
-import org.elasticsearch.index.query.QueryStringQueryBuilder;    
-import org.elasticsearch.index.query.TermsQueryBuilder;    
-import org.elasticsearch.search.SearchHit;    
-import org.elasticsearch.search.sort.SortOrder;    
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.swagger.annotations.ApiOperation;
-import newb.c.backend.model.TaskInfoDTO;
+import newb.c.backend.elasticmodel.MovieDTO;
+import newb.c.backend.elasticmodel.TaskInfoDTO;
 
 @Controller
 @RequestMapping("elasticsearch")
@@ -42,8 +54,25 @@ public class ElasticSearchController {
 	private String esIndexName = "heros";
 
 	private static Logger logger = LoggerFactory.getLogger(ElasticSearchController.class);
-
-	@RequestMapping("CreatIndexMapping")
+	
+	
+	@SuppressWarnings("static-access")
+	@RequestMapping(value="queryMovie",method={RequestMethod.GET,RequestMethod.POST})
+	@ApiOperation(value="查询电影")
+	@ResponseBody
+	public Object queryMovie(String name,int page,int pageSize) {
+		if(StringUtils.isBlank(name))
+			name=null;
+		CriteriaQuery criteriaQuery = new CriteriaQuery(new Criteria().
+				and(new Criteria("movieName").is(name)))
+				.setPageable(new PageRequest(page-1, pageSize));
+		List<MovieDTO> movieList = elasticsearchTemplate.queryForList(criteriaQuery, MovieDTO.class);	
+//		movieList.forEach(System.out::println);
+		return movieList;
+	}
+	
+	
+	@GetMapping("CreatIndexMapping")
 	@ApiOperation(value="创建elastic index和mapping")
 	private void CreatIndexMapping() {
 		// 首先判断index 是否存在 创建 index
@@ -53,22 +82,52 @@ public class ElasticSearchController {
 		elasticsearchTemplate.putMapping(TaskInfoDTO.class);
 	}
 	
-	@RequestMapping("insertOrUpdate")
+	/**
+	 * 上github 查看源码 test core 下 query包
+	 * @param query
+	 */
+	@SuppressWarnings("static-access")
+	@GetMapping("queryById")
+	@ApiOperation(value="查询样例")
+	public void query(String query) {
+		CriteriaQuery criteriaQuery = new CriteriaQuery(new Criteria()
+				.and(new Criteria("clusterName").is("app"))
+				.and(new Criteria("ip").is("127.0.0.1"))
+				.and(new Criteria("appType").is("download"))
+				.and(new Criteria("appName").is("appdownload"))
+				.and(new Criteria("fileName").is("appdownload.log"))
+				.and(new Criteria("logLeval").is("info"))
+				.and(
+						new Criteria("produceDateTime")
+						.greaterThanEqual("startDate.getTime()")
+						.lessThanEqual("endDate.getTime()")
+					)
+				.and(new Criteria("message").contains("haha"))).setPageable(
+				new PageRequest(0, 10)).addSort(
+				new Sort(new Sort.Order(Sort.Direction.DESC, "segEndlineNo")));
+		List<TaskInfoDTO> taskInfoList = elasticsearchTemplate.queryForList(criteriaQuery, TaskInfoDTO.class);	
+		taskInfoList.forEach(System.out::println);
+	}
+	
+	
+	@PostMapping("insertOrUpdate")
+	@ResponseBody
 	@ApiOperation(value="插入和更新数据  单条")
-	public boolean insertOrUpdateTaskInfoDTO(TaskInfoDTO TaskInfoDTO) {
+	public Object insertOrUpdateTaskInfoDTO(TaskInfoDTO TaskInfoDTO) {
 		try {
 			IndexQuery indexQuery = new IndexQueryBuilder().withId(TaskInfoDTO.getTaskId()).withObject(TaskInfoDTO).build();
 			elasticsearchTemplate.index(indexQuery);
-			return true;
+			return "true";
 		} catch (Exception e) {
 			logger.error("insert or update task info error.", e);
-			return false;
+			return "false";
 		}
 	}
 	
-	@RequestMapping("insertOrUpdateList")
+	@PostMapping("insertOrUpdateList")
 	@ApiOperation(value="插入和更新数据  多条")
-	public boolean insertOrUpdateTaskInfoDTOList(List<TaskInfoDTO> TaskInfoDTOList) {
+	@ResponseBody
+	public Object insertOrUpdateTaskInfoDTOList(List<TaskInfoDTO> TaskInfoDTOList) {
 		List<IndexQuery> queries = new ArrayList<IndexQuery>();
 		for (TaskInfoDTO TaskInfoDTO : TaskInfoDTOList) {
 			IndexQuery indexQuery = new IndexQueryBuilder().withId(TaskInfoDTO.getTaskId()).withObject(TaskInfoDTO)
@@ -76,31 +135,23 @@ public class ElasticSearchController {
 			queries.add(indexQuery);
 		}
 		elasticsearchTemplate.bulkIndex(queries);
-		return true;
+		return "true";
 	}
 	
-	@RequestMapping("deleteById")
+	@GetMapping("deleteById")
 	@ApiOperation(value="通过id删除数据")
-	public <T> boolean deleteById(String id, Class<T> clzz) {
+	@ResponseBody
+	public <T> Object deleteById(String id, Class<T> clzz) {
 		try {
 			elasticsearchTemplate.delete(clzz, id);
-			return true;
+			return "true";
 		} catch (Exception e) {
 			logger.error("delete " + clzz + " by id " + id + " error.", e);
-			return false;
+			return "false";
 		}
 	}
 	
-	@SuppressWarnings("static-access")
-	@RequestMapping("queryById")
-	@ApiOperation(value="通过id查询")
-	public void query() {
-		Criteria criteria =new Criteria();
-			criteria.where("id").is("3");
-		CriteriaQuery criteriaQuery =new CriteriaQuery(criteria);
-		List<TaskInfoDTO> taskInfoList = elasticsearchTemplate.queryForList(criteriaQuery, TaskInfoDTO.class);	
-		taskInfoList.forEach(System.out::println);
-	}
+	
 	
 	/**
 	 * 检查健康状态

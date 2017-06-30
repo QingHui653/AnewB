@@ -1,4 +1,4 @@
-package newb.c.backend.model;
+package newb.c.backend.elasticmodel;
 
 import org.springframework.data.annotation.Id;    
 import org.springframework.data.elasticsearch.annotations.Document;    
