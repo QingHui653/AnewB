@@ -228,7 +228,7 @@
 	
 	<!-- welcome  -->
 	<welcome-file-list>
-		<welcome-file>/comm/index.html</welcome-file>
+		<welcome-file>/web/vue/movieVue.html</welcome-file>
 	</welcome-file-list>
 	<!-- <error-page>
     	<error-code>404</error-code>
