@@ -1,4 +1,4 @@
-package newb.c.mycontroller;
+package newb.c.myframework.mvc.bean;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;

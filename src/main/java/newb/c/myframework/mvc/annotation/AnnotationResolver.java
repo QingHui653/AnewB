@@ -1,7 +1,9 @@
-package newb.c.mycontroller;
+package newb.c.myframework.mvc.annotation;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+
+import newb.c.myframework.mvc.LoginServlet2;
 
 public class AnnotationResolver {
 

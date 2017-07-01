@@ -21,6 +21,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+/**
+ * 因为去掉activiti pom文件 ，因此报错
+ * 需要的可以自己加入
+ * @author woshizbh
+ *
+ */
 //@Controller
 public class ActController {
     @Autowired

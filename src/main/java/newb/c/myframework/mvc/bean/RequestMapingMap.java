@@ -1,4 +1,4 @@
-package newb.c.mycontroller;
+package newb.c.myframework.mvc.bean;
 
 import java.util.HashMap;
 import java.util.Map;
