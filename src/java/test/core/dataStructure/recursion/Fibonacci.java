@@ -11,6 +11,7 @@ public class Fibonacci  {
     /**
      * 斐波那契数列的实现
      * 0,1,1,2,3,5,8,13,21......
+     * 未使用尾递归，每次都计算全部
      * @param day
      */
     public long fibonacci(int day){
@@ -22,7 +23,7 @@ public class Fibonacci  {
            return fibonacci(day-1)+fibonacci(day-2); //F(n)=F(n-1)+F(n-2)
         }
     }
-
+    
     /**
      * 更为简洁的写法
      * @param day
@@ -83,7 +84,7 @@ public class Fibonacci  {
         long now =System.currentTimeMillis();
 //        System.out.println("第11天动物数量为:"+ fibonacci.fib_i(1,1,50));
 //        System.out.println("第11天动物数量为:"+ fibonacci.fib(50));//12586269025
-        System.out.println("第11天动物数量为:"+ fibonacci.fibonacciNormal(100));//12586269025
+        System.out.println("第11天动物数量为:"+ fibonacci.fibonacciNormal(11));//12586269025
 //        System.out.println("第11天动物数量为:"+ fibonacci.fibonacci(10));
         System.out.println("执行第500天的时间为:"+(System.currentTimeMillis()-now));
     }
