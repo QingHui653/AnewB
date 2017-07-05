@@ -60,7 +60,7 @@ public class ElasticSearchController {
 	@RequestMapping(value="queryMovie",method={RequestMethod.GET,RequestMethod.POST})
 	@ApiOperation(value="查询电影")
 	@ResponseBody
-	public Object queryMovie(String name,int page,int pageSize) {
+	public Object queryMovie(String name,Integer  page,Integer  pageSize) {
 		if(StringUtils.isBlank(name))
 			name=null;
 		CriteriaQuery criteriaQuery = new CriteriaQuery(new Criteria().
