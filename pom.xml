@@ -576,11 +576,17 @@
     		<artifactId>spring-data-redis</artifactId>
     		<version>1.8.0.RELEASE</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-mongodb -->
+		<!-- mongo-java-driver -->
+		<dependency>
+		    <groupId>org.mongodb</groupId>
+		    <artifactId>mongo-java-driver</artifactId>
+		    <version>3.4.2</version>
+		</dependency>
+		<!-- spring mongodb -->
 		<dependency>
 		    <groupId>org.springframework.data</groupId>
 		    <artifactId>spring-data-mongodb</artifactId>
-		    <version>1.10.1.RELEASE</version>
+		    <version>1.10.4.RELEASE</version>
 		</dependency>
 		
 		
