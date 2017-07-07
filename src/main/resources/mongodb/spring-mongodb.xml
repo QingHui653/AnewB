@@ -7,10 +7,11 @@
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
     http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
-    http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
+    http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
     
-    <mongo:mongo id="mongo" host="${mongo.host}" port="${mongo.port}" >
+    <!-- 不支持mongodb3.0 driver -->
+    <!-- <mongo:mongo id="mongo" host="${mongo.host}" port="${mongo.port}" >
         <mongo:options 
             connections-per-host="${mongo.connectionsPerHost}" 
             threads-allowed-to-block-for-connection-multiplier="${mongo.threadsAllowedToBlockForConnectionMultiplier}" 
@@ -22,7 +23,18 @@
             slave-ok="${mongo.slaveOk}" 
             write-number="1" 
             write-timeout="0" write-fsync="true"/> 
-    </mongo:mongo>
+    </mongo:mongo> -->
+    
+    <mongo:mongo-client  id="mongo" host="${mongo.host}" port="${mongo.port}">
+	<mongo:client-options 
+			connections-per-host="${mongo.connectionsPerHost}" 
+            threads-allowed-to-block-for-connection-multiplier="${mongo.threadsAllowedToBlockForConnectionMultiplier}" 
+            connect-timeout="${mongo.connectTimeout}" 
+            max-wait-time="${mongo.maxWaitTime}" 
+            socket-keep-alive="${mongo.socketKeepAlive}" 
+            socket-timeout="${mongo.socketTimeout}" 
+            /> 
+	</mongo:mongo-client>
     <!-- 设置使用的数据库 名-->
     <mongo:db-factory dbname="test" mongo-ref="mongo"/>
     <!-- mongodb的模板 -->

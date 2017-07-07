@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.Document;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,6 +35,13 @@ public class Manager {
 		// 获取集合 ，没有则创建
 		collection = mongoDatabase.getCollection("test");
 		System.out.println("        @Before 集合 test 选择成功");
+	}
+	
+	@After
+	public void close(){
+		if(mongoClient!=null)
+			mongoClient.close();
+		System.out.println("        @After 连接关闭");
 	}
 
 	// @Test
