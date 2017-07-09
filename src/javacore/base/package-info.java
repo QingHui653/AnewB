@@ -1,5 +1,0 @@
-/**
- * @author woshizbh
- *
- */
-package base;

@@ -191,14 +191,14 @@
 		</servlet-mapping> -->
 		
 		<!-- CXF 配置 未启用 -->
-	<!-- <servlet>
+	<servlet>
 		<servlet-name>CXFServlet</servlet-name>
 		<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>CXFServlet</servlet-name>
 		<url-pattern>/webservice/*</url-pattern>
-	</servlet-mapping> -->
+	</servlet-mapping>
 		
 	<!-- 不拦截这些静态资源   目前使用springmvc标签-->
 	<!-- <servlet-mapping>

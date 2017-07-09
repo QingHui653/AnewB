@@ -183,7 +183,41 @@
             cache: true
         },
     });
-
+    
+    function testPass(str){  
+        var rC = {  
+            lW:'[a-z]',  
+            uW:'[A-Z]',  
+            nW:'[0-9]',  
+            sW:'[\\u0020-\\u002F\\u003A-\\u0040\\u005B-\\u0060\\u007B-\\u007E]'  
+        };  
+        function Reg(str, rStr){  
+            var reg = new RegExp(rStr);  
+            if(reg.test(str)) return true;  
+            else return false;  
+        }  
+        if(str.length < 6){  
+            //document.title = '您的密码长度太短';  
+            alert('您的密码长度太短');  
+            return false;  
+        }else{  
+            var tR = {  
+                l:Reg(str, rC.lW),  
+                u:Reg(str, rC.uW),  
+                n:Reg(str, rC.nW),  
+                s:Reg(str, rC.sW)  
+            };  
+            if((tR.l && tR.u && tR.n) || (tR.l && tR.u && tR.s) || (tR.s && tR.u && tR.n) || (tR.s && tR.l && tR.n)){  
+                //document.title = '密码符合要求';  
+                alert('密码符合要求');  
+                return true;  
+            }else{  
+                alert('您的密码必须含有“小写字母”、“大写字母”、“数字”、“特殊符号”中的任意三种');  
+                //document.title = '您的密码必须含有“小写字母”、“大写字母”、“数字”、“特殊符号”中的任意三种';  
+                return false;  
+            }  
+        }  
+    }
 
     <!--select2 -->
     $(".labelName").change(function(){
