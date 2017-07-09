@@ -154,7 +154,7 @@
 	<servlet>
 		<description>自定义的简单的springmvc</description>
 		<servlet-name>AnnotationHandleServlet</servlet-name>
-		<servlet-class>newb.c.mycontroller.AnnotationHandleServlet</servlet-class>
+		<servlet-class>newb.c.myframework.mvc.annotation.AnnotationHandleServlet</servlet-class>
 		<init-param>
 			<description>配置要扫描包及其子包, 如果有多个包,以逗号分隔</description>
 			<param-name>basePackage</param-name>

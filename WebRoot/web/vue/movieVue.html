@@ -51,7 +51,7 @@
             <el-table-column prop="movieName" label="片名" width="500"></el-table-column>
             <el-table-column prop="movieLink" label="网址"></el-table-column>
           </el-table>
-          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20, 50, 100]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="200">
+          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20, 50, 100]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="totalPage">
           </el-pagination>
         </template>
         </div>
@@ -72,7 +72,9 @@ var vm = new Vue({
       currentRow: null,
       multipleSelection: [],
       currentPage: 1,
+      totalPage:0,
       pageSize:10,
+      totalSize:0,
       name:null
     },
 	
@@ -85,12 +87,13 @@ var vm = new Vue({
     	  var _this =this;
     	  var p ={
     			  name:this.name,
-    			  page:this.currentPage,
+    			  page:this.currentPage-1,
     			  pageSize:this.pageSize
     	  };
-    	  this.$http.post("http://www.ihih.club:8088/AnewB/elasticsearch/queryMovie",p,{emulateJSON:true}).then(function (res){
+    	  this.$http.post("http://127.0.0.1:8083/AnewB/elasticsearch/queryMovie",p,{emulateJSON:true}).then(function (res){
     		  console.info(res);
-    		  _this.tableData=res.body;
+    		  _this.totalPage=res.body.totalPage;
+    		  _this.tableData=res.body.list;
     	  })
       },
       handleCurrentChange(val) {
