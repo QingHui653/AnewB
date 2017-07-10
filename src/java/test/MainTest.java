@@ -30,7 +30,10 @@ public class MainTest {
 		   System.out.println("路径分隔符："+props.getProperty("path.separator"));   //在 unix 系统中是＂:＂
 		   System.out.println("行分隔符："+props.getProperty("line.separator"));   //在 unix 系统中是＂/n＂
 		   System.out.println("用户的账户名称："+props.getProperty("user.name"));
+		   
+		   
 		   System.out.println("用户的主目录："+props.getProperty("user.home"));
+		   //在web项目中运行，是相对于tomcat安装目录下的class文件
 		   System.out.println("用户的当前工作目录："+props.getProperty("user.dir"));
 	}
 }

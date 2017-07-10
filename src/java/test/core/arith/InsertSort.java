@@ -2,6 +2,11 @@ package test.core.arith;
 
 import java.util.Arrays;
 
+/**
+ * 插入排序
+ * @author woshizbh
+ *
+ */
 public class InsertSort {
 
 	/**

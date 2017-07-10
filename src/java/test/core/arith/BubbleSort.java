@@ -16,9 +16,13 @@ public class BubbleSort {
 		BubbleSort b= new BubbleSort();
 		int[] arr = {3,44,38,5,47,15,36,26,27,2,46,4,19,50,48};
 		int[] c1=b.BubbleSort1(arr);
-		int[] c2=b.BubbleSort2(arr);
-		int[] c3=b.BubbleSort3(arr);
-		System.out.println("冒泡" + Arrays.toString(c1));
+		
+		int[] arr2 = {3,44,38,5,47,15,36,26,27,2,46,4,19,50,48};
+		int[] c2=b.BubbleSort2(arr2);
+		
+		int[] arr3 = {3,44,38,5,47,15,36,26,27,2,46,4,19,50,48};
+		int[] c3=b.BubbleSort3(arr3);
+		System.out.println("冒泡                        " + Arrays.toString(c1));
 		System.out.println("改进加标示的冒泡" + Arrays.toString(c2));
 		System.out.println("双向加标签的冒泡" + Arrays.toString(c3));
 	}
@@ -37,6 +41,7 @@ public class BubbleSort {
 		return arr;
 	}
 	
+	/*计算错误，掌握思想即可*/
 	public int[] BubbleSort2(int[] arr) {
 		int i=arr.length-1;
 		while (i>0) {
@@ -54,6 +59,7 @@ public class BubbleSort {
 		return arr;
 	}
 	
+	/*计算错误，掌握思想即可*/
 	public int[] BubbleSort3(int[] arr) {
 		int low=0;
 		int high=arr.length-1;

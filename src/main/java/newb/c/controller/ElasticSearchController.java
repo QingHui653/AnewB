@@ -43,7 +43,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import io.swagger.annotations.ApiOperation;
 import newb.c.backend.elasticmodel.MovieDTO;
 import newb.c.backend.elasticmodel.TaskInfoDTO;
-import newb.c.util.common.Pages;
 
 @Controller
 @RequestMapping("elasticsearch")
@@ -61,17 +60,15 @@ public class ElasticSearchController {
 	@RequestMapping(value="queryMovie",method={RequestMethod.GET,RequestMethod.POST})
 	@ApiOperation(value="查询电影")
 	@ResponseBody
-	public Object queryMovie(String name,Pages page ) {
+	public Object queryMovie(String name,Integer  page,Integer  pageSize) {
 		if(StringUtils.isBlank(name))
 			name=null;
 		CriteriaQuery criteriaQuery = new CriteriaQuery(new Criteria().
 				and(new Criteria("movieName").is(name)))
-				.setPageable(new PageRequest(page.getPage(), page.getPageSize()));
-		Page<MovieDTO> movieList = elasticsearchTemplate.queryForPage(criteriaQuery, MovieDTO.class);	
+				.setPageable(new PageRequest(page-1, pageSize));
+		List<MovieDTO> movieList = elasticsearchTemplate.queryForList(criteriaQuery, MovieDTO.class);	
 //		movieList.forEach(System.out::println);
-		page.setList(movieList.getContent());
-		page.setTotalPage(movieList.getTotalPages());
-		return page;
+		return movieList;
 	}
 	
 	

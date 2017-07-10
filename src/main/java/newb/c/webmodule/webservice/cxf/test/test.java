@@ -14,6 +14,11 @@ import org.junit.Test;
 import newb.c.webmodule.webservice.cxf.HelloService;
 
 public class test{
+	/**
+	 * 3.还有一种需要进入到jar包bin的目录下运行命令
+	 * 会生成client，server类，直接调用即可
+	 * 4.配置在spring文件中，直接从spring容器中注入即可
+	 */
 	
 //	@Test
 	public void staticService() {

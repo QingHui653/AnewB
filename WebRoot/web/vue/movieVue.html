@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
 <head>
   <title></title>
 </head>
@@ -52,7 +53,7 @@
             <el-table-column prop="movieName" label="片名" width="500"></el-table-column>
             <el-table-column prop="movieLink" label="网址"></el-table-column>
           </el-table>
-          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20, 50, 100]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="totalPage">
+          <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10, 20, 50, 100]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="200">
           </el-pagination>
         </template>
         </div>
@@ -73,10 +74,8 @@ var vm = new Vue({
       currentRow: null,
       multipleSelection: [],
       currentPage: 1,
-      totalPage:0,
       pageSize:10,
-      totalSize:0,
-      name:null
+      name:''
     },
 	
     mounted: function(){
@@ -88,14 +87,13 @@ var vm = new Vue({
     	  var _this =this;
     	  var p ={
     			  name:this.name,
-    			  page:this.currentPage-1,
+    			  page:this.currentPage,
     			  pageSize:this.pageSize
     	  };
-    	  /*
+        /*
     	  this.$http.post("http://www.ihih.club:8088/AnewB/elasticsearch/queryMovie",p,{emulateJSON:true}).then(function (res){
     		  console.info(res);
-    		  _this.totalPage=res.body.totalPage;
-    		  _this.tableData=res.body.list;
+    		  _this.tableData=res.body;
     	  });
         */ 
         /*
@@ -103,9 +101,8 @@ var vm = new Vue({
           params: p
         })
         .then(function (res) {
-        	console.info(res);
-  		  _this.totalPage=res.body.totalPage;
-  		  _this.tableData=res.body.list;
+          console.info(res);
+    		  _this.tableData=res.data;
         })
         .catch(function (error) {
           console.log(error);
@@ -119,15 +116,13 @@ var vm = new Vue({
 
         axios.post('http://www.ihih.club:8088/AnewB/elasticsearch/queryMovie',params)
         .then(function (res) {
-        	console.info(res);
-  		  _this.totalPage=res.body.totalPage;
-  		  _this.tableData=res.body.list;
+          console.info(res);
+    		  _this.tableData=res.data;
         })
         .catch(function (error) {
           console.log(error);
         });
          
-    	  
       },
       handleCurrentChange(val) {
         this.currentRow = val;
