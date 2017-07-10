@@ -1,4 +1,4 @@
-package test.core.io;
+package test.core.io.bio;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
