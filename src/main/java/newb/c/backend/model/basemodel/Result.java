@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+@Table(name="result")
 public class Result implements Serializable{
     /**
 	 * 

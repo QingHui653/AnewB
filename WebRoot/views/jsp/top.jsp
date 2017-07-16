@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="../web/common/headjsp.jsp" %>
+<%@ include file="/views/jsp/common/headjsp.jsp" %>
 <title>My JSP 'top.jsp' starting page</title>
 
 </head>

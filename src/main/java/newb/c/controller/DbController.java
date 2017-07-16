@@ -132,7 +132,7 @@ public class DbController {
 		 
 		 userService.threadInsertAll(100);
 		 
-	     return "/user/showInfo";
+	     return "/views/jsp/user/showInfo";
 	 }
 	 
 	 
@@ -149,7 +149,7 @@ public class DbController {
 	public String selectUserForUpdate(ModelMap modelMap) {
 		List<User> userList = userService.selectAllForUpdate();
 		System.out.println("有索引 forupdate--" + userList.size());
-		return "/user/showInfo";
+		return "/views/jsp/showInfo";
 	}
 
 	/**

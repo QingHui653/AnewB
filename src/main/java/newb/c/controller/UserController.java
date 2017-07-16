@@ -103,7 +103,7 @@ public class UserController {
 			return "web/upload";
 		}
 		System.out.println("Spring mvc自动序列化得到的user "+user.getOid()+"  "+user.getUsername()+" "+user.getPassword());
-		return "/user/showInfo";
+		return "/views/jsp/user/showInfo";
 	}
 	
 	/**
@@ -125,7 +125,7 @@ public class UserController {
 		    System.out.println("json序列化 "+json);
 		    User userFromJson=gson.fromJson(json, User.class);
 		    System.out.println("反序列化得到的user "+userFromJson.getOid()+"  "+userFromJson.getUsername());
-		    return "/user/showInfo";
+		    return "/views/jsp/user/showInfo";
 	}
 	 /**
 	  * 测试session
@@ -144,7 +144,7 @@ public class UserController {
 	        modelMap.addAttribute("user", user);
 	        //添加到session
 	        httpSession.setAttribute("session", session);
-	        return "/admin/showInfo";
+	        return "/views/jsp/admin/showInfo";
 	    }
 	 /**
 	  * session测试,关闭浏览器服务器端的session不会丢失,但浏览器

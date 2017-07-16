@@ -74,7 +74,7 @@ public class LoginController {
 			return "forward:/user/newb/2";
 		}else{
 //			mv.setViewName("redirect:/login.jsp");
-			mv.setViewName("redirect:/login.jsp"); //此处偷懒，一般是ajax请求，或重定向时将失败传回
+			mv.setViewName("redirect:/views/jsp/login.jsp"); //此处偷懒，一般是ajax请求，或重定向时将失败传回
 		}
 //		return new ModelAndView("redirect:/login.jsp");
 		return mv;

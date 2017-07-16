@@ -1,0 +1,15 @@
+<html>
+<head>
+    <title>$!page_title</title>
+    #parse("/views/velocity/default/header.vm")
+</head>
+<body>
+
+<div>
+
+    $screen_content
+
+</div>
+
+</body>
+</html>

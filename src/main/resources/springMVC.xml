@@ -190,42 +190,6 @@
 	<mvc:resources mapping="/font/**" location="/css/"/>
 	<mvc:resources mapping="/images/**" location="/images/" />
 	<mvc:resources mapping="/js/**" location="/js/" /> -->
-
-	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
-	<!--内容协商 -->
-	<bean
-		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-		<property name="contentNegotiationManager">
-			<bean
-				class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
-				<property name="defaultContentType" value="text/html" />
-				<property name="mediaTypes">
-					<map>
-						<entry key="json" value="application/json" />
-						<entry key="xml" value="application/xml" />
-						<entry key="html" value="text/html" />
-					</map>
-				</property>
-			</bean>
-		</property>
-		<property name="viewResolvers">
-			<list>
-				<bean
-					class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-					<property name="prefix" value="/" />  <!-- 前缀 -->
-					<property name="suffix" value=".jsp" />				<!-- 后缀 -->
-				</bean>
-			</list>
-		</property>
-		<property name="defaultViews">
-			<list>
-				<bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
-				<bean class="org.springframework.web.servlet.view.xml.MarshallingView">
-					<property name="marshaller" ref="castorMarshaller" />
-				</bean>
-			</list>
-		</property>
-	</bean>
 	
 	<!-- 配置多文件上传 -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -258,4 +222,90 @@
         allowed-origins="http://domain1.com" />
 
 </mvc:cors> -->
+	
+	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
+	<!--内容协商 -->
+	<!--  这里是使用RESTful时配置文件 ，可在这配置视图 解析器-->
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="contentNegotiationManager">
+			<bean
+				class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+				<property name="defaultContentType" value="text/html" />
+				<property name="mediaTypes">
+					<map>
+						<entry key="json" value="application/json" />
+						<entry key="xml" value="application/xml" />
+						<entry key="html" value="text/html" />
+					</map>
+				</property>
+			</bean>
+		</property>
+		<!-- <property name="viewResolvers">
+			<list>
+				<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+					<property name="prefix" value="/" />
+					<property name="suffix" value=".jsp" />
+				</bean>
+			</list>
+		</property> -->
+		<property name="defaultViews">
+			<list>
+				<bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+				<bean class="org.springframework.web.servlet.view.xml.MarshallingView">
+					<property name="marshaller" ref="castorMarshaller" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- jsp -->
+	<!-- <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/" />
+		<property name="suffix" value=".jsp" />
+	</bean> -->
+	
+	
+	<!-- Freemarker配置 -->  
+	
+	<!-- <bean id="viewResolver"  class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">  
+	    <property name="suffix" value=".ftl"/>  
+	    <property name="contentType" value="text/html;charset=UTF-8"></property>  
+	</bean>
+	
+	<bean id="freemarkerConfig"  class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">  
+	    <property name="templateLoaderPath" value="/" />  
+	    <property name="freemarkerSettings">  
+	        <props>  
+	            <prop key="template_update_delay">0</prop>  
+	            <prop key="default_encoding">UTF-8</prop>  
+	            <prop key="number_format">0.##########</prop>  
+	            <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>  
+	            <prop key="classic_compatible">true</prop>  
+	            <prop key="template_exception_handler">ignore</prop>  
+	        </props>  
+	    </property>  
+	</bean>  -->
+	
+	<!-- velocity环境配置 -->
+	<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+	    <!-- velocity配置文件路径  或者直接用velocityProperties属性 -->
+	    <property name="configLocation" value="classpath:main/resources/velocity.properties"/>
+	    <!-- velocity模板路径 -->
+	    <property name="resourceLoaderPath" value="/"/>
+	</bean>
+	<!-- velocity视图解析器 -->
+	<bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+	    <property name="order" value="0"/>
+	    <property name="contentType" value="text/html;charset=UTF-8"/>
+	    <property name="cache" value="true"/>
+	    <property name="suffix" value=".vm"/>
+	    <property name="layoutUrl" value="views/velocity/layout/layout.vm"/>
+	    <property name="exposeSpringMacroHelpers" value="true" /><!--是否使用spring对宏定义的支持-->
+	    <property name="exposeSessionAttributes" value="true" /><!--是否开放request属性-->
+	    <property name="requestContextAttribute" value="request"/><!--request属性引用名称-->
+	    <property name="dateToolAttribute" value="dateTool"/>
+	    <property name="numberToolAttribute" value="numberTool"/>
+	</bean>
+	
+	
 </beans>

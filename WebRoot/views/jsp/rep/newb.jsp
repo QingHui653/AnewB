@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*"
 	contentType="text/html; charset=UTF-8"%>
-<%@ include file="/web/common/headjsp.jsp"%>
+<%@ include file="/views/jsp/common/headjsp.jsp"%>
 <html>
 <body>
 	<div class="container">
@@ -78,32 +78,12 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${GroupList}" var="group">
+						<c:forEach items="${repList}" var="rep">
 							<tr>
-								<td>${group.result }</td>
-								<td>${group.count }</td>
+								<td><a href="project/${rep.result }">${rep.result }</td>
+								<td>${rep.count }</td>
 							</tr>
 						</c:forEach>
-						<tr>
-							<td>1</td>
-							<td>01/04/2012</td>
-						</tr>
-						<tr class="success">
-							<td>1</td>
-							<td>TB - Monthly</td>
-						</tr>
-						<tr class="error">
-							<td>2</td>
-							<td>TB - Monthly</td>
-						</tr>
-						<tr class="warning">
-							<td>3</td>
-							<td>TB - Monthly</td>
-						</tr>
-						<tr class="info">
-							<td>4</td>
-							<td>TB - Monthly</td>
-						</tr>
 					</tbody>
 				</table>
 			</div>

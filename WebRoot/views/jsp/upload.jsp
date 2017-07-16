@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="../web/common/headjsp.jsp" %>
+<%@ include file="/views/jsp/common/headjsp.jsp" %>
 <!-- 上传插件 -->
 <script type="text/javascript" src="<%=path%>/js/uploadify/jquery.uploadify.js"></script>
 <!-- 兼容H5上传 -->

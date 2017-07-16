@@ -112,7 +112,7 @@ public class ApiController {
 	@ApiOperation("测试使用通用mapper,自定义通用接口删除数据,重定向到bootstarap")
 	public String getrep() {
 		resultService.CommonDelMapper("50");
-		return "forward:/web/bootstrap.jsp";
+		return "forward:/views/jsp/bootstrap.jsp";
 	}
 	
 	@RequestMapping(value="/getrep2",method=RequestMethod.GET)
@@ -124,7 +124,7 @@ public class ApiController {
 		modelMap.addAttribute("resultList", r);
 		Result r1= resultService.selectByKey(53);
 		modelMap.addAttribute("result", r1);
-		return "forward:/web/bootstrap.jsp";
+		return "forward:/views/jsp/bootstrap.jsp";
 	}
 	
 	
@@ -133,7 +133,7 @@ public class ApiController {
 	public String getRepRes(ModelMap modelMap) {
 		List<RepList> repList= resultService.getRepList();
 		modelMap.addAttribute("repList", repList);
-		return "rep/newb";
+		return "/views/jsp/rep/newb";
 	}
 	
 	@RequestMapping(value="/rep/{group}",method=RequestMethod.GET)
@@ -143,7 +143,7 @@ public class ApiController {
 		example.createCriteria().andEqualTo("f1", group);
 		List<Result> GroupList = resultService.selectByExample(example);
 		modelMap.addAttribute("GroupList", GroupList);
-		return "rep/GroupList";
+		return "/views/jsp/rep/GroupList";
 	}
 	
 	@RequestMapping(value="/rep/{group}/{project}",method=RequestMethod.GET)
@@ -153,7 +153,7 @@ public class ApiController {
 		example.createCriteria().andEqualTo("f1", group).andEqualTo("f4", project);
 		List<Result> GroupList = resultService.selectByExample(example);
 		modelMap.addAttribute("GroupList", GroupList);
-		return "rep/GroupList";
+		return "/views/jsp/rep/GroupList";
 	}
 	
 	

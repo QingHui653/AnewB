@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="Utf-8" %>
-<%@ taglib prefix="ex" uri="/WEB-INF/tld/custom.tld" %>
+<%@ taglib prefix="ex" uri="/WEB-INF/tld/jspTag.tld" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";

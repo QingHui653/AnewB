@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*"
 	contentType="text/html; charset=UTF-8"%>
-<%@ include file="/web/common/headjsp.jsp"%>
+<%@ include file="/views/jsp/common/headjsp.jsp"%>
 <html>
 <body>
 	<div class="container">
@@ -70,39 +70,113 @@
 				</ol>
 			</div>
 			<div class="col-md-6 column">
-				<table class="table table-striped">
+				<table class="table">
 					<thead>
 						<tr>
-							<th>Group</th>
-							<th>Number</th>
+							<th>编号</th>
+							<th>产品</th>
+							<th></th>
+							<th>状态</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${GroupList}" var="group">
+						<c:forEach items="${repList}" var="rep">
 							<tr>
-								<td>${group.result }</td>
-								<td>${group.count }</td>
+								<td>${rep.result }</td>
+								<td>TB - Monthly</td>
+								<td>${rep.sum }</td>
+								<td>Default</td>
 							</tr>
 						</c:forEach>
 						<tr>
 							<td>1</td>
+							<td>TB - Monthly</td>
 							<td>01/04/2012</td>
+							<td>Default</td>
 						</tr>
 						<tr class="success">
 							<td>1</td>
 							<td>TB - Monthly</td>
+							<td>01/04/2012</td>
+							<td>Approved</td>
 						</tr>
 						<tr class="error">
 							<td>2</td>
 							<td>TB - Monthly</td>
+							<td>02/04/2012</td>
+							<td>Declined</td>
 						</tr>
 						<tr class="warning">
 							<td>3</td>
 							<td>TB - Monthly</td>
+							<td>03/04/2012</td>
+							<td>Pending</td>
 						</tr>
 						<tr class="info">
 							<td>4</td>
 							<td>TB - Monthly</td>
+							<td>04/04/2012</td>
+							<td>Call in to confirm</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>TB - Monthly</td>
+							<td>01/04/2012</td>
+							<td>Default</td>
+						</tr>
+						<tr class="success">
+							<td>1</td>
+							<td>TB - Monthly</td>
+							<td>01/04/2012</td>
+							<td>Approved</td>
+						</tr>
+						<tr class="error">
+							<td>2</td>
+							<td>TB - Monthly</td>
+							<td>02/04/2012</td>
+							<td>Declined</td>
+						</tr>
+						<tr class="warning">
+							<td>3</td>
+							<td>TB - Monthly</td>
+							<td>03/04/2012</td>
+							<td>Pending</td>
+						</tr>
+						<tr class="info">
+							<td>4</td>
+							<td>TB - Monthly</td>
+							<td>04/04/2012</td>
+							<td>Call in to confirm</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>TB - Monthly</td>
+							<td>01/04/2012</td>
+							<td>Default</td>
+						</tr>
+						<tr class="success">
+							<td>1</td>
+							<td>TB - Monthly</td>
+							<td>01/04/2012</td>
+							<td>Approved</td>
+						</tr>
+						<tr class="error">
+							<td>2</td>
+							<td>TB - Monthly</td>
+							<td>02/04/2012</td>
+							<td>Declined</td>
+						</tr>
+						<tr class="warning">
+							<td>3</td>
+							<td>TB - Monthly</td>
+							<td>03/04/2012</td>
+							<td>Pending</td>
+						</tr>
+						<tr class="info">
+							<td>4</td>
+							<td>TB - Monthly</td>
+							<td>04/04/2012</td>
+							<td>Call in to confirm</td>
 						</tr>
 					</tbody>
 				</table>

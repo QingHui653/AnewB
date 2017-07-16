@@ -186,6 +186,27 @@
 			<version>1.2.2</version>
 		</dependency>
 		<!-- WEB................................ -->
+		
+		<!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
+		<dependency>
+		    <groupId>org.freemarker</groupId>
+		    <artifactId>freemarker</artifactId>
+		    <version>2.3.23</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.velocity/velocity -->
+		<dependency>
+		    <groupId>org.apache.velocity</groupId>
+		    <artifactId>velocity</artifactId>
+		    <version>1.7</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.velocity</groupId>
+		    <artifactId>velocity-tools</artifactId>
+		    <version>2.0</version>
+		</dependency>
+		
+		
 		<!-- <dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -679,7 +700,7 @@
 		<dependency>
     		<groupId>com.alibaba</groupId>
     		<artifactId>dubbo</artifactId>
-    		<version>2.8.3</version>
+    		<version>2.8.4</version>
     		<exclusions>
     			<exclusion>
     				<artifactId>spring</artifactId>

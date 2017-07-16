@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import lombok.Data;
 
+@Table(name="movie")
 public class Movie {
     @Id
     /*@GeneratedValue(strategy = GenerationType.IDENTITY)*/

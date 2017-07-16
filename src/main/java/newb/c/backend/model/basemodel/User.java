@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.validation.annotation.Validated;
 
+@Table(name="user")
 public class User implements Serializable,Comparable<User> {
     /**
 	 * 

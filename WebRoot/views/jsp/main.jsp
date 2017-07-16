@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*"
 	contentType="text/html; charset=UTF-8"%>
-<%@ include file="../web/common/headjsp.jsp"%>
+<%@ include file="/views/jsp/common/headjsp.jsp"%>
 
 <html>
 <body>

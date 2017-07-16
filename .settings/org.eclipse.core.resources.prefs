@@ -1,7 +1,8 @@
 eclipse.preferences.version=1
 encoding//WebRoot/comm/404.jsp=UTF-8
-encoding//WebRoot/web/main.jsp=UTF-8
+encoding//WebRoot/views/jsp/main.jsp=UTF-8
 encoding//src/main/java/newb/c/api/XmlRpcTest.java=GBK
 encoding//src/main/resources/config.properties=GBK
+encoding//src/main/resources/velocity.properties=UTF-8
 encoding/<project>=UTF-8
 encoding/src=UTF-8
