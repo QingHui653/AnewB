@@ -45,8 +45,7 @@
     <!-- 消息监听器 -->  
     <bean id="consumerMessageListener" class="newb.c.api.activeMQ.ConsumerMessageListener"/>  
     <!-- 消息监听容器 -->  
-    <bean id="jmsContainer"  
-        class="org.springframework.jms.listener.DefaultMessageListenerContainer">  
+    <bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">  
         <property name="connectionFactory" ref="connectionJMSFactory" />  
         <property name="destination" ref="queueDestination" />  
         <property name="messageListener" ref="consumerMessageListener" />  
