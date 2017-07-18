@@ -44,5 +44,4 @@ public class TestManager {
 		Movie movie = queryManage.findById("wow","movie","AVx7mLUpZE3a5IVtpb2G");
 		System.out.println("-- "+movie.toString());
 	}
-	
 }

@@ -259,11 +259,10 @@
 	</bean>
 	
 	<!-- jsp -->
-	<!-- <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/" />
 		<property name="suffix" value=".jsp" />
-	</bean> -->
-	
+	</bean>
 	
 	<!-- Freemarker配置 -->  
 	
@@ -287,25 +286,19 @@
 	</bean>  -->
 	
 	<!-- velocity环境配置 -->
-	<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
-	    <!-- velocity配置文件路径  或者直接用velocityProperties属性 -->
+	<!-- <bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+	    velocity配置文件路径  或者直接用velocityProperties属性
 	    <property name="configLocation" value="classpath:main/resources/velocity.properties"/>
-	    <!-- velocity模板路径 -->
+	    velocity模板路径
 	    <property name="resourceLoaderPath" value="/"/>
 	</bean>
-	<!-- velocity视图解析器 -->
-	<bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
-	    <property name="order" value="0"/>
-	    <property name="contentType" value="text/html;charset=UTF-8"/>
-	    <property name="cache" value="true"/>
-	    <property name="suffix" value=".vm"/>
-	    <property name="layoutUrl" value="views/velocity/layout/layout.vm"/>
-	    <property name="exposeSpringMacroHelpers" value="true" /><!--是否使用spring对宏定义的支持-->
-	    <property name="exposeSessionAttributes" value="true" /><!--是否开放request属性-->
-	    <property name="requestContextAttribute" value="request"/><!--request属性引用名称-->
-	    <property name="dateToolAttribute" value="dateTool"/>
-	    <property name="numberToolAttribute" value="numberTool"/>
-	</bean>
+	velocity视图解析器
+	<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+	    velocity配置文件路径  或者直接用velocityProperties属性
+	    <property name="configLocation" value="classpath:main/resources/velocity.properties"/>
+	      velocity模板路径 
+	    <property name="resourceLoaderPath" value="/"/>
+	</bean> -->
 	
 	
 </beans>

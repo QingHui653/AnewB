@@ -6,8 +6,6 @@ import test.core.io.demo.aio.client.AClient;
 import test.core.io.demo.aio.server.AServer;  
 /** 
  * 测试方法 
- * @author yangtao__anxpp.com 
- * @version 1.0 
  */  
 public class ATest {  
     //测试主方法  

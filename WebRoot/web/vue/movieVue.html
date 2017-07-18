@@ -116,7 +116,7 @@ var vm = new Vue({
 
         axios.post('http://www.ihih.club:8088/AnewB/elasticsearch/queryMovie',params)
         .then(function (res) {
-          console.info(res);
+          	  console.info(res);
     		  _this.tableData=res.data;
         })
         .catch(function (error) {

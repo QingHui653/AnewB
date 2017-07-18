@@ -14,26 +14,29 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 
+import com.google.gson.Gson;
+
 import net.sf.json.JSONObject;
 import newb.c.backend.model.basemodel.Movie;
 import newb.c.util.common.ResultUtil;
 
 public class QueryManage {
 	
+	private Gson gson =new Gson();
 	/**
 	 *	根据id查询 
 	 */
 	public Movie findById(String index,String type,String id) {
+		Movie movie =new Movie();
+		
 		GetRequest rq= new GetRequest(index,type,id);
 		
 		GetResponse response = ESTools.client.get(rq).actionGet();
 		
-		Movie movie =new Movie();
-		
 		if(!response.isSourceEmpty()){
 			Map<String,Object> data =response.getSource();
-			movie = (Movie)JSONObject.toBean(JSONObject.fromObject(data)
-					,Movie.class);
+			movie=gson.fromJson(data.toString(),Movie.class);
+//			movie = (Movie)JSONObject.toBean(JSONObject.fromObject(data),Movie.class);
 		}
 		return movie;
 	}

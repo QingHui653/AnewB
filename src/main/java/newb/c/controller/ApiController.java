@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,7 +32,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -321,4 +327,44 @@ public class ApiController {
 		}
 
 	}
+	/**
+	 * kindEditor 图片跨域上传的服务后台
+	 */
+	@RequestMapping(value = "/kindUpload", method = RequestMethod.POST)  
+    public Object kindUpload(HttpServletRequest request, HttpServletResponse response,@RequestParam("file") MultipartFile file,String redirectUrl) {  
+        try {  
+            String referer = request.getHeader("referer");  
+            Pattern p = Pattern.compile("([a-z]*:(//[^/?#]+)?)?", Pattern.CASE_INSENSITIVE);  
+            Matcher mathcer = p.matcher(referer);  
+            if (mathcer.find()) {  
+                String callBackPath = mathcer.group();// 请求来源a.com  
+                MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;  
+        		boolean success = false;
+        		Map<String, Object> result = new HashMap<String, Object>();
+        		String id = "2";
+        		if (id != null) {
+        			success = true;
+        		}
+                
+        		String url =request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+        		
+                Map<String, Object> map =new HashMap<>();
+                map.put("error",0);
+                map.put("url", url + "/file/download?id="+id);
+                StringBuffer sBuffer2 = new StringBuffer("redirect:").append(redirectUrl);
+                ModelAndView modelAndView = new ModelAndView(sBuffer2.toString());
+                for (String key : map.keySet()) {
+                    modelAndView.addObject(key, map.get(key));//将返回的参数设置到modelAndView中，最后也是以？之后带的参数出现
+                }
+                return modelAndView;
+                
+            } else {  
+                logger.info("upload referer not find");  
+            }  
+        } catch (Exception e) {  
+            logger.error("upload error", e);  
+        }  
+        return null;  
+    }
+	
 }
