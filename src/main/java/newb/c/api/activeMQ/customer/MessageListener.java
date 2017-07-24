@@ -24,7 +24,7 @@ public class MessageListener extends MessageListenerAdapter  {
 	@Autowired(required=false)
 	private JmsTemplate jmsTemplate;
 	
-	@JmsListener(destination="queue")
+	@JmsListener(destination="queue",concurrency="10-15")//监听并行区间范围 最小10个 最大15个
 	public void queueListener(Message message,Session session) throws JMSException {
         TextMessage textMsg = (TextMessage) message;   
         System.out.println("接收到queue一个纯文本消息。");

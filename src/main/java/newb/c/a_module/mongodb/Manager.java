@@ -7,13 +7,18 @@ import org.bson.Document;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.data.mongodb.MongoDbFactory;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
+import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
+
+import newb.c.backend.model.basemodel.User;
 
 public class Manager {
 
@@ -24,6 +29,8 @@ public class Manager {
 	private MongoDatabase mongoDatabase;
 	private MongoClient mongoClient;
 	private MongoCollection<Document> collection;
+	
+	private MongoTemplate mongoTemplate;
 
 	@Before
 	public void connDataBase() {
@@ -35,6 +42,9 @@ public class Manager {
 		// 获取集合 ，没有则创建
 		collection = mongoDatabase.getCollection("test");
 		System.out.println("        @Before 集合 test 选择成功");
+		
+		Mongo mongo =new Mongo(url, port);
+		mongoTemplate =new MongoTemplate(mongo ,database);
 	}
 	
 	@After
@@ -61,7 +71,7 @@ public class Manager {
 		}
 	}
 
-	 @Test
+	@Test
 	public void insertDoc() {
 		try {
 			// 插入文档
@@ -75,6 +85,13 @@ public class Manager {
 			List<Document> documents = new ArrayList<Document>();
 			documents.add(document);
 			collection.insertMany(documents);
+			
+			User user =new User();
+			user.setOid(2);
+			user.setUsername("1111");
+			user.setPassword("xxxx");
+			mongoTemplate.insert(user);
+			
 			System.out.println("文档插入成功");
 		} catch (Exception e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -112,7 +129,7 @@ public class Manager {
 
 	}
 
-	@Test
+//	@Test
 	public void updateDoc() {
 		// 更新文档 将文档中likes=100的文档修改为likes=200
 		collection.updateMany(Filters.eq("likes", 100), new Document("$set", new Document("likes", 200)));
