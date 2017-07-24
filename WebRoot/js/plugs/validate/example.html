@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="">
+	<input id="cname" name="name" minlength="2" type="text" required>
+	</form>
+</body>
+
+
+<script type="text/javascript">
+$("#deliverForm").validate({
+    submitHandler : function(form) {
+		//在这个里面写表单提交方法，如
+		//同步
+		form.submit();
+		//异步
+		$(form).ajaxSubmit(options);
+	}
+});
+
+$("#signupForm").validate({
+    rules: {
+      name: {
+        required: true,
+        minlength: 2
+      }
+    }
+});
+
+
+</script>
+</html>
