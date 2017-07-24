@@ -5,7 +5,7 @@ import java.util.List;
 import newb.c.backend.model.basemodel.User;
 
 public class UserList {
-	private List<User> userList;
+	private List<User> users;
 
 	public UserList() {
 		super();
@@ -13,15 +13,15 @@ public class UserList {
 	
 	public UserList(List<User> userList) {
 		super();
-		this.userList = userList;
+		this.users = userList;
 	}
 	
 	public List<User> getUserList() {
-		return userList;
+		return users;
 	}
 
 	public void setUserList(List<User> userList) {
-		this.userList = userList;
+		this.users = userList;
 	}
 	
 }
