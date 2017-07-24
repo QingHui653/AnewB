@@ -166,6 +166,9 @@ public class MvcController {
 			/* 看时间好像是 spring 开了三个线程去做 */
 			if (task1.isDone() && task2.isDone() && task3.isDone()) {
 				// 三个任务都调用完成，退出循环等待
+				System.out.println(task1.get());
+				System.out.println(task2.get());
+				System.out.println(task3.get());
 				break;
 			}
 			Thread.sleep(1000);
@@ -174,20 +177,6 @@ public class MvcController {
 		System.out.println("任务全部完成，总耗时：" + (end - start) + "毫秒");
 	}
 
-	/**
-	 * springmvc 返回异步任务 直接返回，任务后台继续做
-	 * 
-	 * @throws Exception
-	 */
-	@ApiOperation("调用异步任务")
-	@GetMapping("/asycTask")
-	@Async
-	public void asycTask() throws Exception {
-		long start = System.currentTimeMillis();
-		Thread.sleep(10000);
-		long end = System.currentTimeMillis();
-		System.out.println("任务全部完成，总耗时：" + (end - start) + "毫秒");
-	}
 
 	/**
 	 * 使用forward 使之 重新进入另一个controller /user/newbs 转发

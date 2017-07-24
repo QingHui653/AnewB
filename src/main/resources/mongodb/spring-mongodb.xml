@@ -19,7 +19,7 @@
     http://www.springframework.org/schema/context 
     http://www.springframework.org/schema/context/spring-context-4.0.xsd">
     
-    <!-- 不支持mongodb3.0 driver -->
+    <!-- 不支持mongodb2.0 driver -->
     <!-- <mongo:mongo id="mongo" host="${mongo.host}" port="${mongo.port}" >
         <mongo:options 
             connections-per-host="${mongo.connectionsPerHost}" 
@@ -34,7 +34,7 @@
             write-timeout="0" write-fsync="true"/> 
     </mongo:mongo> -->
     
-    <!-- mongodb4.0  -->
+    <!-- mongodb3.0  -->
     <mongo:mongo-client  id="mongo" host="${mongo.host}" port="${mongo.port}">
 	<mongo:client-options 
 			connections-per-host="${mongo.connectionsPerHost}" 
@@ -49,17 +49,18 @@
 	<!-- 权限配置 -->
 	
 	<bean id="userCredentials" class="org.springframework.data.authentication.UserCredentials">
-		<constructor-arg name="username" value="${mongodb.user}" />
-		<constructor-arg name="password" value="${mongodb.password}" />
+		<constructor-arg name="username" value="${mongo.user}" />
+		<constructor-arg name="password" value="${mongo.password}" />
 	</bean>
 	
     <!-- 设置使用的数据库 名-->
-    <!-- <mongo:db-factory dbname="test" mongo-ref="mongo"/> -->
+    <mongo:db-factory dbname="test" mongo-ref="mongo"/>
     <!-- mongodb的模板 -->
     <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
        <!-- 数据库名称 -->
-	   <constructor-arg value="${mongodb.database}" />
-	   <constructor-arg ref="userCredentials" />
+       <!--<constructor-arg ref="mongo"/>
+	   <constructor-arg value="${mongo.database}" />
+	   <constructor-arg ref="userCredentials" /> -->
     </bean>
 </beans>

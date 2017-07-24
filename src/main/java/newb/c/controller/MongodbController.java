@@ -27,7 +27,7 @@ import newb.c.backend.model.basemodel.User;
 @RequestMapping("mongodb")
 public class MongodbController {
 	
-	@Autowired
+	@Autowired(required=false)
 	private MongoTemplate mongoTemplate;
 	
 	/**

@@ -1,11 +1,9 @@
 package test.core.reflect;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -13,10 +11,8 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import newb.c.backend.model.basemodel.User;  
-import test.core.javacase.a_99;
 
 public class reflectT {
 	public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, SecurityException{
@@ -31,8 +27,7 @@ public class reflectT {
 			m.setAccessible(true);
 			String result= (String) m.invoke(user2.getClass().newInstance(), "456","456");
 			System.out.println(result);
-		} catch (IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException | InstantiationException e) {
+		} catch (IllegalAccessException | IllegalArgumentException| InvocationTargetException | InstantiationException e) {
 			e.printStackTrace();
 		}
 	}

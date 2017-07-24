@@ -17,7 +17,7 @@ import us.codecraft.webmagic.pipeline.ConsolePipeline;
 public class WebMagicController {
 	@Autowired
 	private GithubRepoPageProcessor g;
-	@Autowired
+	@Autowired(required=false)
 	private MongoDbSaveMoviePipeline mongoDbSaveMoviePipeline;
 	
 	@RequestMapping(value="getGithub",method=RequestMethod.GET)

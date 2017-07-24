@@ -13,7 +13,7 @@ import us.codecraft.webmagic.pipeline.Pipeline;
 //@Component
 public class RedisSaveMoviePipeline implements Pipeline {
 	
-	@Autowired
+	@Autowired(required=false)
 	private RedisTemplate<String, String> redisTemplate;
     /**
      * 爬虫数据的持久化

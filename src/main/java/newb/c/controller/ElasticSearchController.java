@@ -48,7 +48,7 @@ import newb.c.backend.elasticmodel.TaskInfoDTO;
 @RequestMapping("elasticsearch")
 public class ElasticSearchController {
 
-	@Autowired
+	@Autowired(required=false)
 	private ElasticsearchTemplate elasticsearchTemplate;
 	
 	private String esIndexName = "heros";

@@ -17,7 +17,7 @@ import redis.clients.jedis.BinaryClient.LIST_POSITION;
 @Component("redisUtil")
 public class RedisUtil {
 	public final static String batchCreateKey = "log:batchCreate:list";
-	@Autowired
+	@Autowired(required=false)
 	private JedisPool pool ;
 	
 	

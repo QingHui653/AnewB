@@ -1,4 +1,4 @@
-package test.core.collection.list;
+package test.core.collection;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class ListOperation {
+public class IteratorTest {
 	
 	@Test
 	public void operationTest() {
@@ -44,3 +44,4 @@ public class ListOperation {
         
 	}
 }
+

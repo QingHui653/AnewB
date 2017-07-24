@@ -13,7 +13,7 @@ public class HashMapTest {
 		map.put("2", "2");
 		map.put("3", "3");
 		
-		System.out.println(map.containsKey("1"));
+		System.out.println("是否包含key--1"+map.containsKey("1"));
 		//使用entry 迭代 Map
 		for (Map.Entry<String,String> entry:map.entrySet()) {
 			System.out.println(entry.getKey()+"="+entry.getValue());

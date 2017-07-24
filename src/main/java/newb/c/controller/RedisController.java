@@ -28,7 +28,7 @@ import newb.c.controller.component.RedisUtil;
 @RequestMapping("redis")
 public class RedisController {
 	//redis
-	@Autowired
+	@Autowired(required=false)
 	private RedisTemplate<String, Object> redisTemplate;
 	@Autowired
 	private RedisUtil redis;

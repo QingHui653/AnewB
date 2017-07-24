@@ -1,6 +1,5 @@
 package newb.c.a_module.mongodb;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +13,6 @@ import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.CriteriaDefinition;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
@@ -92,7 +90,7 @@ public class MongoTemplateUnit {
 	}
 	
 	/**
-	 * 修改数组现在使用的是先删除在新增
+	 * 修改数组现在使用的是先新增在删除
 	 */
 	@Test
 	public void queryList2(){
@@ -111,8 +109,9 @@ public class MongoTemplateUnit {
 		User pushUser =new User(2,"3","3");
 		
 		Update update = new Update();
-		update.pull("users", pullUser);
-//		update.push("users", pushUser);
+		//两个不能同时使用会报错
+		update.push("users", pushUser);
+//		update.pull("users", pullUser);
 		
 		mongoTemplate.updateMulti(query, update, UserList.class);
 		

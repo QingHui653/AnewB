@@ -17,7 +17,7 @@ import us.codecraft.webmagic.pipeline.Pipeline;
 public class MongoDbSaveMoviePipeline implements Pipeline {
 	
 	
-	@Autowired
+	@Autowired(required=false)
 	private MongoTemplate mongoTemplate;
     /**
      * 
