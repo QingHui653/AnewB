@@ -3,6 +3,8 @@ package test.core.collection.list;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Test;
+
 public class ListTest {
 
 	public static void main(String[] args) {
@@ -30,6 +32,21 @@ public class ListTest {
 			if (l.get(i).toString().contains("[")) {
 				System.out.println("是数组");
 			}
+		}
+	}
+	
+	
+	@Test
+	public void test() {
+		List<String> list =new ArrayList<>();
+		System.out.println(list.size());
+		
+		if(list==null){
+			System.out.println("null");
+		}
+		
+		if(list.size()>0){
+			System.out.println(">0");
 		}
 	}
 

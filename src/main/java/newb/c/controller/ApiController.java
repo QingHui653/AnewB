@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +54,7 @@ import newb.c.backend.model.basemodel.Result;
 import newb.c.backend.model.basemodel.TOrder;
 import newb.c.backend.service.ResultService;
 import newb.c.backend.service.TOrderService;
+import newb.c.util.ExcelUtil;
 import newb.c.util.authCode.Captcha;
 import newb.c.util.authCode.GifCaptcha;
 import newb.c.util.authCode.SpecCaptcha;
@@ -75,18 +77,12 @@ public class ApiController {
 	DataHandle data =new DataHandle();
 	
 	/**
-	 *   获取excel 文档
-	 * @param response
-	 * @throws SQLException
-	 * @throws IOException
-	 * @throws RowsExceededException
-	 * @throws WriteException
+	 *   获取excel 文档  JXL
 	 */
-	@RequestMapping(value="/getExc",method=RequestMethod.GET)
-	@ApiOperation("测试使用POI获取excel文档")
+	@RequestMapping(value="/getExcByJXL",method=RequestMethod.GET)
+	@ApiOperation("测试使用JXL获取excel文档")
 	@Test   
-	public void getExc() throws SQLException,
-			IOException, RowsExceededException, WriteException {
+	public void getExcByJXL() throws SQLException,IOException, RowsExceededException, WriteException {
 		String[] title = {"姓名"};
 		String filePath = "g:\\newbc.xls";
 		Connection send = DriverManager.getConnection("proxool.local");
@@ -112,6 +108,27 @@ public class ApiController {
 		wwb.write();
 		wwb.close();
 		logger.info("保存成功");
+	}
+	
+	/**
+	 *   获取excel 文档 POI
+	 */
+	@RequestMapping(value="/getExcByPOI",method=RequestMethod.GET)
+	@ApiOperation("测试使用POI获取excel文档")
+	@Test   
+	public void getExcByPOI(HttpServletResponse response) throws SQLException,IOException, RowsExceededException, WriteException {
+		ExcelUtil excelUtil =new ExcelUtil();
+//		excelUtil.demoExport(response);
+		
+		String[] headList ={"姓名","班级"};
+		List<String[]> bodyList =new ArrayList<String[]>();
+			String[] body1 ={"李明","As178"};
+			String[] body2 ={"李明2","As179"};
+		bodyList.add(body1);
+		bodyList.add(body2);
+		
+		excelUtil.simpleExport(response, headList,bodyList);
+		
 	}
 	
 	@RequestMapping(value="/getrep",method=RequestMethod.GET)
