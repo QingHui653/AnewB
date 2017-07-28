@@ -56,5 +56,5 @@
 			allCheck.prop('checked',false);
 		}
 	});
-	 
+	
 })(jQuery);

@@ -50,6 +50,10 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
 @Controller
@@ -124,6 +128,14 @@ public class UserController {
 			System.out.println("接受到的 userId "+userId);
 		    System.out.println("json序列化 "+json);
 		    User userFromJson=gson.fromJson(json, User.class);
+		    
+		    JsonObject data = new JsonParser().parse(json).getAsJsonObject();
+		    JsonArray list = data.get("list").getAsJsonArray();
+		    for (JsonElement l : list) {
+		    	JsonObject order = l.getAsJsonObject();
+		    	String supplierCompanyCode = order.get("supplierCompanyCode").getAsString();// 供应商id
+		    }
+		    
 		    System.out.println("反序列化得到的user "+userFromJson.getOid()+"  "+userFromJson.getUsername());
 		    return "/views/jsp/user/showInfo";
 	}

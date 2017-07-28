@@ -14,7 +14,7 @@
     		//通过这样可以获取父iframe里的元素
     		$("#ifr_right",parent.document).attr("src",url);
     	});
-
+    
 	/**
 	 * live('',function(){}) 这样可以保证使用ajax后面添加的元素，也能触发js
 	 * 从 jQuery 1.7 开始，不再建议使用 .live() 方法。请使用 .on() 来添加事件处理。使用旧版本的用户，应该优先使用 .delegate() 来替代 .live()。
