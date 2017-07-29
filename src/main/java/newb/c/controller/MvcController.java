@@ -114,7 +114,7 @@ public class MvcController {
 	public Object showUserInfoByView(ModelMap model) {
 		List<User> userList = userService.getUsers();
 		model.addAttribute("UserList", userList);
-		return "/views/jsp/newbs2";
+		return "/views/jsp/newb";
 	}
 
 	/**
