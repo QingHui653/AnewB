@@ -17,19 +17,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import jxl.Workbook;
-import jxl.write.Label;
-import jxl.write.WritableSheet;
-import jxl.write.WritableWorkbook;
-import jxl.write.WriteException;
-import jxl.write.biff.RowsExceededException;
-
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,6 +33,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSON;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
@@ -46,12 +43,18 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
 import io.swagger.annotations.ApiOperation;
-import tk.mybatis.mapper.entity.Example;
+import jxl.Workbook;
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
 import newb.c.a_module.qrcode.MatrixToImageWriter;
 import newb.c.api.weather.weather;
 import newb.c.backend.model.RepList;
 import newb.c.backend.model.basemodel.Result;
 import newb.c.backend.model.basemodel.TOrder;
+import newb.c.backend.model.basemodel.User;
 import newb.c.backend.service.ResultService;
 import newb.c.backend.service.TOrderService;
 import newb.c.util.ExcelUtil;
@@ -59,6 +62,7 @@ import newb.c.util.authCode.Captcha;
 import newb.c.util.authCode.GifCaptcha;
 import newb.c.util.authCode.SpecCaptcha;
 import newb.c.utilDb.DataHandle;
+import tk.mybatis.mapper.entity.Example;
 
 
 @Controller
@@ -384,4 +388,31 @@ public class ApiController {
         return null;  
     }
 	
+	/**
+	 * gson在json中不允许空格 会报错
+	 * @param data
+	 */
+	@GetMapping("fastJson")
+	private void fastJson(String data) {
+		logger.info("接受到json "+data.toString());
+		Map<String,Object> map = (Map<String, Object>) JSON.parse(data.toString());
+		Map<String, String> params = (Map<String, String>) JSON.parse(map.get("parameters").toString());
+		List<User> spuParamList = JSON.parseArray(map.get("list").toString(),User.class);
+		logger.info("转为params "+params.toString());
+	}
+	
+	/**
+	 * gson在json中不允许空格 会报错
+	 * @param data
+	 */
+	@GetMapping("gson")
+	private void gson(String data) {
+		Gson gson =new Gson();
+		logger.info("接受到json "+data.toString());
+		Map<String, Object> mapData = gson.fromJson(data, new TypeToken<Map<String, Object>>(){}.getType());
+		logger.info("转为map "+mapData.toString());
+		Map<String, String> params = gson.fromJson(mapData.get("parameters").toString(), new TypeToken<Map<String, String>>(){}.getType());
+		List<User> spuParamList = gson.fromJson(mapData.get("list").toString(), new TypeToken<List<User>>(){}.getType());
+		logger.info("转为params "+params.toString());
+	}
 }
