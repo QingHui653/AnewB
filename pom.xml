@@ -186,14 +186,14 @@
 			<version>1.2.2</version>
 		</dependency>
 		<!-- WEB................................ -->
-		
+
 		<!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
 		<dependency>
 		    <groupId>org.freemarker</groupId>
 		    <artifactId>freemarker</artifactId>
 		    <version>2.3.23</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.apache.velocity/velocity -->
 		<dependency>
 		    <groupId>org.apache.velocity</groupId>
@@ -205,8 +205,8 @@
 		    <artifactId>velocity-tools</artifactId>
 		    <version>2.0</version>
 		</dependency>
-		
-		
+
+
 		<!-- <dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -220,7 +220,7 @@
     		<version>4.0.0-b01</version>
     		<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
@@ -263,38 +263,38 @@
 		<!-- WEB................................ -->
 		<!-- 组件=============================== -->
 		<!-- Spring security 权限包 -->
-		<!-- <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-web</artifactId> 
-			<version>4.1.3.RELEASE</version> </dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-core</artifactId> <version>4.1.3.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-acl</artifactId> <version>4.1.3.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-aspects</artifactId> <version>4.1.3.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-cas</artifactId> <version>4.1.3.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-config</artifactId> <version>4.1.3.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-crypto</artifactId> <version>4.1.3.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-ldap</artifactId> <version>4.1.3.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-openid</artifactId> <version>4.1.3.RELEASE</version> 
-			<exclusions> <exclusion> <artifactId>httpclient</artifactId> <groupId>org.apache.httpcomponents</groupId> 
-			</exclusion> </exclusions> </dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-remoting</artifactId> <version>4.1.3.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-taglibs</artifactId> <version>4.1.3.RELEASE</version> 
+		<!-- <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-web</artifactId>
+			<version>4.1.3.RELEASE</version> </dependency> <dependency> <groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId> <version>4.1.3.RELEASE</version>
+			</dependency> <dependency> <groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-acl</artifactId> <version>4.1.3.RELEASE</version>
+			</dependency> <dependency> <groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-aspects</artifactId> <version>4.1.3.RELEASE</version>
+			</dependency> <dependency> <groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-cas</artifactId> <version>4.1.3.RELEASE</version>
+			</dependency> <dependency> <groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId> <version>4.1.3.RELEASE</version>
+			</dependency> <dependency> <groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-crypto</artifactId> <version>4.1.3.RELEASE</version>
+			</dependency> <dependency> <groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-ldap</artifactId> <version>4.1.3.RELEASE</version>
+			</dependency> <dependency> <groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-openid</artifactId> <version>4.1.3.RELEASE</version>
+			<exclusions> <exclusion> <artifactId>httpclient</artifactId> <groupId>org.apache.httpcomponents</groupId>
+			</exclusion> </exclusions> </dependency> <dependency> <groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-remoting</artifactId> <version>4.1.3.RELEASE</version>
+			</dependency> <dependency> <groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId> <version>4.1.3.RELEASE</version>
 			</dependency> -->
 		<!-- Spring webflow -->
-		<!-- <dependency> <groupId>org.springframework.webflow</groupId> <artifactId>spring-faces</artifactId> 
-			<version>2.4.2.RELEASE</version> </dependency> <dependency> <groupId>org.springframework.webflow</groupId> 
-			<artifactId>spring-webflow</artifactId> <version>2.4.2.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.webflow</groupId> 
-			<artifactId>spring-binding</artifactId> <version>2.4.2.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.webflow</groupId> 
-			<artifactId>spring-js</artifactId> <version>2.4.2.RELEASE</version> </dependency> 
-			<dependency> <groupId>org.springframework.webflow</groupId> <artifactId>spring-js-resources</artifactId> 
+		<!-- <dependency> <groupId>org.springframework.webflow</groupId> <artifactId>spring-faces</artifactId>
+			<version>2.4.2.RELEASE</version> </dependency> <dependency> <groupId>org.springframework.webflow</groupId>
+			<artifactId>spring-webflow</artifactId> <version>2.4.2.RELEASE</version>
+			</dependency> <dependency> <groupId>org.springframework.webflow</groupId>
+			<artifactId>spring-binding</artifactId> <version>2.4.2.RELEASE</version>
+			</dependency> <dependency> <groupId>org.springframework.webflow</groupId>
+			<artifactId>spring-js</artifactId> <version>2.4.2.RELEASE</version> </dependency>
+			<dependency> <groupId>org.springframework.webflow</groupId> <artifactId>spring-js-resources</artifactId>
 			<version>2.4.2.RELEASE</version> </dependency> -->
 		<!-- 连接池 -->
 		<dependency>
@@ -433,13 +433,19 @@
     		<artifactId>mybatis-ehcache</artifactId>
     		<version>1.0.0</version>
 		</dependency>
-		
+
 		<!-- 日志 -->
 		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
 		<dependency>
     		<groupId>org.slf4j</groupId>
     		<artifactId>slf4j-log4j12</artifactId>
     		<version>1.7.21</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.jcabi/jcabi-log -->
+		<dependency>
+		    <groupId>com.jcabi</groupId>
+		    <artifactId>jcabi-log</artifactId>
+		    <version>0.17.2</version>
 		</dependency>
 		<!-- <dependency>
 			<groupId>org.slf4j</groupId>
@@ -485,16 +491,16 @@
 			<groupId>us.codecraft</groupId>
 			<artifactId>webmagic-core</artifactId>
 			<version>0.6.1</version>
-			<exclusions> 
-					<exclusion> 
- 						<artifactId>commons-lang</artifactId> 
- 						<groupId>commons-lang</groupId> 
+			<exclusions>
+					<exclusion>
+ 						<artifactId>commons-lang</artifactId>
+ 						<groupId>commons-lang</groupId>
  					</exclusion>
  					<exclusion>
             			<groupId>org.slf4j</groupId>
             			<artifactId>slf4j-log4j12</artifactId>
         			</exclusion>
-			</exclusions> 
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>us.codecraft</groupId>
@@ -513,15 +519,15 @@
     			</exclusion>
     		</exclusions>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
 		<dependency>
 		    <groupId>org.apache.poi</groupId>
 		    <artifactId>poi</artifactId>
 		    <version>3.17-beta1</version>
 		</dependency>
-		
-		
+
+
 		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
 		<!-- Swagger -->
 		<!--springfox的基本信息文档: http://springfox.github.io/springfox/docs/current/#architecture-->
@@ -535,7 +541,7 @@
     		<artifactId>springfox-swagger2</artifactId>
     		<version>2.7.0</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok  -->
 		<!-- 使用注解快速完成model配置 -->
 		<dependency>
@@ -551,7 +557,7 @@
 			<artifactId>quartz</artifactId>
 			<version>2.2.3</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/com.google.zxing/core -->
 		<!-- google 二维码 -->
 		<dependency>
@@ -578,21 +584,21 @@
     		<artifactId>async-http-client</artifactId>
     		<version>1.9.40</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore -->
 		<dependency>
     		<groupId>org.apache.httpcomponents</groupId>
     		<artifactId>httpcore</artifactId>
     		<version>4.4.5</version>
 		</dependency>
-		
+
 		<!-- shiro权限 -->
 		<dependency>
     		<groupId>org.apache.shiro</groupId>
     		<artifactId>shiro-all</artifactId>
     		<version>1.3.2</version>
 		</dependency>
-		
+
 		<!-- redis -->
 		<dependency>
     		<groupId>redis.clients</groupId>
@@ -617,16 +623,16 @@
 		    <artifactId>spring-data-mongodb</artifactId>
 		    <version>1.10.4.RELEASE</version>
 		</dependency>
-		
-		
-		
+
+
+
 		<!-- spring session redis -->
 		<dependency>
     		<groupId>org.springframework.session</groupId>
     		<artifactId>spring-session-data-redis</artifactId>
     		<version>1.3.0.RELEASE</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/io.netty/netty-all   netty网络编程框架 netsocket -->
 		<dependency>
     		<groupId>io.netty</groupId>
@@ -634,15 +640,15 @@
     		<version>5.0.0.Alpha2</version>
     		<!-- <version>4.1.5.Final</version> -->
 		</dependency>
-		
+
 		<!-- 数据后端校验 -->
 		<dependency>
     		<groupId>org.hibernate</groupId>
     		<artifactId>hibernate-validator</artifactId>
     		<version>5.4.0.Beta1</version>
 		</dependency>
-		
-		
+
+
 		<!-- mybatis与spring -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -694,7 +700,7 @@
 			<artifactId>cxf-rt-transports-http</artifactId>
 			<version>3.1.11</version>
 		</dependency>
-		
+
 		<!--dubbo -->
 		<!-- 使用的为dubbox 需在github下载源码，使用maven编译 mvn install -Dmaven.test.skip=true -->
 		<!-- maven地址，需要配置server 镜像
@@ -703,7 +709,7 @@
         	<mirrorOf>*</mirrorOf>
         	<name>Nexus aliyun</name>
         	<url>http://maven.aliyun.com/nexus/content/groups/public</url>
-    	</mirror> 	
+    	</mirror>
     	-->
 		<dependency>
     		<groupId>com.alibaba</groupId>
@@ -716,7 +722,7 @@
     			</exclusion>
     		</exclusions>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/com.101tec/zkclient -->
 		<dependency>
     		<groupId>com.101tec</groupId>
@@ -729,8 +735,8 @@
     			</exclusion>
     		</exclusions>
 		</dependency>
-		
-		
+
+
 		<!-- zookeeper -->
 		<dependency>
     		<groupId>org.apache.zookeeper</groupId>
@@ -759,11 +765,11 @@
 			<artifactId>resteasy-client</artifactId>
 			<version>3.0.7.Final</version>
 		</dependency>
-		<dependency>  
-    		<groupId>javax.validation</groupId>  
-    		<artifactId>validation-api</artifactId>  
-    		<version>1.1.0.Final</version>  
-		</dependency> 
+		<dependency>
+    		<groupId>javax.validation</groupId>
+    		<artifactId>validation-api</artifactId>
+    		<version>1.1.0.Final</version>
+		</dependency>
 
 		<!-- 如果要使用json序列化 -->
 		<dependency>
@@ -804,7 +810,7 @@
 			<artifactId>tomcat-embed-logging-juli</artifactId>
 			<version>8.0.11</version>
 		</dependency>
-		
+
 		<!-- dubbox Kyro序列化 -->
 		<dependency>
     		<groupId>com.esotericsoftware.kryo</groupId>
@@ -833,14 +839,14 @@
     		<artifactId>jackson-databind</artifactId>
     		<version>2.3.3</version>
 		</dependency> -->
-		
-		
-		<!-- <dependency>  
-            <groupId>javax.annotation</groupId>  
-            <artifactId>jsr250-api</artifactId>  
-            <version>1.0</version>  
-        </dependency> -->  
-        
+
+
+		<!-- <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>jsr250-api</artifactId>
+            <version>1.0</version>
+        </dependency> -->
+
         <!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-all -->
 		<dependency>
 		    <groupId>org.apache.activemq</groupId>
@@ -848,7 +854,7 @@
 		    <version>5.10.0</version>
 		</dependency>
 
-		
+
 		<!-- elasticsearch -->
 		<!-- https://mvnrepository.com/artifact/org.elasticsearch/elasticsearch -->
 		<dependency>
@@ -857,15 +863,15 @@
 		    <!-- <version>2.4.0</version> -->
 		    <version>2.4.5</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/fr.pilato.spring/spring-elasticsearch -->
 		<dependency>
 		    <groupId>fr.pilato.spring</groupId>
 		    <artifactId>spring-elasticsearch</artifactId>
 		    <version>2.2.0</version>
 		</dependency>
-		
-		
+
+
 		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-elasticsearch -->
 		<dependency>
 		    <groupId>org.springframework.data</groupId>
@@ -873,7 +879,7 @@
 		    <!-- <version>2.1.0.RELEASE</version> -->
 		    <version>2.1.4.RELEASE</version>
 		</dependency>
-		
+
 		<!-- solr-solrj -->
 		<dependency>
 		    <groupId>org.apache.solr</groupId>
@@ -901,11 +907,11 @@
     		<version>2.4</version>
 		</dependency> -->
 
-		
-        
-        
+
+
+
 		<!-- 组件=============================== -->
-		
+
 		<!-- https://mvnrepository.com/artifact/org.fusesource.jansi/jansi  日志控制台颜色 -->
 		<!-- <dependency>
     		<groupId>org.fusesource.jansi</groupId>
@@ -923,38 +929,38 @@
     		<artifactId>spring-boot-starter-redis</artifactId>
     		<version>1.4.1.RELEASE</version>
 		</dependency> -->
-		
+
 		<!-- https://mvnrepository.com/artifact/com.atomikos/transactions -->
 		<!-- 分布式事务 -->
-		<dependency>  
-		    <groupId>javax.transaction</groupId>  
-		    <artifactId>jta</artifactId>  
-		    <version>1.1</version>  
-		</dependency>  
-		<dependency>  
-		    <groupId>com.atomikos</groupId>  
-		    <artifactId>atomikos-util</artifactId>  
-		    <version>4.0.4</version>  
-		</dependency>  
-		<dependency>  
-		    <groupId>com.atomikos</groupId>  
-		    <artifactId>transactions</artifactId>  
-		    <version>4.0.4</version>  
-		</dependency>  
-		<dependency>  
-		    <groupId>com.atomikos</groupId>  
-		    <artifactId>transactions-jta</artifactId>  
-		    <version>4.0.4</version>  
-		</dependency>  
-		<dependency>  
-		    <groupId>com.atomikos</groupId>  
-		    <artifactId>transactions-jdbc</artifactId>  
-		    <version>4.0.4</version>  
-		</dependency>  
-		<dependency>  
-		    <groupId>com.atomikos</groupId>  
-		    <artifactId>transactions-api</artifactId>  
-		    <version>4.0.4</version>  
+		<dependency>
+		    <groupId>javax.transaction</groupId>
+		    <artifactId>jta</artifactId>
+		    <version>1.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.atomikos</groupId>
+		    <artifactId>atomikos-util</artifactId>
+		    <version>4.0.4</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.atomikos</groupId>
+		    <artifactId>transactions</artifactId>
+		    <version>4.0.4</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.atomikos</groupId>
+		    <artifactId>transactions-jta</artifactId>
+		    <version>4.0.4</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.atomikos</groupId>
+		    <artifactId>transactions-jdbc</artifactId>
+		    <version>4.0.4</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.atomikos</groupId>
+		    <artifactId>transactions-api</artifactId>
+		    <version>4.0.4</version>
 		</dependency>
 		<!-- activiti工作流  -->
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml -->
@@ -973,38 +979,38 @@
 			<artifactId>activiti-explorer</artifactId>
 			<version>${activiti.version}</version>
 		</dependency>
-		<dependency>  
-        	<groupId>org.activiti</groupId>  
-        	<artifactId>activiti-engine</artifactId>  
-        	<version>${activiti.version}</version>  
+		<dependency>
+        	<groupId>org.activiti</groupId>
+        	<artifactId>activiti-engine</artifactId>
+        	<version>${activiti.version}</version>
     	</dependency>
-    	<dependency>  
-        	<groupId>org.activiti</groupId>  
-        	<artifactId>activiti-rest</artifactId>  
-        	<version>${activiti.version}</version>  
+    	<dependency>
+        	<groupId>org.activiti</groupId>
+        	<artifactId>activiti-rest</artifactId>
+        	<version>${activiti.version}</version>
     	</dependency>
-    	<dependency>  
-        	<groupId>org.activiti</groupId>  
-        	<artifactId>activiti-spring</artifactId>  
-        	<version>${activiti.version}</version>  
+    	<dependency>
+        	<groupId>org.activiti</groupId>
+        	<artifactId>activiti-spring</artifactId>
+        	<version>${activiti.version}</version>
     	</dependency>
 		<dependency>
 		    <groupId>com.fasterxml.jackson.dataformat</groupId>
 		    <artifactId>jackson-dataformat-xml</artifactId>
 		    <version>2.8.5</version>
 		</dependency> -->
-		
+
 		<!-- https://mvnrepository.com/artifact/com.xiaoleilu/hutool-core -->
 		<dependency>
 		    <groupId>com.xiaoleilu</groupId>
 		    <artifactId>hutool-all</artifactId>
 		    <version>3.0.4</version>
 		</dependency>
-		
-		
-		
+
+
+
 	</dependencies>
-	
+
 
 
 	<build>
@@ -1073,7 +1079,7 @@
 					<server>tomcat7</server>
 				</configuration> -->
 			</plugin>
-			
+
 		</plugins>
 		<pluginManagement>
 			<plugins>
