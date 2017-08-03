@@ -45,15 +45,15 @@ public class AyscTask{
     }
     
     //CompletableFuture jdk 1.8自带
-    /*@Async
-    public CompletableFuture<String> doTaskFour(String firstname){
+    @Async
+    public CompletableFuture<String> doTaskFour(String firstname) throws InterruptedException{
     	System.out.println("开始做任务三");
         long start = System.currentTimeMillis();
         Thread.sleep(random.nextInt(10000));
         long end = System.currentTimeMillis();
         System.out.println("完成任务三，耗时：" + (end - start) + "毫秒");
-    	return new AsyncResult("");
-    }*/
+    	return CompletableFuture.completedFuture("任务CompletableFuture OK");
+    }
     
     //ListenableFuture spring自带
     @Async

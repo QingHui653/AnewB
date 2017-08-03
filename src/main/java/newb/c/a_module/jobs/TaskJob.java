@@ -10,7 +10,8 @@ import org.springframework.stereotype.Component;
 
 @Component("taskJob")
 public class TaskJob {
-    @Scheduled(cron = "0 0 0/10 * * ?")
+	//1000为1s  cron = "0 0 0/10 * * ?"
+    @Scheduled(fixedDelay=60*60*1000)
     public void job1() {
         System.out.println(DateUtil.getForDate()+" Task任务进行中。。。");
     }

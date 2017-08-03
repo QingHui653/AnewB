@@ -16,7 +16,7 @@ public class ProducerServiceImpl{
 	
 	//ActiveMq
 	@Autowired(required=false)
-	private JmsTemplate jmsTemplate; 
+	private JmsTemplate jmsTemplate;
 	
 	public void sendMessage(Destination destination, final String message) {   
         System.out.println("---------------生产者发送消息-----------------");   
