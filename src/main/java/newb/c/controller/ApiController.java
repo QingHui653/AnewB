@@ -43,12 +43,6 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
 import io.swagger.annotations.ApiOperation;
-import jxl.Workbook;
-import jxl.write.Label;
-import jxl.write.WritableSheet;
-import jxl.write.WritableWorkbook;
-import jxl.write.WriteException;
-import jxl.write.biff.RowsExceededException;
 import newb.c.a_module.qrcode.MatrixToImageWriter;
 import newb.c.api.weather.weather;
 import newb.c.backend.model.RepList;
@@ -84,10 +78,11 @@ public class ApiController {
 	 *   获取excel 文档  JXL
 	 */
 	@RequestMapping(value="/getExcByJXL",method=RequestMethod.GET)
-	@ApiOperation("测试使用JXL获取excel文档")
+	@ApiOperation("测试使用JXL获取excel文档  已替换为POI 去掉JXL jar包")
 	@Test   
-	public void getExcByJXL() throws SQLException,IOException, RowsExceededException, WriteException {
-		String[] title = {"姓名"};
+	@Deprecated
+	public void getExcByJXL() throws SQLException,IOException{
+		/*String[] title = {"姓名"};
 		String filePath = "g:\\newbc.xls";
 		Connection send = DriverManager.getConnection("proxool.local");
 		String a0101 = "select username from user";
@@ -111,16 +106,16 @@ public class ApiController {
 		logger.info("保存路径为-- "+filePath);
 		wwb.write();
 		wwb.close();
-		logger.info("保存成功");
+		logger.info("保存成功");*/
 	}
 	
 	/**
 	 *   获取excel 文档 POI
 	 */
 	@RequestMapping(value="/getExcByPOI",method=RequestMethod.GET)
-	@ApiOperation("测试使用POI获取excel文档")
-	@Test   
-	public void getExcByPOI(HttpServletResponse response) throws SQLException,IOException, RowsExceededException, WriteException {
+	@ApiOperation("测试使用POI获取excel文档  ")
+	@Test  
+	public void getExcByPOI(HttpServletResponse response) throws SQLException,IOException{
 		ExcelUtil excelUtil =new ExcelUtil();
 //		excelUtil.demoExport(response);
 		

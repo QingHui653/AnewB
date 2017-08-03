@@ -21,6 +21,7 @@ import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -39,6 +40,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -139,6 +141,42 @@ public class UserController {
 		    System.out.println("反序列化得到的user "+userFromJson.getOid()+"  "+userFromJson.getUsername());
 		    return "/views/jsp/user/showInfo";
 	}
+	
+	
+	@ResponseBody
+	@RequestMapping("/addCookie")
+	public void addCookie(HttpServletRequest request,HttpServletResponse response){
+	    Cookie cookie=new Cookie("test","hello cookie"+System.currentTimeMillis());
+	    cookie.setMaxAge(300);//设置生命周期以秒为单位
+	    //cookie.setDomain("localhost");//设置域名，跨域访问时使用
+	    //cookie.setPath("/");//设置路径，共享cookie时使用
+	    response.addCookie(cookie);
+	    return;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/showCookie")
+	public void showCookie(HttpServletRequest request,HttpServletResponse response){
+	    Cookie[] cookies=request.getCookies();//获取请求中的所有cookie
+	    if(null!=cookies) {
+	        for (Cookie cookie : cookies) {
+	            //输出cookie的标志(name)和值(value)
+	            System.out.println(cookie.getName() + " - " + cookie.getValue());
+	        }
+	    }
+	    else{
+	        System.out.println("cookies is null");
+	    }
+	  
+	    return;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/getCookie")
+	public void getCookieBySpring(@CookieValue(value = "test", defaultValue = "hello") String cookie) {
+	        return;
+	}
+	
 	 /**
 	  * 测试session
 	  * @param modelMap

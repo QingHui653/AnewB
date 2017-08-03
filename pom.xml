@@ -527,26 +527,18 @@
 			<artifactId>webmagic-extension</artifactId>
 			<version>0.6.1</version>
 		</dependency>
-		<!-- jxl 操作word,excel等-->
-		<dependency>
-    		<groupId>net.sourceforge.jexcelapi</groupId>
-    		<artifactId>jxl</artifactId>
-    		<version>2.6.12</version>
-    		<exclusions>
-    			<exclusion>
-    				<artifactId>log4j</artifactId>
-    				<groupId>log4j</groupId>
-    			</exclusion>
-    		</exclusions>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+		<!-- poi 操作word,excel等-->
 		<dependency>
 		    <groupId>org.apache.poi</groupId>
 		    <artifactId>poi</artifactId>
 		    <version>3.17-beta1</version>
 		</dependency>
-
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi-ooxml</artifactId>
+		    <version>3.17-beta1</version>
+		</dependency>
+		
 
 		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
 		<!-- Swagger -->
