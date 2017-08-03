@@ -19,7 +19,7 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-import org.apache.commons.httpclient.HttpClient;
+import org.apache.http.client.HttpClient;
 import org.apache.commons.logging.Log;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
