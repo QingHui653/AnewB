@@ -186,8 +186,8 @@
 			<version>1.2.2</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
-		
-		
+
+
 		<!-- WEB................................ -->
 
 		<!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
@@ -408,7 +408,7 @@
 		    <artifactId>commons-codec</artifactId>
 		    <version>1.10</version>
 		</dependency>
-		
+
 		<dependency>
 		    <groupId>org.apache.httpcomponents</groupId>
 		    <artifactId>httpclient</artifactId>
@@ -456,33 +456,53 @@
 
 		<!-- 日志 -->
 		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
-		<dependency>
+		<!-- <dependency>
     		<groupId>org.slf4j</groupId>
     		<artifactId>slf4j-log4j12</artifactId>
     		<version>1.7.21</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.jcabi/jcabi-log -->
 		<dependency>
 		    <groupId>com.jcabi</groupId>
 		    <artifactId>jcabi-log</artifactId>
 		    <version>0.17.2</version>
-		</dependency>
+		</dependency> -->
 		<!-- <dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.21</version>
-		</dependency> -->
-		<!-- <dependency>
+		</dependency>
+		 <dependency>
     		<groupId>log4j</groupId>
     		<artifactId>log4j</artifactId>
     		<version>1.2.17</version>
 		</dependency> -->
 		<!-- logback-->
-		<!-- <dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.1.7</version>
-		</dependency> -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.21</version>
+		</dependency>
+		<dependency>
+		    <groupId>ch.qos.logback</groupId>
+		    <artifactId>logback-classic</artifactId>
+		    <version>1.2.3</version>
+		</dependency>
+		<dependency>
+		    <groupId>ch.qos.logback</groupId>
+		    <artifactId>logback-core</artifactId>
+		    <version>1.2.3</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.logback-extensions</groupId>
+		    <artifactId>logback-ext-spring</artifactId>
+		    <version>0.1.4</version>
+		</dependency>
+		<dependency>
+    		<groupId>log4j</groupId>
+    		<artifactId>log4j</artifactId>
+    		<version>1.2.17</version>
+		</dependency>
+
 		<!-- log4j2 日志 -->
 		<!-- <dependency>
     		<groupId>org.apache.logging.log4j</groupId>
@@ -531,14 +551,14 @@
 		<dependency>
 		    <groupId>org.apache.poi</groupId>
 		    <artifactId>poi</artifactId>
-		    <version>3.17-beta1</version>
+		    <version>3.16</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.apache.poi</groupId>
 		    <artifactId>poi-ooxml</artifactId>
-		    <version>3.17-beta1</version>
+		    <version>3.16</version>
 		</dependency>
-		
+
 
 		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
 		<!-- Swagger -->
@@ -726,7 +746,7 @@
 		<dependency>
     		<groupId>com.alibaba</groupId>
     		<artifactId>dubbo</artifactId>
-    		<version>2.8.4</version>
+    		<version>2.8.3</version>
     		<exclusions>
     			<exclusion>
     				<artifactId>spring</artifactId>
@@ -745,6 +765,10 @@
     				<artifactId>log4j</artifactId>
     				<groupId>log4j</groupId>
     			</exclusion>
+    			<exclusion>
+    				<groupId>org.slf4j</groupId>
+    				<artifactId>slf4j-log4j12</artifactId>
+    			</exclusion>
     		</exclusions>
 		</dependency>
 
@@ -762,6 +786,10 @@
     			<exclusion>
     				<artifactId>log4j</artifactId>
     				<groupId>log4j</groupId>
+    			</exclusion>
+    			<exclusion>
+    				<groupId>org.slf4j</groupId>
+    				<artifactId>slf4j-log4j12</artifactId>
     			</exclusion>
     		</exclusions>
 		</dependency>
@@ -860,11 +888,18 @@
         </dependency> -->
 
         <!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-all -->
-		<dependency>
+        <!-- 自带个slf4j的log4j 实现 会与logback冲突 -->
+		<!-- <dependency>
 		    <groupId>org.apache.activemq</groupId>
 		    <artifactId>activemq-all</artifactId>
 		    <version>5.10.0</version>
+		</dependency> -->
+		<dependency>
+		    <groupId>org.apache.activemq</groupId>
+		    <artifactId>activemq-core</artifactId>
+		    <version>5.7.0</version>
 		</dependency>
+
 
 
 		<!-- elasticsearch -->
@@ -872,7 +907,6 @@
 		<dependency>
 		    <groupId>org.elasticsearch</groupId>
 		    <artifactId>elasticsearch</artifactId>
-		    <!-- <version>2.4.0</version> -->
 		    <version>2.4.5</version>
 		</dependency>
 

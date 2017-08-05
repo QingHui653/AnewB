@@ -62,24 +62,24 @@ import tk.mybatis.mapper.entity.Example;
 @Controller
 @RequestMapping("api")
 public class ApiController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(ApiController.class);
-	
+
 	@Autowired
 	private ResultService resultService;
 	@Autowired
 	private TOrderService tOrderService;
-	
+
 	weather weather = new weather();
-	                        
+
 	DataHandle data =new DataHandle();
-	
+
 	/**
 	 *   获取excel 文档  JXL
 	 */
 	@RequestMapping(value="/getExcByJXL",method=RequestMethod.GET)
 	@ApiOperation("测试使用JXL获取excel文档  已替换为POI 去掉JXL jar包")
-	@Test   
+	@Test
 	@Deprecated
 	public void getExcByJXL() throws SQLException,IOException{
 		/*String[] title = {"姓名"};
@@ -108,35 +108,35 @@ public class ApiController {
 		wwb.close();
 		logger.info("保存成功");*/
 	}
-	
+
 	/**
 	 *   获取excel 文档 POI
 	 */
 	@RequestMapping(value="/getExcByPOI",method=RequestMethod.GET)
 	@ApiOperation("测试使用POI获取excel文档  ")
-	@Test  
+	@Test
 	public void getExcByPOI(HttpServletResponse response) throws SQLException,IOException{
 		ExcelUtil excelUtil =new ExcelUtil();
 //		excelUtil.demoExport(response);
-		
+
 		String[] headList ={"姓名","班级"};
 		List<String[]> bodyList =new ArrayList<String[]>();
 			String[] body1 ={"李明","As178"};
 			String[] body2 ={"李明2","As179"};
 		bodyList.add(body1);
 		bodyList.add(body2);
-		
+
 		excelUtil.simpleExport(response, headList,bodyList);
-		
+
 	}
-	
+
 	@RequestMapping(value="/getrep",method=RequestMethod.GET)
 	@ApiOperation("测试使用通用mapper,自定义通用接口删除数据,重定向到bootstarap")
 	public String getrep() {
 		resultService.CommonDelMapper("50");
 		return "forward:/views/jsp/bootstrap.jsp";
 	}
-	
+
 	@RequestMapping(value="/getrep2",method=RequestMethod.GET)
 	@ApiOperation("测试使用通用mapper获取表值,重定向到bootstarap")
 	public Object getrep2(ModelMap modelMap) {
@@ -148,8 +148,8 @@ public class ApiController {
 		modelMap.addAttribute("result", r1);
 		return "forward:/views/jsp/bootstrap.jsp";
 	}
-	
-	
+
+
 	@RequestMapping(value="/rep/getRes",method=RequestMethod.GET)
 	@ApiOperation("获取爬虫爬取信息")
 	public String getRepRes(ModelMap modelMap) {
@@ -157,7 +157,7 @@ public class ApiController {
 		modelMap.addAttribute("repList", repList);
 		return "/views/jsp/rep/newb";
 	}
-	
+
 	@RequestMapping(value="/rep/{group}",method=RequestMethod.GET)
 	@ApiOperation("通过公司名获取爬虫爬取信息")
 	public String getGroupRes(ModelMap modelMap,@PathVariable String group) {
@@ -167,7 +167,7 @@ public class ApiController {
 		modelMap.addAttribute("GroupList", GroupList);
 		return "/views/jsp/rep/GroupList";
 	}
-	
+
 	@RequestMapping(value="/rep/{group}/{project}",method=RequestMethod.GET)
 	@ApiOperation("通过公司名和工程名，获取爬虫爬取信息")
 	public String getProject(ModelMap modelMap,@PathVariable String group,@PathVariable String project) {
@@ -177,8 +177,8 @@ public class ApiController {
 		modelMap.addAttribute("GroupList", GroupList);
 		return "/views/jsp/rep/GroupList";
 	}
-	
-	
+
+
 	@ApiOperation(value="根据城市获取天气情况")
 	@RequestMapping(value="/weather/{cityname}",method=RequestMethod.GET)
 	@ResponseBody
@@ -186,7 +186,7 @@ public class ApiController {
 		String res= weather.queryWeather(cityname);
 		return res;
 	}
-	
+
 	@RequestMapping(value="/sharding",method=RequestMethod.GET)
 	@ApiOperation("sharding-jdbc测试方法")
 	@ResponseBody
@@ -197,7 +197,7 @@ public class ApiController {
 		tOrderService.insertByXML(tO1);
 		TOrder tO2=new TOrder(2, 4, "第2条数据");
 		tOrderService.insertByXML(tO2);
-		
+
 		/*TOrder tO1=new TOrder(1, 1, "第1条数据");
 		int bool1= tOrderService.insertByMapper(tO1);
 		TOrder tO2=new TOrder(2, 2, "第2条数据");
@@ -207,10 +207,10 @@ public class ApiController {
 		 */
 		/*User u = new User(10, "xx", "cc");
 		int bool0=userService.save(u);*/
-		
+
 		return bool0;
 	}
-	
+
 	/**
 	 * 获取验证码（Gif版本）
 	 * @param response
@@ -219,10 +219,10 @@ public class ApiController {
 	@ApiOperation("获取验证码 gif版")
 	public void getGifCode(HttpServletResponse response,HttpServletRequest request,HttpSession session){
 		try {
-			response.setHeader("Pragma", "No-cache");  
-	        response.setHeader("Cache-Control", "no-cache");  
-	        response.setDateHeader("Expires", 0);  
-	        response.setContentType("image/gif");  
+			response.setHeader("Pragma", "No-cache");
+	        response.setHeader("Cache-Control", "no-cache");
+	        response.setDateHeader("Expires", 0);
+	        response.setContentType("image/gif");
 	        /**
 	         * gif格式动画验证码
 	         * 宽，高，位数。
@@ -233,7 +233,7 @@ public class ApiController {
 	        System.out.println("hhh 1"+captcha);
 	        System.out.println("hhh 2"+captcha.text());
 	        System.out.println("hhh 3"+captcha.text().toLowerCase());
-	        session.setAttribute("_code",captcha.text().toLowerCase());  
+	        session.setAttribute("_code",captcha.text().toLowerCase());
 	        //输出
 	        captcha.out(response.getOutputStream());
 		} catch (Exception e) {
@@ -241,7 +241,7 @@ public class ApiController {
 			logger.error("获取验证码异常：%s",e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * 获取验证码（jpg版本）
 	 * @param response
@@ -250,49 +250,49 @@ public class ApiController {
 	@ApiOperation("获取验证码 jpg版")
 	public void getJPGCode(HttpServletResponse response,HttpServletRequest request){
 		try {
-			response.setHeader("Pragma", "No-cache");  
-			response.setHeader("Cache-Control", "no-cache");  
-			response.setDateHeader("Expires", 0);  
-			response.setContentType("image/jpg");  
+			response.setHeader("Pragma", "No-cache");
+			response.setHeader("Cache-Control", "no-cache");
+			response.setDateHeader("Expires", 0);
+			response.setContentType("image/jpg");
 			/**
 			 * jgp格式验证码
 			 * 宽，高，位数。
 			 */
 			Captcha captcha = new SpecCaptcha(146,33,4);
-			HttpSession session = request.getSession(true);  
+			HttpSession session = request.getSession(true);
 			//存入Session
-			session.setAttribute("_code",captcha.text().toLowerCase());  
+			session.setAttribute("_code",captcha.text().toLowerCase());
 			//输出
 			captcha.out(response.getOutputStream());
 		} catch (Exception e) {
 			logger.error("获取验证码异常：%s",e.toString());
 		}
 	}
-	
-	
+
+
 	@RequestMapping(value="throwEx",method=RequestMethod.GET)
 	@ApiOperation("测试 抛出异常")
 	public void throwEx() throws Exception {
-		switch(1) {  
-        case 1:  
-            throw new Exception("浙江温州，浙江温州，浙江温州。最大皮革厂倒闭了");  
+		switch(1) {
+        case 1:
+            throw new Exception("浙江温州，浙江温州，浙江温州。最大皮革厂倒闭了");
         default:
-        	throw new Exception("22222222222");  
+        	throw new Exception("22222222222");
         }
 	}
-	
+
 	@RequestMapping(value="shardDatasource",method=RequestMethod.GET)
 	@ApiOperation("测试分库  为分布式事务先做 测试")
 	public Object shardDatasource() throws Exception {
 		TOrder t2= new TOrder(1,2 , "進入newb t_order_1"); //偶数进newb t_order_1
 		TOrder t1= new TOrder(2,1 , "進入newb2 t_order_0"); //奇数进newb2 t_order_0
 		tOrderService.save(t1);
-		
+
 		tOrderService.save(t2);
-		
+
 		return "测试分库表完成";
 	}
-	
+
 	/**
 	 * 未加分布式事务配置，事务暂时不可用
 	 * @return
@@ -302,10 +302,10 @@ public class ApiController {
 	@ApiOperation("测试分库  为分布式事务先做 测试")
 	public Object shardDatasourceTestJTA() throws Exception {
 		tOrderService.testJTA();
-		
+
 		return "测试分布式 事务";
 	}
-	
+
 	/**
 	 * 同一个库的事务是可用的
 	 * @return
@@ -315,10 +315,10 @@ public class ApiController {
 	@ApiOperation("测试一个库下的事务情况")
 	public Object TestOneData() throws Exception {
 		tOrderService.testOneData();
-		
+
 		return "一个库下的事务情况";
 	}
-	
+
 	@RequestMapping(value="ZxingTest",method=RequestMethod.GET)
 	@ApiOperation("测试二维码")
 	public void zxingTest(HttpServletRequest request, HttpServletResponse response) {
@@ -334,7 +334,7 @@ public class ApiController {
 			bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 200, 200, hints);
 			// 生成二维码
 			MatrixToImageWriter.writeToStream(bitMatrix, "png", out);
-			
+
 			out.close();
 		} catch (WriterException e) {
 			e.printStackTrace();
@@ -346,24 +346,24 @@ public class ApiController {
 	/**
 	 * kindEditor 图片跨域上传的服务后台
 	 */
-	@RequestMapping(value = "/kindUpload", method = RequestMethod.POST)  
-    public Object kindUpload(HttpServletRequest request, HttpServletResponse response,@RequestParam("file") MultipartFile file,String redirectUrl) {  
-        try {  
-            String referer = request.getHeader("referer");  
-            Pattern p = Pattern.compile("([a-z]*:(//[^/?#]+)?)?", Pattern.CASE_INSENSITIVE);  
-            Matcher mathcer = p.matcher(referer);  
-            if (mathcer.find()) {  
-                String callBackPath = mathcer.group();// 请求来源a.com  
-                MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;  
+	@RequestMapping(value = "/kindUpload", method = RequestMethod.POST)
+    public Object kindUpload(HttpServletRequest request, HttpServletResponse response,@RequestParam("file") MultipartFile file,String redirectUrl) {
+        try {
+            String referer = request.getHeader("referer");
+            Pattern p = Pattern.compile("([a-z]*:(//[^/?#]+)?)?", Pattern.CASE_INSENSITIVE);
+            Matcher mathcer = p.matcher(referer);
+            if (mathcer.find()) {
+                String callBackPath = mathcer.group();// 请求来源a.com
+                MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         		boolean success = false;
         		Map<String, Object> result = new HashMap<String, Object>();
         		String id = "2";
         		if (id != null) {
         			success = true;
         		}
-                
+
         		String url =request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
-        		
+
                 Map<String, Object> map =new HashMap<>();
                 map.put("error",0);
                 map.put("url", url + "/file/download?id="+id);
@@ -373,16 +373,16 @@ public class ApiController {
                     modelAndView.addObject(key, map.get(key));//将返回的参数设置到modelAndView中，最后也是以？之后带的参数出现
                 }
                 return modelAndView;
-                
-            } else {  
-                logger.info("upload referer not find");  
-            }  
-        } catch (Exception e) {  
-            logger.error("upload error", e);  
-        }  
-        return null;  
+
+            } else {
+                logger.info("upload referer not find");
+            }
+        } catch (Exception e) {
+            logger.error("upload error", e);
+        }
+        return null;
     }
-	
+
 	/**
 	 * gson在json中不允许空格 会报错
 	 * @param data
@@ -395,7 +395,7 @@ public class ApiController {
 		List<User> spuParamList = JSON.parseArray(map.get("list").toString(),User.class);
 		logger.info("转为params "+params.toString());
 	}
-	
+
 	/**
 	 * gson在json中不允许空格 会报错
 	 * @param data
