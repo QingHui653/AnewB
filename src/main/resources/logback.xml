@@ -3,7 +3,7 @@
 <configuration debug="true" scan="true" scanPeriod="30 seconds">
 
   <!-- <property name="console_log" value="%date{HH:mm:ss} |%highlight(%-5level) |%thread | %cyan(%logger %line) | %m|%n"/> -->
-  <property name="console_log" value="%date{HH:mm:ss} |%highlight(%-5level) | %cyan(%logger %line) | %m|%n"/>
+  <property name="console_log" value="%date{HH:mm:ss} |%highlight(%-5level) | %cyan(%logger %line) | %m%n"/>
 
   <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
     <encoder charset="UTF-8">
@@ -13,7 +13,7 @@
 
   <!-- 按日期区分的滚动日志 -->
   <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>./logs/Anewb/error%i.log</file>
+    <file>../logs/Anewb/error%i.log</file>
     <encoder charset="UTF-8">
     	<pattern>${console_log}</pattern>
     </encoder>
@@ -31,7 +31,7 @@
 
   <!-- 按文件大小区分的滚动日志 -->
   <appender name="info" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>./logs/Anewb/info%i.log</file>
+    <file>../logs/Anewb/info%i.log</file>
 
     <encoder charset="UTF-8">
     	<pattern>${console_log}</pattern>
@@ -58,7 +58,7 @@
 
   <!-- 按日期和大小区分的滚动日志 -->
   <appender name="debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>./logs/Anewb/debug.log</file>
+    <file>../logs/Anewb/debug.log</file>
 
     <encoder charset="UTF-8">
     	<pattern>${console_log}</pattern>
@@ -82,7 +82,7 @@
 
    <!-- 级别阀值过滤 -->
   <appender name="sum" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>./logs/Anewb//sum.log</file>
+    <file>../logs/Anewb/sum.log</file>
 
     <encoder charset="UTF-8">
     	<pattern>${console_log}</pattern>
