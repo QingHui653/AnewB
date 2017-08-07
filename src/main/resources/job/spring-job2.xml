@@ -27,7 +27,7 @@
 	<!--定时执行 -->
 	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail" ref="job2" />
-		<property name="cronExpression" value="0 0/10 * * * ?" />
+		<property name="cronExpression" value="0/10 * * * * ?" />
 	</bean>
 
 	<!-- 执行的bean -->
