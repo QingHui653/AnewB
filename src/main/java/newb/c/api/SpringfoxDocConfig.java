@@ -16,7 +16,7 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @Configuration
 @EnableWebMvc //NOTE: Only needed in a non-springboot application
 @EnableSwagger2 //Enable swagger 2.0 spec
-@ComponentScan("newb.c")
+@ComponentScan("newb.c.controller")
 public class SpringfoxDocConfig {
 	/**
 	 * 访问/swagger-ui.html

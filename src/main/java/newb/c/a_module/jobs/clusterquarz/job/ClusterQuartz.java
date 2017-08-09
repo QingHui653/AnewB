@@ -4,7 +4,6 @@ import java.util.Date;
 
 import org.apache.tools.ant.util.DateUtils;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
 @Component
 public class ClusterQuartz {

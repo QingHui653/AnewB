@@ -30,6 +30,11 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
     </context:component-scan> -->
 
+	<context:component-scan base-package="newb.c" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+		<context:include-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect" />
+	</context:component-scan>
+
     <task:annotation-driven />
 
     <!-- 日志代理配置 -->
@@ -39,7 +44,6 @@
 
     <!-- 必须配置在springmvc中 ，不然不起作用，未经过确认，但在e账柜OA中无法识别到-->
     <aop:aspectj-autoproxy/>
-    <!-- <bean id="LogProxy" class="newb.c.proxy.log.LogProxy"/> -->
 
 	<!-- 启用spring mvc 注解 -->
     <!--

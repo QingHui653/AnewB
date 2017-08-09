@@ -32,7 +32,7 @@
 	<!-- 配置调度任务 -->
 	<bean name="quartzScheduler"
 		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-		<property name="configLocation" value="classpath:job/quartz.properties" />
+		<property name="configLocation" value="classpath:properties/quartz.properties" />
 		<property name="dataSource" ref="parentDataSource" />
 		<property name="transactionManager" ref="transactionManager" />
 
@@ -76,7 +76,7 @@
 	<bean name="printCurrentTimeScheduler" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail" ref="printCurrentTimeJobs" />
 		<property name="cronExpression">
-			<value>0/10 * * * * ?</value>
+			<value>0 0/10 * * * ?</value>
 		</property>
 	</bean>
 

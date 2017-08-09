@@ -116,6 +116,9 @@
   <logger name="org.springframework.web.servlet" level="DEBUG" />
 
   <!-- mybatis -->
+  <logger name="org.apache.ibatis" level="DEBUG" />
+  <logger name="org.mybatis.spring" level="DEBUG" />
+
   <logger name="newb.c.backend.dao" level="DEBUG" />
   <logger name="newb.c.backend.mapping" level="DEBUG" />
   <logger name="java.sql.Connection" level="TRACE" />
