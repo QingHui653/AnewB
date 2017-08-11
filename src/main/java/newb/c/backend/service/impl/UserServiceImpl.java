@@ -20,14 +20,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service("UserService")
 public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
-	
+
 	@Autowired
 	private UserMapper userMapper;
-	
+
 	private volatile int threadCount =0;
-	
-	private Lock lock =new ReentrantLock(); 
-	
+
+	private Lock lock =new ReentrantLock();
+
 	@Override
 //	@Cacheable(value="userCache")
 	public User getUserById(int id) {
@@ -76,10 +76,10 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 	public int threadInsertAll(int page) {
 		threadCount=0;
 		ExecutorService excutor= Executors.newCachedThreadPool();
-		
+
 			for (int i = 0; i < page; i++) {
 				excutor.execute(new Runnable() {
-					
+
 					@Override
 					public void run() {
 							lock.lock();
@@ -93,7 +93,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 			}
 		return 0;
 	}
-	
+
 	private List<User> threadList(int page) {
 		List<User> userList = new ArrayList<User>();
 		for (int i =1000*page ; i <= 1000*page+999; i++) {
