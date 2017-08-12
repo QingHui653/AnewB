@@ -40,7 +40,7 @@ public class DbController {
 
 	/**
 	 * 测试不同mapXML是否可行
-	 * 
+	 *
 	 * @param modelMap
 	 * @param userId
 	 * @return
@@ -55,7 +55,7 @@ public class DbController {
 
 	/**
 	 * 测试dao关联查询 关联查询暂时没找到方法使用注解的方式
-	 * 
+	 *
 	 * @param modelMap
 	 * @param userId
 	 * @return
@@ -71,7 +71,7 @@ public class DbController {
 	/**
 	 *
 	 * 测试XML关联查询是否可行
-	 * 
+	 *
 	 * @param modelMap
 	 * @param userId
 	 * @return
@@ -86,7 +86,7 @@ public class DbController {
 
 	/**
 	 * save 测试批量插入
-	 * 
+	 *
 	 * @param modelMap
 	 * @param userId
 	 * @return
@@ -99,13 +99,14 @@ public class DbController {
 		 * 测试插入10w数据，用时，在服务器开启后第一次用时10s，后面用时2-4s
 		 */
 		List<User> userList = new ArrayList<User>();
-		for (int i = 0; i < 10000; i++) {
+		for (int i = 0; i < 30000; i++) {
 			User user = new User();
 			user.setOid(i);
 			user.setUsername(i + "");
 			user.setPassword(i + "");
 			userList.add(user);
 		}
+		System.out.println("size "+userList.size());
 		userService.insertAll(userList);
 		/**
 		 * 测试查询10w条数据，user在oid加入索引 类型Unique 方法：BTREE
@@ -118,7 +119,7 @@ public class DbController {
 		 */
 		return "/user/showInfo";
 	}
-	
+
 	 /**
 	  * 多线程 测试批量插入
 	  * @param modelMap
@@ -129,13 +130,13 @@ public class DbController {
 	 @ApiOperation("多线程测试批量插入方法")
 	 @ResponseBody
 	 public String insertUserByMultithread(ModelMap modelMap){
-		 
-		 userService.threadInsertAll(100);
-		 
+
+		 userService.threadInsertAll(1000);
+
 	     return "/views/jsp/user/showInfo";
 	 }
-	 
-	 
+
+
 
 
 	/**
@@ -154,7 +155,7 @@ public class DbController {
 
 	/**
 	 * userCahce表，测试插入10w条数据
-	 * 
+	 *
 	 * @param modelMap
 	 * @param userId
 	 * @return
@@ -190,7 +191,7 @@ public class DbController {
 
 	/**
 	 * del 测试事务 具体看BaseServiceImpl
-	 * 
+	 *
 	 * @param modelMap
 	 * @param userId
 	 * @return
@@ -203,7 +204,7 @@ public class DbController {
 		int test = userService.delete(null);
 		return test + "";
 	}
-	
+
 	@Test
 	private List<User> threadList(int page) {
 //		int page=1;

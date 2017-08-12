@@ -4,33 +4,39 @@
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:task="http://www.springframework.org/schema/task" 
+	xmlns:task="http://www.springframework.org/schema/task"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd 
-		http://www.springframework.org/schema/context 
-		http://www.springframework.org/schema/context/spring-context-4.2.xsd 
-		http://www.springframework.org/schema/mvc 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/mvc
 		http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
-		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop
 		http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
-		http://www.springframework.org/schema/task 
-		http://www.springframework.org/schema/task/spring-task-4.2.xsd 
+		http://www.springframework.org/schema/task
+		http://www.springframework.org/schema/task/spring-task-4.2.xsd
 		">
-	
-	<!-- 此处必须存在不能删除，不然使用@vaule(${})取不到值 -->	
-	<context:property-placeholder location="classpath*:main/resources/*.properties" />
+
+	<!-- 此处必须存在不能删除，不然使用@vaule(${})取不到值 -->
+	<!-- <context:property-placeholder location="classpath*:main/resources/*.properties" /> -->
 	<!-- 自动扫描下的包自动装配 -->
 	<!--resource-pattern="api/*.class" 基类包下的所有类-->
 	<!-- <context:component-scan base-package="newb.c.controller.test" /> -->
     <!-- 加载controller的时候,不加载service,因为此时事物并未生效,若此时加载了service,那么事物无法对service进行拦截 -->
-    <context:component-scan base-package="newb.c">
-        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>    
-        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/> 
-    </context:component-scan>
-    
+    <!-- 配置在spring中，在一开始就加载 -->
+    <!-- <context:component-scan base-package="newb.c">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+    </context:component-scan> -->
+
+	<context:component-scan base-package="newb.c" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+		<context:include-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect" />
+	</context:component-scan>
+
     <task:annotation-driven />
-    
+
     <!-- 日志代理配置 -->
     <!-- <aop:aspectj-autoproxy/>
     <bean id="LogProxy" class="newb.c.proxy.log.LogProxy"/>
@@ -38,21 +44,20 @@
 
     <!-- 必须配置在springmvc中 ，不然不起作用，未经过确认，但在e账柜OA中无法识别到-->
     <aop:aspectj-autoproxy/>
-    <!-- <bean id="LogProxy" class="newb.c.proxy.log.LogProxy"/> -->
-    
+
 	<!-- 启用spring mvc 注解 -->
     <!--
     @Controller 声明Action组件
-    @Service    声明Service组件    @Service("myMovieLister") 
+    @Service    声明Service组件    @Service("myMovieLister")
     @Repository 声明Dao组件
-    @Component   泛指组件, 当不好归类时. 
+    @Component   泛指组件, 当不好归类时.
     @RequestMapping("/menu")  请求映射
-    @Resource  用于注入，( j2ee提供的 ) 默认按名称装配，@Resource(name="beanName") 
-    @Autowired 用于注入，(spring提供的) 默认按类型装配 
+    @Resource  用于注入，( j2ee提供的 ) 默认按名称装配，@Resource(name="beanName")
+    @Autowired 用于注入，(spring提供的) 默认按类型装配
     @Transactional( rollbackFor={Exception.class}) 事务管理
     @ResponseBody
     @Scope("prototype")   设定bean的作用域 -->
-	
+
 	<!--RequestMappingHandlerAdapter 返回映射处理适配器-->
 	<!-- validator="validator" 校验 -->
 	<mvc:annotation-driven validator="validator">
@@ -62,13 +67,13 @@
 			<ref bean="mappingJackson2HttpMessageConverter" />
 		</mvc:message-converters>
 	</mvc:annotation-driven>
-	
+
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
 		<property name="providerClass" value="org.hibernate.validator.HibernateValidator"></property>
 		<!-- 国际化 -->
 		<!-- <property name="validationMessageSource" ref="messageSource"></property> -->
 	</bean>
-	
+
 	<!-- validator 国际化 -->
 	<!-- <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"
 		p:basename="i18n/messages" /> -->
@@ -98,47 +103,47 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- bean 转xml -->
 	<bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller" />
-	
+
 	 <!-- 全局拦截器   会拦截静态资源
     Spring为我们提供了：
     org.springframework.web.servlet.HandlerInterceptor接口，
     org.springframework.web.servlet.handler.HandlerInterceptorAdapter适配器，
            实现这个接口或继承此类，可以非常方便的实现自己的拦截器。
-      
+
           有以下三个方法：
-      
+
     Action之前执行:
      public boolean preHandle(HttpServletRequest request,
        HttpServletResponse response, Object handler);
-      
+
            生成视图之前执行
      public void postHandle(HttpServletRequest request,
        HttpServletResponse response, Object handler,
        ModelAndView modelAndView);
-      
+
            最后执行，可用于释放资源
      public void afterCompletion(HttpServletRequest request,
        HttpServletResponse response, Object handler, Exception ex);
-    <mvc:interceptors >  
-     <mvc:interceptor>  
-            <mvc:mapping path="/user/*" />  /user/*    
-            <bean class="com.mvc.MyInteceptor"></bean>  
-        </mvc:interceptor>  
-    </mvc:interceptors>  
+    <mvc:interceptors >
+     <mvc:interceptor>
+            <mvc:mapping path="/user/*" />  /user/*
+            <bean class="com.mvc.MyInteceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
     -->
-    
+
 	<!-- 配置权限拦截器  多个拦截器,顺序执行-->
-	<!-- 当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法 --> 
+	<!-- 当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/user/**" /><!-- 匹配的是url路径， 如果不配置或/**,将拦截所有的Controller -->
 			<bean class="newb.c.webmodule.interceptor.MemberInterceptor"></bean>
 		</mvc:interceptor>
 	 </mvc:interceptors>
-	
+
 	<!-- 总错误处理   异常处理方式一：使用spring自带clss
 		   这里主要的类是SimpleMappingExceptionResolver类，和他的父类AbstractHandlerExceptionResolver类。
 		   具体可以配置哪些属性，我是通过查看源码知道的。
@@ -173,13 +178,13 @@
 	 -->
 	 <!-- 异常处理第二种：自定义 -->
     <!-- <bean id="exceptionHandler" class="newb.c.controller.component.ErrorLogSendEmail"/> -->
-	
+
 	<!-- 对静态资源文件的访问  方案一 （二选一）
                        会把"/**" url,注册到SimpleUrlHandlerMapping的urlMap中,把对静态资源的访问由HandlerMapping转到
     org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler处理并返回.
     DefaultServletHttpRequestHandler使用就是各个Servlet容器自己的默认Servlet. -->
     <mvc:default-servlet-handler/>
-     
+
    <!--  对静态资源文件的访问  方案二 （二选一）/images/**映射到ResourceHttpRequestHandler进行处理，
     location指定静态资源的位置.可以是web application根目录下、jar包里面，这样可以把静态资源压缩到jar包中。
     cache-period 可以使得静态资源进行web cache  -->
@@ -190,7 +195,7 @@
 	<mvc:resources mapping="/font/**" location="/css/"/>
 	<mvc:resources mapping="/images/**" location="/images/" />
 	<mvc:resources mapping="/js/**" location="/js/" /> -->
-	
+
 	<!-- 配置多文件上传 -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="defaultEncoding">
@@ -204,11 +209,11 @@
 			<value>4096</value>
 		</property>
 	</bean>
-	
+
 	<mvc:cors>
         <mvc:mapping path="/**" allowed-origins="*" allow-credentials="true" max-age="1800" allowed-methods="GET,POST,OPTIONS"/>
     </mvc:cors>
-	
+
 	<!-- <mvc:cors>
 
     <mvc:mapping path="/api/**"
@@ -222,7 +227,7 @@
         allowed-origins="http://domain1.com" />
 
 </mvc:cors> -->
-	
+
 	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
 	<!--内容协商 -->
 	<!--  这里是使用RESTful时配置文件 ，可在这配置视图 解析器-->
@@ -257,34 +262,34 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- jsp -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	
-	<!-- Freemarker配置 -->  
-	
-	<!-- <bean id="viewResolver"  class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">  
-	    <property name="suffix" value=".ftl"/>  
-	    <property name="contentType" value="text/html;charset=UTF-8"></property>  
+
+	<!-- Freemarker配置 -->
+
+	<!-- <bean id="viewResolver"  class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+	    <property name="suffix" value=".ftl"/>
+	    <property name="contentType" value="text/html;charset=UTF-8"></property>
 	</bean>
-	
-	<bean id="freemarkerConfig"  class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">  
-	    <property name="templateLoaderPath" value="/" />  
-	    <property name="freemarkerSettings">  
-	        <props>  
-	            <prop key="template_update_delay">0</prop>  
-	            <prop key="default_encoding">UTF-8</prop>  
-	            <prop key="number_format">0.##########</prop>  
-	            <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>  
-	            <prop key="classic_compatible">true</prop>  
-	            <prop key="template_exception_handler">ignore</prop>  
-	        </props>  
-	    </property>  
+
+	<bean id="freemarkerConfig"  class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+	    <property name="templateLoaderPath" value="/" />
+	    <property name="freemarkerSettings">
+	        <props>
+	            <prop key="template_update_delay">0</prop>
+	            <prop key="default_encoding">UTF-8</prop>
+	            <prop key="number_format">0.##########</prop>
+	            <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+	            <prop key="classic_compatible">true</prop>
+	            <prop key="template_exception_handler">ignore</prop>
+	        </props>
+	    </property>
 	</bean>  -->
-	
+
 	<!-- velocity环境配置 -->
 	<!-- <bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
 	    velocity配置文件路径  或者直接用velocityProperties属性
@@ -296,9 +301,9 @@
 	<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
 	    velocity配置文件路径  或者直接用velocityProperties属性
 	    <property name="configLocation" value="classpath:main/resources/velocity.properties"/>
-	      velocity模板路径 
+	      velocity模板路径
 	    <property name="resourceLoaderPath" value="/"/>
 	</bean> -->
-	
-	
+
+
 </beans>

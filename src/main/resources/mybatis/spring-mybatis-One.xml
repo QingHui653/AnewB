@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:cache="http://www.springframework.org/schema/cache"
 	xmlns:rdb="http://www.dangdang.com/schema/ddframe/rdb"
 	xsi:schemaLocation="
-		http://www.springframework.org/schema/beans 
-		http://www.springframework.org/schema/beans/spring-beans.xsd 
-		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx
 		http://www.springframework.org/schema/tx/spring-tx.xsd
-		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop
 		http://www.springframework.org/schema/aop/spring-aop.xsd
 		http://www.springframework.org/schema/context
        	http://www.springframework.org/schema/context/spring-context.xsd
-       	http://www.springframework.org/schema/cache 
+       	http://www.springframework.org/schema/cache
        	http://www.springframework.org/schema/cache/spring-cache.xsd
-       	http://www.dangdang.com/schema/ddframe/rdb 
+       	http://www.dangdang.com/schema/ddframe/rdb
         http://www.dangdang.com/schema/ddframe/rdb/rdb.xsd
        	">
-       	
-    <!-- 扫描目录下的包自动装配 -->  	
-    <context:component-scan base-package="newb.c.backend.service" />
+
+    <!-- 扫描目录下的包自动装配 -->
+    <!-- <context:component-scan base-package="newb.c.backend.service" /> -->
 	<!-- 由于inline表达式内使用Groovy语法，Groovy语法的变量占位符为`${}`,与Spring的Property占位符冲突。
  +故需要在Spring的配置文件中增加<context:property-placeholder location="classpath:conf/rdb/conf.properties" **ignore-unresolvable="true"**/> -->
-	<context:property-placeholder location="classpath*:main/resources/*.properties" />
-	
+	<!-- <context:property-placeholder location="classpath*:main/resources/*.properties" /> -->
+
 	<!-- 配置数据源 使用的是Druid数据源 -->
 	<bean name="parentDataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close"><!--init-method="init" destroy-method="close" -->
 		<property name="driverClassName" value="${jdbc.driver}"/>
@@ -90,7 +90,7 @@
             </array>
         </property>
 	</bean>
-	
+
 	<!--  通用mapper 插件 -->
 	<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="newb.c.backend.dao"/>
@@ -104,15 +104,15 @@
             </value>
         </property>
     </bean>
-    
+
     <!-- ehcache 缓存 -->
     <!-- <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
         <property name="configLocation" value="classpath*:main/resources/mybatis/ehcache.xml" />
     </bean> -->
     <!-- myBatis 使用 分页插件，通用插件 配置  结束-->
-    
+
     <!-- 不使用插件，普通配置mybatis方式  -->
-    <!-- 
+    <!--
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="parentDataSource" />
 		<property name="mapperLocations" value="classpath:/com/test/mapping/*.xml" />
@@ -122,9 +122,9 @@
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
      -->
-    
+
     <!-- <aop:aspectj-autoproxy/> -->
-    
+
 	<!-- Spring ===事务管理=================== -->
 	<!-- 配置事务管理器 -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -133,10 +133,10 @@
 
 	<!-- 开启注解方式支持配置事物 -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
-	
+
 	<!-- 拦截器方式配置事物 -->
 	<!-- 拦截代理对象，为了给业务逻辑对象增加事务处理 -->
-	<!-- 
+	<!--
 		transactionAttributes属性可以设置事务处理的方式，事务隔离级别，是否只读三个属性，用逗号隔开
 		事务隔离级别各数据库系统不完全支持，一般不设置，用默认的即可
 		事务处理选项有如下几个：（前面2个常用）
@@ -159,7 +159,7 @@
 			<tx:method name="select*" propagation="SUPPORTS" read-only="true" />
 		</tx:attributes>
 	</tx:advice>
-	
+
 	<!--把事务控制在Service层-->
 	<aop:config>
 		<aop:pointcut id="transactionPointcut" expression="execution(* newb.c.backend.service..*Impl.*(..))" />
