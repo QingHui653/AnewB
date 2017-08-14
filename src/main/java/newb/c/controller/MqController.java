@@ -32,7 +32,7 @@ public class MqController {
 	
 	private Destination queueDestination =new ActiveMQQueue("queue");
 	
-	private Destination topicDestination =new ActiveMQTopic("topic");
+	private Destination topicDestination =new ActiveMQTopic("test_topic");
 	
 	private Destination beanDestination =new ActiveMQQueue("object");
 	
@@ -41,7 +41,8 @@ public class MqController {
 	@ResponseBody
 	public String sendQueueMq() {
 //		ActiveMq
-		producerServiceImpl.sendMessage(queueDestination, "HHHHHworld");
+		producerServiceImpl.sendMessage(queueDestination, "HHHHHworld HHHHHworld queue->queue");
+		producerServiceImpl.sendMessage(new ActiveMQQueue("topic"), "HHHHHworld  queue->topic");
 		return "OK";
 	}
 	
