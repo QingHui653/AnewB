@@ -44,7 +44,7 @@ public class MessageListener {
         System.out.println("消息内容是：" + textMsg.getText());
     }
 
-	@JmsListener(destination="test_topic",containerFactory="topicListener")
+	@JmsListener(destination="topic",containerFactory="topicListener")
 	public void topicTopicListener(Message message,Session session) throws JMSException {
         TextMessage textMsg = (TextMessage) message;
         System.out.println("接收到topic  topic一个纯文本消息。");
