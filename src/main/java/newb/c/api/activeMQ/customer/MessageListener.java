@@ -19,7 +19,7 @@ import newb.c.backend.model.basemodel.User;
  *
  */
 @Component
-public class MessageListener extends MessageListenerAdapter  {
+public class MessageListener {
 
 	@Autowired(required=false)
 	private JmsTemplate jmsTemplate;
@@ -35,9 +35,19 @@ public class MessageListener extends MessageListenerAdapter  {
     }
 
 	@JmsListener(destination="topic")
-	public void topicListener(Message message,Session session) throws JMSException {
+	public void queueTopicListener(Message message,Session session) throws JMSException {
         TextMessage textMsg = (TextMessage) message;
-        System.out.println("接收到topic一个纯文本消息。");
+        System.out.println("接收到queue topic一个纯文本消息。");
+        System.out.println(session);
+        //消息确认
+        message.acknowledge();
+        System.out.println("消息内容是：" + textMsg.getText());
+    }
+
+	@JmsListener(destination="test_topic",containerFactory="topicListener")
+	public void topicTopicListener(Message message,Session session) throws JMSException {
+        TextMessage textMsg = (TextMessage) message;
+        System.out.println("接收到topic  topic一个纯文本消息。");
         System.out.println(session);
         //消息确认
         message.acknowledge();

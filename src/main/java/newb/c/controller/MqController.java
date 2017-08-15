@@ -41,7 +41,8 @@ public class MqController {
 	@ResponseBody
 	public String sendQueueMq() {
 //		ActiveMq
-		producerServiceImpl.sendMessage(queueDestination, "HHHHHworld");
+		producerServiceImpl.sendMessage(queueDestination, "HHHHHworld HHHHHworld queue->queue");
+		producerServiceImpl.sendMessage(new ActiveMQQueue("topic"), "HHHHHworld  queue->topic");
 		return "OK";
 	}
 

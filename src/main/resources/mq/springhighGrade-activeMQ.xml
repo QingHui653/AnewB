@@ -54,8 +54,18 @@
 			DeliveryMode.PERSISTENT=2:持久-->  
         <property name="deliveryMode" value="2" /> 
         <!-- <property name="messageConverter" ref="jmsMessageConverter"/>  --> 
-    </bean>  
-       
+        <property name="pubSubDomain" value="false" />
+    </bean>
+	
+	<bean id="queueListener"  class="org.springframework.jms.config.DefaultJmsListenerContainerFactory">
+		<property name="connectionFactory" ref="connectionFactory" />  
+		<property name="pubSubDomain" value="false" />
+	</bean>	
+	
+	<bean id="topicListener"  class="org.springframework.jms.config.DefaultJmsListenerContainerFactory">
+		<property name="connectionFactory" ref="connectionFactory" />  
+		<property name="pubSubDomain" value="true" />
+	</bean>	
     <!-- 现在消费者 使用的是注解的形式 在   newb.c.api.mq下 -->
     
     <!-- 消息消费者 start  使用jms 配置文件-->
