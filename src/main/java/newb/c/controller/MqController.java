@@ -20,23 +20,23 @@ import newb.c.backend.model.basemodel.User;
 @Controller
 @RequestMapping("mq")
 public class MqController {
-	
-	private static final Logger logger =LoggerFactory.getLogger(MqController.class); 
-	
+
+	private static final Logger logger =LoggerFactory.getLogger(MqController.class);
+
 	//ActiveMQ
 	@Autowired(required=false)
 	private JmsTemplate jmsTemplate;
-	
+
 	@Autowired(required=false)
 	private ProducerServiceImpl producerServiceImpl;
-	
+
 	private Destination queueDestination =new ActiveMQQueue("queue");
-	
+
 	private Destination topicDestination =new ActiveMQTopic("topic");
-	
+
 	private Destination beanDestination =new ActiveMQQueue("object");
-	
-	@RequestMapping(value="/sendQueueMq",method=RequestMethod.GET)
+
+	@RequestMapping(value="/sendQueueMq  queue",method=RequestMethod.GET)
 	@ApiOperation("测试sendQueueMq发送消息")
 	@ResponseBody
 	public String sendQueueMq() {
@@ -44,8 +44,17 @@ public class MqController {
 		producerServiceImpl.sendMessage(queueDestination, "HHHHHworld");
 		return "OK";
 	}
-	
-	@RequestMapping(value="/sendTopicMq",method=RequestMethod.GET)
+
+	@RequestMapping(value="/sendQueueMq  topic",method=RequestMethod.GET)
+	@ApiOperation("测试sendQueueMq发送消息")
+	@ResponseBody
+	public String sendQueueMqToTopic() {
+//		ActiveMq
+		producerServiceImpl.sendMessage(new ActiveMQQueue("topic"), "HHHHHworld topic");
+		return "OK";
+	}
+
+	@RequestMapping(value="/sendTopicMq topic",method=RequestMethod.GET)
 	@ApiOperation("测试sendTopicMq发送消息")
 	@ResponseBody
 	public String sendTopicMq() {
@@ -53,8 +62,8 @@ public class MqController {
 		producerServiceImpl.sendMessage(topicDestination, "HHHHHworld");
 		return "OK";
 	}
-	
-	@RequestMapping(value="/sendObjectMq",method=RequestMethod.GET)
+
+	@RequestMapping(value="/sendObjectMq queue object",method=RequestMethod.GET)
 	@ApiOperation("测试sendObjectMq发送消息")
 	@ResponseBody
 	public String sendObjectMq() {

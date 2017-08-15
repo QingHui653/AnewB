@@ -14,43 +14,43 @@ import org.springframework.stereotype.Component;
 import newb.c.backend.model.basemodel.User;
 
 /**
- * 使用注解监听 jms 
+ * 使用注解监听 jms
  * @author woshizbh
  *
  */
 @Component
 public class MessageListener extends MessageListenerAdapter  {
-	
+
 	@Autowired(required=false)
 	private JmsTemplate jmsTemplate;
-	
+
 	@JmsListener(destination="queue",concurrency="10-15")//监听并行区间范围 最小10个 最大15个
 	public void queueListener(Message message,Session session) throws JMSException {
-        TextMessage textMsg = (TextMessage) message;   
+        TextMessage textMsg = (TextMessage) message;
         System.out.println("接收到queue一个纯文本消息。");
         System.out.println(session);
         //消息确认
         message.acknowledge();
-        System.out.println("消息内容是：" + textMsg.getText());   
+        System.out.println("消息内容是：" + textMsg.getText());
     }
-	
+
 	@JmsListener(destination="topic")
 	public void topicListener(Message message,Session session) throws JMSException {
-        TextMessage textMsg = (TextMessage) message;   
+        TextMessage textMsg = (TextMessage) message;
         System.out.println("接收到topic一个纯文本消息。");
         System.out.println(session);
         //消息确认
         message.acknowledge();
-        System.out.println("消息内容是：" + textMsg.getText());   
-    } 
-	
+        System.out.println("消息内容是：" + textMsg.getText());
+    }
+
 	@JmsListener(destination="object")
 	public void beanListener(Message message,Session session) throws JMSException {
-        Object user =(Object) jmsTemplate.getMessageConverter().fromMessage(message);  
+        Object user =(Object) jmsTemplate.getMessageConverter().fromMessage(message);
         System.out.println("接收到object信息"+user.toString());
         System.out.println(session);
         //消息确认
         message.acknowledge();
-    } 
-	
+    }
+
 }
