@@ -105,6 +105,11 @@
 
 	<!-- spring上下文加载监听器  初始化IOC容器-->
 	<listener>
+		<description>自定义监听器</description>
+		<listener-class>newb.c.webmodule.listener.InitListener</listener-class>
+	</listener>
+	
+	<listener>
 		<description>spring监听器</description>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>

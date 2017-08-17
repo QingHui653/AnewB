@@ -1,5 +1,7 @@
 package test.core.base;
 
+import org.junit.Test;
+
 public class StaticTest {
 	private static String LOCAL="静态变量";
 
@@ -15,6 +17,6 @@ public class StaticTest {
 		StaticTest staticTest =new StaticTest();
 		System.out.println(staticTest.LOCAL);
 		staticTest.sayHello();
-
 	}
+	
 }
