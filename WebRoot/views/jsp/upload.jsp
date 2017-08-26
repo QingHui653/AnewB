@@ -15,7 +15,7 @@ $(function() {
 	        'width'         : 200,    
 	        'buttonText'    : '选择照片',
 			'swf'      : '../js/uploadify/uploadify.swf',
-			'uploader' : '../user/imgfile',
+			'uploader' : '/user/imgfile',
 			'fileObjName'   : 'file',
 			'onUploadSuccess':function(file,data,response){
                         /* alert('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + data);*/ 
@@ -24,21 +24,20 @@ $(function() {
                     },
 		}); 
 		
-		var uploader = new plupload.Uploader({
+		/* var uploader = new plupload.Uploader({
 			runtimes : 'html5,flash',//官网上默认是gears,html5,flash,silverlight,browserplus
 			browse_button : 'pickfiles', //这个是点击上传的html标签的id,可以a,button等等
 			container: 'container',  //这个是容器的地址，
-			url : '../user/imgfile',//上传的地址
+			url : '/AnewB/user/imgfile',//上传的地址
 			multi_selection:false,//实现大附件分段上传的功能
-			auto_start : true,//自动上传
+			auto_start : false,//自动上传
 			flash_swf_url : '/js/plugs/plupload/Moxie.swf',
 			max_file_size : '10mb',//这是文件的最大上传大小，得跟IIS结合使用
 			resize : {width : 320, height : 240, quality : 90},
 			/* filters : [  //拦截 比较卡
 							{title : "Image files", extensions : "jpg,gif,png"},
 							{title : "Zip files", extensions : "zip"}
-			], */
-
+			], 
 			init: {
 				// Init事件发生后触发
 				PostInit: function() {
@@ -53,7 +52,8 @@ $(function() {
 				FilesAdded: function(up, files) {
 					plupload.each(files, function(file) {
 						document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
-						alert("上传到队列")
+						alert("上传到队列");
+						uploader.start();
 					});
 				},
 				// 会在文件上传过程中不断触发，可以用此事件来显示上传进度
@@ -63,15 +63,29 @@ $(function() {
 				// 当队列中的某一个文件上传完成后触发
 				FileUploaded:function(uploader,file,responseObject) {
 					alert(responseObject['response']);
-					$("#picture").attr("src",responseObject['response']);  
-                    $("#picture").show();
 				}
-
-				
 			}
 		});
 
-		uploader.init();
+		uploader.init(); */
+		/*  plupload 3.1 上传会造成 重复提交 ，去 GitHub 上下载最新版*/
+		 var uploader = new plupload.Uploader({
+				runtimes : 'html5',
+				browse_button : 'pickfiles', // you can pass an id...
+				url : '/AnewB/user/imgfile',
+				init: {
+					FilesAdded: function(up, files) {
+						plupload.each(files, function(file) {
+							uploader.start();
+						});
+					},
+					FileUploaded:function(up,file,responseObject) {
+							console.info(responseObject['response']);
+					}
+				}
+			});
+
+			uploader.init();
 		
 	});
 //未兼容ie8
