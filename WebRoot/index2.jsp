@@ -15,6 +15,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
     nginx+tomcat集群  测试git Dev
 
-    测试git master 合并
+    测试 开发新功能
   </body>
 </html>
