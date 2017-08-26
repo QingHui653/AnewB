@@ -29,7 +29,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  */
 //@Controller
 public class ActController {
-    @Autowired
+	
+    @Autowired(required=false)
     private RepositoryService repositoryService;
 
     /**
