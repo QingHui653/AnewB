@@ -20,8 +20,8 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/json-lib-2.4-jdk15.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/qrcode.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/qrcode_swetake.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/qrcode.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ws-commons-util-1.0.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
