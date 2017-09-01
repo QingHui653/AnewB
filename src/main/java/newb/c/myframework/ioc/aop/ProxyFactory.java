@@ -6,7 +6,6 @@ import newb.c.myframework.ioc.aop.annotation.PointCut;
 import newb.c.myframework.ioc.aop.bean.Advice;
 
 /**
- * Created by 10033 on 2017/5/12.
  * 对Bean进行AOP操作
  */
 public class ProxyFactory {

@@ -43,7 +43,8 @@
 	<!-- 分布式session 存redis中 -->
 	<!-- <import resource="session/spring-session.xml"/> -->
 	<!-- activeMQ -->
-	<import resource="mq/springhighGrade-active*.xml"/>
+	<!-- <import resource="mq/springhighGrade-active*.xml"/> -->
+	<import resource="mq/spring-rabbitMq.xml"/>
 	<!-- cxf webservice 需先启用web.xml 中的配置 -->
 	<!-- <import resource="webservice/cxf/spring-cxf.xml"/> -->
 	<!-- rmi java远程调用 -->

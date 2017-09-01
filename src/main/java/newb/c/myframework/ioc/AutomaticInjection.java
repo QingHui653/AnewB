@@ -87,7 +87,6 @@ public class AutomaticInjection {
             if(fieldExist) {
                 String classtype=field.getGenericType().toString();
                 Class fieldClass=Class.forName(classtype.substring(6));
-                field.setAccessible(true);
                 //强制设置值 破坏了封装性
                 field.setAccessible(true);
 

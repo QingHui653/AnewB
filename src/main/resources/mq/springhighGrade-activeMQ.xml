@@ -28,7 +28,7 @@
         <property name="connectionFactory">
             <bean class="org.apache.activemq.ActiveMQConnectionFactory">
                 <property name="brokerURL" value="${activemq.url}" />
-                <property name="trustAllPackages" value="true"/>  <!-- activemq 禁止序列化  需要注明允许 -->
+                <!-- <property name="trustAllPackages" value="true"/> -->  <!-- activemq 禁止序列化  需要注明允许 -->
                 <!-- <property name="trustedPackages">
 			        <list>  // 允许的包路径
 			            <value>org.apache.activemq.test</value>

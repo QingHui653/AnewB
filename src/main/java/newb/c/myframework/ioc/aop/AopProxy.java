@@ -7,10 +7,6 @@ import newb.c.myframework.ioc.aop.bean.Advice;
 
 import java.lang.reflect.Method;
 
-/**
- * Created by 10033 on 2017/5/12.
- * 获得代理类
- */
 public class AopProxy implements MethodInterceptor {
 
     private Enhancer enhancer = new Enhancer();

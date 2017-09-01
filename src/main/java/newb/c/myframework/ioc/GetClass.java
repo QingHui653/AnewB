@@ -7,10 +7,6 @@ import java.util.List;
 import newb.c.myframework.ioc.utils.ConstantUtil;
 
 /**
- * Created by 10033 on 2017/5/9.
- */
-
-/**
  * 获取相应类对象
  * IoC的解析
  */

@@ -6,9 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-/**
- * Created by 10033 on 2017/5/9.
- */
 public class PropertiesReaderUtil {
 
     //IoC的定位

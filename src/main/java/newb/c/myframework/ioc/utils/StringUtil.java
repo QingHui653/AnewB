@@ -2,9 +2,6 @@ package newb.c.myframework.ioc.utils;
 
 import java.net.URL;
 
-/**
- * Created by 10033 on 2017/5/9.
- */
 public class StringUtil {
     private StringUtil() {
 

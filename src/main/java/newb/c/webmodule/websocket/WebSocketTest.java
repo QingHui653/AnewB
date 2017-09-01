@@ -11,7 +11,7 @@ import javax.websocket.server.ServerEndpoint;
  * 注解的值将被用于监听用户连接的终端访问URL地址,客户端可以通过这个URL来连接到WebSocket服务器端
  * 需要运行在tomcat7.05以上
  */
-@ServerEndpoint("/websocket")
+@ServerEndpoint("/AnewBsocket")
 public class WebSocketTest {
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
     private static int onlineCount = 0;

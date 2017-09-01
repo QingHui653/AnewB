@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-4.1.xsd
+    http://www.springframework.org/schema/rabbit 
+    http://www.springframework.org/schema/rabbit/spring-rabbit.xsd"
+    >
+
+	<rabbit:connection-factory id="connectionFactory" host="${rabbitmq.host}" username="${rabbitmq.username}" password="${rabbitmq.password}" port="${rabbitmq.port}"/>
+    <rabbit:admin connection-factory="connectionFactory"/>
+	
+	<!-- spring template声明-->
+    <rabbit:template exchange="rabbitExchange"
+					 id="rabbitTemplate"
+					 connection-factory="connectionFactory" />
+					 <!--message-converter="jsonMessageConverter"-->
+	
+	<context:component-scan base-package="newb.c.api.rabbitmq"/>
+	<rabbit:annotation-driven />
+
+	<bean id="rabbitListenerContainerFactory"
+	    class="org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory">
+	    <!--<property name="messageConverter" ref="jsonMessageConverter" />-->
+	    <property name="connectionFactory" ref="connectionFactory" />
+	    <property name="concurrentConsumers" value="3" />
+	    <property name="maxConcurrentConsumers" value="10" />
+	</bean>
+	
+	
+	<rabbit:queue id="queue_one" durable="true" auto-delete="false" exclusive="false" name="queue_one"/>
+	<rabbit:queue id="queue_two" durable="true" auto-delete="false" exclusive="false" name="queue_two"/>
+	<rabbit:queue id="queue_three" durable="true" auto-delete="false" exclusive="false" name="queue_three"/>
+
+	<!-- exchange queue binging key 绑定 -->
+    <rabbit:direct-exchange name="rabbitExchange" durable="true" auto-delete="false" id="rabbitExchange">
+        <rabbit:bindings>
+            <rabbit:binding queue="queue_one" key="queue_one"/>
+			<rabbit:binding queue="queue_two" key="queue_two"/>
+			<rabbit:binding queue="queue_three" key="queue_three"/>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
+	
+    <!-- 消息对象json转换类 -->
+    <!--<bean id="jsonMessageConverter" class="org.springframework.amqp.support.converter.Jackson2JsonMessageConverter" />
+-->
+</beans>

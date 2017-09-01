@@ -6,9 +6,6 @@ import java.util.Map;
 
 import newb.c.myframework.ioc.aop.ProxyFactory;
 
-/**
- * Created by 10033 on 2017/5/9.
- */
 public class BeanFactory {
     public static Map<String, Object> map=new HashMap();
     private static final String KEY="scan.package";

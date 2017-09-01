@@ -19,14 +19,14 @@ import newb.c.backend.model.basemodel.User;
 
 @Controller
 @RequestMapping("mq")
-public class MqController {
+public class ActiveMqController {
 
-	private static final Logger logger =LoggerFactory.getLogger(MqController.class);
+	private static final Logger logger =LoggerFactory.getLogger(ActiveMqController.class);
 
 	//ActiveMQ
 	@Autowired(required=false)
 	private JmsTemplate jmsTemplate;
-
+	
 	@Autowired(required=false)
 	private ProducerServiceImpl producerServiceImpl;
 
