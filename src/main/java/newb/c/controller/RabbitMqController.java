@@ -20,7 +20,7 @@ public class RabbitMqController {
     private static final Logger logger = LoggerFactory.getLogger(RabbitMqController.class);
 
     //ActiveMQ
-    @Autowired
+    @Autowired(required=false)
     private RabbitTemplate rabbitTemplate;
 
     @GetMapping("string")
