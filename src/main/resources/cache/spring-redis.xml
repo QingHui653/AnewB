@@ -91,7 +91,7 @@
         </property> 
   </bean>
   
-  <bean id="listener" class="newb.c.api.redisMQ.TestMessage"/>
+  <bean id="listener" class="newb.c.api.mq.redismq.TestMessage"/>
 
   <!-- 暂时注释掉，未打开redis时,会一直重复获取redis连接报错 -->
   <!-- <redis:listener-container connection-factory="connectionRedisFactory">

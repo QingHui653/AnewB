@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import newb.c.api.kafka.KafkaProducerServer;
+import newb.c.api.mq.kafka.KafkaProducerServer;
 
 
 @Controller
@@ -28,10 +28,10 @@ public class KafkaController {
 
     @GetMapping("string")
     public void testKafka() {
-    	 String topic = "orderTopic";
-         String value = "test";
+    	 String topic = "test";
+         String value = "test  String";
          String ifPartition = "0";
-         Integer partitionNum = 3;
+         Integer partitionNum = 2;
          String role = "test";//用来生成key
          Map<String,Object> res = kafkaProducer.sndMesForTemplate
                  (topic, value, ifPartition, partitionNum, role);
@@ -47,9 +47,9 @@ public class KafkaController {
     @RequestMapping(value = "/test")
     @ResponseBody
     public  Object index() {
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 50; i++) {
             logger.info("======send=====" + i);
-            kafkaTemplate.send("test", "key", "测试");
+            kafkaTemplate.send("test", "key", "测试"+i);
         }
         return "finished";
     }

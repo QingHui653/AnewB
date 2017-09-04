@@ -40,7 +40,7 @@ public class KafkaProducerServer{
         if(ifPartition.equals("0")){
             //表示使用分区
             int partitionIndex = getPartitionIndex(key, partitionNum);
-            ListenableFuture<SendResult<String, String>> result = kafkaTemplate.send(topic, partitionIndex, key, valueString);
+            ListenableFuture<SendResult<String, String>> result = kafkaTemplate.send(topic, 0, key, valueString);
             Map<String,Object> res = checkProRecord(result);
             return res;
         }else{

@@ -15,7 +15,7 @@
         <constructor-arg>
             <map>
                 <entry key="bootstrap.servers" value="${kafka.url}" />
-                <entry key="group.id" value="testGroup" />
+                <entry key="group.id" value="test-consumer-group" />
                 <entry key="retries" value="1" />
                 <entry key="batch.size" value="16384" />
                 <entry key="linger.ms" value="1" />

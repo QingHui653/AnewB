@@ -15,7 +15,7 @@
          <constructor-arg>
              <map>
                  <entry key="bootstrap.servers" value="${kafka.url}"/>
-                 <entry key="group.id" value="testGroup"/>
+                 <entry key="group.id" value="test-consumer-group"/>
                  <entry key="enable.auto.commit" value="true"/>
                  <entry key="auto.commit.interval.ms" value="1000"/>
                  <entry key="session.timeout.ms" value="15000"/>
