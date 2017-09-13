@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.springframework.integration:spring-integration-core:4.3.10.RELEASE">
+    <CLASSES>
+      <root url="jar://F:/Maven/apache-maven-3.3.9/repo/repository/org/springframework/integration/spring-integration-core/4.3.10.RELEASE/spring-integration-core-4.3.10.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://F:/Maven/apache-maven-3.3.9/repo/repository/org/springframework/integration/spring-integration-core/4.3.10.RELEASE/spring-integration-core-4.3.10.RELEASE-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://F:/Maven/apache-maven-3.3.9/repo/repository/org/springframework/integration/spring-integration-core/4.3.10.RELEASE/spring-integration-core-4.3.10.RELEASE-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

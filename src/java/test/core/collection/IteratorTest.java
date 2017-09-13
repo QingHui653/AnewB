@@ -7,10 +7,10 @@ import java.util.List;
 import org.junit.Test;
 
 public class IteratorTest {
-	
+
 	@Test
 	public void operationTest() {
-		
+
 		List<String> list1= new ArrayList<String>();
 		list1.add("1111");
         list1.add("2222");
@@ -20,7 +20,7 @@ public class IteratorTest {
         list2.add("3333");
         list2.add("4444");
         list2.add("5555");
-        
+
         // 并集  有重复
         // list1.addAll(list2);
         // 交集
@@ -35,13 +35,12 @@ public class IteratorTest {
 			String str = (String) iter.next();
 			System.out.println(str);
 		}
-        
+
         // while
         Iterator<String> it = list1.iterator();
         while (it.hasNext()) {
             System.out.println(it.next());
         }
-        
+
 	}
 }
-

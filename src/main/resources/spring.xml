@@ -46,8 +46,8 @@
 	<!-- <import resource="mq/spring-activemq.xml"/> -->
 	<!-- <import resource="mq/spring-rabbitmq.xml"/> -->
 	
-	<import resource="mq/spring-kafka-producer.xml"/>
-	<import resource="mq/spring-kafka-consumer.xml"/>
+	<!-- <import resource="mq/spring-kafka-producer.xml"/>
+	<import resource="mq/spring-kafka-consumer.xml"/> -->
 	
 	<!-- cxf webservice 需先启用web.xml 中的配置 -->
 	<!-- <import resource="webservice/cxf/spring-cxf.xml"/> -->
