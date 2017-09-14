@@ -20,10 +20,10 @@ public class KafkaController {
 
     private static final Logger logger = LoggerFactory.getLogger(KafkaController.class);
     
-    @Autowired
+    @Autowired(required=false)
     private KafkaProducerServer kafkaProducer;
     
-    @Autowired
+    @Autowired(required=false)
     private KafkaTemplate kafkaTemplate;
 
     @GetMapping("string")

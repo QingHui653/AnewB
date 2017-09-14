@@ -22,7 +22,7 @@ import com.alibaba.fastjson.JSON;
 @Component
 public class KafkaProducerServer{
 
-    @Autowired
+    @Autowired(required=false)
     private KafkaTemplate<String, String> kafkaTemplate;
     
     /**
