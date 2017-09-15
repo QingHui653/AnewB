@@ -7,11 +7,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import newb.c.a_module.dubbo.RestService;
 import newb.c.backend.model.basemodel.User;
 
-public class ConsumerRest {  
+public class dubboRestTest {  
   
     public static void main(String[] args) throws Exception {  
         @SuppressWarnings("resource")
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "main/resources/dubbo/springhighGradeT-dubbox-test.xml" });  
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "main/resources/dubbo/spring-dubbox-test.xml" });  
         context.start();  
   
         RestService restService = (RestService) context.getBean("restService"); //  

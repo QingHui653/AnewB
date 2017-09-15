@@ -9,7 +9,7 @@
         ">  
     
     <!-- 提供方应用信息，用于计算依赖关系 -->  
-    <dubbo:application name="qinghui_provider"  />  
+    <dubbo:application name="ihih_provider"  />  
    
     <!-- 使用multicast广播注册中心暴露服务地址    -->
     <!-- 使用多播 multicast 注册不知道为什么消费者无法 获取bean 报错 -->  
@@ -32,6 +32,4 @@
     <dubbo:service interface="newb.c.a_module.dubbo.DemoService" ref="demoService" />  
     <dubbo:service interface="newb.c.a_module.dubbo.DemoService2" ref="demoService2" />  
     <dubbo:service interface="newb.c.a_module.dubbo.DemoService3" ref="demoService3" />
-    
-    <dubbo:reference id="demoServiceTest"  interface="newb.c.dubbo.DemoService" />  
 </beans>

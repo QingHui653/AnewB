@@ -43,13 +43,10 @@ public class RedisController {
 		String timeStr = (String) redisTemplate.opsForValue().get("+5s");
 		Long time = redisTemplate.getExpire("+5s");
 		System.out.println(" "+timeStr +" "+time);
-		
 		Thread.sleep(5000l);
-		
 		timeStr = (String) redisTemplate.opsForValue().get("+5s");
 		time = redisTemplate.getExpire("+5s");
 		System.out.println(" "+timeStr +" "+time);
-		
 		System.out.println("--测试有效时间OK--- ");
 	}
 	
@@ -123,6 +120,28 @@ public class RedisController {
         System.out.println(zset.rangeByScore("lpZset", 0, 2));
     }
 	
+	@ApiOperation("redis 分布式锁")
+	@RequestMapping("lock")
+	public void setNX() {
+		boolean ifLock = redisTemplate.boundValueOps("lock").setIfAbsent("true");
+		
+		if(ifLock) {
+			//已经设置锁进行操作
+			System.out.println("获取到锁");
+			Object value = redisTemplate.boundValueOps("lock").get();
+			System.out.println(value);
+			for (int i = 0,j=10; i< j; i++) {
+				System.out.println("--- "+i);
+			}
+			redisTemplate.delete("lock");
+			System.out.println("释放锁");
+		}else {
+			System.out.println("没获取到锁");
+		}
+		
+	}
+	
+	
 	@RequestMapping(value="/saveRedisCluster",method=RequestMethod.GET)
 	@ApiOperation("测试 Cluster  redis 暂无")
 	public void addRedisCluster() {
@@ -143,5 +162,7 @@ public class RedisController {
 		// 地理位置
         GeoOperations<String, Object> Geo = redisTemplate.opsForGeo();
     }
+	
+	
 	
 }

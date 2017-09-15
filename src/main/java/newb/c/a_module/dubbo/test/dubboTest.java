@@ -8,11 +8,11 @@ import newb.c.a_module.dubbo.DemoService;
 import newb.c.backend.model.basemodel.User;  
 
   
-public class Consumer {  
+public class dubboTest {  
   
+	@SuppressWarnings("resource")
     public static void main(String[] args) throws Exception {  
-        @SuppressWarnings("resource")
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "main/resources/dubbo/springhighGradeT-dubbo-test.xml" });  
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "main/resources/dubbo/spring-dubbo-test.xml" });  
         context.start(); 
   
         DemoService demoService = (DemoService) context.getBean("demoService"); //  

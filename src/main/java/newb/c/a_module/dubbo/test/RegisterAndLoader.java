@@ -12,10 +12,10 @@ public class RegisterAndLoader {
 	@SuppressWarnings("resource")
     public static void main(String[] args) throws Exception {
     	
-    	ClassPathXmlApplicationContext RegistContext = new ClassPathXmlApplicationContext(new String[] { "main/resources/dubbo/springhighGrade-dubbo.xml" });  
+    	ClassPathXmlApplicationContext RegistContext = new ClassPathXmlApplicationContext(new String[] { "main/resources/dubbo/spring-dubbo.xml" });  
     	RegistContext.start();
     	
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "main/resources/dubbo/springhighGradeT-dubbo-test.xml" });  
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "main/resources/dubbo/spring-dubbo-test.xml" });  
         context.start(); 
         
         DemoService demoService = (DemoService) context.getBean("demoService"); //  
