@@ -37,7 +37,7 @@
 	<rabbit:queue id="queue_two" durable="true" auto-delete="false" exclusive="false" name="queue_two"/>
 	<rabbit:queue id="queue_three" durable="true" auto-delete="false" exclusive="false" name="queue_three"/>
 
-	<!-- exchange queue binging key 绑定 -->
+	<!-- exchange queue binging key 绑定    fanout  direct topic header 四种类型-->
     <rabbit:direct-exchange name="rabbitExchange" durable="true" auto-delete="false" id="rabbitExchange">
         <rabbit:bindings>
             <rabbit:binding queue="queue_one" key="queue_one"/>
