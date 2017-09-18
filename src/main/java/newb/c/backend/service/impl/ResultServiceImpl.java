@@ -1,5 +1,6 @@
 package newb.c.backend.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import newb.c.backend.dao.ResultMapper;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("ResultService")
 public class ResultServiceImpl extends BaseServiceImpl<Result> implements ResultService {
@@ -36,4 +38,26 @@ public class ResultServiceImpl extends BaseServiceImpl<Result> implements Result
 		return resultMapper.getRepList();
 	}
 
+
+	@Transactional
+	@Override
+	public Object tranTest() {
+		List<Result> list =swapList();
+		for (int i=0;i<3;i++){
+				mapper.insert(list.get(i));
+		}
+		System.out.println("插入完成");
+			throw new RuntimeException("抛出异常回滚");
+	}
+
+	private List<Result> swapList(){
+		List<Result> list =new ArrayList<>();
+		Result e1 =new Result(1,"1","2","3","4","5");
+		Result e2 =new Result(2,"2","2","3","4","5");
+		Result e3 =new Result(3,"3","2","3","4","5");
+		list.add(e1);
+		list.add(e2);
+		list.add(e3);
+		return list;
+	}
 }

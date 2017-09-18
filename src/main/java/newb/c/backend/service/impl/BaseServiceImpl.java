@@ -29,30 +29,7 @@ public abstract class BaseServiceImpl<T> implements IService<T> {
         return mapper.insert(entity);
     }
     
-    @SuppressWarnings("finally")
-	@Transactional //事务注解
-    public int delete(Object key) {
-    	if(key==null){
-    		try {
-    			User u= (User) mapper.selectByPrimaryKey(4);
-        		System.out.println("-------测试事务--还未删除所以能查询-"+u.toString());
-    			mapper.deleteByPrimaryKey(4);
-        		User u2= (User) mapper.selectByPrimaryKey(4);
-        		System.out.println("-------测试事务--已删除在事务中不可读,但还未提交在数据库中可见-"+u2.toString());
-        		throw new RuntimeException("test"); 
-			} catch (Exception e) {
-				System.out.println("测试事务");
-			}finally {
-				//还未回滚所以查询不出
-				User u= (User) mapper.selectByPrimaryKey(4);
-				System.out.println("-------测试事务已删除在事务中不可读,但还未提交在数据库中可见---"+u.toString());
-				//正式删除,提交至数据库
-		        return mapper.deleteByPrimaryKey(key);
-			}
-    	}
-    	//正式删除,提交至数据库
-        return mapper.deleteByPrimaryKey(key);
-    }
+    public int delete(Object key) {return mapper.deleteByPrimaryKey(key);}
 
     public int updateAll(T entity) {
         return mapper.updateByPrimaryKey(entity);
@@ -73,4 +50,29 @@ public abstract class BaseServiceImpl<T> implements IService<T> {
     public int CommonDelMapper(String key) {
         return mapper.CommonDelMapper(key);
     }
+
+    @Transactional //事务注解
+    public int TranDelete(Object key) {
+        if(key==null){
+            try {
+                User u= (User) mapper.selectByPrimaryKey(4);
+                System.out.println("-------测试事务--还未删除所以能查询-"+u.toString());
+                mapper.deleteByPrimaryKey(4);
+                User u2= (User) mapper.selectByPrimaryKey(4);
+                System.out.println("-------测试事务--已删除在事务中不可读,但还未提交在数据库中可见-"+u2.toString());
+                throw new RuntimeException("test");
+            } catch (Exception e) {
+                System.out.println("测试事务");
+            }finally {
+                //还未回滚所以查询不出
+                User u= (User) mapper.selectByPrimaryKey(4);
+                System.out.println("-------测试事务已删除在事务中不可读,但还未提交在数据库中可见---"+u.toString());
+                //正式删除,提交至数据库
+                return mapper.deleteByPrimaryKey(key);
+            }
+        }
+        //正式删除,提交至数据库
+        return mapper.deleteByPrimaryKey(key);
+    }
+
 }

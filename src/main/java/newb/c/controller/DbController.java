@@ -3,6 +3,7 @@ package newb.c.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import newb.c.backend.service.ResultService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,8 @@ public class DbController {
 	private UserService userService;
 	@Autowired
 	private TestCacheService userCacheService;
+	@Autowired
+	private ResultService resultService;
 
 	public volatile Integer threadCount = 0;
 
@@ -203,6 +206,14 @@ public class DbController {
 	public String del(ModelMap modelMap) {
 		int test = userService.delete(null);
 		return test + "";
+	}
+
+	@RequestMapping(value = "/newb/tranTest", method = RequestMethod.GET)
+	@ApiOperation("测试回滚")
+	@ResponseBody
+	public Object tranTest(ModelMap modelMap) {
+		Object test =resultService.tranTest();
+		return test ;
 	}
 
 	@Test

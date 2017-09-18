@@ -1,5 +1,7 @@
 package newb.c.backend.model.basemodel;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 import javax.persistence.*;
@@ -29,6 +31,18 @@ public class Result implements Serializable{
 
     @Column(name = "f_5")
     private String f5;
+
+    public Result() {
+    }
+
+    public Result(Integer oid, String f1, String f2, String f3, String f4, String f5) {
+        this.oid = oid;
+        this.f1 = f1;
+        this.f2 = f2;
+        this.f3 = f3;
+        this.f4 = f4;
+        this.f5 = f5;
+    }
 
     /**
      * @return oid
