@@ -18,12 +18,12 @@ public class Calenda {
 		Calendar c=GregorianCalendar.getInstance();
 		Date d= new Date();
 		d.getYear();
+		c.add(Calendar.WEEK_OF_YEAR, 1);
 		SimpleDateFormat s= new SimpleDateFormat("yyyyMMdd");
 		System.out.println("今天日期"+s.format(c.getTime()));
 		c.add(Calendar.MONTH, -9);
 		System.out.println("九月前"+s.format(c.getTime()));
 		System.out.println("是否瑞年"+c.isLenient());
-
 		String date1 ="2017-08-19";
 		String date2 ="201708999";
 		System.out.println("错误格式1  "+s.parse(date1));
