@@ -15,7 +15,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("rabbitmq")
-public class RabbitMqController {
+public class  RabbitMqController {
 
     private static final Logger logger = LoggerFactory.getLogger(RabbitMqController.class);
 

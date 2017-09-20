@@ -1,17 +1,11 @@
 package newb.c.webmodule.aopproxy.log;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -19,14 +13,21 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class LogProxy {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(LogProxy.class);
-	
+
+	private Map<Integer,Integer> trackCounts =new HashMap<>();
+
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	
-	@Pointcut("execution(* newb.c.controller.*Controller.*(..)) and !execution(* newb.c.controller.ApiController.rep())")//execution(* newb.c.controller.*.*(..))
-	private void Log() {
-	}
+
+
+    @Pointcut("execution(* newb.c.controller.*Controller.*(..)) ")//execution(* newb.c.controller.*.*(..))
+    private void Log() {
+    }
+
+    public int getCount(int trackNumber){
+	    return trackCounts.containsKey(trackNumber)?trackCounts.get(trackNumber):0;
+    }
 
 	@Before("Log()")
 	public void beforeAdvice(JoinPoint point) throws ClassNotFoundException {
@@ -67,6 +68,21 @@ public class LogProxy {
 		System.out.println("----------------结束时间---"+curtime);
 		System.out.println("-------------------------------日志代理结束--------------------------------------------------");
 	}
+
+	@Around("Log()")
+	public void around(ProceedingJoinPoint jp) {
+		try {
+			System.out.println("环绕通知前 ---1");
+			System.out.println("环绕通知前 ---2");
+			jp.proceed();//运行
+			System.out.println("环绕通知后 ---3");
+		} catch (Throwable throwable) {
+			System.out.println("抛出异常");
+			throwable.printStackTrace();
+		}
+
+	}
+
 
 	@SuppressWarnings("rawtypes")
 	@AfterReturning(pointcut = "Log()", returning = "retVal")

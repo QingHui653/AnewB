@@ -56,7 +56,7 @@
 	<!-- guava缓存 -->
 	<!-- <import resource="cache/spring-guava.xml"/> -->
 	<!-- dubbo -->
-	<import resource="dubbo/spring-dubbo.xml"/>
+	<!--<import resource="dubbo/spring-dubbo.xml"/>-->
 	<!-- <import resource="dubbo/spring-dubboxRest.xml"/> -->
 	<!-- elasticsearch -->
 	<import resource="elasticsearch/elasticsearch.xml"/>

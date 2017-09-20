@@ -12,4 +12,6 @@ public interface ResultService extends IService<Result> {
     List<Result> getAll();
     
     List<RepList> getRepList();
+
+    Object tranTest();
 }
