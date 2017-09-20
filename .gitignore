@@ -49,3 +49,4 @@ Temporary Items
 /.apt_generated/
 /.classpath
 /.gitignore
+.idea/
