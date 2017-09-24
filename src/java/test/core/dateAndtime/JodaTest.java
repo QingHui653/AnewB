@@ -28,4 +28,12 @@ public class JodaTest {
         System.out.println("错误格式1  "+dtf.parseDateTime(date1));
         System.out.println("错误格式2  "+dtf.parseDateTime(date2));
     }
+    
+    @Test
+    public void jodaWeek() {
+    	DateTime dateTime = new DateTime();
+    	System.out.println(dateTime.toString());
+    	dateTime.plusDays(1).plusWeeks(1);
+    	System.out.println(dateTime.toString());
+    }
 }

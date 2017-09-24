@@ -20,12 +20,8 @@ public class LogProxy {
 
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-	@Pointcut("execution(* newb.c.controller.*Controller.*(..)) and !execution(* newb.c.controller.ApiController.rep())"
-            +"&&args(trackNumber)")//execution(* newb.c.controller.*.*(..))
-	private void Log(int trackNumber) {
-	}
 
-    @Pointcut("execution(* newb.c.controller.*Controller.*(..)) and !execution(* newb.c.controller.ApiController.rep())")//execution(* newb.c.controller.*.*(..))
+    @Pointcut("execution(* newb.c.controller.*Controller.*(..)) ")//execution(* newb.c.controller.*.*(..))
     private void Log() {
     }
 
@@ -33,8 +29,8 @@ public class LogProxy {
 	    return trackCounts.containsKey(trackNumber)?trackCounts.get(trackNumber):0;
     }
 
-	@Before("Log(trackNumber)")
-	public void beforeAdvice(JoinPoint point,int trackNumber) throws ClassNotFoundException {
+	@Before("Log()")
+	public void beforeAdvice(JoinPoint point) throws ClassNotFoundException {
 		/*logger.info("");
 		logger.info("");
 		logger.info("-------------------------------日志代理开始--------------------------------------------------");

@@ -15,7 +15,7 @@ public class UploadFile {
 			conf.set("fs.defaultFS", "hdfs://hadoop-master:9000");
 			// 获得hadoop系统的连接
 			FileSystem fs = FileSystem.get(new URI("hdfs://hadoop-master:9000"), conf,"root");
-			fs.copyFromLocalFile(new Path("D:/2.xls"), new Path("/input"));
+			fs.copyFromLocalFile(new Path("D:/出库.json"), new Path("/input"));
 			fs.close();
 	}
 }

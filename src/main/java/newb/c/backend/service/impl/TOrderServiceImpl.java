@@ -1,5 +1,6 @@
 package newb.c.backend.service.impl;
 
+import newb.c.backend.model.basemodel.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
