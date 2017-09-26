@@ -1,0 +1,100 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:redis="http://www.springframework.org/schema/redis"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/cache
+           http://www.springframework.org/schema/cache/spring-cache.xsd
+           http://www.springframework.org/schema/redis 
+           http://www.springframework.org/schema/redis/spring-redis.xsd
+           ">
+	
+	<!-- 启用缓存注解功能，这个是必须的，否则注解不会生效，另外，该注解一定要声明在spring主配置文件中才会生效 -->
+    <cache:annotation-driven cache-manager="cacheManager" key-generator="myKeyGenerator"/>
+    
+    <!-- 自定义key生成器 -->
+    <bean id="myKeyGenerator" class="newb.c.a_module.cache.common.MyKeyGenerator"></bean>
+    
+    
+    <!-- spring自带的cache管理器 -->
+    <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
+        <constructor-arg name="redisOperations" ref="redisTemplate"/>
+        <constructor-arg name="cacheNames">
+            <set>
+                <value>redisCache60seconds</value>
+                <value>redisCache10minutes</value>
+                <value>redisCache1hour</value>
+            </set>
+        </constructor-arg>
+        <property name="defaultExpiration" value="0"/>
+        <property name="expires">
+            <map>
+                <entry key="redisCache60seconds" value="60"/>
+                <entry key="redisCache10minutes" value="600"/>
+                <entry key="redisCache1hour" value="3600"/>
+            </map>
+        </property>
+        <property name="usePrefix" value="true"/>
+    </bean>
+	
+	<!-- redis缓存1分钟 -->
+    <!--<bean id="redisCache1" class="newb.c.a_module.cache.redis.RedisCacheFactoryBean">
+		      <property name="name" value="redisCache60seconds"/>&lt;!&ndash; 缓存名称 &ndash;&gt;
+		      <property name="liveTime" value="60"/>&lt;!&ndash; 缓存时间：以秒为单位 &ndash;&gt;
+    	    <property name="redisTemplate" ref="redisTemplate" />&lt;!&ndash; 缓存实现 &ndash;&gt;
+    </bean>-->
+
+    
+    <!-- redis 相关配置 -->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		      <property name="maxTotal" value="${redis.maxTotal}" />
+		      <property name="maxIdle" value="${redis.maxIdle}" />
+		      <property name="maxWaitMillis" value="${redis.maxWait}" />
+		      <property name="testOnBorrow" value="${redis.testOnBorrow}" /><!-- 向调用者输出“链接”资源时，是否检测是有有效，如果无效则从连接池中移除，并尝试获取继续获取。设为true，一个挂都不能用 -->
+		      <property name="testOnReturn" value="${redis.testOnReturn}" /><!-- 向连接池“归还”链接时，是否检测“链接”对象的有效性。 -->
+	</bean>
+	
+	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+		    <constructor-arg index="0" ref="jedisPoolConfig" />
+		    <constructor-arg index="1" value="${redis.master.hostname}" type="java.lang.String"/>
+		    <constructor-arg index="2" value="${redis.master.port}" type="int"/>
+		    <constructor-arg index="3" value="${redis.timeOut}" type="int"/>
+		    <constructor-arg index="4" value="${redis.master.password}" type="java.lang.String"/>
+	</bean>
+	
+  <bean id="connectionRedisFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+        p:host-name="${redis.master.hostname}" p:port="${redis.master.port}" 
+        p:pool-config-ref="jedisPoolConfig" p:password="${redis.master.password}" />
+
+  <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+    	<property name="connectionFactory" ref="connectionRedisFactory" />
+    	<!--如果不配置Serializer，那么存储的时候智能使用String，如果用User类型存储，那么会提示错误User can't cast to String！！！-->
+    	<!-- 不加，key vaule 会出现在redismanager中出现二进制 不加使用二进制-->
+        <property name="keySerializer">
+        	<bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="valueSerializer">
+        	<bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="hashKeySerializer">     
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>     
+        </property>   
+        <property name="hashValueSerializer">   
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>  
+           <!-- <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/> -->     
+        </property> 
+  </bean>
+  
+  <bean id="listener" class="newb.c.api.mq.redismq.TestMessage"/>
+
+  <!-- 暂时注释掉，未打开redis时,会一直重复获取redis连接报错 -->
+  <!-- <redis:listener-container connection-factory="connectionRedisFactory">
+        the method attribute can be skipped as the default method name is "handleMessage"
+        topic代表监听的频道，是一个正规匹配  其实就是你要订阅的频道
+        <redis:listener ref="listener" method="handleMessage" topic="*"/>
+  </redis:listener-container> -->
+  	
+	
+</beans>

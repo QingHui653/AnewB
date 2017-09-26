@@ -33,9 +33,11 @@
 	<!-- activiti工作流 -->
 	<!-- <import resource="activiti/spring-activiti.xml" /> -->
 	<!-- ehcache 缓存 -->
-	<!-- <import resource="cache/spring-ehcache.xml"/> -->
+	<!--<import resource="cache/spring-ehcache.xml"/>-->
 	<!-- redis 不能注释，连不上没关系 -->
-	<import resource="cache/spring-redis.xml"/>
+	<!--<import resource="cache/spring-cache.xml"/>-->
+	<!--<import resource="cache/spring-redis.xml"/>-->
+	<import resource="cache/spring-redisCache.xml"/>
 	<!-- mongodb 不能注释，连不上没关系 -->
 	<import resource="mongodb/spring-mongodb.xml"/>
 	<!-- aop -->
