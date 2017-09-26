@@ -38,6 +38,7 @@
 	<!--<import resource="cache/spring-cache.xml"/>-->
 	<!--<import resource="cache/spring-redis.xml"/>-->
 	<import resource="cache/spring-redisCache.xml"/>
+	<import resource="cache/spring-guavaCache.xml"/>
 	<!-- mongodb 不能注释，连不上没关系 -->
 	<import resource="mongodb/spring-mongodb.xml"/>
 	<!-- aop -->

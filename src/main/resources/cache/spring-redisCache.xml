@@ -38,15 +38,7 @@
         </property>
         <property name="usePrefix" value="true"/>
     </bean>
-	
-	<!-- redis缓存1分钟 -->
-    <!--<bean id="redisCache1" class="newb.c.a_module.cache.redis.RedisCacheFactoryBean">
-		      <property name="name" value="redisCache60seconds"/>&lt;!&ndash; 缓存名称 &ndash;&gt;
-		      <property name="liveTime" value="60"/>&lt;!&ndash; 缓存时间：以秒为单位 &ndash;&gt;
-    	    <property name="redisTemplate" ref="redisTemplate" />&lt;!&ndash; 缓存实现 &ndash;&gt;
-    </bean>-->
 
-    
     <!-- redis 相关配置 -->
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
 		      <property name="maxTotal" value="${redis.maxTotal}" />
