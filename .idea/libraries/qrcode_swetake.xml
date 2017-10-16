@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="qrcode_swetake">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/WebRoot/WEB-INF/lib/qrcode_swetake.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

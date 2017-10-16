@@ -3,7 +3,6 @@
   <component name="CompilerConfiguration">
     <excludeFromCompile>
       <file url="file://$PROJECT_DIR$/src/main/java/newb/c/controller/ActController.java" />
-      <file url="file://$PROJECT_DIR$/src/main/java/newb/c/a_module/dubbo/test/RestTest.java" />
     </excludeFromCompile>
     <annotationProcessing>
       <profile name="Maven default annotation processors profile" enabled="true">
