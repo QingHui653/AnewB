@@ -1,0 +1,24 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/cache
+           http://www.springframework.org/schema/cache/spring-cache.xsd
+    ">
+
+    <!-- spring自带的cache管理器 -->
+    <bean id="cacheManager" class="org.springframework.cache.guava.GuavaCacheManager">
+        <property name="cacheNames" value="guavaCache60seconds">
+            <!--<set>
+                <value>guavaCache60seconds</value>
+                <value>guavaCache10minutes</value>
+                <value>guavaCache1hour</value>
+            </set>-->
+        </property>
+        <property name="allowNullValues" value="true"/>
+        <property name="cacheSpecification" value="expireAfterAccess=15s,expireAfterWrite=15s"/>
+    </bean>
+
+</beans>

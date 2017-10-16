@@ -63,13 +63,11 @@ public class LogProxy {
 	@After("Log()")
 	public void afterAdvice() {
 		String curtime=sdf.format(Calendar.getInstance().getTime());
-//		logger.info("----------------结束时间---"+curtime);
-//		logger.info("-------------------------------日志代理结束--------------------------------------------------");
 		System.out.println("----------------结束时间---"+curtime);
 		System.out.println("-------------------------------日志代理结束--------------------------------------------------");
 	}
 
-	@Around("Log()")
+	/*@Around("Log()")
 	public void around(ProceedingJoinPoint jp) {
 		try {
 			System.out.println("环绕通知前 ---1");
@@ -80,8 +78,7 @@ public class LogProxy {
 			System.out.println("抛出异常");
 			throwable.printStackTrace();
 		}
-
-	}
+	}*/
 
 
 	@SuppressWarnings("rawtypes")
