@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-@RequestMapping("cache")
+@RequestMapping("resources/cache")
 public class TestCacheController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(TestCacheController.class);

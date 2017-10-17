@@ -21,13 +21,13 @@
         http://www.dangdang.com/schema/ddframe/rdb/rdb.xsd
        	">
     
-    <!-- 读写分离配置 独自配置方便切换 -->
+    <!-- 分库分表 独自配置方便切换 -->
        	
     <!-- 扫描目录下的包自动装配 -->  	
     <context:component-scan base-package="newb.c.backend.service" />
 	<!-- 由于inline表达式内使用Groovy语法，Groovy语法的变量占位符为`${}`,与Spring的Property占位符冲突。
  +故需要在Spring的配置文件中增加<context:property-placeholder location="classpath:conf/rdb/conf.properties" **ignore-unresolvable="true"**/> -->
-	<context:property-placeholder location="classpath*:main/resources/*.properties" />
+	<context:property-placeholder location="classpath*:resources/properties/*.properties" />
 	
 	<!-- 配置数据源 使用的是Druid数据源 -->
 	<bean name="parentDataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close"><!--init-method="init" destroy-method="close" -->
@@ -80,16 +80,16 @@
 	<rdb:master-slave-data-source id="rbb_1" master-data-source-ref="ds_1" slave-data-sources-ref="ds_0"/>-->
 	
 	<!-- 读写分离配置 -->
-	<rdb:master-slave-data-source id="dbtb" master-data-source-ref="ds_0" slave-data-sources-ref="ds_1"/>
+	<!-- <rdb:master-slave-data-source id="dbtb" master-data-source-ref="ds_0" slave-data-sources-ref="ds_1"/> -->
 	
 	<!-- 分库分表规则 -->
 	<rdb:strategy id="databaseShardingStrategy" sharding-columns="user_id" algorithm-class="newb.c.a_module.sharding.SingleKeyModuloDatabaseShardingAlgorithm"/>
     <rdb:strategy id="tableShardingStrategy" sharding-columns="order_id" algorithm-class="newb.c.a_module.sharding.SingleKeyModuloTableShardingAlgorithm"/>
     
     <rdb:data-source id="shardingDataSource">
-        <rdb:sharding-rule data-sources="dbtb"><!--  default-data-source="ds_0"  -->
+        <rdb:sharding-rule data-sources="ds_0,ds_1" default-data-source="ds_0"><!--多库  data-sources="ds_0,ds_1"  default-data-source="ds_0"  --> <!-- 读写分离配置 data-sources="dbtb" -->
             <rdb:table-rules>													<!-- database-strategy="databaseShardingStrategy" -->
-                <rdb:table-rule logic-table="t_order" actual-tables="t_order_0,t_order_1" table-strategy="tableShardingStrategy"/>
+                <rdb:table-rule logic-table="t_order" actual-tables="t_order_0,t_order_1" table-strategy="tableShardingStrategy" database-strategy="databaseShardingStrategy"/>
             </rdb:table-rules>
             <rdb:binding-table-rules>
                 <rdb:binding-table-rule logic-tables="t_order"/>
@@ -103,10 +103,10 @@
 	<!-- myBatis 使用 分页插件，通用插件 配置 开始 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="shardingDataSource" /><!-- parentDataSource shardingDataSource -->
-		<property name="configLocation" value="classpath:main/resources/mybatis/SqlMapConfig.xml" />
+		<property name="configLocation" value="classpath:resources/mybatis/SqlMapConfig.xml" />
 		<!-- <property name="configLocation" value="classpath:mybatis-config.xml"/> -->
 		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
-		<property name="mapperLocations" value="classpath*:/newb/c/backend/mapping/*.xml" />
+		<property name="mapperLocations" value="classpath*:/newb/c/backend/mapping/ResultMapper.xml" />
 		<property name="typeAliasesPackage" value="newb.c.backend.model.basemodel"/>
 		<!-- mybatis 分页插件 -->
 		<property name="plugins">
@@ -144,9 +144,10 @@
         </property>
     </bean>
 	
-	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
+	<!-- 未清楚何用 可移除   -->
+	<!-- <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
         <constructor-arg index="0" ref="sqlSessionFactory"/>
-    </bean>
+    </bean> -->
     
     <!-- ehcache 缓存 -->
     <!-- <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">

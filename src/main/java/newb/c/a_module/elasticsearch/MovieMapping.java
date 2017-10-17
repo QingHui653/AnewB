@@ -19,7 +19,7 @@ public class MovieMapping {
 						.startObject("_ttl")
 								.field("enabled",false)
 						.endObject()
-							 .startObject("properties")
+							 .startObject("resources/properties")
 									.startObject("movie_name")
 										 .field("type","string")
 										 .field("index","not_analyzed")

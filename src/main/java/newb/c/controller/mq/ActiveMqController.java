@@ -18,7 +18,7 @@ import newb.c.api.mq.activemq.producer.ProducerServiceImpl;
 import newb.c.backend.model.basemodel.User;
 
 @Controller
-@RequestMapping("mq")
+@RequestMapping("resources/mq")
 public class ActiveMqController {
 
 	private static final Logger logger =LoggerFactory.getLogger(ActiveMqController.class);

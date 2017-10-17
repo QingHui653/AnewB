@@ -24,7 +24,7 @@ import newb.c.backend.model.basemodel.User;
  */
 @SuppressWarnings("static-access")
 @Controller
-@RequestMapping("mongodb")
+@RequestMapping("resources/mongodb")
 public class MongodbController {
 	
 	@Autowired(required=false)

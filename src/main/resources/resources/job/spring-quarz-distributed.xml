@@ -32,7 +32,7 @@
 	<!-- 配置调度任务 -->
 	<bean name="quartzScheduler"
 		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-		<property name="configLocation" value="classpath:properties/quartz.properties" />
+		<property name="configLocation" value="classpath:resources/properties/quartz.properties" />
 		<property name="dataSource" ref="parentDataSource" />
 		<property name="transactionManager" ref="transactionManager" />
 

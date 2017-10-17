@@ -17,7 +17,7 @@ public class RpcController {
 	@Qualifier(value="demoServiceTest")
 	private DemoService demoServiceTest;
 	
-	@RequestMapping(value="/dubbo",method=RequestMethod.GET)
+	@RequestMapping(value= "/resources/dubbo",method=RequestMethod.GET)
 	@ApiOperation("测试dubbo远程调用")
 	public Object getDubboServer(){
 		/*String hello = (String) demoService.sayHello("tom");  

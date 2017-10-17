@@ -19,7 +19,7 @@ public class ZhiDaoMapping {
 						.startObject("_ttl")
 								.field("enabled",false)
 								.endObject()
-									.startObject("properties")
+									.startObject("resources/properties")
 									.startObject("title")
 										 .field("type","string")
 									.endObject()

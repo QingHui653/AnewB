@@ -193,7 +193,7 @@ public class UserController {
 		 	SessionBean session = new SessionBean(user);
 	        modelMap.addAttribute("user", user);
 	        //添加到session
-	        httpSession.setAttribute("session", session);
+	        httpSession.setAttribute("resources/session", session);
 	        return "/views/jsp/admin/showInfo";
 	    }
 	 /**

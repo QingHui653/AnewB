@@ -12,7 +12,7 @@
         ">
         <!-- 不知道为什么未起作用，现在暂时是配置的springmvc中 -->
         
-        <context:component-scan base-package="newb.c.proxy" />
+        <context:component-scan base-package="newb.c.webmodule.aopproxy" />
         
         <aop:aspectj-autoproxy/>
         

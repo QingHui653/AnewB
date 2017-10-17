@@ -27,7 +27,7 @@
     <context:component-scan base-package="newb.c.backend.service" />
 	<!-- 由于inline表达式内使用Groovy语法，Groovy语法的变量占位符为`${}`,与Spring的Property占位符冲突。
  +故需要在Spring的配置文件中增加<context:property-placeholder location="classpath:conf/rdb/conf.properties" **ignore-unresolvable="true"**/> -->
-	<context:property-placeholder location="classpath*:main/resources/*.properties" />
+	<context:property-placeholder location="classpath:resources/properties/*.properties" />
 	
 	<!-- 配置数据源 使用的是Druid数据源 -->
 	<bean id="abstractXADataSource" class="com.atomikos.jdbc.AtomikosDataSourceBean" destroy-method="close">
@@ -118,10 +118,10 @@
 	<!-- myBatis 使用 分页插件，通用插件 配置 开始 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="shardingDataSource" /><!-- parentDataSource shardingDataSource -->
-		<property name="configLocation" value="classpath:main/resources/mybatis/SqlMapConfig.xml" />
+		<property name="configLocation" value="classpath:resources/mybatis/SqlMapConfig.xml" />
 		<!-- <property name="configLocation" value="classpath:mybatis-config.xml"/> -->
 		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
-		<property name="mapperLocations" value="classpath*:/newb/c/backend/mapping/*.xml" />
+		<property name="mapperLocations" value="classpath*:/newb/c/backend/mapping/ResultMapper.xml" />
 		<property name="typeAliasesPackage" value="newb.c.backend.model.basemodel"/>
 		<!-- mybatis 分页插件 -->
 		<property name="plugins">

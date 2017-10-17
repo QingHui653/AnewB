@@ -13,7 +13,6 @@ import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.cluster.health.ClusterHealthStatus;
-import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.QueryStringQueryBuilder;
 import org.elasticsearch.index.query.TermsQueryBuilder;
@@ -22,7 +21,6 @@ import org.elasticsearch.search.sort.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
@@ -30,9 +28,6 @@ import org.springframework.data.elasticsearch.core.query.Criteria;
 import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
-import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,7 +40,7 @@ import newb.c.backend.elasticmodel.MovieDTO;
 import newb.c.backend.elasticmodel.TaskInfoDTO;
 
 @Controller
-@RequestMapping("elasticsearch")
+@RequestMapping("resources/elasticsearch")
 public class ElasticSearchController {
 
 	@Autowired(required=false)

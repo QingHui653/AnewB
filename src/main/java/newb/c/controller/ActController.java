@@ -43,7 +43,7 @@ public class ActController {
     @ResponseBody
     public Object brithdayList(HttpServletRequest req) {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("name", "activiti");
+        map.put("name", "resources/activiti");
         return map;
     }
 

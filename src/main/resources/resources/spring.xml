@@ -11,7 +11,7 @@
 
 	<!--引入配置属性文件 -->
 	<!-- 记得以前这里也报过错，暂时不要删除 -->
-	<context:property-placeholder location="classpath:properties/*.properties" />
+	<context:property-placeholder location="classpath:resources/properties/*.properties" />
 
 	<context:component-scan base-package="newb.c" use-default-filters="false">
 		<!-- 扫描componet会同时包括 controller  所有下面那个排除没起作用   以后不使用 component注解  ，只使用其他三个-->

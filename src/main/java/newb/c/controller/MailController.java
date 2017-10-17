@@ -13,7 +13,7 @@ import newb.c.api.mail.EmailSendManager;
 import newb.c.api.mail.SimpleEmail;
 
 //@Controller
-@RequestMapping("/mail")
+@RequestMapping("/resources/mail")
 public class MailController {
 	/*@Autowired(required=false)
 	@Qualifier(value= "simpleEmailSendManagerImpl")*/
