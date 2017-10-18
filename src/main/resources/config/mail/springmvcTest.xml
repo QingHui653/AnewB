@@ -16,7 +16,7 @@
 	<!-- 自动扫描下的包自动装配 -->
 	<!--resource-pattern="api/*.class" 基类包下的所有类-->
 	<!-- <context:component-scan base-package="newb.c.controller.test" /> -->
-	<context:property-placeholder location="classpath:resources/properties/config.properties" />
+	<context:property-placeholder location="classpath:config/properties/config.properties" />
     <context:component-scan base-package="newb.c.api.mail"/>
     	<!-- <context:exclude-filter type="regex" expression="com.jek.*"/> --><!-- 过滤 -->
     	<!-- <context:include-filter type="aspectj" expression="com.jike..*Controller+"/> --><!-- 包括 -->

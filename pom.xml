@@ -11,7 +11,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<activiti.version>5.16</activiti.version>
-		<project.basedir.lib>/WebRoot/WEB-INF</project.basedir.lib>
+		<project.basedir.lib>/src/main/webapp/WEB-INF</project.basedir.lib>
 	</properties>
 
 	<dependencyManagement>
@@ -1104,19 +1104,22 @@
 
 
 	<build>
-		<sourceDirectory>src/main/java</sourceDirectory>
+        <sourceDirectory>src/main/java</sourceDirectory>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
-				<excludes>
-					<exclude>**/*.java</exclude>
-				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
 			</resource>
 		</resources>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>3.7.0</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
@@ -1124,22 +1127,9 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>2.2</version>
+				<version>3.2.0</version>
 				<configuration>
-					<classesDirectory>${basedir}/src</classesDirectory>
 					<warName>AnewB</warName>
-					<warSourceDirectory>${basedir}/WebRoot</warSourceDirectory>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-					<webResources>
-						<resource>
-							<directory>WebRoot/WEB-INF/lib</directory>
-							<targetPath>WebRoot/WEB-INF/lib</targetPath>
-							<filtering>false</filtering>
-							<includes>
-								<include>**/*.jar</include>
-							</includes>
-						</resource>
-					</webResources>
 				</configuration>
 			</plugin>
 

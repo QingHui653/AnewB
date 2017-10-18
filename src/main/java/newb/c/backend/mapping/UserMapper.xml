@@ -35,6 +35,7 @@
          与非延迟加载的主要区别就在association标签属性多了select和column
      -->
     <association property="user" javaType="User" resultMap="BaseResultMap"/>
+    <association property="result" javaType="Result" resultMap="BaseResultMap"/>
     <!-- 一对多关联查询 -->
     <!-- <collection property=""></collection> -->
   </resultMap>
@@ -57,9 +58,12 @@
   	<!-- select user_cache.id,user_cache.name,user_cache.age,user.oid,user.username,user.password 
   		from user_cache,user 
   	where user_cache.id=user.oid and user.oid=#{id} -->
-  	select user_cache.*,user.*
-  		from user_cache,user 
-  	where user_cache.id=user.oid and user.oid=#{id}
+  	select user_cache.*,user.*,result.*
+  		from user_cache,user,result
+  	where
+      user_cache.id=user.oid
+      and result.oid =user.oid
+      and user.oid=#{id}
   </select>
   
 </mapper>

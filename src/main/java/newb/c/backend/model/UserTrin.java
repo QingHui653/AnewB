@@ -1,5 +1,6 @@
 package newb.c.backend.model;
 
+import newb.c.backend.model.basemodel.Result;
 import newb.c.backend.model.basemodel.User;
 
 public class UserTrin{
@@ -10,19 +11,21 @@ public class UserTrin{
     private Integer age;
     
     private User user;
+
+	private Result result;
     
 	public UserTrin() {
 		super();
 	}
 
-	public UserTrin(Integer id, String name, Integer age, User user) {
-		super();
+	public UserTrin(Integer id, String name, Integer age, User user, Result result) {
 		this.id = id;
 		this.name = name;
 		this.age = age;
 		this.user = user;
+		this.result = result;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -53,5 +56,12 @@ public class UserTrin{
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public Result getResult() {
+		return result;
+	}
+
+	public void setResult(Result result) {
+		this.result = result;
 	}
 }

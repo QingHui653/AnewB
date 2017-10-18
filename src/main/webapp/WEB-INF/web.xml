@@ -8,7 +8,7 @@
 	<!-- Spring context应用 配置Spring与 mybatis -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:resources/spring.xml</param-value>
+		<param-value>classpath:config/spring.xml</param-value>
 		<!-- 使用 dubbo service="servlet" 一定要配置在这里，但我这不知道为什么一直报错 -->
 		<!-- <param-value>/WEB-INF/classes/main/resources/dubbo/springhighGrade-dubboxRest.xml,classpath*:spring.xml</param-value> -->
 		<!-- <param-value>classpath:spring.xml,classpath:spring-mybatis.xml,classpath:spring-cache.xml</param-value> -->
@@ -181,7 +181,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:resources/springMVC.xml</param-value>
+			<param-value>classpath:config/springMVC.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 		<!-- 开启Cglib 代理 -->

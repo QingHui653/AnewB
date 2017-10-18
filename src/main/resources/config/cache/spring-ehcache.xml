@@ -12,7 +12,7 @@
     </bean>
     
     <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
-        <property name="configLocation" value="classpath:resources/cache/ehcache.xml" />
+        <property name="configLocation" value="classpath:config/cache/ehcache.xml" />
         <property name="shared" value="false" />
     </bean>
 
