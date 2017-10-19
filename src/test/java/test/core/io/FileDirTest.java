@@ -11,11 +11,11 @@ public class FileDirTest {
 	
 	@Test
 	public void fileDir() throws IOException {
-		File f1 =new File("D:\\233\\1.txt");
+		/*File f1 =new File("D:\\233\\1.txt");
 		FileInputStream fio1= new FileInputStream(f1);
 		String theString1 =IOUtils.toString(fio1,"UTF-8");
 		System.out.println(" io1 "+theString1);
-		fio1.close();
+		fio1.close();*/
 		
 		File f2 =new File("src/test/io/1.txt");
 		FileInputStream fio2= new FileInputStream(f2);
