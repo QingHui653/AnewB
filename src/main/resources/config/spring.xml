@@ -14,12 +14,17 @@
 	<context:property-placeholder location="classpath:config/properties/*.properties" />
 
 	<context:component-scan base-package="newb.c" use-default-filters="false">
-		<!-- 扫描componet会同时包括 controller  所有下面那个排除没起作用   以后不使用 component注解  ，只使用其他三个-->
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
+		<context:exclude-filter type="regex" expression="new.c.webmodule.aopproxy.*" />
+	</context:component-scan>
+
+	<!--<context:component-scan base-package="newb.c" use-default-filters="false">
+		&lt;!&ndash; 扫描componet会同时包括 controller  所有下面那个排除没起作用   以后不使用 component注解  ，只使用其他三个&ndash;&gt;
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Component" />
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
   		<context:exclude-filter type="regex" expression="new.c.controller.*Controller" />
   		<context:exclude-filter type="regex" expression="new.c.webmodule.aopproxy.*" />
-    </context:component-scan>
+    </context:component-scan>-->
 
 	<import resource="mybatis/spring-mybatis-One.xml" />
 	<!-- <import resource="mybatis/spring-mybatis-Shard.xml" /> -->

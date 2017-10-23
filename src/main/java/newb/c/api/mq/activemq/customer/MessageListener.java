@@ -12,13 +12,14 @@ import org.springframework.jms.listener.adapter.MessageListenerAdapter;
 import org.springframework.stereotype.Component;
 
 import newb.c.backend.model.basemodel.User;
+import org.springframework.stereotype.Service;
 
 /**
  * 使用注解监听 jms
  * @author woshizbh
  *
  */
-@Component
+@Service
 public class MessageListener {
 
 	@Autowired(required=false)

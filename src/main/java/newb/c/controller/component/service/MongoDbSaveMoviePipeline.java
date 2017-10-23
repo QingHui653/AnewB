@@ -9,11 +9,12 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
 import newb.c.backend.model.basemodel.Movie;
+import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 
-@Component
+@Service
 public class MongoDbSaveMoviePipeline implements Pipeline {
 	
 	

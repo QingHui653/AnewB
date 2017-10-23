@@ -10,7 +10,7 @@ import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 
-//@Component
+//@Service
 public class RedisSaveMoviePipeline implements Pipeline {
 	
 	@Autowired(required=false)

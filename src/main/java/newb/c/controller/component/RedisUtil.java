@@ -7,6 +7,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.BinaryClient.LIST_POSITION;
@@ -14,7 +15,7 @@ import redis.clients.jedis.BinaryClient.LIST_POSITION;
 /**
  * redis通用工具类
  */
-@Component("redisUtil")
+@Service("redisUtil")
 public class RedisUtil {
 	public final static String batchCreateKey = "log:batchCreate:list";
 	@Autowired(required=false)

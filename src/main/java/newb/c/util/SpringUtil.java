@@ -4,14 +4,15 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
- 
+import org.springframework.stereotype.Service;
+
 /**
  * 普通类调用Spring bean对象：
  * 说明：
  * 1、此类需要放到App.java同包或者子包下才能被扫描，否则失效。
  * @author woshizbh
  */
-@Component
+@Service
 public class SpringUtil implements ApplicationContextAware{
     private static ApplicationContext applicationContext = null;
  

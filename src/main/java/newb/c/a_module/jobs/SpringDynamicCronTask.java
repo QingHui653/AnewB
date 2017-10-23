@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
  * @Create 2016-11-10 16:31:29 
  */  
 @Lazy(false)  
-//@Component  
+//@Service  
 @EnableScheduling  
 public class SpringDynamicCronTask implements SchedulingConfigurer {  
     private static final Logger logger = LoggerFactory.getLogger(SpringDynamicCronTask.class);  

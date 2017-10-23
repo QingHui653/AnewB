@@ -14,6 +14,11 @@
 		<!-- <param-value>classpath:spring.xml,classpath:spring-mybatis.xml,classpath:spring-cache.xml</param-value> -->
 	</context-param>
 
+	<context-param>
+		<param-name>logbackConfigLocation</param-name>
+		<param-value>classpath:logback.xml</param-value>
+	</context-param>
+
 	<!-- 分布式 session -->
 	<!-- <filter>
         <filter-name>springSessionRepositoryFilter</filter-name>
@@ -90,10 +95,6 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping> -->
 
-	<context-param>
-         <param-name>logbackConfigLocation</param-name>
-         <param-value>classpath:logback.xml</param-value>
-	</context-param>
 	<listener>
          <listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
 	</listener>

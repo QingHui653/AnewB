@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import newb.c.util.IpUtil;
 import newb.c.util.annotation.RequestLimit;
 import newb.c.webmodule.exception.RequestLimitException;
+import org.springframework.stereotype.Service;
 
 /**
  * 限制 ip 访问方法或URL的当前时间内的次数
@@ -25,7 +26,7 @@ import newb.c.webmodule.exception.RequestLimitException;
  *
  */
 @Aspect
-@Component
+@Service
 public class RequestLimitContract {
 
 	private static Logger logger = LoggerFactory.getLogger(RequestLimitContract.class);

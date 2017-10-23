@@ -18,7 +18,7 @@ import newb.c.api.mail.EmailSendManager;
 import newb.c.api.mail.SimpleEmail;
 import newb.c.controller.component.service.MysqlSaveMoviePipeline;
 
-//@Component
+//@Service
 public class ErrorLogSendEmail implements HandlerExceptionResolver{
 	
 	@Resource(name = "simpleEmailSendManagerImpl")

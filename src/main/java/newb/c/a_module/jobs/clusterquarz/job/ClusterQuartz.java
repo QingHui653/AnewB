@@ -4,8 +4,9 @@ import java.util.Date;
 
 import org.apache.tools.ant.util.DateUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class ClusterQuartz {
 
 	public void printUserInfo() {

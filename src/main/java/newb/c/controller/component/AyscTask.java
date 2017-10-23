@@ -7,9 +7,10 @@ import java.util.concurrent.Future;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 
-@Component
+@Service
 public class AyscTask{
 
     private Random random =new Random();
