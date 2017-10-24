@@ -31,12 +31,14 @@
     </context:component-scan> -->
 
 	<context:component-scan base-package="newb.c" use-default-filters="false">
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 		<context:include-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect" />
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
     <task:annotation-driven />
 
+	<!--注册swagger2 -->
+	<bean class="newb.c.api.SpringfoxDocConfig"/>
     <!-- 日志代理配置 -->
     <!-- <aop:aspectj-autoproxy/>
     <bean id="LogProxy" class="newb.c.proxy.log.LogProxy"/>
@@ -60,7 +62,7 @@
 
 	<!--RequestMappingHandlerAdapter 返回映射处理适配器-->
 	<!-- validator="validator" 校验 -->
-	<mvc:annotation-driven validator="validator">
+	<mvc:annotation-driven validator="validator" enable-matrix-variables="true">
 		<mvc:message-converters>
 			<ref bean="stringHttpMessageConverter" />
 			<ref bean="marshallingHttpMessageConverter" />

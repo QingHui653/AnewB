@@ -13,16 +13,21 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import static springfox.documentation.builders.PathSelectors.regex;
 
-@Configuration
-@EnableWebMvc //NOTE: Only needed in a non-springboot application
-@EnableSwagger2 //Enable swagger 2.0 spec
-@ComponentScan("newb.c.controller")
+
+/**
+ * 使用java配置是全部需要
+ * 使用xml配置 开启@enableswagger2即可，单需要在mvc.xml中注册
+ */
+//@Configuration
+//@ComponentScan("newb.c.controller")
+//@EnableWebMvc
+@EnableSwagger2
 public class SpringfoxDocConfig {
-	/**
-	 * 访问/swagger-ui.html
-	 * @return
-	 */
-	@Bean
+    /**
+     * 访问/swagger-ui.html
+     * @return
+     */
+    @Bean
     public Docket configSpringfoxDocketForAll() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .produces(Sets.newHashSet("application/json"))
@@ -44,5 +49,4 @@ public class SpringfoxDocConfig {
                 .version("9999999")
                 .build();
     }
-
 }

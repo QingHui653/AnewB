@@ -1,6 +1,7 @@
 package newb.c.webmodule.config.initBean;
 
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.stereotype.Service;
 
 public class TestBean implements InitializingBean {
     String name;
