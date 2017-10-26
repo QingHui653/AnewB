@@ -406,6 +406,22 @@
 			<artifactId>commons-httpclient</artifactId>
 			<version>3.1</version>
 		</dependency>
+		<!-- http -->
+
+		<dependency>
+			<groupId>com.squareup.retrofit2</groupId>
+			<artifactId>retrofit</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-gson -->
+		<dependency>
+			<groupId>com.squareup.retrofit2</groupId>
+			<artifactId>converter-gson</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+
+
 		<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
 		<dependency>
 			<groupId>commons-codec</groupId>
@@ -910,12 +926,6 @@
 		    <artifactId>spring-kafka</artifactId>
 		    <version>1.2.2.RELEASE</version>
 		</dependency>
-		
-		
-		
-		
-		
-
 
 		<!-- elasticsearch -->
 		<!-- https://mvnrepository.com/artifact/org.elasticsearch/elasticsearch -->

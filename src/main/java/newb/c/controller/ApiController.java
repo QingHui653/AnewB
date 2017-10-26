@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import newb.c.api.weather.retrofit.RetrofitWeather;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,7 +71,9 @@ public class ApiController {
 	@Autowired
 	private TOrderService tOrderService;
 
-	weather weather = new weather();
+	public weather weather = new weather();
+
+	public RetrofitWeather retrofitWeather = new RetrofitWeather();
 
 	DataHandle data =new DataHandle();
 
@@ -182,8 +185,9 @@ public class ApiController {
 	@ApiOperation(value="根据城市获取天气情况")
 	@RequestMapping(value="/weather/{cityname}",method=RequestMethod.GET)
 	@ResponseBody
-	public Object queryWeather(@PathVariable String cityname){
-		String res= weather.queryWeather(cityname);
+	public Object queryWeather(@PathVariable String cityname) throws IOException {
+//		String res= weather.queryWeather(cityname);
+		String res =retrofitWeather.queryWeather(cityname);
 		return res;
 	}
 
