@@ -1,8 +1,7 @@
 package newb.c.webmodule.config;
 
-import newb.c.webmodule.config.initBean.TestBean;
+import newb.c.webmodule.config.springBean.TestInitializingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -64,14 +63,4 @@ public class CorsConfig {
         bean.setOrder(0);
         return bean;
     }*/
-
-    /**
-     * 测试spring初始化bean
-     * 具体可查看 360 问题 spring加载bean
-     * @return TestBean
-     */
-    @Bean
-    public TestBean testBean() {
-        return new TestBean();
-    }
 }

@@ -113,7 +113,7 @@
     </root>
 
     <!-- spring mvc -->
-    <logger name="org.springframework.web.servlet" level="DEBUG"/>
+    <!--<logger name="org.springframework.web.servlet" level="DEBUG"/>-->
 
     <!-- mybatis -->
     <logger name="org.apache.ibatis" level="DEBUG"/>
