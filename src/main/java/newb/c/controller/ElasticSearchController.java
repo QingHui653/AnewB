@@ -24,20 +24,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
-import org.springframework.data.elasticsearch.core.query.Criteria;
-import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
-import org.springframework.data.elasticsearch.core.query.IndexQuery;
-import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
+import org.springframework.data.elasticsearch.core.query.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import io.swagger.annotations.ApiOperation;
 import newb.c.backend.elasticmodel.MovieDTO;
 import newb.c.backend.elasticmodel.TaskInfoDTO;
+
+import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
 
 @Controller
 @RequestMapping("resources/elasticsearch")
@@ -52,16 +47,28 @@ public class ElasticSearchController {
 	
 	
 	@SuppressWarnings("static-access")
-	@RequestMapping(value="queryMovie",method={RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value="queryMovie",method={RequestMethod.GET})
 	@ApiOperation(value="查询电影")
 	@ResponseBody
 	public Object queryMovie(String name,Integer  page,Integer  pageSize) {
 		if(StringUtils.isBlank(name))
 			name=null;
+		//条件查询 相等
 		CriteriaQuery criteriaQuery = new CriteriaQuery(new Criteria().
 				and(new Criteria("movieName").is(name)))
 				.setPageable(new PageRequest(page-1, pageSize));
 		List<MovieDTO> movieList = elasticsearchTemplate.queryForList(criteriaQuery, MovieDTO.class);	
+		return movieList;
+	}
+
+	@SuppressWarnings("static-access")
+	@RequestMapping(value="querylikeMovie",method={RequestMethod.GET})
+	@ApiOperation(value="查询电影")
+	@ResponseBody
+	public Object querylikeMovie(String name,Integer  page,Integer  pageSize) {
+		SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(matchQuery("movieName", name)).withPageable(new PageRequest(page-1,pageSize)).build();
+
+		List<MovieDTO> movieList = elasticsearchTemplate.queryForList(searchQuery, MovieDTO.class);
 //		movieList.forEach(System.out::println);
 		return movieList;
 	}
@@ -69,10 +76,11 @@ public class ElasticSearchController {
 	
 	@GetMapping("CreatIndexMapping")
 	@ApiOperation(value="创建elastic index和mapping")
-	private void CreatIndexMapping() {
+	private void CreatIndexMapping(String esIndexName) {
 		// 首先判断index 是否存在 创建 index
-		if (!elasticsearchTemplate.indexExists(""))
-			elasticsearchTemplate.createIndex("");
+		if (!elasticsearchTemplate.indexExists("")){
+			elasticsearchTemplate.createIndex(esIndexName);
+		}
 		// 在创建mapping ，需要在实体类中使用注解
 		elasticsearchTemplate.putMapping(TaskInfoDTO.class);
 	}
@@ -134,18 +142,33 @@ public class ElasticSearchController {
 	}
 	
 	@GetMapping("deleteById")
-	@ApiOperation(value="通过id删除数据")
+	@ApiOperation(value="通过id删除数据 某个")
 	@ResponseBody
 	public <T> Object deleteById(String id, Class<T> clzz) {
 		try {
-			elasticsearchTemplate.delete(clzz, id);
+			elasticsearchTemplate.delete(clzz.getClass(),id);
 			return "true";
 		} catch (Exception e) {
 			logger.error("delete " + clzz + " by id " + id + " error.", e);
 			return "false";
 		}
 	}
-	
+
+	@GetMapping("deleteType")
+	@ApiOperation(value="通过id删除数据")
+	@ResponseBody
+	public <T> Object deleteType(String index, String type, @RequestParam(defaultValue = "100000") Integer pageSize, Class<T> clzz) {
+		try {
+			DeleteQuery deleteQuery = new DeleteQuery();
+			deleteQuery.setIndex(index);
+			deleteQuery.setType(type);
+			deleteQuery.setPageSize(pageSize);
+			elasticsearchTemplate.delete(deleteQuery,MovieDTO.class);
+			return "true";
+		} catch (Exception e) {
+			return "false";
+		}
+	}
 	
 	
 	/**

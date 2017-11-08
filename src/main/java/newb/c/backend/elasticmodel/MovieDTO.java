@@ -4,7 +4,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-@Document(indexName = "wow", type = "movie") 
+@Document(indexName = "wow", type = "esmovie")
 public class MovieDTO {
 	
 	@Field(type = FieldType.String)  

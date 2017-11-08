@@ -1,5 +1,6 @@
 package newb.c.controller;
 
+import newb.c.controller.component.service.EsSaveMoviePipeline;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,9 @@ public class WebMagicController {
 	private GithubRepoPageProcessor g;
 	@Autowired(required=false)
 	private MongoDbSaveMoviePipeline mongoDbSaveMoviePipeline;
-	
+	@Autowired(required=false)
+	private EsSaveMoviePipeline esSaveMoviePipeline;
+
 	@RequestMapping(value="getGithub",method=RequestMethod.GET)
 	@ApiOperation("测试使用spider爬取github alibaba的项目")
 	public void rep() throws Exception {//alibaba  QingHui653
@@ -31,10 +34,9 @@ public class WebMagicController {
 	}
 	
 	/**
-	 * 电影爬虫
-	 * @param response
+	 * 电影爬虫 存至 mongo
 	 */
-	@RequestMapping(value="getMovie",method=RequestMethod.GET)
+	@RequestMapping(value="getMovieToMongo",method=RequestMethod.GET)
 	@ApiOperation("电影爬虫")
 	public void getMovie(){
 		Spider.create(new MovieProcessor())
@@ -45,5 +47,19 @@ public class WebMagicController {
         .addPipeline(mongoDbSaveMoviePipeline)
         .thread(50)
         .run();
+	}
+
+	/**
+	 * 电影爬虫 存至es
+	 */
+	@RequestMapping(value="getMovieToES",method=RequestMethod.GET)
+	@ApiOperation("电影爬虫")
+	public void getMovieToES(){
+		Spider.create(new MovieProcessor())
+				.addUrl("http://www.80s.tw/movie/list/")
+				.addPipeline(new ConsolePipeline())
+				.addPipeline(esSaveMoviePipeline)
+				.thread(50)
+				.run();
 	}
 }
