@@ -36,7 +36,7 @@ public class SpringConfig {
         return new TestBeanNameAware();
     }
 
-    @Bean
+//    @Bean
     public TestBeanPostProcessor testBeanPostProcessor(){
         return new TestBeanPostProcessor();
     }
