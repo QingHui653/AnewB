@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import newb.c.backend.elasticmodel.MovieDTO;
 import org.junit.Test;
 
 import newb.c.backend.model.basemodel.Movie;
@@ -28,7 +29,7 @@ public class TestManager {
 		insertManager.save("hi", "hello", "", list);
 	}
 	
-//	@Test
+	@Test
 	public void testMovie() {
 		Movie  movie = new Movie();
 			movie.setMovieName("ailce");
@@ -36,12 +37,12 @@ public class TestManager {
 		List<Object> list =new ArrayList<>();
 		list.add(movie);
 		
-		insertManager.save("wow", "movie", "", list);
+		insertManager.save("wow", "esmovie", "", list);
 	}
 	
 	@Test
 	public void findByid() {
-		Movie movie = queryManage.findById("wow","movie","AVx7mLUpZE3a5IVtpb2G");
+		MovieDTO movie = queryManage.findById("wow","esmovie","259");
 		System.out.println("-- "+movie.toString());
 	}
 }

@@ -934,6 +934,21 @@
 			<artifactId>elasticsearch</artifactId>
 			<version>2.4.5</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/net.sf.ezmorph/ezmorph -->
+		<dependency>
+			<groupId>net.sf.ezmorph</groupId>
+			<artifactId>ezmorph</artifactId>
+			<version>1.0.6</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.blancas/morph -->
+		<dependency>
+			<groupId>org.blancas</groupId>
+			<artifactId>morph</artifactId>
+			<version>0.3.0</version>
+		</dependency>
+
+
 
 		<!-- https://mvnrepository.com/artifact/fr.pilato.spring/spring-elasticsearch -->
 		<dependency>

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.fastjson.JSON;
+import newb.c.backend.elasticmodel.MovieDTO;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
@@ -26,8 +28,8 @@ public class QueryManage {
 	/**
 	 *	根据id查询 
 	 */
-	public Movie findById(String index,String type,String id) {
-		Movie movie =new Movie();
+	public MovieDTO findById(String index,String type,String id) {
+		MovieDTO movie =new MovieDTO();
 		
 		GetRequest rq= new GetRequest(index,type,id);
 		
@@ -35,7 +37,8 @@ public class QueryManage {
 		
 		if(!response.isSourceEmpty()){
 			Map<String,Object> data =response.getSource();
-			movie=gson.fromJson(data.toString(),Movie.class);
+			String json = gson.toJson(data);
+			movie=gson.fromJson(json,MovieDTO.class);
 //			movie = (Movie)JSONObject.toBean(JSONObject.fromObject(data),Movie.class);
 		}
 		return movie;
