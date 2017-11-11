@@ -7,7 +7,6 @@ import org.bson.Document;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 import com.mongodb.Mongo;
@@ -18,7 +17,7 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 
-import newb.c.backend.model.basemodel.User;
+import newb.c.backend.sql.model.basemodel.User;
 
 public class Manager {
 

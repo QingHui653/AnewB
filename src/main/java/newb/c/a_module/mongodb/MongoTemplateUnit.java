@@ -18,8 +18,8 @@ import org.springframework.data.mongodb.core.query.Update;
 
 import com.mongodb.MongoClient;
 
-import newb.c.backend.model.UserList;
-import newb.c.backend.model.basemodel.User;
+import newb.c.backend.sql.model.UserList;
+import newb.c.backend.sql.model.basemodel.User;
 
 public class MongoTemplateUnit {
 	private static final Logger log =LoggerFactory.getLogger(MongoTemplateUnit.class);

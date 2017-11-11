@@ -1,8 +1,7 @@
 package newb.c.api.mq.rabbitmq;
 
-import newb.c.backend.model.basemodel.User;
+import newb.c.backend.sql.model.basemodel.User;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Service;
 
 @Service

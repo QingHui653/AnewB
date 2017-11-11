@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="newb.c.backend.sql.dao.UserMapper">
+  <resultMap id="UserMap2" type="newb.c.backend.sql.model.basemodel.User">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="oid" jdbcType="INTEGER" property="oid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+  </resultMap>
+  
+  <!-- <cache type="org.mybatis.caches.ehcache.LoggingEhcache" >  
+	<property name="timeToIdleSeconds" value="3600"/>
+	<property name="timeToLiveSeconds" value="3600"/>
+	<property name="maxEntriesLocalHeap" value="1000"/>  
+	<property name="maxEntriesLocalDisk" value="10000000"/>  
+	<property name="memoryStoreEvictionPolicy" value="LRU"/>  
+  </cache> -->
+  
+  
+  <select id="selectPW" parameterType="java.lang.Integer" resultType="java.lang.String">
+  	select password from user where oid=#{oid}
+  </select>
+</mapper>

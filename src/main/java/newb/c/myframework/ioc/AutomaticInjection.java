@@ -38,8 +38,9 @@ public class AutomaticInjection {
         if(isExist) {
             MyBean myBean = (MyBean) classes.getAnnotation(MyBean.class);
             String beanName= myBean.value(); //获得bean名称
-            if(null==judgeMap.get(beanName))
+            if(null==judgeMap.get(beanName)){
                 judgeMap.put(beanName,true);
+            }
             else { //又返回依赖他
                 throw new Exception("循环依赖");
             }

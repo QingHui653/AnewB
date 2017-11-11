@@ -121,7 +121,7 @@
 		<property name="configLocation" value="classpath:config/mybatis/SqlMapConfig.xml" />
 		<!-- <property name="configLocation" value="classpath:mybatis-config.xml"/> -->
 		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
-		<property name="mapperLocations" value="classpath*:/newb/c/backend/mapping/ResultMapper.xml" />
+		<property name="mapperLocations" value="classpath*:/newb/c/backend/sql/mapping/ResultMapper.xml" />
 		<property name="typeAliasesPackage" value="newb.c.backend.model.basemodel"/>
 		<!-- mybatis 分页插件 -->
 		<property name="plugins">
@@ -154,7 +154,7 @@
         <property name="properties">
             <value>
                 <!-- mappers=tk.mybatis.mapper.common.Mapper -->
-                mappers=newb.c.backend.service.common.MyMapper
+                mappers=MyMapper
             </value>
         </property>
     </bean>

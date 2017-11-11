@@ -1,41 +1,14 @@
 package newb.c.test;
 
-import newb.c.backend.dao.UserMapper;
-import newb.c.backend.model.basemodel.User;
-
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.omg.CORBA.PUBLIC_MEMBER;
-import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.factory.BeanFactoryUtils;
-import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.core.MethodIntrospector;
-import org.springframework.core.annotation.AnnotatedElementUtils;
-import org.springframework.core.annotation.AnnotationAwareOrderComparator;
-import org.springframework.stereotype.Controller;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.util.ClassUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.HandlerMapping;
-import org.springframework.web.servlet.handler.AbstractUrlHandlerMapping;
-import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import javax.annotation.Resource;
 
 /**
  * Created by woshizbh on 2017/1/12.

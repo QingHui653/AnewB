@@ -1,12 +1,11 @@
 package newb.c.controller.component.service;
 
-import newb.c.backend.elasticmodel.MovieDTO;
-import newb.c.backend.model.basemodel.Movie;
+import newb.c.backend.elasticsearch.model.MovieDTO;
+import newb.c.backend.sql.model.basemodel.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;

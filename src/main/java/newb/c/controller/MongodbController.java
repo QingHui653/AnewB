@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.swagger.annotations.ApiOperation;
-import newb.c.backend.model.basemodel.Movie;
-import newb.c.backend.model.basemodel.User;
+import newb.c.backend.sql.model.basemodel.Movie;
+import newb.c.backend.sql.model.basemodel.User;
 
 /**
  * @ClassName LoginController

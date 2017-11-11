@@ -27,11 +27,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import newb.c.backend.model.SessionBean;
-import newb.c.backend.model.basemodel.User;  
-import newb.c.backend.model.UserData;
-import newb.c.backend.model.UserXL;
-import newb.c.backend.service.UserService;
+import newb.c.backend.sql.model.SessionBean;
+import newb.c.backend.sql.model.basemodel.User;
+import newb.c.backend.sql.model.UserData;
+import newb.c.backend.sql.model.UserXL;
+import newb.c.backend.sql.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -322,8 +322,9 @@ public class UserController {
 	        // 上传位置
 	        String path = sc.getRealPath("\\img") + "\\"; // 设定文件保存的目录
 	        File f = new File(path);
-	        if (!f.exists())
-	            f.mkdirs();
+	        if (!f.exists()){
+				f.mkdirs();
+			}
 	        if (!file.isEmpty()) {
 	            try {
 	                FileOutputStream fos = new FileOutputStream(path + newFileName);
@@ -370,8 +371,9 @@ public class UserController {
 	        // 上传位置
 	        String path = sc.getRealPath("\\img") + "\\"; // 设定文件保存的目录
 	        File f = new File(path);
-	        if (!f.exists())
-	            f.mkdirs();
+	        if (!f.exists()){
+				f.mkdirs();
+			}
 	        if (!file.isEmpty()) {
 	            try {
 	                FileOutputStream fos = new FileOutputStream(path + newFileName);

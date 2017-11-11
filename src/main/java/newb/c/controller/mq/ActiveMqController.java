@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.swagger.annotations.ApiOperation;
 import newb.c.api.mq.activemq.producer.ProducerServiceImpl;
-import newb.c.backend.model.basemodel.User;
+import newb.c.backend.sql.model.basemodel.User;
 
 @Controller
 @RequestMapping("resources/mq")

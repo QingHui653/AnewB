@@ -19,8 +19,9 @@ public class ProxyController {
 	public static Object doController(Object o, Method method, Object[] objects, MethodProxy methodProxy)
 			throws Throwable {
 		// 有忽视注解
-		if (method.isAnnotationPresent(Ignore.class))
+		if (method.isAnnotationPresent(Ignore.class)){
 			return methodProxy.invokeSuper(o, objects);
+		}
 		// 没有切入点
 		if (!method.isAnnotationPresent(PointCut.class)) {
 			return methodProxy.invokeSuper(o, objects);
@@ -35,8 +36,9 @@ public class ProxyController {
 	public static Object doController(Object o, Method method, Object[] objects, MethodProxy methodProxy, Advice advice)
 			throws Throwable {
 		// 有忽视注解
-		if (method.isAnnotationPresent(Ignore.class))
+		if (method.isAnnotationPresent(Ignore.class)){
 			return methodProxy.invokeSuper(o, objects);
+		}
 		// 有切入点
 		if (method.isAnnotationPresent(PointCut.class)) {
 			Advice advice2 = getAdvice(method);

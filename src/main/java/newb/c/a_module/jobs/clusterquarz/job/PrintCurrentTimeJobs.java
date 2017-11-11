@@ -21,6 +21,7 @@ public class PrintCurrentTimeJobs extends QuartzJobBean {
 	@Autowired
     private ClusterQuartz clusterQuartz;
 
+	@Override
 	protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 		LOG_RECORD.info("begin to execute task," + DateUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss:SSS"));
 

@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import newb.c.backend.elasticsearch.service.EsMovieService;
 import org.apache.commons.lang.StringUtils;
 import org.elasticsearch.action.ActionFuture;
 import org.elasticsearch.action.admin.cluster.health.ClusterHealthRequest;
@@ -29,8 +30,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import io.swagger.annotations.ApiOperation;
-import newb.c.backend.elasticmodel.MovieDTO;
-import newb.c.backend.elasticmodel.TaskInfoDTO;
+import newb.c.backend.elasticsearch.model.MovieDTO;
+import newb.c.backend.elasticsearch.model.TaskInfoDTO;
 
 import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
 
@@ -40,19 +41,42 @@ public class ElasticSearchController {
 
 	@Autowired(required=false)
 	private ElasticsearchTemplate elasticsearchTemplate;
+
+	@Autowired(required = false)
+	private EsMovieService esMovieService;
 	
 	private String esIndexName = "heros";
 
 	private static Logger logger = LoggerFactory.getLogger(ElasticSearchController.class);
-	
-	
+
+
+	@GetMapping("CreatIndexMapping")
+	@ApiOperation(value="创建elastic index和mapping")
+	public void creatIndexMapping(String esIndexName) {
+		// 首先判断index 是否存在 创建 index
+		if (!elasticsearchTemplate.indexExists(esIndexName)){
+			elasticsearchTemplate.createIndex(esIndexName);
+		}
+		// 在创建mapping ，需要在实体类中使用注解
+		elasticsearchTemplate.putMapping(TaskInfoDTO.class);
+	}
+
+	@GetMapping
+	@ApiOperation(value = "findall")
+	@ResponseBody
+	public Object finaAll(){
+		return esMovieService.findAll(new PageRequest(1, 20));
+	}
+
+
 	@SuppressWarnings("static-access")
 	@RequestMapping(value="queryMovie",method={RequestMethod.GET})
 	@ApiOperation(value="查询电影")
 	@ResponseBody
 	public Object queryMovie(String name,Integer  page,Integer  pageSize) {
-		if(StringUtils.isBlank(name))
+		if(StringUtils.isBlank(name)){
 			name=null;
+		}
 		//条件查询 相等
 		CriteriaQuery criteriaQuery = new CriteriaQuery(new Criteria().
 				and(new Criteria("movieName").is(name)))
@@ -72,19 +96,7 @@ public class ElasticSearchController {
 //		movieList.forEach(System.out::println);
 		return movieList;
 	}
-	
-	
-	@GetMapping("CreatIndexMapping")
-	@ApiOperation(value="创建elastic index和mapping")
-	private void CreatIndexMapping(String esIndexName) {
-		// 首先判断index 是否存在 创建 index
-		if (!elasticsearchTemplate.indexExists("")){
-			elasticsearchTemplate.createIndex(esIndexName);
-		}
-		// 在创建mapping ，需要在实体类中使用注解
-		elasticsearchTemplate.putMapping(TaskInfoDTO.class);
-	}
-	
+
 	/**
 	 * 上github 查看源码 test core 下 query包
 	 * @param query
@@ -116,9 +128,9 @@ public class ElasticSearchController {
 	@PostMapping("insertOrUpdate")
 	@ResponseBody
 	@ApiOperation(value="插入和更新数据  单条")
-	public Object insertOrUpdateTaskInfoDTO(TaskInfoDTO TaskInfoDTO) {
+	public Object insertOrUpdateTaskInfoDTO(TaskInfoDTO taskInfo) {
 		try {
-			IndexQuery indexQuery = new IndexQueryBuilder().withId(TaskInfoDTO.getTaskId()).withObject(TaskInfoDTO).build();
+			IndexQuery indexQuery = new IndexQueryBuilder().withId(taskInfo.getTaskId()).withObject(taskInfo).build();
 			elasticsearchTemplate.index(indexQuery);
 			return "true";
 		} catch (Exception e) {
@@ -130,10 +142,10 @@ public class ElasticSearchController {
 	@PostMapping("insertOrUpdateList")
 	@ApiOperation(value="插入和更新数据  多条")
 	@ResponseBody
-	public Object insertOrUpdateTaskInfoDTOList(List<TaskInfoDTO> TaskInfoDTOList) {
+	public Object insertOrUpdateTaskInfoDTOList(List<TaskInfoDTO> taskInfos) {
 		List<IndexQuery> queries = new ArrayList<IndexQuery>();
-		for (TaskInfoDTO TaskInfoDTO : TaskInfoDTOList) {
-			IndexQuery indexQuery = new IndexQueryBuilder().withId(TaskInfoDTO.getTaskId()).withObject(TaskInfoDTO)
+		for (TaskInfoDTO taskInfoDTO: taskInfos) {
+			IndexQuery indexQuery = new IndexQueryBuilder().withId(taskInfoDTO.getTaskId()).withObject(taskInfoDTO)
 					.build();
 			queries.add(indexQuery);
 		}

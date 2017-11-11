@@ -2,7 +2,7 @@ package newb.c.a_module.dubbo;
 
 import java.util.List;
 import com.alibaba.dubbo.rpc.protocol.rest.support.ContentType;
-import javax.servlet.http.HttpServletRequest;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -11,7 +11,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import newb.c.backend.model.basemodel.User;  
+import newb.c.backend.sql.model.basemodel.User;
 @Path("users")
 @Consumes({MediaType.APPLICATION_JSON, MediaType.TEXT_XML})
 @Produces({ContentType.APPLICATION_JSON_UTF_8, ContentType.TEXT_XML_UTF_8})

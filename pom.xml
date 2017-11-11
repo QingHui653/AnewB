@@ -211,7 +211,7 @@
 		</dependency>
 
 
-		<!-- <dependency> <groupId>javax.servlet</groupId> <artifactId>servlet-api</artifactId> 
+		<!-- <dependency> <groupId>javax.servlet</groupId> <artifactId>servlet-api</artifactId>
 			<version>2.5</version> <scope>provided</scope> </dependency> -->
 		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
 		<dependency>
@@ -263,38 +263,38 @@
 		<!-- WEB................................ -->
 		<!-- 组件=============================== -->
 		<!-- Spring security 权限包 -->
-		<!-- <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-web</artifactId> 
-			<version>4.1.3.RELEASE</version> </dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-core</artifactId> <version>4.1.3.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-acl</artifactId> <version>4.1.3.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-aspects</artifactId> <version>4.1.3.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-cas</artifactId> <version>4.1.3.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-config</artifactId> <version>4.1.3.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-crypto</artifactId> <version>4.1.3.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-ldap</artifactId> <version>4.1.3.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-openid</artifactId> <version>4.1.3.RELEASE</version> 
-			<exclusions> <exclusion> <artifactId>httpclient</artifactId> <groupId>org.apache.httpcomponents</groupId> 
-			</exclusion> </exclusions> </dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-remoting</artifactId> <version>4.1.3.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.security</groupId> 
-			<artifactId>spring-security-taglibs</artifactId> <version>4.1.3.RELEASE</version> 
+		<!-- <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-web</artifactId>
+			<version>4.1.3.RELEASE</version> </dependency> <dependency> <groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId> <version>4.1.3.RELEASE</version>
+			</dependency> <dependency> <groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-acl</artifactId> <version>4.1.3.RELEASE</version>
+			</dependency> <dependency> <groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-aspects</artifactId> <version>4.1.3.RELEASE</version>
+			</dependency> <dependency> <groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-cas</artifactId> <version>4.1.3.RELEASE</version>
+			</dependency> <dependency> <groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId> <version>4.1.3.RELEASE</version>
+			</dependency> <dependency> <groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-crypto</artifactId> <version>4.1.3.RELEASE</version>
+			</dependency> <dependency> <groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-ldap</artifactId> <version>4.1.3.RELEASE</version>
+			</dependency> <dependency> <groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-openid</artifactId> <version>4.1.3.RELEASE</version>
+			<exclusions> <exclusion> <artifactId>httpclient</artifactId> <groupId>org.apache.httpcomponents</groupId>
+			</exclusion> </exclusions> </dependency> <dependency> <groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-remoting</artifactId> <version>4.1.3.RELEASE</version>
+			</dependency> <dependency> <groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId> <version>4.1.3.RELEASE</version>
 			</dependency> -->
 		<!-- Spring webflow -->
-		<!-- <dependency> <groupId>org.springframework.webflow</groupId> <artifactId>spring-faces</artifactId> 
-			<version>2.4.2.RELEASE</version> </dependency> <dependency> <groupId>org.springframework.webflow</groupId> 
-			<artifactId>spring-webflow</artifactId> <version>2.4.2.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.webflow</groupId> 
-			<artifactId>spring-binding</artifactId> <version>2.4.2.RELEASE</version> 
-			</dependency> <dependency> <groupId>org.springframework.webflow</groupId> 
-			<artifactId>spring-js</artifactId> <version>2.4.2.RELEASE</version> </dependency> 
-			<dependency> <groupId>org.springframework.webflow</groupId> <artifactId>spring-js-resources</artifactId> 
+		<!-- <dependency> <groupId>org.springframework.webflow</groupId> <artifactId>spring-faces</artifactId>
+			<version>2.4.2.RELEASE</version> </dependency> <dependency> <groupId>org.springframework.webflow</groupId>
+			<artifactId>spring-webflow</artifactId> <version>2.4.2.RELEASE</version>
+			</dependency> <dependency> <groupId>org.springframework.webflow</groupId>
+			<artifactId>spring-binding</artifactId> <version>2.4.2.RELEASE</version>
+			</dependency> <dependency> <groupId>org.springframework.webflow</groupId>
+			<artifactId>spring-js</artifactId> <version>2.4.2.RELEASE</version> </dependency>
+			<dependency> <groupId>org.springframework.webflow</groupId> <artifactId>spring-js-resources</artifactId>
 			<version>2.4.2.RELEASE</version> </dependency> -->
 		<!-- 连接池 -->
 		<dependency>
@@ -461,7 +461,7 @@
 		    <artifactId>joda-time</artifactId>
 		    <version>2.9.9</version>
 		</dependency>
-		
+
 		<!-- guava 工具包 使用缓存 -->
 		<dependency>
 			<groupId>com.google.guava</groupId>
@@ -483,11 +483,11 @@
 
 		<!-- 日志 -->
 		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
-		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-log4j12</artifactId> 
-			<version>1.7.21</version> </dependency> <dependency> <groupId>com.jcabi</groupId> 
+		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.21</version> </dependency> <dependency> <groupId>com.jcabi</groupId>
 			<artifactId>jcabi-log</artifactId> <version>0.17.2</version> </dependency> -->
-		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-api</artifactId> 
-			<version>1.7.21</version> </dependency> <dependency> <groupId>log4j</groupId> 
+		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-api</artifactId>
+			<version>1.7.21</version> </dependency> <dependency> <groupId>log4j</groupId>
 			<artifactId>log4j</artifactId> <version>1.2.17</version> </dependency> -->
 		<!-- logback -->
 		<dependency>
@@ -510,20 +510,26 @@
 			<artifactId>logback-ext-spring</artifactId>
 			<version>0.1.4</version>
 		</dependency>
-		<dependency>
+		<!-- https://mvnrepository.com/artifact/org.slf4j/log4j-over-slf4j -->
+		<!--<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+			<version>1.8.0-beta0</version>
+		</dependency>-->
+		<!--<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
-		</dependency>
+		</dependency>-->
 
 		<!-- log4j2 日志 -->
-		<!-- <dependency> <groupId>org.apache.logging.log4j</groupId> <artifactId>log4j-core</artifactId> 
-			<version>2.7</version> </dependency> <dependency> <groupId>org.apache.logging.log4j</groupId> 
-			<artifactId>log4j-slf4j-impl</artifactId> <version>2.7</version> </dependency> 
-			<dependency> <groupId>org.apache.logging.log4j</groupId> <artifactId>log4j-1.2-api</artifactId> 
+		<!-- <dependency> <groupId>org.apache.logging.log4j</groupId> <artifactId>log4j-core</artifactId>
+			<version>2.7</version> </dependency> <dependency> <groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId> <version>2.7</version> </dependency>
+			<dependency> <groupId>org.apache.logging.log4j</groupId> <artifactId>log4j-1.2-api</artifactId>
 			<version>2.7</version> </dependency> -->
 		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
-		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-log4j12</artifactId> 
+		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-log4j12</artifactId>
 			<version>1.7.21</version> </dependency> -->
 		<!-- slf4j -->
 		<!-- 爬虫框架 -->
@@ -665,7 +671,7 @@
 			<version>1.3.0.RELEASE</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/io.netty/netty-all netty网络编程框架 
+		<!-- https://mvnrepository.com/artifact/io.netty/netty-all netty网络编程框架
 			netsocket -->
 		<dependency>
 			<groupId>io.netty</groupId>
@@ -736,8 +742,8 @@
 
 		<!--dubbo -->
 		<!-- 使用的为dubbox 需在github下载源码，使用maven编译 mvn install -Dmaven.test.skip=true -->
-		<!-- maven地址，需要配置server 镜像 <mirror> <id>nexus-aliyun</id> <mirrorOf>*</mirrorOf> 
-			<name>Nexus aliyun</name> <url>http://maven.aliyun.com/nexus/content/groups/public</url> 
+		<!-- maven地址，需要配置server 镜像 <mirror> <id>nexus-aliyun</id> <mirrorOf>*</mirrorOf>
+			<name>Nexus aliyun</name> <url>http://maven.aliyun.com/nexus/content/groups/public</url>
 			</mirror> -->
 		<!-- <dependency>
 			<groupId>com.alibaba</groupId>
@@ -757,7 +763,7 @@
 		    <artifactId>dubbo2</artifactId>
 		    <version>1.0</version>
 		</dependency>
-		
+
 
 		<!-- https://mvnrepository.com/artifact/com.101tec/zkclient -->
 		<dependency>
@@ -873,17 +879,17 @@
 			<version>1.55</version>
 		</dependency>
 		<!-- dubbox jackson -->
-		<!-- <dependency> <groupId>com.fasterxml.jackson.core</groupId> <artifactId>jackson-core</artifactId> 
-			<version>2.3.3</version> </dependency> <dependency> <groupId>com.fasterxml.jackson.core</groupId> 
+		<!-- <dependency> <groupId>com.fasterxml.jackson.core</groupId> <artifactId>jackson-core</artifactId>
+			<version>2.3.3</version> </dependency> <dependency> <groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId> <version>2.3.3</version> </dependency> -->
 
 
-		<!-- <dependency> <groupId>javax.annotation</groupId> <artifactId>jsr250-api</artifactId> 
+		<!-- <dependency> <groupId>javax.annotation</groupId> <artifactId>jsr250-api</artifactId>
 			<version>1.0</version> </dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-all -->
 		<!-- 自带个slf4j的log4j 实现 会与logback冲突 -->
-		<!-- <dependency> <groupId>org.apache.activemq</groupId> <artifactId>activemq-all</artifactId> 
+		<!-- <dependency> <groupId>org.apache.activemq</groupId> <artifactId>activemq-all</artifactId>
 			<version>5.10.0</version> </dependency> -->
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
@@ -895,7 +901,7 @@
 			<artifactId>activemq-pool</artifactId>
 			<version>5.15.0</version>
 		</dependency>
-		
+
 		<!-- rabbitmq -->
 		<dependency>
 		    <groupId>com.rabbitmq</groupId>
@@ -907,7 +913,7 @@
 		    <artifactId>spring-rabbit</artifactId>
 		    <version>1.7.3.RELEASE</version>
 		</dependency>
-		
+
 		<!-- Kafka和spring集成的支持类库，spring和kafka通信监听 -->
 		<dependency>
 		    <groupId>org.springframework.integration</groupId>
@@ -920,7 +926,7 @@
 		    <artifactId>kafka-clients</artifactId>
 		    <version>0.11.0.0</version>
 		</dependency>
-		
+
 		<dependency>
 		    <groupId>org.springframework.kafka</groupId>
 		    <artifactId>spring-kafka</artifactId>
@@ -957,6 +963,12 @@
 			<version>2.2.0</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>2.0.1.RELEASE</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-elasticsearch -->
 		<dependency>
@@ -981,10 +993,10 @@
 
 		<!-- 手动加入maven的jar包 -->
 		<!-- oracle -->
-		<!-- <dependency> <groupId>com.oracle</groupId> <artifactId>ojdbc14</artifactId> 
+		<!-- <dependency> <groupId>com.oracle</groupId> <artifactId>ojdbc14</artifactId>
 			<version>10.2.0.4.0</version> </dependency> -->
 		<!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
-		<!-- <dependency> <groupId>net.sf.json-lib</groupId> <artifactId>json-lib</artifactId> 
+		<!-- <dependency> <groupId>net.sf.json-lib</groupId> <artifactId>json-lib</artifactId>
 			<version>2.4</version> </dependency> -->
 
 
@@ -992,9 +1004,9 @@
 
 		<!-- 组件=============================== -->
 		<!-- Spring boot -->
-		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-web</artifactId> 
+		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-web</artifactId>
 			<version>1.4.1.RELEASE</version> </dependency> -->
-		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-redis</artifactId> 
+		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-redis</artifactId>
 			<version>1.4.1.RELEASE</version> </dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/com.atomikos/transactions -->
@@ -1090,6 +1102,7 @@
 			<artifactId>commons-email</artifactId>
 			<version>1.4</version>
 		</dependency>
+
 
 		<dependency>
 			<groupId>jdk.tools</groupId>
@@ -1194,14 +1207,14 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
 				<!-- <artifactId>tomcat8-maven-plugin</artifactId> <version>3.0-r1655215</version> -->
-				<!-- <configuration> <port>8081</port> <path>/AnewB</path> <uriEncoding>UTF-8</uriEncoding> 
+				<!-- <configuration> <port>8081</port> <path>/AnewB</path> <uriEncoding>UTF-8</uriEncoding>
 					<finalName>AnewB</finalName> <server>tomcat7</server> </configuration> -->
 			</plugin>
 
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
+				<!--This plugin's configuration is used to store Eclipse m2e settings
 					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>

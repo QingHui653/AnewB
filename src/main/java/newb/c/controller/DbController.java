@@ -3,7 +3,7 @@ package newb.c.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import newb.c.backend.service.ResultService;
+import newb.c.backend.sql.service.ResultService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.swagger.annotations.ApiOperation;
-import newb.c.backend.model.UserTrin;
-import newb.c.backend.model.basemodel.User;
-import newb.c.backend.model.basemodel.UserCache;
-import newb.c.backend.service.TestCacheService;
-import newb.c.backend.service.UserService;
+import newb.c.backend.sql.model.UserTrin;
+import newb.c.backend.sql.model.basemodel.User;
+import newb.c.backend.sql.model.basemodel.UserCache;
+import newb.c.backend.sql.service.TestCacheService;
+import newb.c.backend.sql.service.UserService;
 
 @Controller
 @RequestMapping("db")

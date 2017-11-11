@@ -17,6 +17,7 @@ public class AutowiringSpringBeanJobFactory extends SpringBeanJobFactory impleme
 
 	private transient AutowireCapableBeanFactory beanFactory;
 
+	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		beanFactory = applicationContext.getAutowireCapableBeanFactory();
 	}

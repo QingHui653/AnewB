@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.alibaba.fastjson.JSON;
-import newb.c.backend.elasticmodel.MovieDTO;
+import newb.c.backend.elasticsearch.model.MovieDTO;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
@@ -19,7 +18,7 @@ import org.elasticsearch.search.SearchHits;
 import com.google.gson.Gson;
 
 import net.sf.json.JSONObject;
-import newb.c.backend.model.basemodel.Movie;
+import newb.c.backend.sql.model.basemodel.Movie;
 import newb.c.util.common.ResultUtil;
 
 public class QueryManage {

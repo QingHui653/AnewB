@@ -34,6 +34,7 @@ public class RedisCacheFactoryBean implements Cache {
         final String keyf = (String) key;
         Object object = null;
         object = redisTemplate.execute(new RedisCallback<Object>() {
+            @Override
             public Object doInRedis(RedisConnection connection) throws DataAccessException {
                 byte[] key = keyf.getBytes();
                 connection.select(1);
@@ -71,6 +72,7 @@ public class RedisCacheFactoryBean implements Cache {
         final Object valuef = value;
 
         redisTemplate.execute(new RedisCallback<Long>() {
+            @Override
             public Long doInRedis(RedisConnection connection) throws DataAccessException {
                 byte[] keyb = keyf.getBytes();
                 byte[] valueb = toByteArray(valuef);
@@ -138,6 +140,7 @@ public class RedisCacheFactoryBean implements Cache {
     public void evict(Object key) {
         final String keyf = (String) key;
         redisTemplate.execute(new RedisCallback<Long>() {
+            @Override
             public Long doInRedis(RedisConnection connection) throws DataAccessException {
                 return connection.del(keyf.getBytes());
             }
@@ -147,6 +150,7 @@ public class RedisCacheFactoryBean implements Cache {
     @Override
     public void clear() {
         redisTemplate.execute(new RedisCallback<String>() {
+            @Override
             public String doInRedis(RedisConnection connection) throws DataAccessException {
                 connection.flushDb();
                 return "ok";

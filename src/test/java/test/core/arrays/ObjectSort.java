@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import newb.c.backend.model.basemodel.User;  
+import newb.c.backend.sql.model.basemodel.User;
 public class ObjectSort {
 	
 	public static void main(String[] args) {

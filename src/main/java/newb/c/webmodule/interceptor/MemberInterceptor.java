@@ -46,6 +46,7 @@ public class MemberInterceptor implements HandlerInterceptor {
      *    从最后一个拦截器往回执行所有的postHandle()
      *    接着再从最后一个拦截器往回执行所有的afterCompletion()
      */
+    @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
             Object handler) throws Exception {
     	System.out.println("---1--------进入前置拦截器,在controller之前拦截---------------------------");
@@ -66,6 +67,7 @@ public class MemberInterceptor implements HandlerInterceptor {
      * 只是Struts2里面的intercept方法中要手动的调用ActionInvocation的invoke方法，Struts2中调用ActionInvocation的invoke方法就是调用下一个Interceptor
      * 或者是调用action，然后要在Interceptor之前调用的内容都写在调用invoke之前，要在Interceptor之后调用的内容都写在调用invoke方法之后。
      */
+    @Override
     public void postHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2,
             ModelAndView arg3) throws Exception {
     	System.out.println("---2--------进入中间拦截器,在controller之后拦截,但还未渲染视图--------------");
@@ -82,6 +84,7 @@ public class MemberInterceptor implements HandlerInterceptor {
      * 该方法也是需要当前对应的Interceptor的preHandle方法的返回值为true时才会执行。该方法将在整个请求完成之后，也就是DispatcherServlet渲染了视图执行，
      * 这个方法的主要作用是用于清理资源的，当然这个方法也只能在当前这个Interceptor的preHandle方法的返回值为true时才会执行。
      */
+    @Override
     public void afterCompletion(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2,
             Exception arg3) throws Exception {
     	System.out.println("---3--------进入后置拦截器,在渲染视图后拦截,只要用于资源清理-----------------");

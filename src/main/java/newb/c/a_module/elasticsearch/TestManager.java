@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import newb.c.backend.elasticmodel.MovieDTO;
+import newb.c.backend.elasticsearch.model.MovieDTO;
 import org.junit.Test;
 
-import newb.c.backend.model.basemodel.Movie;
+import newb.c.backend.sql.model.basemodel.Movie;
 
 public class TestManager {
 	

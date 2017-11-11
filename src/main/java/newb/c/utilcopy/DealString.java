@@ -17,8 +17,9 @@ public class DealString {
 	 * @return
 	 */
 	public static String convertNullCode(String tempSql) {
-		if (tempSql == null)
+		if (tempSql == null){
 			tempSql = "";
+		}
 		return tempSql;
 	}
 

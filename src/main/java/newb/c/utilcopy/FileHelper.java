@@ -85,8 +85,9 @@ public class FileHelper {
 				);
 			}
 		}
-
-		if (from.renameTo(to)) return;
+		if (from.renameTo(to)) {
+			return;
+		}
 
 		InputStream in = null;
 		OutputStream out = null;

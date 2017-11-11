@@ -1,11 +1,8 @@
 package newb.c.util;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
-
-import newb.c.backend.model.UserXL;
 
 public class JsonUtil {
 	

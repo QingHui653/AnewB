@@ -28,8 +28,9 @@ public class Test {
 			BitMatrix bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 200, 200, hints);
 			// 生成二维码
 			File outputFile = new File(path, "14.png");
-			if (!outputFile.exists())
+			if (!outputFile.exists()){
 				outputFile.createNewFile();
+			}
 			MatrixToImageWriter.writeToFile(bitMatrix, "png", outputFile);
 		} catch (Exception e) {
 			e.printStackTrace();

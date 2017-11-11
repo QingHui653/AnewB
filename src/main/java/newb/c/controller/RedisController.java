@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.google.gson.Gson;
 
 import io.swagger.annotations.ApiOperation;
-import newb.c.backend.model.basemodel.User;
+import newb.c.backend.sql.model.basemodel.User;
 import newb.c.controller.component.RedisUtil;
 
 @Controller
@@ -43,7 +43,7 @@ public class RedisController {
 		String timeStr = (String) redisTemplate.opsForValue().get("+5s");
 		Long time = redisTemplate.getExpire("+5s");
 		System.out.println(" "+timeStr +" "+time);
-		Thread.sleep(5000l);
+		Thread.sleep(5000L);
 		timeStr = (String) redisTemplate.opsForValue().get("+5s");
 		time = redisTemplate.getExpire("+5s");
 		System.out.println(" "+timeStr +" "+time);

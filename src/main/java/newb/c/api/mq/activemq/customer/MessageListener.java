@@ -8,10 +8,7 @@ import javax.jms.TextMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.listener.adapter.MessageListenerAdapter;
-import org.springframework.stereotype.Component;
 
-import newb.c.backend.model.basemodel.User;
 import org.springframework.stereotype.Service;
 
 /**

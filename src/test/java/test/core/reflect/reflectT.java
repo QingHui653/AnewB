@@ -12,7 +12,7 @@ import java.util.Map.Entry;
 
 import org.junit.Test;
 
-import newb.c.backend.model.basemodel.User;  
+import newb.c.backend.sql.model.basemodel.User;
 
 public class reflectT {
 	public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, SecurityException{

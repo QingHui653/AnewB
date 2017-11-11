@@ -1,7 +1,7 @@
 package newb.c.controller;
 
 
-import newb.c.backend.service.TestCacheService;
+import newb.c.backend.sql.service.TestCacheService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

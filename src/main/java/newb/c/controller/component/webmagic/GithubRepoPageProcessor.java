@@ -1,24 +1,15 @@
 package newb.c.controller.component.webmagic;
 
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.annotation.Resource;
-
 import org.apache.http.HttpHost;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import newb.c.backend.dao.ResultMapper;
-import newb.c.backend.model.basemodel.Result;
-import newb.c.backend.service.ResultService;
-import newb.c.util.Regex;
+import newb.c.backend.sql.model.basemodel.Result;
+import newb.c.backend.sql.service.ResultService;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
