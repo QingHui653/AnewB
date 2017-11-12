@@ -13,7 +13,7 @@
     
     <!-- 服务端 -->
     <!-- 访问项目名+ /webservice(web.xml中配置)  能看见所有server -->
-    <jaxws:endpoint id="helloWorld" implementor="newb.c.webmodule.webservice.cxf.HelloServiceImpl" address="/helloWorld" />
+    <jaxws:endpoint id="helloWorld" implementor="newb.c.a_web.webmodule.webservice.cxf.HelloServiceImpl" address="/helloWorld" />
     
     <!-- 返回json格式 存在jar包冲突未解决 未启用 -->
     <!-- <jaxrs:server id="helloWorldRest" address="/rest/helloWorld">

@@ -6,7 +6,7 @@
 
     <bean id="rmiService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
         <property name="serviceUrl" value="rmi://132.122.235.101:1199/RmiService" />
-        <property name="serviceInterface" value="newb.c.a_module.dubbo.RmiDemoService" />
+        <property name="serviceInterface" value="newb.c.a_spring.a_module.dubbo.RmiDemoService" />
     </bean>
 
 </beans>

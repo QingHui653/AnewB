@@ -15,8 +15,8 @@
 	</context-param>
 
 	<context-param>
-		<param-name>logbackConfigLocation</param-name>
-		<param-value>classpath:logback.xml</param-value>
+		<param-name>log4jConfiguration</param-name>
+		<param-value>classpath:log4j2.xml</param-value>
 	</context-param>
 
 	<!-- 分布式 session -->
@@ -95,9 +95,14 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping> -->
 
+	<!--<context-param>
+		<param-name>logbackConfigLocation</param-name>
+		<param-value>classpath:logback.xml</param-value>
+	</context-param>
 	<listener>
          <listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
-	</listener>
+	</listener>-->
+
 	<!-- dubbox REST  使用service="servlet"-->
 	<!-- 注意：如果你是用spring的ContextLoaderListener来加载spring，则必须保证BootstrapListener配置在ContextLoaderListener之前，否则dubbo初始化会出错。 -->
 	<!-- <listener>
@@ -107,7 +112,7 @@
 	<!-- spring上下文加载监听器  初始化IOC容器-->
 	<listener>
 		<description>自定义监听器</description>
-		<listener-class>newb.c.webmodule.listener.InitListener</listener-class>
+		<listener-class>newb.c.a_web.webmodule.listener.InitListener</listener-class>
 	</listener>
 	
 	<listener>
@@ -160,7 +165,7 @@
 	<servlet>
 		<description>自定义的简单的springmvc</description>
 		<servlet-name>AnnotationHandleServlet</servlet-name>
-		<servlet-class>newb.c.myframework.mvc.annotation.AnnotationHandleServlet</servlet-class>
+		<servlet-class>newb.c.a_spring.myframework.mvc.annotation.AnnotationHandleServlet</servlet-class>
 		<init-param>
 			<description>配置要扫描包及其子包, 如果有多个包,以逗号分隔</description>
 			<param-name>basePackage</param-name>

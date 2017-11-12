@@ -24,6 +24,6 @@
     <!-- <dubbo:registry address="zookeeper://127.0.0.1:2181" /> -->
     <dubbo:registry address="${dubbo.url}" />    
     <!-- 生成远程服务代理，可以像使用本地bean一样使用demoService -->  
-    <dubbo:reference id="demoService"  interface="newb.c.a_module.dubbo.DemoService" />  
+    <dubbo:reference id="demoService"  interface="newb.c.a_spring.a_module.dubbo.DemoService" />
   
 </beans>  

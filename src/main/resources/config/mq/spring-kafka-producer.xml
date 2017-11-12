@@ -42,6 +42,6 @@
         <property name="producerListener" ref="producerListener"/>
     </bean>
     
-    <bean id="producerListener" class="newb.c.api.mq.kafka.KafkaProducerListener" /> 
+    <bean id="producerListener" class="newb.c.a_spring.api.mq.kafka.KafkaProducerListener" />
     
 </beans>

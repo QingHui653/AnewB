@@ -15,7 +15,7 @@
     <cache:annotation-driven cache-manager="cacheManager" key-generator="myKeyGenerator"/>
 
     <!-- 自定义key生成器 -->
-    <bean id="myKeyGenerator" class="newb.c.a_module.cache.common.MyKeyGenerator"></bean>
+    <bean id="myKeyGenerator" class="newb.c.a_spring.a_module.cache.common.MyKeyGenerator"></bean>
 
 
     <!-- spring自带的cache管理器 -->
@@ -30,26 +30,25 @@
     </bean>
 
     <!-- redis缓存1分钟 -->
-    <bean id="redisCache1" class="newb.c.a_module.cache.redis.RedisCacheFactoryBean">
+    <bean id="redisCache1" class="newb.c.a_spring.a_module.cache.redis.RedisCacheFactoryBean">
         <property name="name" value="redisCache60seconds"/><!-- 缓存名称 -->
         <property name="liveTime" value="60"/><!-- 缓存时间：以秒为单位 -->
         <property name="redisTemplate" ref="redisTemplate"/><!-- 缓存实现 -->
     </bean>
 
     <!-- redis缓存10分钟 -->
-    <bean id="redisCache2" class="newb.c.a_module.cache.redis.RedisCacheFactoryBean">
+    <bean id="redisCache2" class="newb.c.a_spring.a_module.cache.redis.RedisCacheFactoryBean">
         <property name="name" value="redisCache10minutes"/><!-- 缓存名称 -->
         <property name="liveTime" value="600"/><!-- 缓存时间 ：以秒为单位-->
         <property name="redisTemplate" ref="redisTemplate"/><!-- 缓存实现 -->
     </bean>
 
     <!-- redis缓存1小时-->
-    <bean id="redisCache3" class="newb.c.a_module.cache.redis.RedisCacheFactoryBean">
+    <bean id="redisCache3" class="newb.c.a_spring.a_module.cache.redis.RedisCacheFactoryBean">
         <property name="name" value="redisCache1hour"/><!-- 缓存名称 -->
         <property name="liveTime" value="3600"/><!-- 缓存时间 ：以秒为单位-->
         <property name="redisTemplate" ref="redisTemplate"/><!-- 缓存实现 -->
     </bean>
-
 
     <!-- redis 相关配置 -->
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
@@ -92,7 +91,7 @@
         </property>
     </bean>
 
-    <bean id="listener" class="newb.c.api.mq.redismq.TestMessage"/>
+    <bean id="listener" class="newb.c.a_spring.api.mq.redismq.TestMessage"/>
 
     <!-- 暂时注释掉，未打开redis时,会一直重复获取redis连接报错 -->
     <!-- <redis:listener-container connection-factory="connectionRedisFactory">

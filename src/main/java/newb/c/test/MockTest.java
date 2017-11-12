@@ -1,7 +1,7 @@
 package newb.c.test;
 
 
-import newb.c.controller.MockController;
+import newb.c.a_web.controller.MockController;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
 

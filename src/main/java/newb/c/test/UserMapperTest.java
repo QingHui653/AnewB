@@ -1,7 +1,7 @@
 package newb.c.test;
 
-import newb.c.backend.sql.dao.UserMapper;
-import newb.c.backend.sql.model.basemodel.User;
+import newb.c.a_spring.backend.sql.dao.UserMapper;
+import newb.c.a_spring.backend.sql.model.basemodel.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;

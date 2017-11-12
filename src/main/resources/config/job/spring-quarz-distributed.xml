@@ -44,7 +44,7 @@
 		<property name="applicationContextSchedulerContextKey" value="appli" />
 
 		<property name="jobFactory">
-			<bean class="newb.c.a_module.jobs.clusterquarz.autowired.AutowiringSpringBeanJobFactory" />
+			<bean class="newb.c.a_spring.a_module.jobs.clusterquarz.autowired.AutowiringSpringBeanJobFactory" />
 		</property>
 
 		<property name="triggers">
@@ -64,7 +64,7 @@
 
 	<!-- 配置Job详情 -->
 	<bean name="printCurrentTimeJobs" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-		<property name="jobClass" value="newb.c.a_module.jobs.clusterquarz.job.PrintCurrentTimeJobs" />
+		<property name="jobClass" value="newb.c.a_spring.a_module.jobs.clusterquarz.job.PrintCurrentTimeJobs" />
 		<!--因为我使用了spring的注解，所以这里可以不用配置scheduler的属性 -->
 		<!--<property name="jobDataAsMap"> <map> <entry key="clusterQuartz" value="com.aaron.framework.clusterquartz.job.ClusterQuartz"/>
 			</map> </property> -->

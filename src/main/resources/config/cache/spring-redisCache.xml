@@ -15,7 +15,7 @@
     <cache:annotation-driven cache-manager="cacheManager" key-generator="myKeyGenerator"/>
     
     <!-- 自定义key生成器 -->
-    <bean id="myKeyGenerator" class="newb.c.a_module.cache.common.MyKeyGenerator"></bean>
+    <bean id="myKeyGenerator" class="newb.c.a_spring.a_module.cache.common.MyKeyGenerator"></bean>
     
     
     <!-- spring自带的cache管理器 -->
@@ -79,7 +79,7 @@
         </property> 
   </bean>
   
-  <bean id="listener" class="newb.c.api.mq.redismq.TestMessage"/>
+  <bean id="listener" class="newb.c.a_spring.api.mq.redismq.TestMessage"/>
 
   <!-- 暂时注释掉，未打开redis时,会一直重复获取redis连接报错 -->
   <!-- <redis:listener-container connection-factory="connectionRedisFactory">

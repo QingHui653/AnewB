@@ -2,7 +2,7 @@ package test.core.arrays;
 
 import java.util.Comparator;
 
-import newb.c.backend.sql.model.basemodel.User;
+import newb.c.a_spring.backend.sql.model.basemodel.User;
 
 public class ComparatorDemo implements Comparator<Object>{
 

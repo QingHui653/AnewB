@@ -1,7 +1,7 @@
 package test.module.jdbc;
 
-import newb.c.backend.sql.model.UserTrin;
-import newb.c.backend.sql.model.basemodel.User;
+import newb.c.a_spring.backend.sql.model.UserTrin;
+import newb.c.a_spring.backend.sql.model.basemodel.User;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;

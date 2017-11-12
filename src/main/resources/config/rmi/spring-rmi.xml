@@ -5,7 +5,7 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- 注入要发布的RMI服务类 -->
-    <bean id="rmiService" class="newb.c.a_module.dubbo.RmiDemoServiceImpl"></bean>
+    <bean id="rmiService" class="newb.c.a_spring.a_module.dubbo.RmiDemoServiceImpl"></bean>
 
     <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
         <!-- RMI服务名称,可自定义服务名称 -->
@@ -13,7 +13,7 @@
         <!-- 导出实体 -->
         <property name="service" ref="rmiService" />
         <!-- 导出接口 -->
-        <property name="serviceInterface" value="newb.c.a_module.dubbo.RmiDemoService" />
+        <property name="serviceInterface" value="newb.c.a_spring.a_module.dubbo.RmiDemoService" />
         <!-- spring默认使用1099端口 -->
         <property name="registryPort" value="1199" />
     </bean>

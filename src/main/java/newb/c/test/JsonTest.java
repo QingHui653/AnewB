@@ -2,7 +2,7 @@ package newb.c.test;
 
 import com.alibaba.dubbo.common.json.JSON;
 import com.alibaba.dubbo.common.json.ParseException;
-import newb.c.backend.sql.model.basemodel.User;
+import newb.c.a_spring.backend.sql.model.basemodel.User;
 import org.junit.Test;
 
 import java.io.IOException;

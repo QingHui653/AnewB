@@ -30,7 +30,7 @@
 
 	<!-- 执行的bean -->
 	<bean name="job1" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-		<property name="jobClass" value="newb.c.a_module.jobs.QuartzJob1" />
+		<property name="jobClass" value="newb.c.a_spring.a_module.jobs.QuartzJob1" />
 	</bean>
 
 </beans>

@@ -33,7 +33,7 @@
 	<!-- 执行的bean -->
 	<bean id="job2" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject">
-			<bean class="newb.c.a_module.jobs.QuartzJob2" />
+			<bean class="newb.c.a_spring.a_module.jobs.QuartzJob2" />
 		</property>
 		<property name="targetMethod" value="doQuartzJob2" />
 		<property name="concurrent" value="false" />

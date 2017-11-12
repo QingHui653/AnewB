@@ -30,15 +30,17 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
     </context:component-scan> -->
 
-	<context:component-scan base-package="newb.c" use-default-filters="false">
+	<context:component-scan base-package="newb.c.a_web"/>
+
+	<!--<context:component-scan base-package="newb.c" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect" />
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
-	</context:component-scan>
+	</context:component-scan>-->
 
     <task:annotation-driven />
 
 	<!--注册swagger2 -->
-	<bean class="newb.c.api.SpringfoxDocConfig"/>
+	<bean class="newb.c.a_spring.api.SpringfoxDocConfig"/>
     <!-- 日志代理配置 -->
     <!-- <aop:aspectj-autoproxy/>
     <bean id="LogProxy" class="newb.c.proxy.log.LogProxy"/>
@@ -142,7 +144,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/user/**" /><!-- 匹配的是url路径， 如果不配置或/**,将拦截所有的Controller -->
-			<bean class="newb.c.webmodule.interceptor.MemberInterceptor"></bean>
+			<bean class="newb.c.a_web.webmodule.interceptor.MemberInterceptor"></bean>
 		</mvc:interceptor>
 	 </mvc:interceptors>
 
@@ -179,7 +181,7 @@
 	</bean>
 	 -->
 	 <!-- 异常处理第二种：自定义 -->
-    <!-- <bean id="exceptionHandler" class="newb.c.controller.component.ErrorLogSendEmail"/> -->
+    <!-- <bean id="exceptionHandler" class="ErrorLogSendEmail"/> -->
 
 	<!-- 对静态资源文件的访问  方案一 （二选一）
                        会把"/**" url,注册到SimpleUrlHandlerMapping的urlMap中,把对静态资源的访问由HandlerMapping转到

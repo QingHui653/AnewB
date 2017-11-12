@@ -12,7 +12,7 @@
     http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
 ">
 
-	<bean id="processBean" class="newb.c.webmodule.config.springBean.ProcessBean">
+	<bean id="processBean" class="newb.c.a_spring.a_config.springBean.ProcessBean">
 		<property name="username" value="1" />
 		<property name="password" value="1" />
 	</bean>
@@ -20,11 +20,13 @@
 	<!-- 记得以前这里也报过错，暂时不要删除 -->
 	<context:property-placeholder location="classpath:config/properties/*.properties" />
 
-	<context:component-scan base-package="newb.c" use-default-filters="false">
+    <context:component-scan base-package="newb.c.a_spring"/>
+
+	<!--<context:component-scan base-package="newb.c" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
 		<context:exclude-filter type="regex" expression="new.c.webmodule.aopproxy.*" />
-	</context:component-scan>
+	</context:component-scan>-->
 
 	<!--<context:component-scan base-package="newb.c" use-default-filters="false">
 		&lt;!&ndash; 扫描componet会同时包括 controller  所有下面那个排除没起作用   以后不使用 component注解  ，只使用其他三个&ndash;&gt;

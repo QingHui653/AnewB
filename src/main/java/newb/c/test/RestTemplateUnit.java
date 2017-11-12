@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.web.client.RestTemplate;
 
-import newb.c.backend.sql.model.basemodel.User;
+import newb.c.a_spring.backend.sql.model.basemodel.User;
 
 public class RestTemplateUnit {
 	

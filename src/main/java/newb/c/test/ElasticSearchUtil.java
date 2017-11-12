@@ -12,7 +12,7 @@ import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import newb.c.backend.elasticsearch.model.MovieDTO;
+import newb.c.a_spring.backend.elasticsearch.model.MovieDTO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath:main/resources/config.xml","classpath:main/resources/elasticsearch/elasticsearch.xml"})
