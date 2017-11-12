@@ -13,6 +13,7 @@ import org.elasticsearch.action.admin.cluster.health.ClusterHealthResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
+import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.cluster.health.ClusterHealthStatus;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.QueryStringQueryBuilder;
@@ -44,10 +45,10 @@ public class ElasticSearchController {
 
 	@Autowired(required = false)
 	private EsMovieService esMovieService;
-	
+
 	private String esIndexName = "heros";
 
-	private static Logger logger = LoggerFactory.getLogger(ElasticSearchController.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
 	@GetMapping("CreatIndexMapping")
@@ -58,6 +59,7 @@ public class ElasticSearchController {
 			elasticsearchTemplate.createIndex(esIndexName);
 		}
 		// 在创建mapping ，需要在实体类中使用注解
+        //mapping可以理解为表的结构和相关设置的信息
 		elasticsearchTemplate.putMapping(TaskInfoDTO.class);
 	}
 
@@ -123,8 +125,7 @@ public class ElasticSearchController {
 		List<TaskInfoDTO> taskInfoList = elasticsearchTemplate.queryForList(criteriaQuery, TaskInfoDTO.class);	
 		taskInfoList.forEach(System.out::println);
 	}
-	
-	
+
 	@PostMapping("insertOrUpdate")
 	@ResponseBody
 	@ApiOperation(value="插入和更新数据  单条")
