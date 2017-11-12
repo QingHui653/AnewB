@@ -13,7 +13,7 @@ import javax.annotation.Resource;
  * Created by woshizbh on 2017/1/12.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:main/resources/mybatis/spring-mybatis.xml"})
+@ContextConfiguration({"classpath:/config/mybatis/spring-mybatis-One.xml"})
 public class UserMapperTest {
 
     @Resource

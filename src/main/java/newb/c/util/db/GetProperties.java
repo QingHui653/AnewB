@@ -1,4 +1,4 @@
-package newb.c.utilDb;
+package newb.c.util.db;
 
 import java.io.IOException;
 import java.io.InputStreamReader;

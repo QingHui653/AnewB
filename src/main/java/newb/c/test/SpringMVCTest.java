@@ -20,7 +20,7 @@ public class SpringMVCTest<T> {
 
     public void multipartResolverTest(){
     	@SuppressWarnings("resource")
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "main/resources/springMVC.xml" });  
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "/config/springMVC.xml" });
         context.start();  
   
         CommonsMultipartResolver multipartResolver=context.getBean("multipartResolver", CommonsMultipartResolver.class); //  
@@ -32,7 +32,7 @@ public class SpringMVCTest<T> {
     
     @Test
     public void handlerMappingsTest(){
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "main/resources/springMVC.xml" });  
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "/config/springMVC.xml" });
         context.start();  
 		Map<String, HandlerMapping> matchingBeans =BeanFactoryUtils.beansOfTypeIncludingAncestors(context, HandlerMapping.class, true, false);
 		

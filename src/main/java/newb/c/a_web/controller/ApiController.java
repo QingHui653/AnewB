@@ -53,7 +53,7 @@ import newb.c.util.ExcelUtil;
 import newb.c.util.authCode.Captcha;
 import newb.c.util.authCode.GifCaptcha;
 import newb.c.util.authCode.SpecCaptcha;
-import newb.c.utilDb.DataHandle;
+import newb.c.util.db.DataHandle;
 import tk.mybatis.mapper.entity.Example;
 
 

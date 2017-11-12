@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import newb.c.a_spring.backend.elasticsearch.model.MovieDTO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:main/resources/config.xml","classpath:main/resources/elasticsearch/elasticsearch.xml"})
+@ContextConfiguration({"classpath:/config/properties/config.properties","classpath:/config/elasticsearch/elasticsearch.xml"})
 public class ElasticSearchUtil {
 	
 	@Autowired
