@@ -202,7 +202,7 @@ public class MvcController {
 		User user = userService.getUserById(userId);
 		modelMap.addAttribute("user", user);
 		// return "redi:/user/newbs";
-		return "forward:/views/jsp/user/newbs";
+		return "redirect:/views/jsp/user/newbs";
 	}
 	
 }
