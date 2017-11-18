@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import com.alibaba.fastjson.JSON;
 import newb.c.a_spring.backend.redis.service.WorkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ClusterOperations;
@@ -42,14 +43,15 @@ public class RedisController {
 	@ApiOperation("redis 有效时间")
 	public void redisTime() throws Exception {
 		//先存储到redis中然后设置有效时间
-		redisTemplate.opsForValue().set("+5s", "5s");
-		redisTemplate.expire("+5s", 5000, TimeUnit.MILLISECONDS);
-		String timeStr = (String) redisTemplate.opsForValue().get("+5s");
-		Long time = redisTemplate.getExpire("+5s");
+		redisTemplate.opsForValue().set("30s", "设置有效时间30s");
+		redisTemplate.expire("30s", 30000, TimeUnit.MILLISECONDS);
+		String timeStr = (String) redisTemplate.opsForValue().get("30s");
+		//-2 未找到 key
+		Long time = redisTemplate.getExpire("30s");
 		System.out.println(" "+timeStr +" "+time);
 		Thread.sleep(5000L);
-		timeStr = (String) redisTemplate.opsForValue().get("+5s");
-		time = redisTemplate.getExpire("+5s");
+		timeStr = (String) redisTemplate.opsForValue().get("30s");
+		time = redisTemplate.getExpire("30s");
 		System.out.println(" "+timeStr +" "+time);
 		System.out.println("--测试有效时间OK--- ");
 	}
@@ -71,11 +73,38 @@ public class RedisController {
 		valueOper.set("2", "测试中文");
 		System.out.println("redis 查询:"+valueOper.get("2"));
 		//存储对象,有三种，序列化二进制， 序列化json，序列化map
-		valueOper.set("user", gson.toJson(u));
+		valueOper.set("user:", gson.toJson(u));
 		User u2 = gson.fromJson((String) valueOper.get("user"), User.class);
 		System.out.println( " user "+ u2.toString());
     }
-	
+
+	@RequestMapping(value="/saveRedisToFolder",method=RequestMethod.GET)
+	@ApiOperation("测试存储Java对象 到redis 文件夹")
+	public void addRedisToFolder() {
+		ValueOperations<String, Object> valueOper = redisTemplate.opsForValue();
+
+		User u =null;
+		for (int i = 0; i < 10; i++) {
+			u=new User(i,String.valueOf(i),String.valueOf(i));
+			//使用冒号 ： 生成文件夹
+			valueOper.set("user:"+i, JSON.toJSONString(u));
+		}
+
+	}
+
+    @RequestMapping(value="/delRedis",method=RequestMethod.GET)
+    @ApiOperation("删除 redis ")
+    public void delRedis(String key) {
+        redisTemplate.delete(key);
+    }
+
+    @RequestMapping(value="/updateRedis",method=RequestMethod.GET)
+    @ApiOperation("更新 redis ")
+    public void updateRedis() {
+        ValueOperations<String, Object> valueOper = redisTemplate.opsForValue();
+        valueOper.set("2","更新到测试中文2");
+    }
+
 	@RequestMapping(value="/saveRedisList",method=RequestMethod.GET)
 	@ApiOperation("测试存储List 到redis")
 	public void addRedisList() {
@@ -125,7 +154,7 @@ public class RedisController {
     }
 	
 	@ApiOperation("redis 分布式锁")
-	@RequestMapping("lock")
+	@RequestMapping(value = "lock",method = RequestMethod.GET)
 	public void setNX() {
 		boolean ifLock = redisTemplate.boundValueOps("lock").setIfAbsent("true");
 		

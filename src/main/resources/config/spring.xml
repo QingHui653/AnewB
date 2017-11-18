@@ -60,6 +60,7 @@
 	<!-- <import resource="aop/spring-aop.xml" /> -->
 	<!-- 分布式session 存redis中 -->
 	<!-- <import resource="session/spring-session.xml"/> -->
+
 	<!-- activeMQ -->
 	<!-- <import resource="mq/spring-activemq.xml"/> -->
 	<!-- <import resource="mq/spring-rabbitmq.xml"/> -->
@@ -73,11 +74,13 @@
 	<!-- <import resource="rmi/spring-rmi.xml"/> -->
 	<!-- guava缓存 -->
 	<!-- <import resource="cache/spring-guava.xml"/> -->
+
 	<!-- dubbo -->
 	<!--<import resource="dubbo/spring-dubbo.xml"/>-->
 	<!-- <import resource="dubbo/spring-dubboxRest.xml"/> -->
+
 	<!-- elasticsearch -->
-	<import resource="elasticsearch/elasticsearch.xml"/>
+	<!--<import resource="elasticsearch/elasticsearch.xml"/>-->
 	<!--<import resource="elasticsearch/spring-elasticsearch.xml"/>-->
 
 
