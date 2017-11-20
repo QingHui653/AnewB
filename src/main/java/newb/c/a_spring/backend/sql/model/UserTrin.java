@@ -1,8 +1,11 @@
 package newb.c.a_spring.backend.sql.model;
 
+import lombok.Data;
+import newb.c.a_spring.backend.sql.model.basemodel.Movie;
 import newb.c.a_spring.backend.sql.model.basemodel.Result;
 import newb.c.a_spring.backend.sql.model.basemodel.User;
 
+@Data
 public class UserTrin{
 	private Integer id;
 
@@ -13,6 +16,8 @@ public class UserTrin{
     private User user;
 
 	private Result result;
+
+	private Movie movie;
     
 	public UserTrin() {
 		super();

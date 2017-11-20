@@ -53,14 +53,14 @@
 		<constructor-arg name="password" value="${mongo.password}" />
 	</bean>
 	
-    <!-- 设置使用的数据库 名-->
-    <mongo:db-factory dbname="test" mongo-ref="mongo"/>
-    <!-- mongodb的模板 -->
+    <!-- 设置使用的数据库 给工厂设置数据库 -->
+    <mongo:db-factory mongo-ref="mongo"/>
+    <!-- mongodb的模板 单独给 template 设置数据库 -->
     <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-       <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+       <!--<constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>-->
        <!-- 数据库名称 -->
-       <!--<constructor-arg ref="mongo"/>
+       <constructor-arg ref="mongo"/>
 	   <constructor-arg value="${mongo.database}" />
-	   <constructor-arg ref="userCredentials" /> -->
+        <!--<constructor-arg ref="userCredentials" /> -->
     </bean>
 </beans>

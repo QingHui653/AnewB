@@ -1,7 +1,9 @@
 package newb.c.a_web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import newb.c.a_spring.backend.sql.model.UserTrin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -36,42 +38,177 @@ public class MongodbController {
 	@RequestMapping(value="testAddUser",method=RequestMethod.GET)
 	@ApiOperation(value="测试mongdb插入数据")
     public void testAddUser() {
-        User zhanggc = new User();
-        zhanggc.setOid(122);
-        zhanggc.setPassword("123");
-        zhanggc.setUsername("123Name");
-        // 插入数据
-        mongoTemplate.insert(zhanggc);
+	    List<User> userList =new ArrayList<>();
+	    User user =null;
+        for (int i = 0; i < 10; i++) {
+            user=new User();
+            user.setOid(i);
+            user.setPassword(String.valueOf(i));
+            user.setUsername(String.valueOf(i));
+            userList.add(user);
+        }
+        mongoTemplate.insertAll(userList);
     }
-	
-	@GetMapping("testMovieName")
-	@ResponseBody
-	@ApiOperation(value="测试mongodb查询电影名")
-	public Object testMovieName(String name ) {
-		// 查询主要用到Query和Criteria两个对象
+
+    /**
+     * 插入用户信息
+     */
+    @RequestMapping(value="testAddUserTrin",method=RequestMethod.GET)
+    @ApiOperation(value="测试mongdb插入 内嵌 数据 手动方式")
+    public void testAddUserTrin() {
+        List<UserTrin> userTrinList =new ArrayList<>();
+        User user =null;
+        UserTrin userTrin=null;
+        for (int i = 0; i < 10; i++) {
+            user=new User();
+            user.setOid(i);
+            user.setPassword(String.valueOf(i));
+            user.setUsername(String.valueOf(i));
+
+            userTrin=new UserTrin();
+            userTrin.setId(i);
+            userTrin.setName(String.valueOf(i));
+            userTrin.setAge(i);
+            userTrin.setUser(user);
+
+            userTrinList.add(userTrin);
+        }
+        mongoTemplate.insertAll(userTrinList);
+    }
+
+    @RequestMapping(value="testQueryUserTrin",method=RequestMethod.GET)
+    @ApiOperation(value="查询 内嵌 数据 手动方式")
+    public void testQueryUserTrin() {
         Query query = new Query();
-        Criteria criteria =new Criteria();
-        
-        criteria.and("movieName").regex(".*"+name+".*");
-        
+        Criteria criteria =Criteria.where("id").lt(10).andOperator(Criteria.where("user.oid").gte(5));
         query.addCriteria(criteria);
-        
-        List<Movie> movieList = mongoTemplate.find(query, Movie.class);
-        
-        return movieList;
-	}
-	
+
+        List<UserTrin> userTrinList = mongoTemplate.find(query,UserTrin.class);
+
+        userTrinList.forEach(System.out::println);
+    }
+
+    @RequestMapping(value="testUpdateUserTrin",method=RequestMethod.GET)
+    @ApiOperation(value="更新 内嵌 数据 手动方式")
+    public void testUpdateUserTrin() {
+        Query query = new Query();
+        Criteria criteria =Criteria.where("id").lt(10).andOperator(Criteria.where("user.oid").gte(5));
+        query.addCriteria(criteria);
+
+        Update update = new Update();
+//        update.rename("更新 内嵌文档 ","user.username");
+        update.set("user.username","更新 内嵌文档 ");
+
+        mongoTemplate.updateMulti(query,update,UserTrin.class);
+
+        List<UserTrin> userTrinList = mongoTemplate.find(query,UserTrin.class);
+
+        userTrinList.forEach(System.out::println);
+    }
+
+    /**
+     * 插入用户信息
+     */
+    @RequestMapping(value="testAddUserTrin2",method=RequestMethod.GET)
+    @ApiOperation(value="测试mongdb插入 内嵌 数据 引用方式")
+    public void testAddUserTrin2() {
+        List<UserTrin> userTrinList =new ArrayList<>();
+        UserTrin userTrin=null;
+        Movie movie =null;
+        for (int i = 10; i < 20; i++) {
+            movie=new Movie();
+            movie.setId(i);
+
+            userTrin=new UserTrin();
+            userTrin.setId(i);
+            userTrin.setName(String.valueOf(i));
+            userTrin.setAge(i);
+            userTrin.setMovie(movie);
+
+            userTrinList.add(userTrin);
+        }
+        mongoTemplate.insertAll(userTrinList);
+    }
+
+    @RequestMapping(value="testQueryUserTrin2",method=RequestMethod.GET)
+    @ApiOperation(value="查询 内嵌 数据 引用方式")
+    public void testQueryUserTrin2() {
+        Query query = new Query();
+
+        Criteria criteria =Criteria.where("id").gte(10);
+        query.addCriteria(criteria);
+
+        List<UserTrin> userTrinList = mongoTemplate.find(query,UserTrin.class);
+
+        for (UserTrin userTrin : userTrinList) {
+            Movie movie = mongoTemplate.findOne(new Query(Criteria.where("id").is(userTrin.getMovie().getId())), Movie.class);
+            userTrin.setMovie(movie);
+        }
+
+        userTrinList.forEach(System.out::println);
+    }
+
+    /**
+     * 测试删除数据
+     */
+    @GetMapping("testRemoveUser")
+    @ApiOperation(value="测试mongodb删除数据")
+    public void testRemoveUser() {
+        Query query = new Query();
+//        Criteria criteria = new Criteria();
+//        criteria.where("oid").gt(22);
+        // 条件删除
+        query.addCriteria(Criteria.where("oid").gt(5));
+        mongoTemplate.remove(query, User.class);
+    }
+
+    /**
+     * 更新用户数据
+     */
+    @GetMapping("testUpdateUser")
+    @ApiOperation(value="测试mongodb更新数据")
+    public void testUpdateUser() {
+        // update(query,update,class)
+        // Query query:需要更新哪些用户,查询参数
+        // Update update:操作符,需要对数据做什么更新
+        // Class class:实体类
+
+        // 更新age大于24的用户信息
+        Query query = new Query();
+        query.addCriteria(Criteria.where("oid").gt(3));
+
+
+        Update update = new Update();
+        // 值加2
+        update.inc("oid", 2);
+        // update.set("name", "zhangsan"); 直接赋值
+        // update.unset("name"); 删去字段
+        // update.push("interest", "java"); 把java追加到interest里面,interest一定得是数组
+        // update.pushAll("interest", new String[]{".net","mq"})
+        // 用法同push,只是pushAll一定可以追加多个值到一个数组字段内
+        // update.pull("interest", "study"); 作用和push相反,从interest字段中删除一个等于value的值
+        // update.pullAll("interest", new String[]{"sing","dota"})作用和pushAll相反
+        // update.addToSet("interest", "study") 把一个值添加到数组字段中,而且只有当这个值不在数组内的时候才增加
+        // update.rename("oldName", "newName") 字段重命名
+
+        // 只更新第一条记录,age加122,name值更新为zhangsan
+        mongoTemplate.updateFirst(query, new Update().inc("oid", 2).set("username", "更新第一条"), User.class);
+
+        // 批量更新,更新所有查询到的数据
+        mongoTemplate.updateMulti(query, update, User.class);
+
+    }
+
     /**
      * 查询用户信息
      */
-	@GetMapping("testQueryUser")
-	@ApiOperation(value="测试mongodb查询数据")
+    @GetMapping("testQueryUser")
+    @ApiOperation(value="测试mongodb查询数据")
     public void testQueryUser() {
         // 查询主要用到Query和Criteria两个对象
         Query query = new Query();
-        Criteria criteria =new Criteria(); 
-        criteria.where("oid").gt(22);    // 大于
-
+        Criteria criteria =Criteria.where("oid").gt(3);
+        criteria.and("username").is("更新第一条");
 //         criteria.and("name").is("cuichongfei");等于
         // List<String> interests = new ArrayList<String>();
         // interests.add("study");
@@ -112,57 +249,38 @@ public class MongodbController {
 
     }
 
-    /**
-     * 更新用户数据
-     */
-	@GetMapping("testUpdateUser")
-	@ApiOperation(value="测试mongodb更新数据")
-	public void testUpdateUser() {
-        // update(query,update,class)
-        // Query query:需要更新哪些用户,查询参数
-        // Update update:操作符,需要对数据做什么更新
-        // Class class:实体类
-
-        // 更新age大于24的用户信息
-        Query query = new Query();
-        Criteria criteria =new Criteria(); 
-        query.addCriteria(criteria.where("oid").gt(1));
-
-        Update update = new Update();
-        // age值加2
-         update.inc("oid", 2);
-        // update.set("name", "zhangsan"); 直接赋值
-        // update.unset("name"); 删去字段
-        // update.push("interest", "java"); 把java追加到interest里面,interest一定得是数组
-        // update.pushAll("interest", new String[]{".net","mq"})
-        // 用法同push,只是pushAll一定可以追加多个值到一个数组字段内
-        // update.pull("interest", "study"); 作用和push相反,从interest字段中删除一个等于value的值
-        // update.pullAll("interest", new String[]{"sing","dota"})作用和pushAll相反
-        // update.addToSet("interest", "study") 把一个值添加到数组字段中,而且只有当这个值不在数组内的时候才增加
-        // update.rename("oldName", "newName") 字段重命名
-
-        // 只更新第一条记录,age加122,name值更新为zhangsan
-        mongoTemplate.updateFirst(query, new Update().inc("oid", 122).set("username", "123zhangsan"), User.class);
-
-        // 批量更新,更新所有查询到的数据
-        mongoTemplate.updateMulti(query, update, User.class);
-
+    @RequestMapping(value="testAddMovie",method=RequestMethod.GET)
+    @ApiOperation(value="测试mongdb插入 Movie数据")
+    public void testAddMovie() {
+        List<Movie> movieList =new ArrayList<>();
+        Movie movie =null;
+        for (int i = 0; i < 20; i++) {
+            movie=new Movie();
+            movie.setId(i);
+            movie.setMovieLink("第一条Link"+i);
+            movie.setMovieName("第一个Name"+i);
+            movieList.add(movie);
+        }
+        mongoTemplate.insertAll(movieList);
     }
-    
-    /**
-     * 测试删除数据
-     */
-	@GetMapping("testRemoveUser")
-	@ApiOperation(value="测试mongodb删除数据")
-	public void testRemoveUser() {
+
+    @GetMapping("testMovieName")
+    @ResponseBody
+    @ApiOperation(value="测试mongodb查询电影名")
+    public Object testMovieName(String name ) {
+        // 查询主要用到Query和Criteria两个对象
         Query query = new Query();
-        // query.addCriteria(where("age").gt(22));
-        Criteria criteria = new Criteria();
-       	criteria.where("age").gt(22);
-        // 删除年龄大于22岁的用户
+        Criteria criteria =new Criteria();
+
+        criteria.and("movieName").regex(".*"+name+".*");
+
         query.addCriteria(criteria);
-        mongoTemplate.remove(query, User.class);
+
+        List<Movie> movieList = mongoTemplate.find(query, Movie.class);
+
+        return movieList;
     }
+
 
     public void printList(List<User> userList) {
         for (User user : userList) {
