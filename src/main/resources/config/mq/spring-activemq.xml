@@ -12,7 +12,7 @@
 
 
     <!-- 启用jms注解 -->
-    <context:component-scan base-package="newb.c.api.mq.activemq"/>
+    <context:component-scan base-package="newb.c.a_spring.api.mq.activemq"/>
     <jms:annotation-driven/>
 
 
@@ -28,7 +28,10 @@
         <property name="connectionFactory">
             <bean class="org.apache.activemq.ActiveMQConnectionFactory">
                 <property name="brokerURL" value="${activemq.url}" />
-                <!-- <property name="trustAllPackages" value="true"/> -->  <!-- activemq 禁止序列化  需要注明允许 -->
+                <!-- activemq 禁止序列化  需要注明允许 -->
+                <property name="trustAllPackages" value="true"/>
+                <!-- 是否异步发送 -->
+                <property name="useAsyncSend" value="true" />
                 <!-- <property name="trustedPackages">
 			        <list>  // 允许的包路径
 			            <value>org.apache.activemq.test</value>
@@ -51,7 +54,7 @@
     <!-- <bean id="jmsMessageConverter" class="org.springframework.jms.support.converter.SimpleMessageConverter" /> -->
 
     <!-- Spring提供的JMS工具类，它可以进行消息发送、接收等 -->
-    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+    <bean id="jmsQueueTemplate" class="org.springframework.jms.core.JmsTemplate">
         <!-- 这个connectionFactory对应的是我们定义的Spring提供的那个ConnectionFactory对象 -->
         <property name="connectionFactory" ref="connectionFactory"/>
         <!-- 发送模式
@@ -62,6 +65,12 @@
         <property name="pubSubDomain" value="false" />
     </bean>
 
+    <bean id="jmsTopicTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="deliveryMode" value="2" />
+        <property name="pubSubDomain" value="true" />
+    </bean>
+
 	<!-- 默认的 -->
 	<bean id="jmsListenerContainerFactory" class="org.springframework.jms.config.DefaultJmsListenerContainerFactory">
         <property name="connectionFactory" ref="connectionFactory"/>
@@ -69,7 +78,7 @@
 
 	<bean id="queueListener"  class="org.springframework.jms.config.DefaultJmsListenerContainerFactory">
 		<property name="connectionFactory" ref="connectionFactory" />
-		<property name="pubSubDomain" value="false" />
+		<property name="pubSubDomain" value="true" />
 	</bean>
 
 	<bean id="topicListener"  class="org.springframework.jms.config.DefaultJmsListenerContainerFactory">

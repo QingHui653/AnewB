@@ -39,30 +39,44 @@
 	<import resource="mybatis/spring-mybatis-One.xml" />
 	<!-- <import resource="mybatis/spring-mybatis-Shard.xml" /> -->
 	<!-- <import resource="mail/spring-mail.xml"/> -->
+
 	<!-- 定时任务 -->
 	<!-- <import resource="job/spring-task.xml" /> -->
 	<!-- <import resource="job/spring-job2.xml" /> -->
 	<!-- <import resource="job/spring-quarz-distributed.xml" /> -->
+
 	<!-- 分布式事务 -->
 	<!-- <import resource="atomikos/spring-jta.xml" /> -->
+
 	<!-- activiti工作流 -->
 	<!-- <import resource="activiti/spring-activiti.xml" /> -->
+
 	<!-- ehcache 缓存 -->
 	<!--<import resource="cache/spring-ehcache.xml"/>-->
+	<!--<import resource="cache/spring-guavaCache.xml"/>-->
+
+	<!-- guava缓存 -->
+	<!-- <import resource="cache/spring-guava.xml"/> -->
+
 	<!-- redis 不能注释，连不上没关系 -->
 	<import resource="cache/spring-cache.xml"/>
 	<!--<import resource="cache/spring-redis.xml"/>-->
-	<!--<import resource="cache/spring-redisCache.xml"/>
-	<import resource="cache/spring-guavaCache.xml"/>-->
+	<!--<import resource="cache/spring-redisCache.xml"/>-->
+
+
 	<!-- mongodb 不能注释，连不上没关系 -->
-	<import resource="mongodb/spring-mongodb.xml"/>
+	<!--<import resource="mongodb/spring-mongodb.xml"/>-->
+
 	<!-- aop -->
 	<!-- <import resource="aop/spring-aop.xml" /> -->
+
 	<!-- 分布式session 存redis中 -->
 	<!-- <import resource="session/spring-session.xml"/> -->
 
 	<!-- activeMQ -->
-	<!-- <import resource="mq/spring-activemq.xml"/> -->
+	<import resource="mq/spring-activemq.xml"/>
+
+	<!-- Rabbitmq -->
 	<!-- <import resource="mq/spring-rabbitmq.xml"/> -->
 	
 	<!-- <import resource="mq/spring-kafka-producer.xml"/>
@@ -70,10 +84,9 @@
 	
 	<!-- cxf webservice 需先启用web.xml 中的配置 -->
 	<!-- <import resource="webservice/cxf/spring-cxf.xml"/> -->
+
 	<!-- rmi java远程调用 -->
 	<!-- <import resource="rmi/spring-rmi.xml"/> -->
-	<!-- guava缓存 -->
-	<!-- <import resource="cache/spring-guava.xml"/> -->
 
 	<!-- dubbo -->
 	<!--<import resource="dubbo/spring-dubbo.xml"/>-->
