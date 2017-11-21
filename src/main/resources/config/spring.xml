@@ -74,10 +74,10 @@
 	<!-- <import resource="session/spring-session.xml"/> -->
 
 	<!-- activeMQ -->
-	<import resource="mq/spring-activemq.xml"/>
+	<!--<import resource="mq/spring-activemq.xml"/>-->
 
 	<!-- Rabbitmq -->
-	<!-- <import resource="mq/spring-rabbitmq.xml"/> -->
+	 <import resource="mq/spring-rabbitmq.xml"/>
 	
 	<!-- <import resource="mq/spring-kafka-producer.xml"/>
 	<import resource="mq/spring-kafka-consumer.xml"/> -->
