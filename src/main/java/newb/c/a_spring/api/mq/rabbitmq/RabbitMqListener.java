@@ -53,4 +53,26 @@ public class RabbitMqListener  {
 		System.out.println("topic2 id msg" + new String(msg.getBody(),"UTF-8"));
 	}
 
+
+	@RabbitListener(queues="fanout_one")
+	public void fanoutOneListener(Message msg) throws UnsupportedEncodingException {
+		System.out.println("fanout_one " + new String(msg.getBody(),"UTF-8"));
+	}
+
+	@RabbitListener(queues="fanout_two")
+	public void fanoutTwoListener(Message msg) throws UnsupportedEncodingException {
+		System.out.println("fanout_two " + new String(msg.getBody(),"UTF-8"));
+	}
+
+
+	@RabbitListener(queues="headers_one")
+	public void headersOneListener(Message msg) throws UnsupportedEncodingException {
+		System.out.println("headers_one " + new String(msg.getBody(),"UTF-8"));
+	}
+
+	@RabbitListener(queues="headers_two")
+	public void headersTwoListener(Message msg) throws UnsupportedEncodingException {
+		System.out.println("headers_two " + new String(msg.getBody(),"UTF-8"));
+	}
+
 }

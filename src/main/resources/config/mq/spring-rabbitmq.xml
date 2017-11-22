@@ -36,12 +36,18 @@
 	<rabbit:queue id="queue_two" durable="true" auto-delete="false" exclusive="false" name="queue_two"/>
 	<rabbit:queue id="queue_three" durable="true" auto-delete="false" exclusive="false" name="queue_three"/>
 
+	<rabbit:queue id="fanout_one" durable="true" auto-delete="false" exclusive="false" name="fanout_one"/>
+	<rabbit:queue id="fanout_two" durable="true" auto-delete="false" exclusive="false" name="fanout_two"/>
 
 	<rabbit:queue id="topic_one" durable="true" auto-delete="false" exclusive="false" name="topic_one"/>
 	<rabbit:queue id="topic_two" durable="true" auto-delete="false" exclusive="false" name="topic_two"/>
 
-	<!-- producer->exchange->binding->queue->consumer     direct fanout topic headers  system 五种类型-->
-	<!--定义exchange模式为direct，意思就是消息与一个特定的路由键完全匹配，才会转发。 -->
+	<rabbit:queue id="headers_one" durable="true" auto-delete="false" exclusive="false" name="headers_one"/>
+	<rabbit:queue id="headers_two" durable="true" auto-delete="false" exclusive="false" name="headers_two"/>
+
+	<!-- producer->exchange->binding->queue->consumer     direct fanout topic headers  四种类型-->
+	<!--定义exchange模式为direct，意思就是消息与一个特定的路由键完全匹配，才会转发 直连 -->
+	<!--fanout类型转发器特别简单，把所有它介绍到的消息，广播到所有它所知道的队列  广播-->
     <rabbit:direct-exchange name="directExchange" durable="true" auto-delete="false" id="directExchange">
         <rabbit:bindings>
             <rabbit:binding queue="queue_one" key="queue_one" />
@@ -50,12 +56,41 @@
         </rabbit:bindings>
     </rabbit:direct-exchange>
 
+	<rabbit:fanout-exchange name="fanoutExchange" durable="true" auto-delete="false">
+		<rabbit:bindings>
+			<rabbit:binding queue="fanout_one"/>
+			<rabbit:binding queue="fanout_two"/>
+		</rabbit:bindings>
+	</rabbit:fanout-exchange>
+
+	<!-- * 表示接受一个 quick.orange.fox 转发 one-->
+	<!-- # 表示多个 lazy.orange.elephant 转发 two-->
 	<rabbit:topic-exchange name="topicExchange" durable="true" auto-delete="false" id="topicExchange">
 		<rabbit:bindings>
-			<rabbit:binding queue="topic_one" pattern="topic.*"/>
-			<rabbit:binding queue="topic_two" pattern="topic.#"/>
+			<rabbit:binding queue="topic_one" pattern="*.orange.*"/>
+			<rabbit:binding queue="topic_two" pattern="*.*.rabbit"/>
+			<rabbit:binding queue="topic_two" pattern="lazy.#"/>
 		</rabbit:bindings>
 	</rabbit:topic-exchange>
+
+	<rabbit:headers-exchange name="headersExchange" durable="true" auto-delete="false">
+		<rabbit:bindings>
+			<rabbit:binding queue="headers_one">
+				<rabbit:binding-arguments>
+					<entry key="x-match" value="any" />
+					<entry key="head_one_one" value="head_one_one" />
+					<entry key="head_one_two" value="head_one_two" />
+				</rabbit:binding-arguments>
+			</rabbit:binding>
+			<rabbit:binding queue="headers_two" >
+				<rabbit:binding-arguments>
+					<entry key="x-match" value="all" />
+					<entry key="head_two_one" value="head_two_one" />
+					<entry key="head_two_two" value="head_two_two" />
+				</rabbit:binding-arguments>
+			</rabbit:binding>
+		</rabbit:bindings>
+	</rabbit:headers-exchange>
 
     <!-- 消息对象json转换类 -->
     <bean id="jsonMessageConverter" class="org.springframework.amqp.support.converter.Jackson2JsonMessageConverter" />
