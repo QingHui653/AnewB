@@ -1,8 +1,7 @@
 package newb.c.a_spring.api.mq.kafka;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.kafka.listener.MessageListener;
 
 /**
@@ -10,8 +9,8 @@ import org.springframework.kafka.listener.MessageListener;
  * 自动监听是否有消息需要消费
  *
  */
+@Slf4j
 public class KafkaConsumerServer implements MessageListener<String, String> {
-    protected final Logger LOG = LoggerFactory.getLogger("kafkaConsumer");
     /**
      * 监听器自动执行该方法
      *     消费消息
@@ -21,18 +20,18 @@ public class KafkaConsumerServer implements MessageListener<String, String> {
      */
     @Override
     public void onMessage(ConsumerRecord<String, String> record) {
-        LOG.info("=============kafkaConsumer开始消费=============");
+        log.info("=============kafkaConsumer开始消费=============");
         String topic = record.topic();
         String key = record.key();
         String value = record.value();
         long offset = record.offset();
         int partition = record.partition();
-        LOG.info("-------------topic:"+topic);
-        LOG.info("-------------value:"+value);
-        LOG.info("-------------key:"+key);
-        LOG.info("-------------offset:"+offset);
-        LOG.info("-------------partition:"+partition);
-        LOG.info("~~~~~~~~~~~~~kafkaConsumer消费结束~~~~~~~~~~~~~");
+        log.info("-------------topic:"+topic);
+        log.info("-------------value:"+value);
+        log.info("-------------key:"+key);
+        log.info("-------------offset:"+offset);
+        log.info("-------------partition:"+partition);
+        log.info("~~~~~~~~~~~~~kafkaConsumer消费结束~~~~~~~~~~~~~");
     }
 
 }

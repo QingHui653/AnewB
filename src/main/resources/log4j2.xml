@@ -92,6 +92,8 @@
 
         <logger name="org.elasticsearch.client" level="DEBUG"/>
 
+        <logger name="org.apache.kafka" level="INFO"/>
+
 
     </loggers>
 </configuration>

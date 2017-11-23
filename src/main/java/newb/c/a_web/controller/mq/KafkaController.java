@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import newb.c.a_spring.api.mq.kafka.KafkaProducerServer;
 
 
+/**
+ * kafka 端口 为 9092，没有 自带web 界面
+ */
 @Controller
 @RequestMapping("kafka")
 public class KafkaController {
@@ -33,8 +36,7 @@ public class KafkaController {
          String ifPartition = "0";
          Integer partitionNum = 2;
          String role = "test";//用来生成key
-         Map<String,Object> res = kafkaProducer.sndMesForTemplate
-                 (topic, value, ifPartition, partitionNum, role);
+         Map<String,Object> res = kafkaProducer.sndMesForTemplate(topic, value, ifPartition, partitionNum, role);
          
          System.out.println("测试结果如下：===============");
          String message = (String)res.get("message");
@@ -44,7 +46,7 @@ public class KafkaController {
          System.out.println("message:"+message);
 	}
     
-    @RequestMapping(value = "/test")
+    @GetMapping(value = "/test")
     @ResponseBody
     public  Object index() {
         for (int i = 0; i < 50; i++) {
