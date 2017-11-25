@@ -45,6 +45,11 @@ public class KafkaController {
          System.out.println("code:"+code);
          System.out.println("message:"+message);
 	}
+
+    @GetMapping("annTest")
+    public void annTestKafka() {
+        kafkaTemplate.send("annTest", "测试注解监听", "测试注解监听");
+    }
     
     @GetMapping(value = "/test")
     @ResponseBody
