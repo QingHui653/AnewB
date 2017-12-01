@@ -421,7 +421,7 @@ public class UserController {
 		// 如果file代表的不是一个文件，而是一个目录
 		if (!file.isFile()) {
 			// 列出该目录下的所有文件和目录
-			File files[] = file.listFiles();
+            File[] files = file.listFiles();
 			// 遍历files[]数组
 			for (File f : files) {
 				// 递归
@@ -478,7 +478,7 @@ public class UserController {
 	         // 创建输出流
 	         OutputStream out = response.getOutputStream();
 	         // 创建缓冲区
-	         byte buffer[] = new byte[1024];
+             byte[] buffer = new byte[1024];
 	         int len = 0;
 	         // 循环将输入流中的内容读取到缓冲区当中
 	         while ((len = in.read(buffer)) > 0) {

@@ -11,8 +11,8 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 import org.springframework.stereotype.Service;
 
-@Service
-@EnableKafka()
+//@Service
+//@EnableKafka()
 @Slf4j
 public class kafkaConfig {
 

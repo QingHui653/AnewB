@@ -62,7 +62,9 @@
 
         <!-- mybatis -->
         <logger name="org.apache.ibatis" level="DEBUG"/>
-        <logger name="org.mybatis.spring" level="INFO"/>
+        <logger name="org.mybatis.spring" level="DEBUG"/>
+        <logger name="org.springframework.jdbc" level="DEBUG"/>
+        <logger name="org.springframework.transaction" level="DEBUG"/>
 
         <!--druid -->
         <logger name="com.alibaba.druid" level="INFO"/>

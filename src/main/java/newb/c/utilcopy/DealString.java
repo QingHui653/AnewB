@@ -260,7 +260,7 @@ public class DealString {
 		return strcurr;
 	}
 
-	public static void main(String args[]) {
+	public static void main(String[] args) {
 		DealString.convertNumToMoney(1234566);
 	}
 }

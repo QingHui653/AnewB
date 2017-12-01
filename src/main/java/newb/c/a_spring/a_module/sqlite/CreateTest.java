@@ -9,7 +9,7 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 
 public class CreateTest {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Connection c = null;
         Statement stmt = null;
         try {

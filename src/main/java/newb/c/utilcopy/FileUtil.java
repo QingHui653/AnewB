@@ -293,7 +293,7 @@ public class FileUtil {
 			}
 		}
 		if (file.isDirectory()) {
-			File files[] = file.listFiles();
+            File[] files = file.listFiles();
 			for (int i = 0; i < files.length; i++) {
 				list(list, files[i], filter);
 			}

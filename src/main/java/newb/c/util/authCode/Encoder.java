@@ -86,7 +86,7 @@ public class Encoder
     int cur_accum = 0;
     int cur_bits = 0;
 
-    int masks[] =
+    int[] masks =
             {
                     0x0000,
                     0x0001,
@@ -104,7 +104,7 @@ public class Encoder
                     0x1FFF,
                     0x3FFF,
                     0x7FFF,
-                    0xFFFF };
+                    0xFFFF};
 
     // Number of characters so far in this 'packet'
     int a_count;
