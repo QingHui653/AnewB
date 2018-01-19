@@ -23,7 +23,8 @@ public class TestBeanPostProcessor implements BeanPostProcessor {
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName)
             throws BeansException {
-        logger.info("bean初始化之前调用：bean=" + bean + ", beanName" + beanName);
+        //在 最先调用 多个BeanPostProcessor 好像会覆盖
+        logger.info("1.---bean初始化之前调用：bean=" + bean + ", beanName" + beanName);
         if(bean instanceof ProcessBean) {
             ProcessBean pb = (ProcessBean)bean;
             System.out.println("username:"+pb.getUsername()); //2 被beanFactory修改
@@ -42,7 +43,8 @@ public class TestBeanPostProcessor implements BeanPostProcessor {
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName)
             throws BeansException {
-        logger.info("bean初始化之后调用：bean=" + bean + ", beanName" + beanName);
+        //在 最后调用 多个BeanPostProcessor 好像会覆盖
+        logger.info("5.---bean初始化之后调用：bean=" + bean + ", beanName" + beanName);
         if(bean instanceof ProcessBean) {
             ProcessBean pb = (ProcessBean)bean;
             System.out.println("username:"+pb.getUsername());

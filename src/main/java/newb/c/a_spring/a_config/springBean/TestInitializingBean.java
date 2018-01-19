@@ -32,20 +32,18 @@ public class TestInitializingBean implements InitializingBean {
         this.name = name;
     }
 
-    public void init() {
-        System.out.println("init方法执行");
-        System.out.println("******************************");
-    }
-
     @PostConstruct
     public void postConstruct() {
-        System.out.println("postConstruct方法执行");
-        System.out.println("******************************");
+        System.out.println("2.---postConstruct方法执行");
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        System.out.println("------调用afterPropertiesSet()");
-        System.out.println("******************************");
+        System.out.println("3.---调用afterPropertiesSet()");
     }
+
+    public void init() {
+        System.out.println("4.---init方法执行");
+    }
+
 }
