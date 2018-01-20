@@ -7,6 +7,13 @@ package newb.c.a_spring.a_module.mongodb;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Sorts;
+import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.junit.Test;
 
 import com.mongodb.MongoClient;
@@ -14,13 +21,15 @@ import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoDatabase;
 
+import static com.mongodb.client.model.Sorts.orderBy;
+
 public class MongoDBJDBC{
    
-   private String url ="192.168.1.188";
+   private String url ="119.23.231.239";
    private int port =27017;
-   private String database ="platform";
-   private String user ="root";
-   private String password ="Passw0rd";
+   private String database ="upload";
+   private String user ="qh";
+   private String password ="726214";
    
    @SuppressWarnings({ "resource", "unused" })
 //   @Test
@@ -57,8 +66,17 @@ public class MongoDBJDBC{
            MongoClient mongoClient = new MongoClient(addrs,credentials);  
              
            //连接到数据库  
-           MongoDatabase mongoDatabase = mongoClient.getDatabase("databaseName");  
-           System.out.println("Connect to database successfully");  
+           MongoDatabase mongoDatabase = mongoClient.getDatabase(database);
+
+
+           FindIterable<Document> findIterable = mongoDatabase.getCollection("title").find(Filters.eq("tid", "893321")).sort(orderBy(Sorts.ascending("index")));
+
+           MongoCursor<Document> mongoCursor = findIterable.iterator();
+           while(mongoCursor.hasNext()){
+               System.out.println(mongoCursor.next());
+           }
+
+           System.out.println("Connect to database successfully");
        } catch (Exception e) {  
            System.err.println( e.getClass().getName() + ": " + e.getMessage() );  
        }  

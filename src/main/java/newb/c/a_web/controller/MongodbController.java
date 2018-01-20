@@ -3,8 +3,19 @@ package newb.c.a_web.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mongodb.*;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
 import newb.c.a_spring.backend.sql.model.UserTrin;
+import newb.c.a_spring.backend.sql.model.basemodel.Nove;
+import newb.c.a_spring.backend.sql.model.basemodel.Title;
+import newb.c.a_spring.backend.sql.service.NoveService;
+import newb.c.a_spring.backend.sql.service.TitleService;
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -31,7 +42,43 @@ public class MongodbController {
 	
 	@Autowired(required=false)
 	private MongoTemplate mongoTemplate;
-	
+    @Autowired
+	private NoveService noveService;
+	@Autowired
+	private TitleService titleService;
+
+    @GetMapping("switch")
+    public void switchDb(){
+        DBCollection dbCollection;
+
+        /*dbCollection = mongoTemplate.getDb().getCollection("nove");
+        DBCursor noves = dbCollection.find();
+        while (noves.hasNext()){
+            DBObject doc=noves.next();
+            String tid =(String)doc.get("_id");
+            String name =(String)doc.get("name");
+            String noveType =(String)doc.get("noveType");
+            String titleType =(String)doc.get("titleType");
+
+            Nove nove = new Nove(tid,name,noveType,titleType);
+            noveService.save(nove);
+        }*/
+
+
+        dbCollection = mongoTemplate.getDb().getCollection("title");
+        DBCursor dbObjects = dbCollection.find();
+        int i=0;
+        while(dbObjects.hasNext()){
+            DBObject doc=dbObjects.next();
+            String tid =(String)doc.get("tid");
+            Integer index =(Integer)doc.get("index");
+            String content =(String)doc.get("content");
+
+            Title title = new Title(i,tid,index,content);
+            titleService.save(title);
+            i++;
+        }
+    }
 	/**
      * 插入用户信息
      */
@@ -227,7 +274,7 @@ public class MongodbController {
         printList(userList1);
 
         // 排序查询sort方法,按照age降序排列
-        // query.sort().on("age", Order.DESCENDING);
+        //query.sort().on("age", Order.DESCENDING);
         // List<User> userList2 = mongoTemplate.find(query, User.class);
         // printList(userList2);
 

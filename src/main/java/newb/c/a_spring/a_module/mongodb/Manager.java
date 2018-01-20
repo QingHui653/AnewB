@@ -23,7 +23,7 @@ public class Manager {
 
 	private String url = "192.168.1.188";
 	private int port = 27017;
-	private String database = "platform";
+	private String database = "upload";
 
 	private MongoDatabase mongoDatabase;
 	private MongoClient mongoClient;
