@@ -7,13 +7,13 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Document(indexName = "wow", type = "esmovie")
 public class MovieDTO {
 	
-	@Field(type = FieldType.String)
+	@Field(type = FieldType.text)
     private Integer id;
 	
-	@Field(type = FieldType.String)
+	@Field(type = FieldType.text)
     private String movieName;
 	
-	@Field(type = FieldType.String)
+	@Field(type = FieldType.text)
     private String movieLink;
 
     /**

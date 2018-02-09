@@ -13,6 +13,7 @@ import org.elasticsearch.action.admin.cluster.health.ClusterHealthResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
+import org.elasticsearch.client.RestClient;
 import org.elasticsearch.cluster.health.ClusterHealthStatus;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.QueryStringQueryBuilder;
@@ -44,6 +45,8 @@ public class ElasticSearchController {
 
 	@Autowired(required = false)
 	private EsMovieService esMovieService;
+	@Autowired
+	private RestClient restClient;
 
 	private String esIndexName = "heros";
 
@@ -306,8 +309,8 @@ public class ElasticSearchController {
             contents.add("\"" + content + "\"");    
         }    
         TermsQueryBuilder inQuery = QueryBuilders.termsQuery(field, contents);    
-        inQuery.minimumShouldMatch("10");    
-        reqBuilder.setQuery(QueryBuilders.boolQuery().mustNot(inQuery)).setExplain(true);    
+//        inQuery.minimumShouldMatch("10");
+        reqBuilder.setQuery(QueryBuilders.boolQuery().mustNot(inQuery)).setExplain(true);
         if (StringUtils.isNotEmpty(sortField) && order != null) {    
             reqBuilder.addSort(sortField, order);    
         }    
@@ -350,8 +353,7 @@ public class ElasticSearchController {
             queryString.field(field);    
         queryString.minimumShouldMatch("10");    
             
-        reqBuilder.setQuery(QueryBuilders.filteredQuery(queryString, QueryBuilders.rangeQuery("taskState").from(start).to(end)))    
-                .setExplain(true);    
+//        reqBuilder.setQuery(QueryBuilders.filteredQuery(queryString, QueryBuilders.rangeQuery("taskState").from(start).to(end))).setExplain(true);
     
         SearchResponse resp = reqBuilder.execute().actionGet();    
         SearchHit[] hits = resp.getHits().getHits();    

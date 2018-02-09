@@ -1,4 +1,4 @@
-package newb.c.a_spring.a_module.elasticsearch;
+package newb.c.a_spring.a_module.elasticsearch.v2;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -7,6 +7,7 @@ import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.transport.client.PreBuiltTransportClient;
 
 /**
  * 必须使用非root 用户启动 用户名es
@@ -33,7 +34,7 @@ public class ESTools {
 		try {
 			System.out.println("创建Elasticsearch Client 开始");
 			Settings settings = Settings
-				.settingsBuilder()
+				.builder()
 				  .put("node.name","qhNode")
 					.put("cluster.name","qh")
 					//自动嗅探集群Ip
@@ -41,10 +42,13 @@ public class ESTools {
 //						.put("client.transport.sniff", true)
 							.build();
 //			Settings settings = Settings.builder().put("node.name","qhNode").put("cluster.name","qh").build();
-			client = TransportClient.builder().settings(settings).build()
-			.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(ip), 9300));
-//			client = TransportClient.builder().build()
-//			.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(ip), 9300));
+			//版本 2.4.2
+//			client = TransportClient.builder().settings(settings).build().addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(ip), 9300));
+//			client = TransportClient.builder().build().addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(ip), 9300));
+
+			//创建客户端 版本 5.6.7
+			client = new PreBuiltTransportClient(Settings.EMPTY).addTransportAddresses(new InetSocketTransportAddress(InetAddress.getByName(ip),9300));
+
 			System.out.println("创建Elasticsearch Client 结束");
 		} catch (Exception e) {
 			System.out.println("创建Client异常");
@@ -79,30 +83,30 @@ public class ESTools {
 		*/
 		
 		
-		//第二种
+		//第二种 版本 2.4.2
 		
 		/**
 		 * 指定 ip地址创建
 		 */
 		// on startup
-		Client client2 = TransportClient.builder().build()
-		        .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("host1"), 9300))
-		        .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("host2"), 9300));
-		// on shutdown
-		client2.close();
+//		Client client2 = TransportClient.builder().build()
+//		        .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("host1"), 9300))
+//		        .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("host2"), 9300));
+//		// on shutdown
+//		client2.close();
 		
 		//第三种
 		//按集群名称创建
-		Settings settings = Settings.settingsBuilder()
-		        .put("cluster.name", "sojson-application").build();
-		Client client = TransportClient.builder().settings(settings).build();
+//		Settings settings = Settings.settingsBuilder()
+//		        .put("cluster.name", "sojson-application").build();
+//		Client client = TransportClient.builder().settings(settings).build();
 		//Add transport addresses and do something with the client...
 		
 		//第四种
 		//同一内网Ip段，嗅的方式自己查找，组成集群。
-		Settings settings4 = Settings.settingsBuilder()
-		        .put("client.transport.sniff", true).build();
-		TransportClient client4 = TransportClient.builder().settings(settings).build();
+//		Settings settings4 = Settings.settingsBuilder()
+//		        .put("client.transport.sniff", true).build();
+//		TransportClient client4 = TransportClient.builder().settings(settings).build();
 		/*
 		客户端允许嗅其余的集群,它将数据节点添加到列表的机器使用。在这种情况下要注意,将使用的IP地址的其他节点开始(“publish”地址)。启用它,设置client.transport.sniff为 true:
 		*/

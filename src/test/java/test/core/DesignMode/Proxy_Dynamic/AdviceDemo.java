@@ -14,8 +14,9 @@ public class AdviceDemo {
 	public static void main(String[] args) {
 		Collection<Object> proxy3=(Collection) getproxy(new ArrayList<>(), new MyAdvice());
 		proxy3.add("111");
+		System.out.println(proxy3.size()+"--------");
 		proxy3.add("222");
-		System.out.println(proxy3.size());
+		System.out.println(proxy3.size()+"--------");
 		
 	}
 	

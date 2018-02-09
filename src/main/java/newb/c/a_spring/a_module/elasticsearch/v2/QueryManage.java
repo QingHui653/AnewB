@@ -1,4 +1,4 @@
-package newb.c.a_spring.a_module.elasticsearch;
+package newb.c.a_spring.a_module.elasticsearch.v2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,7 +113,7 @@ public class QueryManage {
 		SearchRequestBuilder srb = client.prepareSearch("hi");
 		srb.setSearchType(SearchType.DFS_QUERY_THEN_FETCH);
 		srb.setTypes("hello");
-		srb.setQuery(resultMap);
+//		srb.setQuery(resultMap);
 		srb.setFrom((pageNo - 1) * pageSize).setSize(pageSize)
 		.setExplain(true);
 		

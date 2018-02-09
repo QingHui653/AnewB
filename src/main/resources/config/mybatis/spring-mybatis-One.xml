@@ -162,7 +162,7 @@
 
 	<!--把事务控制在Service层-->
 	<aop:config>
-		<aop:pointcut id="transactionPointcut" expression="execution(* newb.c.backend.sql.service..*Impl.*(..))" />
+		<aop:pointcut id="transactionPointcut" expression="execution(* newb.c.a_spring.backend.sql.service..*Impl.*(..))" />
 		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
 	</aop:config>
 

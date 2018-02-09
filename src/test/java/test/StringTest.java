@@ -9,6 +9,16 @@ public class StringTest {
 
 
 	@Test
+	public void  revInter(){
+		System.out.println(Integer.highestOneBit(10));
+	}
+
+	@Test
+	public void  minInter(){
+		Integer i = 2147483647;
+		System.out.println(i);
+	}
+	@Test
 	public void test() {
 		String foo="1";
 		String bar=foo;

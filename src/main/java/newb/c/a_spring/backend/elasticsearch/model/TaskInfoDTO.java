@@ -9,28 +9,28 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Document(indexName = "heros", type = "hello")
 public class TaskInfoDTO {    
     @Id
-    @Field(index = FieldIndex.not_analyzed, store = true)    
+    @Field(analyzer = "not_analyzed", store = true)
     private String taskId;    
         
-    @Field(type = FieldType.Integer, index = FieldIndex.not_analyzed, store = true)    
+    @Field(type = FieldType.Integer, analyzer = "not_analyzed", store = true)
     private Integer userId;    
     
-    @Field(type = FieldType.String, store = true)    // , searchAnalyzer="ik" ,indexAnalyzer="ik",
+    @Field(type = FieldType.text, store = true)    // , searchAnalyzer="ik" ,indexAnalyzer="ik",
     private String taskContent;    
     
-    @Field(type = FieldType.String, store = true)   //indexAnalyzer="ik",  searchAnalyzer="ik"
+    @Field(type = FieldType.text, store = true)   //indexAnalyzer="ik",  searchAnalyzer="ik"
     private String taskArea;    
         
-    @Field(type = FieldType.String, store = true)    //indexAnalyzer="ik",  searchAnalyzer="ik"
+    @Field(type = FieldType.text, store = true)    //indexAnalyzer="ik",  searchAnalyzer="ik"
     private String taskTags;    
         
-    @Field(type = FieldType.Integer, index = FieldIndex.not_analyzed, store = true)    
+    @Field(type = FieldType.Integer,analyzer = "not_analyzed", store = true)
     private Integer taskState;    
     
-    @Field(type = FieldType.String, index = FieldIndex.not_analyzed, store = true)    
+    @Field(type = FieldType.text, analyzer = "not_analyzed", store = true)
     private String updateTime;    
     
-    @Field(type = FieldType.String, store = true)    //indexAnalyzer="ik", searchAnalyzer="ik"
+    @Field(type = FieldType.text, store = true)    //indexAnalyzer="ik", searchAnalyzer="ik"
     private String userNickName;    
         
     public String getTaskId() {    

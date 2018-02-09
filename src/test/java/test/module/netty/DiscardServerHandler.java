@@ -7,7 +7,6 @@ import io.netty.util.ReferenceCountUtil;
 
 public class DiscardServerHandler extends ChannelHandlerAdapter{
 	
-	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) {
 		 // 默默地丢弃收到的数据
 //		((ByteBuf) msg).release();

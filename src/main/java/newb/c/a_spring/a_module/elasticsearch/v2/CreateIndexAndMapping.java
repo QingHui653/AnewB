@@ -1,4 +1,4 @@
-package newb.c.a_spring.a_module.elasticsearch;
+package newb.c.a_spring.a_module.elasticsearch.v2;
 
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.admin.indices.mapping.put.PutMappingRequest;

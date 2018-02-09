@@ -40,10 +40,9 @@
                 <property name="password" value="123456" />
             </dataSource>
         </environment>
-    </environments>-->
-	<!--<mappers>
+    </environments>
+	<mappers>
     	<mapper resource="newb/c/backend/mapping/User.xml"/>
-
 	</mappers>-->
 
 </configuration>

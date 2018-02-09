@@ -1,4 +1,4 @@
-package newb.c.a_spring.a_module.elasticsearch;
+package newb.c.a_spring.a_module.elasticsearch.v2;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,12 +33,11 @@ public class InsertManager {
 	 * @param index		索引
 	 * @param type		类型
 	 * @param idName	Id字段名称
-	 * @param listData  一个对象集合
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
 	public Map<Object, Object> save(String index, String type, String idName, List<Object> list) {
-		BulkRequestBuilder bulkRequest =ESTools.client.prepareBulk().setRefresh(true);
+		BulkRequestBuilder bulkRequest =ESTools.client.prepareBulk();
 		Map<Object, Object> resultMap =new HashMap<>();
 		
 		for (Object object : list) {

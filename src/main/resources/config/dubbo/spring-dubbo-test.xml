@@ -11,7 +11,7 @@
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd  
         ">  
     
-    <context:property-placeholder location="classpath:config/properties/mongodb.properties" />
+    <context:property-placeholder location="classpath:config/properties/config.properties" />
     
     <!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
     <!-- 此处在所以引入dubbo的文件中只能存在一个 name -->  

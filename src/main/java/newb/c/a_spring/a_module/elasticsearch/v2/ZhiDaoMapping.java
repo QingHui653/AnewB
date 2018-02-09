@@ -1,4 +1,4 @@
-package newb.c.a_spring.a_module.elasticsearch;
+package newb.c.a_spring.a_module.elasticsearch.v2;
 
 import java.io.IOException;
 
