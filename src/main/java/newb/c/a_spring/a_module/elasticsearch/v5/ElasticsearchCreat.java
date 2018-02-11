@@ -11,9 +11,9 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ElasticsearchTest1 {
+public class ElasticsearchCreat {
 
-    private Logger logger = LoggerFactory.getLogger(ElasticsearchTest1.class);
+    private Logger logger = LoggerFactory.getLogger(ElasticsearchCreat.class);
 
     public final static String HOST = "119.23.231.239";
 
