@@ -84,35 +84,53 @@ public class SpiralArrayTest {
     }
 
     @Test
-    public void luoxuanArray(){
-        int size =5;
-        int[][] array= new int[5][5];
-        int i = 0,j=0,pos =0,len = size*size;
+    public void luoxuanArrayTest(){
+        luoxuanArray(4);
+        luoxuanArray(5);
+        luoxuanArray(6);
+    }
+
+    //只是 正螺旋 未考虑 反螺旋 和 向下 开始的螺旋
+    public void luoxuanArray(int size){
+
+        int[][] array= new int[size][size];
+
+        int i = 0,j=0;
+
+        int pos =0,len = size*size;
+
         int turnSize=size,turnedSize=size; //经过 几次 赋值 转向；
+
         int path=1;
 
-        for (pos=0 ; pos<len; pos++) {
-            printArray(array);
-            System.out.println("------------");
+        for (pos=0;pos<len;pos++) {
+
             array[i][j]=pos+1;
+
             turnedSize--;
             //判断 是否 需要转向
             if(turnedSize==0){
-                if(path==1&& path==4){
+                // 向下 向上 时 需要 减少 次数
+                if(path==1||path==3)
                     turnSize--;
-                    turnedSize=turnSize;
-                }
+
+                //转向 重新 设置 需要 几次
+                turnedSize=turnSize;
+
+                // 只有 4 个 方向
                 path++;
-                if(path>4){
-                    path=1;
-                }
+                if(path>4)path=1;
             }
 
             switch (path){
+                //向右 j--
                 case 1:j++;break;
+                //向下
                 case 2:i++;break;
+                //向左
                 case 3:j--;break;
-                case 4:i++;break;
+                //向上
+                case 4:i--;break;
             }
         }
 
