@@ -15,6 +15,7 @@ public class SpiralArrayTest {
 //        printArray(getSpiralArray(5,5,true));
     }
     //返回螺旋数组
+    //网上 的。
     public static int [][] getSpiralArray(int m,int n,boolean reverse){
         //定义一个长度为m*n的数组，并按顺序初始化
         int [] numArray = new int[m*n];
@@ -88,14 +89,13 @@ public class SpiralArrayTest {
 //        luoxuanArray(4);
 //        luoxuanArray(5);
 //        luoxuanArray(6);
-
-        luoxuanArray(4,4,true,false);
-        System.out.println("------");
-        luoxuanArray(4,4,false,false);
-        System.out.println("------");
-        luoxuanArray(4,4,true,true);
-        System.out.println("------");
-        luoxuanArray(4,4,false,true);
+        luoxuanArray(6,4,true,false);
+        System.out.println("---");
+        luoxuanArray(6,4,false,false);
+        System.out.println("---");
+        luoxuanArray(6,4,true,true);
+        System.out.println("---");
+        luoxuanArray(6,4,false,true);
     }
 
     //只是 正螺旋 未考虑 反螺旋 和 向下 开始的螺旋
@@ -145,16 +145,16 @@ public class SpiralArrayTest {
         printArray(array);
     }
 
+    // 考虑 正 反 螺旋 和 向下的 螺旋
+    public void luoxuanArray(int size,boolean isPos, boolean isTurnDown){
 
-    public void luoxuanArray(int row,int col,boolean isPos, boolean isTurnDown){
-
-        int[][] array= new int[row][col];
+        int[][] array= new int[size][size];
 
         int i = 0,j=0;
         // 判断 正 反 向
-        int pos =isPos?1:row*col,len =isPos?row*col:1;
+        int pos =isPos?1:size*size,len =isPos?size*size:1;
 
-        int turnSize=row,turnedSize=row; //经过 几次 赋值 转向；
+        int turnSize=size,turnedSize=size; //经过 几次 赋值 转向；
 
         int path=1;
         // 判断 正 反 向
@@ -191,6 +191,69 @@ public class SpiralArrayTest {
                 //向上
                 case 4:i--;break;
             }
+
+            //判断 正反向 操作
+            if(isPos){
+                pos++;
+            }else {
+                pos--;
+            }
+        }
+
+        printArray(array);
+    }
+
+    // 考虑 正 反 螺旋 ，向下螺旋 和 自定义行列
+    public void luoxuanArray(int row,int col,boolean isPos, boolean isTurnDown){
+
+        int[][] array= new int[row][col];
+
+        int i = 0,j=0;
+        // 判断 正 反 向
+        int pos =isPos?1:row*col,len =isPos?row*col:1;
+
+        int turnSize=isTurnDown?row:col, rowSize=isTurnDown?col:row, colSize =isTurnDown?row:col; //经过 几次 赋值 转向；
+
+        int path=1;
+        // 判断 正 反 向
+        for (;isPos?pos<=len:pos>=len;) {
+
+            if(isTurnDown){
+                array[j][i]=pos;
+            }else {
+                array[i][j]=pos;
+            }
+
+            turnSize--;
+            //判断 是否 需要转向
+            if(turnSize==0){
+                // 向下 向上 时 需要 减少 次数
+                if(path==1||path==3){
+                    rowSize--;
+                    turnSize=rowSize;
+                }
+
+                if(path==2||path==4){
+                    colSize--;
+                    turnSize=colSize;
+                }
+
+                // 只有 4 个 方向
+                path++;
+                if(path>4)path=1;
+            }
+
+            switch (path){
+                //向右 j--
+                case 1:j++;break;
+                //向下
+                case 2:i++;break;
+                //向左
+                case 3:j--;break;
+                //向上
+                case 4:i--;break;
+            }
+
 
             //判断 正反向 操作
             if(isPos){
