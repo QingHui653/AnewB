@@ -85,9 +85,17 @@ public class SpiralArrayTest {
 
     @Test
     public void luoxuanArrayTest(){
-        luoxuanArray(4);
-        luoxuanArray(5);
-        luoxuanArray(6);
+//        luoxuanArray(4);
+//        luoxuanArray(5);
+//        luoxuanArray(6);
+
+        luoxuanArray(4,4,true,false);
+        System.out.println("------");
+        luoxuanArray(4,4,false,false);
+        System.out.println("------");
+        luoxuanArray(4,4,true,true);
+        System.out.println("------");
+        luoxuanArray(4,4,false,true);
     }
 
     //只是 正螺旋 未考虑 反螺旋 和 向下 开始的螺旋
@@ -131,6 +139,64 @@ public class SpiralArrayTest {
                 case 3:j--;break;
                 //向上
                 case 4:i--;break;
+            }
+        }
+
+        printArray(array);
+    }
+
+
+    public void luoxuanArray(int row,int col,boolean isPos, boolean isTurnDown){
+
+        int[][] array= new int[row][col];
+
+        int i = 0,j=0;
+        // 判断 正 反 向
+        int pos =isPos?1:row*col,len =isPos?row*col:1;
+
+        int turnSize=row,turnedSize=row; //经过 几次 赋值 转向；
+
+        int path=1;
+        // 判断 正 反 向
+        for (;isPos?pos<=len:pos>=len;) {
+
+            if(isTurnDown){
+                array[j][i]=pos;
+            }else {
+                array[i][j]=pos;
+            }
+
+            turnedSize--;
+            //判断 是否 需要转向
+            if(turnedSize==0){
+                // 向下 向上 时 需要 减少 次数
+                if(path==1||path==3)
+                    turnSize--;
+
+                //转向 重新 设置 需要 几次
+                turnedSize=turnSize;
+
+                // 只有 4 个 方向
+                path++;
+                if(path>4)path=1;
+            }
+
+            switch (path){
+                //向右 j--
+                case 1:j++;break;
+                //向下
+                case 2:i++;break;
+                //向左
+                case 3:j--;break;
+                //向上
+                case 4:i--;break;
+            }
+
+            //判断 正反向 操作
+            if(isPos){
+                pos++;
+            }else {
+                pos--;
             }
         }
 
