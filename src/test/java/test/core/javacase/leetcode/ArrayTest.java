@@ -17,8 +17,12 @@ public class ArrayTest {
 //        rotate(arr2,2);
 //        rotate(2,arr2);
 //        System.out.println(containsDuplicate(arr));
-        System.out.println(singleNumberBySort(arr));
-        System.out.println(singleNumber(arr));
+//        System.out.println(singleNumberBySort(arr));
+//        System.out.println(singleNumber(arr));
+
+        int[] nums1 ={1};int[] nums2 ={1,2};
+//        int[] nums1 ={};int[] nums2 ={};
+        intersect(nums1,nums2);
 
     }
 
@@ -198,5 +202,44 @@ public class ArrayTest {
             result ^=nums[i];
         }
         return result;
+    }
+
+    /**
+     * https://leetcodechina.com/explore/suan-fa/card/chu-ji-suan-fa/1/di-yi-zhang-jie/26/
+     * 判断 nums1 对于 nums2 是否 交集
+     * {1,1} {1} -> {1}
+     * {1}  {1,1} ->{1,1}
+     * @param nums1
+     * @param nums2
+     * @return
+     */
+    public int[] intersect(int[] nums1, int[] nums2) {
+        int[] nums3 ={};
+        if(nums1.length==0||nums2.length==0) return nums3;
+
+        Map map = new HashMap();
+        for (int i = 0; i < nums2.length ; i++) {
+            if(map.get(nums2[i])==null){
+                map.put(nums2[i],1);
+            }else {
+                map.put(nums2[i],(int)map.get(nums2[i])+1);
+            }
+        }
+
+        List numsList = new ArrayList<>();
+        for (int i = 0; i < nums1.length; i++) {
+            if(map.get(nums1[i])!=null&&(int)map.get(nums1[i])>=1){
+                numsList.add(nums1[i]);
+                map.put(nums1[i],(int)map.get(nums1[i])-1);
+            }
+        }
+
+        nums3 = new int[numsList.size()];
+        for (int i = 0; i < numsList.size() ; i++) {
+            nums3[i]=(int)numsList.get(i);
+        }
+
+        System.out.println(Arrays.toString(nums3));
+        return nums3;
     }
 }
