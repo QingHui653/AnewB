@@ -241,5 +241,6 @@ public class ArrayTest {
 
         System.out.println(Arrays.toString(nums3));
         return nums3;
+
     }
 }
