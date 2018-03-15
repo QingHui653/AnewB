@@ -10,14 +10,22 @@ import newb.c.a_spring.backend.sql.service.ResultService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 @Service("ResultService")
 public class ResultServiceImpl extends BaseServiceImpl<Result> implements ResultService {
 	
 	@Autowired
 	private ResultMapper resultMapper;
+
+	@Autowired
+	private DataSourceTransactionManager transactionManager;
 	
 	@Override
 	@Cacheable(value="default")
@@ -48,6 +56,48 @@ public class ResultServiceImpl extends BaseServiceImpl<Result> implements Result
 		System.out.println("插入完成");
 			throw new RuntimeException("抛出异常回滚");
 	}
+
+	public void tranTest2() {
+		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+		def.setName("SomeTxName");
+		def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+
+		TransactionStatus status = transactionManager.getTransaction(def);
+		try {
+			List<Result> list =swapList();
+			for (int i=0;i<3;i++){
+				mapper.insert(list.get(i));
+			}
+			System.out.println("插入完成");
+			throw new RuntimeException("抛出异常回滚");
+		} catch (Exception ex) {
+			transactionManager.rollback(status);
+			throw ex;
+		}
+	}
+
+
+	// 手动 事务
+	public void tranTest3() {
+		// 设置保存点
+		Object savepoint = TransactionAspectSupport.currentTransactionStatus().createSavepoint();
+
+		List<Result> list =swapList();
+		for (int i=0;i<3;i++){
+			mapper.insert(list.get(i));
+		}
+		System.out.println("插入完成");
+
+		try{
+			//抛出异常
+			throw new RuntimeException("抛出异常回滚");
+		}catch(Exception e){
+			//回滚 保存点
+			TransactionAspectSupport.currentTransactionStatus().rollbackToSavepoint(savepoint);
+			e.printStackTrace();
+		}
+	}
+
 
 	private List<Result> swapList(){
 		List<Result> list =new ArrayList<>();
