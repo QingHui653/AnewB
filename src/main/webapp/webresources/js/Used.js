@@ -354,3 +354,34 @@ $(".labelName").change(function () {
 
 <!--选择下拉框选中的值 -->
 var id = $("#selectId option:selected").val();
+
+
+// 闭包 第一种 自调用
+/*var addc =(function () {
+        var counter =0;
+        var funb =function () {
+			return counter+=10;
+        }
+        var func = function () {
+            funb();
+            return counter+=1;
+        };
+        return func;
+    })();*/
+//闭包 第二种 ，手动调用一次
+function addc() {
+    var counter =0;
+    var funb =function () {
+        return counter+=10;
+    }
+    var func = function () {
+        funb();
+        return counter+=1;
+    };
+    return func;
+};
+var addcf = addc();
+// addcf();
+function con() {
+    console.info(addcf());
+}
