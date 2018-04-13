@@ -166,4 +166,13 @@
 		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
 	</aop:config>
 
+	<aop:config>
+		<aop:aspect>
+			<aop:before method=""></aop:before>
+			<aop:pointcut id="" expression=""></aop:pointcut>
+			<aop:after method=""></aop:after>
+		</aop:aspect>
+		<aop:advisor advice-ref=""
+	</aop:config>
+
 </beans>

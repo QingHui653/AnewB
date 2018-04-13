@@ -35,7 +35,9 @@ public class MybatisFirst {
         User user = sqlSession.selectOne("UserMapper.findUserById", 1);
         
 //        User user2 = sqlSession.selectOne("UserMapper.findUserBySql", "select * from user where oid=2");
-        
+
+
+
         System.out.println(user);
 //        System.out.println(user2);
 
