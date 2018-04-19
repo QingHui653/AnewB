@@ -23,16 +23,33 @@ public class ArrayTest {
 //        int[] nums1 ={1};int[] nums2 ={1,2};
 //        int[] nums1 ={};int[] nums2 ={};
 //        intersect(nums1,nums2);
-        int[] arr3= {9,9,9};
-        plusOne(arr3);
+//        int[] arr3= {9,9,9};
+//        plusOne(arr3);
 
         // 定义 nums = [0, 1, 0, 3, 12,13]，调用函数之后， nums 应为 [1, 3, 12,13, 0, 0]
-        int[] nums ={-959151711,623836953,209446690,-1950418142,1339915067,-733626417,481171539,-2125997010,-1225423476,1462109565,147434687,-1800073781,-1431212205,-450443973,50097298,753533734,-747189404,-2070885638,0,-1484353894,-340296594,-2133744570,619639811,-1626162038,669689561,0,112220218,502447212,-787793179,0,-726846372,-1611013491,204107194,1605165582,-566891128,2082852116,0,532995238,-1502590712,0,2136989777,-2031153343,371398938,-1907397429,342796391,609166045,-2007448660,-1096076344,-323570318,0,-2082980371,2129956379,-243553361,-1549960929,1502383415,0,-1394618779,694799815,78595689,-1439173023,-1416578800,685225786,-333502212,-1181308536,-380569313,772035354,0,-915266376,663709718,1443496021,-777017729,-883300731,-387828385,1907473488,-725483724,-972961871,-1255712537,383120918,1383877998,1722751914,0,-1156050682,1952527902,-560244497,1304305692,1173974542,-1313227247,-201476579,-298899493,-1828496581,-1724396350,1933643204,1531804925,1728655262,-955565449,0,-69843702,-461760848,268336768,1446130876};
-        moveZeroes(nums);
+//        int[] nums ={-959151711,0,623836953,209446690,-1950418142,1339915067,-733626417,481171539,-2125997010,-1225423476,1462109565,147434687,-1800073781,-1431212205,-450443973,50097298,753533734,-747189404,-2070885638,0,-1484353894,-340296594,-2133744570,619639811,-1626162038,669689561,0,112220218,502447212,-787793179,0,-726846372,-1611013491,204107194,1605165582,-566891128,2082852116,0,532995238,-1502590712,0,2136989777,-2031153343,371398938,-1907397429,342796391,609166045,-2007448660,-1096076344,-323570318,0,-2082980371,2129956379,-243553361,-1549960929,1502383415,0,-1394618779,694799815,78595689,-1439173023,-1416578800,685225786,-333502212,-1181308536,-380569313,772035354,0,-915266376,663709718,1443496021,-777017729,-883300731,-387828385,1907473488,-725483724,-972961871,-1255712537,383120918,1383877998,1722751914,0,-1156050682,1952527902,-560244497,1304305692,1173974542,-1313227247,-201476579,-298899493,-1828496581,-1724396350,1933643204,1531804925,1728655262,-955565449,0,-69843702,-461760848,268336768,1446130876};
+//        moveZeroes(nums);
+
+//        int[] nums = {3,2,4};
+//        twoSum(nums,6);
+        char[][] c = new char[][]{
+                {'5','3','.','.','7','.','.','.','.'},
+                {'6','.','.','1','9','5','.','.','.'},
+                {'.','9','8','.','.','.','.','6','.'},
+                {'8','.','.','.','6','.','.','.','3'},
+                {'4','.','.','8','.','3','.','.','1'},
+                {'7','.','.','.','2','.','.','.','6'},
+                {'.','6','.','.','.','.','2','8','.'},
+                {'.','.','.','4','1','9','.','.','5'},
+                {'.','.','.','.','8','.','.','7','9'}};
+
+        System.out.println(isValidSudoku(c));
     }
 
+
     /**
-     * https://leetcodechina.com/explore/suan-fa/card/chu-ji-suan-fa/1/di-yi-zhang-jie/21/
+     * 数组1
+     * 移除重复
      * @param nums
      * @return
      */
@@ -55,7 +72,7 @@ public class ArrayTest {
     }
 
     /**
-     * https://leetcodechina.com/explore/suan-fa/card/chu-ji-suan-fa/1/di-yi-zhang-jie/22/
+     * 最大利润
      * @param prices
      * @return
      */
@@ -71,7 +88,7 @@ public class ArrayTest {
     }
 
     /**
-     * https://leetcodechina.com/explore/suan-fa/card/chu-ji-suan-fa/1/di-yi-zhang-jie/23/
+     * 向右旋转数组
      * @param nums
      * @param k 右旋转 的 位数
      */
@@ -154,7 +171,7 @@ public class ArrayTest {
     }
 
     /**
-     * https://leetcodechina.com/explore/suan-fa/card/chu-ji-suan-fa/1/di-yi-zhang-jie/24/
+     * 是否存在重复
      * @param nums
      * @return
      */
@@ -179,7 +196,8 @@ public class ArrayTest {
     }
 
     /**
-     * https://leetcodechina.com/explore/suan-fa/card/chu-ji-suan-fa/1/di-yi-zhang-jie/25/
+     * 只出现一次的 数字(其他都出现了两次)
+     *
      * @param nums
      * @return
      */
@@ -210,7 +228,6 @@ public class ArrayTest {
     }
 
     /**
-     * https://leetcodechina.com/explore/suan-fa/card/chu-ji-suan-fa/1/di-yi-zhang-jie/26/
      * 判断 nums1 对于 nums2 是否 交集
      * {1,1} {1} -> {1}
      * {1}  {1,1} ->{1,1}
@@ -250,7 +267,7 @@ public class ArrayTest {
     }
 
     /**
-     * https://leetcodechina.com/explore/suan-fa/card/chu-ji-suan-fa/1/di-yi-zhang-jie/27/
+     * 十进制 +1
      * @param digits
      * @return
      */
@@ -272,30 +289,93 @@ public class ArrayTest {
     }
 
     /**
-     * https://leetcodechina.com/explore/suan-fa/card/chu-ji-suan-fa/1/di-yi-zhang-jie/28/
+     * // 将0 移至末尾
      * @param nums
-     * 0 1 0 3 12 13
-     * 1 0 0 3 12 13
-     * 1 3 12 0 0 13
-     * 1 3 12 13 0 0
-     *
-     * 0 1 3 0 12 13
-     * 1 0 3 0 12 13
-     * 1 3 0 0 12 13
-     * 1 3 12 13 0 0
      */
     public void moveZeroes(int[] nums) {
+        // 为0 的 个数
         int newIndex = 0;
-
+        // 判断 是否为0
+        // 为0,向前 移动已经存在0的 个数
+        //newIndex 为 最后为0的 位置
         for (int i = 0; i < nums.length ; i++) {
             if (nums[i] != 0) {
                 nums[newIndex++] = nums[i];
             }
         }
+        // 将newIndex 和 后面 全 置换 为 0
         for (; newIndex < nums.length; newIndex++) {
             nums[newIndex] = 0;
         }
 
         System.out.println(Arrays.toString(nums));
     }
+
+    /**
+     * 数组内两数相加 == 目标数
+     * @param nums
+     * @param target
+     * @return 相加索引的 数组
+     */
+    public int[] twoSum(int[] nums, int target) {
+        for (int i=0; i < nums.length; i++) {
+            for (int j =i+1; j < nums.length; j++) {
+                if(nums[i]+nums[j]==target){
+                    return new int[]{i,j};
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 有效的 数独
+     * // 数独 每一行|每一列|每个3*3块 不存在重复 1-9
+     * // 这里给定的 是 9*9
+     * @param board
+     * @return
+     */
+    public boolean isValidSudoku(char[][] board) {
+        int len = 9;
+
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                String index =String.valueOf(board[i][j]);
+                //.不需要判断
+                if(index.equals("."))continue;
+                //判断每行,移动列
+                for (int col = 0; col < len; col++) {
+                    if(col==j)continue;
+                    String target = String.valueOf(board[i][col]);
+                    if(index.equals(target))return false;
+                }
+                //判断每列,移动行
+                for (int row = 0; row < len; row++) {
+                    if(row==i)continue;
+                    String target = String.valueOf(board[row][i]);
+                    if(index.equals(target))return false;
+                }
+                //判断 3*3;9*9中 每行列 有 3个 3*3
+                // 从当前位置 比到 能被3 整除的位置
+
+                for (int col3 = j; col3 < len; col3++) {
+                    for (int row3 = i; row3 < len; row3++) {
+                        if(col3==j&&row3==i)continue;
+                        String target = String.valueOf(board[row3][col3]);
+                        if(index.equals(target))return false;
+                        // 行 3*3
+                        if((row3+1)%3==0)break;
+                    }
+                    //列 3*3
+                    if((col3+1)%3==0)break;
+                }
+
+
+            }
+        }
+        return true;
+    }
+
+
+
 }

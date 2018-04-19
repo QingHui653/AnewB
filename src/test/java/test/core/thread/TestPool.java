@@ -50,7 +50,12 @@ public class TestPool {
 		ExecutorService pool = Executors.newCachedThreadPool();
 //		ExecutorService pool = Executors.newWorkStealingPool();
 		for (int i = 0; i < threadNum; i++) {
+			// 1.通过构造方法
 			Callable<List<String>> myThread = new Thread2("线程" + i, i, threadNum);
+			// 2. 通过设置参数
+			((Thread2) myThread).setFileName("第二种");
+			// 3. new Thread2( new Work());
+			// Thread2 内 要调用 new Work 的方法来修改 参数
 			Future<List<String>> future = pool.submit(myThread);//submit执行callable  execute执行runable
 			try {
 				list.addAll(future.get());
@@ -90,6 +95,8 @@ class Thread2 implements Callable<List<String>>{
 	private int i; // 第几个线程
 	private int threadNum; // 总共创建了几个线程
 
+	private String fileName;
+
 	public Thread2(String name, int i, int threadNum) {
 		this.name = name;
 		this.i = i;
@@ -100,8 +107,14 @@ class Thread2 implements Callable<List<String>>{
 		MyPrint2 myPrint2 = new MyPrint2();
 		return myPrint2.print(name, i, threadNum);
 	}
-	
 
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 }
 
 /**
