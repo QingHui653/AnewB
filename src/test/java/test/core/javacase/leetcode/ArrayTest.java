@@ -32,18 +32,32 @@ public class ArrayTest {
 
 //        int[] nums = {3,2,4};
 //        twoSum(nums,6);
-        char[][] c = new char[][]{
-                {'5','3','.','.','7','.','.','.','.'},
-                {'6','.','.','1','9','5','.','.','.'},
-                {'.','9','8','.','.','.','.','6','.'},
-                {'8','.','.','.','6','.','.','.','3'},
-                {'4','.','.','8','.','3','.','.','1'},
-                {'7','.','.','.','2','.','.','.','6'},
-                {'.','6','.','.','.','.','2','8','.'},
-                {'.','.','.','4','1','9','.','.','5'},
-                {'.','.','.','.','8','.','.','7','9'}};
 
-        System.out.println(isValidSudoku(c));
+//        char[][] c = new char[][]{
+//                {'.','.','.','.','5','.','.','1','.'},
+//                {'.','4','.','3','.','.','.','.','.'},
+//                {'.','.','.','.','.','3','.','.','1'},
+//                {'8','.','.','.','.','.','.','2','.'},
+//                {'.','.','2','.','7','.','.','.','.'},
+//                {'.','1','5','.','.','.','.','.','.'},
+//                {'.','.','.','.','.','2','.','.','.'},
+//                {'.','2','.','9','.','.','.','.','.'},
+//                {'.','.','4','.','.','.','.','.','.'}}
+//                ;
+//
+//        System.out.println(isValidSudoku(c));
+        //  [ 5, 1, 9,11],
+        //  [ 2, 4, 8,10],
+        //  [13, 3, 6, 7],
+        //  [15,14,12,16]
+        int[][] nums = new int[][]{
+                {5, 1, 9,11},
+                {2, 4, 8,10},
+                {13,3, 6,7},
+                {15,14,12,16}};
+
+        rotate(nums);
+
     }
 
 
@@ -352,22 +366,18 @@ public class ArrayTest {
                 //判断每列,移动行
                 for (int row = 0; row < len; row++) {
                     if(row==i)continue;
-                    String target = String.valueOf(board[row][i]);
+                    String target = String.valueOf(board[row][j]);
                     if(index.equals(target))return false;
                 }
                 //判断 3*3;9*9中 每行列 有 3个 3*3
                 // 从当前位置 比到 能被3 整除的位置
-
-                for (int col3 = j; col3 < len; col3++) {
-                    for (int row3 = i; row3 < len; row3++) {
-                        if(col3==j&&row3==i)continue;
-                        String target = String.valueOf(board[row3][col3]);
+                // 3 6 9 为最大，找出3*3中最小的。
+                for (int minCol=switchMin(j); minCol < switchMin(j)+3; minCol++) {
+                    for (int minRow = switchMin(i); minRow < switchMin(i)+3; minRow++) {
+                        if(minCol==j&&minRow==i)continue;
+                        String target = String.valueOf(board[minRow][minCol]);
                         if(index.equals(target))return false;
-                        // 行 3*3
-                        if((row3+1)%3==0)break;
                     }
-                    //列 3*3
-                    if((col3+1)%3==0)break;
                 }
 
 
@@ -375,7 +385,66 @@ public class ArrayTest {
         }
         return true;
     }
+    private int switchMin(int i){
+        int index = Integer.valueOf(i);
+        if(index<3){
+            return 0;
+        }else if(index>=3&&index<6){
+            return 3;
+        }else if(index>=6&&index<9){
+            return 6;
+        }
+        return 0;
+    }
 
+    //  [ 5, 1, 9,11],
+    //  [ 2, 4, 8,10],
+    //  [13, 3, 6, 7],
+//      [15,14,12,16]
 
+//    {1,2,3}, {7,4,1}
+//    {4,5,6}, {8,5,2}
+//    {7,8,9}, {9,6,3}
+    /**
+     * 原地 顺时针 旋转 90
+     * 很像 行列 转换,将行 作为 列,列 作为行
+     * @param matrix
+     */
+    public void rotate(int[][] matrix) {
+        System.out.println(Arrays.deepToString(matrix));
+//        int n = matrix.length;
+//        for (int i = 0; i < n / 2; ++i) {
+//            for (int j = i; j < n - 1 - i; ++j) {
+//                int tmp = matrix[i][j];
+//                matrix[i][j] = matrix[n - 1 - j][i];
+//                matrix[n - 1 - j][i] = matrix[n - 1 - i][n - 1 - j];
+//                matrix[n - 1 - i][n - 1 - j] = matrix[j][n - 1 - i];
+//                matrix[j][n - 1 - i] = tmp;
+//            }
+//        }
+        /** 每次旋转 4个数字
+         *  先旋转 7139 再旋转 4862
+         * 1  2  3      7  2  1       7  4  1
+         * 4  5  6  --> 4  5  6　-->  8  5  2　　
+         * 7  8  9      9  8  3　　　 9  6  3
+         */
+        for (int i = 0, j = matrix.length-1; i < j; i++, j--) {
+            System.out.println("--i="+i+"--j="+j);
+            for (int k = i, d = j; k < j; k++, d--) {
+                int t = matrix[i][k];
+                System.out.println("--k="+k+"--d="+d+"--t="+t);
+                matrix[i][k] = matrix[d][i];
+                System.out.println(Arrays.deepToString(matrix));
+                matrix[d][i] = matrix[j][d];
+                System.out.println(Arrays.deepToString(matrix));
+                matrix[j][d] = matrix[k][j];
+                System.out.println(Arrays.deepToString(matrix));
+                matrix[k][j] = t;
+                System.out.println(Arrays.deepToString(matrix));
+            }
+
+        }
+        System.out.println(Arrays.deepToString(matrix));
+    }
 
 }
