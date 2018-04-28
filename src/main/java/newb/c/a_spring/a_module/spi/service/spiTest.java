@@ -12,7 +12,7 @@ public class spiTest {
         }
     }
     /**
-     * spi配置文件 配置在 /resources/META-INF/services 下
+     * spi配置文件 配置在 加载类路径下/META-INF/services/接口全称
      */
     @Test
     public void test(){
