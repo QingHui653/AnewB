@@ -40,18 +40,18 @@ import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
 @RequestMapping("resources/elasticsearch")
 public class ElasticSearchController {
 
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	@Autowired(required=false)
 	private ElasticsearchTemplate elasticsearchTemplate;
 
 	@Autowired(required = false)
 	private EsMovieService esMovieService;
-	@Autowired
+
+	@Autowired(required = false)
 	private RestClient restClient;
 
 	private String esIndexName = "heros";
-
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
-
 
 	@GetMapping("CreatIndexMapping")
 	@ApiOperation(value="创建elastic index和mapping")
