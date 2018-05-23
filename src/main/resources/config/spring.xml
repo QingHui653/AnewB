@@ -93,7 +93,7 @@
 	<!-- <import resource="dubbo/spring-dubboxRest.xml"/> -->
 
 	<!-- elasticsearch -->
-	<import resource="elasticsearch/elasticsearch5.xml"/>
+	<!--<import resource="elasticsearch/elasticsearch5.xml"/>-->
 	<!--<import resource="elasticsearch/spring-elasticsearch.xml"/>-->
 
 
