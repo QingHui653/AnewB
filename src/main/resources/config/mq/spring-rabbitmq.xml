@@ -27,8 +27,8 @@
 	<bean id="rabbitListenerContainerFactory" class="org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory">
 	    <property name="messageConverter" ref="jsonMessageConverter" />
 	    <property name="connectionFactory" ref="connectionFactory" />
-	    <property name="concurrentConsumers" value="3" />
-	    <property name="maxConcurrentConsumers" value="10" />
+	    <property name="concurrentConsumers" value="10" />
+	    <property name="maxConcurrentConsumers" value="100" />
 	</bean>
 
 	<!--durable:是否持久化 exclusive: 仅创建者可以使用的私有队列，断开后自动删除 auto_delete: 当所有消费客户端连接断开后，是否自动删除队列 -->
@@ -45,6 +45,9 @@
 	<rabbit:queue id="headers_one" durable="true" auto-delete="false" exclusive="false" name="headers_one"/>
 	<rabbit:queue id="headers_two" durable="true" auto-delete="false" exclusive="false" name="headers_two"/>
 
+	<rabbit:queue id="all" durable="true" auto-delete="false" exclusive="false" name="all"/>
+	<rabbit:queue id="only" durable="true" auto-delete="false" exclusive="false" name="only"/>
+
 	<!-- producer->exchange->binding->queue->consumer     direct fanout topic headers  四种类型-->
 	<!--定义exchange模式为direct，意思就是消息与一个特定的路由键完全匹配，才会转发 直连 -->
 	<!--fanout类型转发器特别简单，把所有它介绍到的消息，广播到所有它所知道的队列  广播-->
@@ -53,6 +56,7 @@
             <rabbit:binding queue="queue_one" key="queue_one" />
 			<rabbit:binding queue="queue_two" key="queue_two"/>
 			<rabbit:binding queue="queue_three" key="queue_three"/>
+			<rabbit:binding queue="only" key="only"/>
         </rabbit:bindings>
     </rabbit:direct-exchange>
 
@@ -60,6 +64,7 @@
 		<rabbit:bindings>
 			<rabbit:binding queue="fanout_one"/>
 			<rabbit:binding queue="fanout_two"/>
+			<rabbit:binding queue="all"/>
 		</rabbit:bindings>
 	</rabbit:fanout-exchange>
 

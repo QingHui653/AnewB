@@ -75,4 +75,8 @@ public class RabbitMqListener  {
 		System.out.println("headers_two " + new String(msg.getBody(),"UTF-8"));
 	}
 
+	@RabbitListener(queues="only")
+	public void onlyListener(Message msg) throws UnsupportedEncodingException {
+		System.out.println("only " + new String(msg.getBody(),"UTF-8"));
+	}
 }
