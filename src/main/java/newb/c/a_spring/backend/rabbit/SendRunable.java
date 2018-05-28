@@ -1,9 +1,14 @@
 package newb.c.a_spring.backend.rabbit;
 
+import newb.c.a_spring.backend.sql.model.MqTeachDTO;
+import newb.c.a_spring.backend.sql.model.basemodel.MqStudent;
+import newb.c.a_spring.backend.sql.model.basemodel.MqTeach;
 import newb.c.a_spring.backend.sql.model.basemodel.Result;
 import newb.c.util.common.ResultUtil;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.UUID;
 
 public class SendRunable implements Runnable {
@@ -26,11 +31,31 @@ public class SendRunable implements Runnable {
 
     @Override
     public void run() {
-        ResultUtil obj = new ResultUtil();
-        for (int i = 0; i < 50; i++) {
-            obj.setSuccessful(true);
-            obj.setResultmessage(exchange+"-"+routingKey+"-"+i+"：在"+System.currentTimeMillis()+"时间生成了ID为+"+UUID.randomUUID()+"的对象");
-            rabbitTemplate.convertAndSend(exchange,routingKey,obj);
+        MqTeachDTO mqTeachDTO;
+        MqTeach mqTeach;
+        MqStudent mqStudent;
+        for (int i = 0; i < 500; i++) {
+            mqTeachDTO =new MqTeachDTO();
+
+            mqTeach =new MqTeach();
+            String teachId = UUID.randomUUID().toString()+i;
+            mqTeach.setId(UUID.randomUUID().toString());
+            mqTeach.setInfo(exchange+"-"+routingKey+"-"+i+"：在"+System.currentTimeMillis()+"时间生成了ID为+"+teachId+"的对象");
+            mqTeach.setName(teachId);
+            mqTeach.setTime(new Date());
+
+            mqStudent = new MqStudent();
+            String studentId = UUID.randomUUID().toString()+i;
+            mqStudent.setId(studentId);
+            mqStudent.setInfo(exchange+"-"+routingKey+"-"+i+"：在"+System.currentTimeMillis()+"时间生成了ID为+"+studentId+"的对象");
+            mqStudent.setName(studentId);
+            mqStudent.setTeachId(teachId);
+            mqStudent.setTime(new Date());
+
+            mqTeachDTO.setMqTeach(mqTeach);
+            mqTeachDTO.setMqStudent(mqStudent);
+
+            rabbitTemplate.convertAndSend(exchange,routingKey,mqTeachDTO);
         }
     }
 }

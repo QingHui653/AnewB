@@ -36,8 +36,8 @@
 	<rabbit:queue id="queue_two" durable="true" auto-delete="false" exclusive="false" name="queue_two"/>
 	<rabbit:queue id="queue_three" durable="true" auto-delete="false" exclusive="false" name="queue_three"/>
 
-	<rabbit:queue id="fanout_one" durable="true" auto-delete="false" exclusive="false" name="fanout_one"/>
-	<rabbit:queue id="fanout_two" durable="true" auto-delete="false" exclusive="false" name="fanout_two"/>
+	<!--<rabbit:queue id="fanout_one" durable="true" auto-delete="false" exclusive="false" name="fanout_one"/>
+	<rabbit:queue id="fanout_two" durable="true" auto-delete="false" exclusive="false" name="fanout_two"/>-->
 
 	<rabbit:queue id="topic_one" durable="true" auto-delete="false" exclusive="false" name="topic_one"/>
 	<rabbit:queue id="topic_two" durable="true" auto-delete="false" exclusive="false" name="topic_two"/>
@@ -62,8 +62,8 @@
 
 	<rabbit:fanout-exchange name="fanoutExchange" durable="true" auto-delete="false">
 		<rabbit:bindings>
-			<rabbit:binding queue="fanout_one"/>
-			<rabbit:binding queue="fanout_two"/>
+			<!--<rabbit:binding queue="fanout_one"/>
+			<rabbit:binding queue="fanout_two"/>-->
 			<rabbit:binding queue="all"/>
 		</rabbit:bindings>
 	</rabbit:fanout-exchange>
