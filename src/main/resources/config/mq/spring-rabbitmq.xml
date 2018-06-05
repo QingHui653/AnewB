@@ -27,10 +27,12 @@
 	<bean id="rabbitListenerContainerFactory" class="org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory">
 	    <property name="messageConverter" ref="jsonMessageConverter" />
 	    <property name="connectionFactory" ref="connectionFactory" />
-	    <property name="concurrentConsumers" value="10" />
-	    <property name="maxConcurrentConsumers" value="100" />
+	    <property name="concurrentConsumers" value="1" />
+		<!-- 最大消费者 -->
+	    <property name="maxConcurrentConsumers" value="10" />
+		<!-- 预读数量，但还是单条操作,不支持批量 -->
+		<property name="prefetchCount" value="20" />
 	</bean>
-
 	<!--durable:是否持久化 exclusive: 仅创建者可以使用的私有队列，断开后自动删除 auto_delete: 当所有消费客户端连接断开后，是否自动删除队列 -->
 	<rabbit:queue id="queue_one" durable="true" auto-delete="false" exclusive="false" name="queue_one"/>
 	<rabbit:queue id="queue_two" durable="true" auto-delete="false" exclusive="false" name="queue_two"/>

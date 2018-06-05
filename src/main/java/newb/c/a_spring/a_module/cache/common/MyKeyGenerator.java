@@ -14,7 +14,7 @@ public class MyKeyGenerator implements KeyGenerator {
 		if (params.length == 1) {
 			Object param = params[0];
 			if (param != null && !param.getClass().isArray()) {
-				return target.getClass().getName() + "." + method.getName() + param;
+				return target.getClass().getName() + "." + method.getName()+":" + param;
 			}
 		}
 		return target.getClass().getName() + "." + method.getName();

@@ -6,6 +6,9 @@
            http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/cache
            http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+    <!-- 只能作为 单机版缓存 -->
+    <!-- redis 的 key 生成，存取 为考虑多节点；具体查看 Mark 项目 -->
 	
 	<!-- 启用缓存注解功能，这个是必须的，否则注解不会生效，另外，该注解一定要声明在spring主配置文件中才会生效 -->
     <cache:annotation-driven cache-manager="cacheManager" key-generator="myKeyGenerator"/>

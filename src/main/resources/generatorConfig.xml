@@ -3,7 +3,7 @@
 <generatorConfiguration>
 	<!-- 使用mybaits 通用插件生成,建议不要使用这个 -->    
     <!-- 数据库驱动包位置 -->  
-    <classPathEntry location="E:\mysql\mysql-connector-java-5.1.26-bin.jar" />   
+    <classPathEntry location="D:\envir\maven-repository\mysql\mysql-connector-java\5.1.44\mysql-connector-java-5.1.44.jar" />
     <!-- <classPathEntry location="C:\oracle\product\10.2.0\db_1\jdbc\lib\ojdbc14.jar" />-->  
     <!-- <classPathEntry location="G:\笔记\JAR\sqljdbc4.jar" />   -->
     <context id="Mysql" targetRuntime="MyBatis3Simple"  defaultModelType="flat">  
@@ -16,24 +16,22 @@
             <property name="suppressAllComments" value="true" />  
         </commentGenerator>  
         <!-- 数据库链接URL、用户名、密码 -->  
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://119.23.231.239:3306/newb?characterEncoding=utf8" userId="root" password="7262140">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://193.112.44.172:3306/newb?characterEncoding=utf8" userId="root" password="7262140">
         <!-- <jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver" connectionURL="jdbc:sqlserver://127.0.0.1:1433;databaseName=newb" userId="sa" password="7262140"> -->   
         <!--<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@localhost:1521:orcl" userId="msa" password="msa">-->  
         </jdbcConnection>  
         
         <!-- 生成模型的包名和位置 -->  
-        <javaModelGenerator targetPackage="newb.c.model" targetProject="G:\bean"/>  
+        <javaModelGenerator targetPackage="newb.c.a_spring.backend.sql.model.basemodel" targetProject="D:\qhCode\AnewB\src\main\java"/>
         <!-- 生成的映射文件包名和位置 -->  
-        <sqlMapGenerator targetPackage="newb.c.mapping" targetProject="G:\bean"/>  
+        <sqlMapGenerator targetPackage="newb.c.a_spring.backend.sql.mapping" targetProject="D:\qhCode\AnewB\src\main\java"/>
         <!-- 生成DAO的包名和位置 -->  
-        <javaClientGenerator type="XMLMAPPER" targetPackage="newb.c.dao" targetProject="G:\bean" />  
-        
-        
-        
+        <javaClientGenerator type="XMLMAPPER" targetPackage="newb.c.a_spring.backend.sql.dao" targetProject="D:\qhCode\AnewB\src\main\java" />
+
         <!-- 要生成那些表(更改tableName和domainObjectName就可以) -->  
        <!--  <table tableName="user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />  --> 
         <!-- <table tableName="result" ><generatedKey column="oid" sqlStatement="Mysql" identity="true"/></table> -->
-        <table tableName="nove" ><generatedKey column="id" sqlStatement="Mysql" identity="true"/></table>
-        <table tableName="title" ><generatedKey column="id" sqlStatement="Mysql" identity="true"/></table>
+        <table tableName="mq_teach" ><generatedKey column="id" sqlStatement="Mysql" identity="false"/></table>
+        <table tableName="mq_student" ><generatedKey column="id" sqlStatement="Mysql" identity="false"/></table>
     </context>
 </generatorConfiguration> 
