@@ -64,6 +64,7 @@
 
 	<!--RequestMappingHandlerAdapter 返回映射处理适配器-->
 	<!-- validator="validator" 校验 -->
+	<!-- 配置HandlerAdapter -->
 	<mvc:annotation-driven validator="validator" enable-matrix-variables="true">
 		<mvc:message-converters>
 			<ref bean="stringHttpMessageConverter" />
@@ -75,24 +76,36 @@
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
 		<property name="providerClass" value="org.hibernate.validator.HibernateValidator"></property>
 		<!-- 国际化 -->
-		<!-- <property name="validationMessageSource" ref="messageSource"></property> -->
+		 <property name="validationMessageSource" ref="messageSource"></property>
 	</bean>
 
 	<!-- validator 国际化 -->
-	<!-- <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"
-		p:basename="i18n/messages" /> -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"
+		  p:basename="i18n/messages" <!--国际化加载的资源路径-->
+		  p:defaultEncoding="UTF-8"
+		  p:useCodeAsDefaultMessage="true" <!--不存在时 使用编码-->
+		  p:cacheSeconds="0" />
+	<!-- cookie加载器 同理存在 session加载器。controller 调用 setLocale 修改语言  -->
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="defaultLocale" value="zh_CN" />
+		<property name="cookieMaxAge" value="2592000"/>
+	</bean>
+	<!-- 国际化拦截器 看 mvc：interceptors -->
 
 	<!--解决Spring MVC返回字符串自动加"引号"和 中文乱码 -->
 	<bean id="stringHttpMessageConverter"
 		class="org.springframework.http.converter.StringHttpMessageConverter">
 		<constructor-arg value="UTF-8" />
 	</bean>
-
+	<!-- XML转换器 -->
 	<bean id="marshallingHttpMessageConverter"
 		class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
 		<property name="marshaller" ref="castorMarshaller" />
 		<property name="unmarshaller" ref="castorMarshaller" />
 	</bean>
+
+	<!-- bean 转xml 供marshaller和unmarshaller使用 -->
+	<bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller" />
 
 	<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
 	<bean id="mappingJackson2HttpMessageConverter"
@@ -108,8 +121,6 @@
 		</property>
 	</bean>
 
-	<!-- bean 转xml -->
-	<bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller" />
 
 	 <!-- 全局拦截器   会拦截静态资源
     Spring为我们提供了：
@@ -142,9 +153,15 @@
 	<!-- 配置权限拦截器  多个拦截器,顺序执行-->
 	<!-- 当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法 -->
 	<mvc:interceptors>
+		<!--测试 自定义拦截器-->
 		<mvc:interceptor>
 			<mvc:mapping path="/user/**" /><!-- 匹配的是url路径， 如果不配置或/**,将拦截所有的Controller -->
 			<bean class="newb.c.a_web.webmodule.interceptor.MemberInterceptor"></bean>
+		</mvc:interceptor>
+		<!--国际化 请求 拦截 参数为 language 切换-->
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" p:paramName="language" />
 		</mvc:interceptor>
 	 </mvc:interceptors>
 
@@ -187,6 +204,7 @@
                        会把"/**" url,注册到SimpleUrlHandlerMapping的urlMap中,把对静态资源的访问由HandlerMapping转到
     org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler处理并返回.
     DefaultServletHttpRequestHandler使用就是各个Servlet容器自己的默认Servlet. -->
+	<!--静态资源访问-->
     <mvc:default-servlet-handler/>
 
    <!--  对静态资源文件的访问  方案二 （二选一）/images/**映射到ResourceHttpRequestHandler进行处理，
@@ -213,11 +231,11 @@
 			<value>4096</value>
 		</property>
 	</bean>
-
+	<!--跨域问题-->
 	<mvc:cors>
         <mvc:mapping path="/**" allowed-origins="*" allow-credentials="true" max-age="1800" allowed-methods="GET,POST,OPTIONS"/>
     </mvc:cors>
-
+	<!--跨域问题-->
 	<!-- <mvc:cors>
 
     <mvc:mapping path="/api/**"

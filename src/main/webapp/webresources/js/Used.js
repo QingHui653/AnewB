@@ -385,3 +385,26 @@ var addcf = addc();
 function con() {
     console.info(addcf());
 }
+
+// POST 请求 提交表单 跳转页面
+
+function virtualPost(url, params, target) {
+    var temp = document.createElement("form");
+    temp.action = url;
+    temp.method = "post";
+    temp.style.display = "none";
+    if (target) {
+        temp.target = target;
+    }
+    for (var x in params) {
+        var opt = document.createElement("textarea");
+        opt.name = x;
+        opt.value = params[x];
+        temp.appendChild(opt);
+    }
+    document.body.appendChild(temp);
+    temp.submit();
+    return temp;
+}
+
+virtualPost(baseURL + '/salesOrders/print', {id: id, outboundId: outboundId, status: status}, '_blank')
