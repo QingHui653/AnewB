@@ -27,6 +27,11 @@ import javax.mail.internet.MimeUtility;
  * @author woshizbh
  *
  */
+
+/**
+ *  直接使用 Apache email util
+ */
+@Deprecated
 public class mail {
 	private final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
 	private String smtpServer; // SMTP服务器地址
