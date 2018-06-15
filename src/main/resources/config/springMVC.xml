@@ -80,10 +80,12 @@
 	</bean>
 
 	<!-- validator 国际化 -->
+	<!--国际化加载的资源路径-->
+	<!--不存在时 使用编码-->
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"
-		  p:basename="i18n/messages" <!--国际化加载的资源路径-->
+		  p:basename="i18n/messages"
 		  p:defaultEncoding="UTF-8"
-		  p:useCodeAsDefaultMessage="true" <!--不存在时 使用编码-->
+		  p:useCodeAsDefaultMessage="true"
 		  p:cacheSeconds="0" />
 	<!-- cookie加载器 同理存在 session加载器。controller 调用 setLocale 修改语言  -->
 	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
