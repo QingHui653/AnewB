@@ -18,6 +18,9 @@
 	<typeAliases>
 		<!-- <typeAlias alias="User" type="com.zeusjava.kernel.entity.User" /> -->
 	</typeAliases>
+	<plugins>
+		<plugin interceptor="newb.c.a_spring.backend.MybatisInterceptor"></plugin>
+	</plugins>
 	<mappers>
 		<!--<mapper resource="com/zeusjava/kernel/mapper/UserMapper.xml"/>-->
 		<!--<mapper class="com.zeusjava.kernel.dao.UserMapper"/>-->

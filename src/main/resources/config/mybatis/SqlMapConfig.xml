@@ -27,6 +27,9 @@
         <!-- 数据库超过25000秒仍未响应则超时 -->
         <setting name="defaultStatementTimeout" value="25000"/>
     </settings>
+    <plugins>
+        <plugin interceptor="newb.c.a_spring.backend.MybatisInterceptor"></plugin>
+    </plugins>
     <!-- 和spring整合后 environments配置将废除-->
     <!--<environments default="development">
         <environment id="development">
