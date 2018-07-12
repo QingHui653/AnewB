@@ -21,7 +21,8 @@ public interface UserMapper extends MyMapper<User> {
 
 	int insertAll(List<User> userList);
 
-	@Select("select * from user where oid>=0 for update")
+//	@Select("select * from user where oid>=0 for update")
+	@Select("select * from user where oid>=0")
 	/*@Options(useCache = false,timeout = 10000,flushCache = false)
     @ResultMap("BaseResultMap")*/
 	List<User> selectAllForUpdate();

@@ -356,6 +356,7 @@ public class AVLTree<T extends Comparable> implements Tree<T>{
 
     /**
      * 左左单旋转(LL旋转) w变为x的根结点, x变为w的右子树
+     * LL 情况 需要 右旋
      * @param x
      * @return
      */
@@ -374,6 +375,7 @@ public class AVLTree<T extends Comparable> implements Tree<T>{
 
     /**
      * 右右单旋转(RR旋转) x变为w的根结点, w变为x的左子树
+     * RR 情况 需要 左旋
      * @return
      */
     private AVLNode<T> singleRotateRight(AVLNode<T> w){

@@ -1,8 +1,11 @@
 package test.core.dataStructure.Tree.AVLTree;
 
+import lombok.ToString;
+
 /**
  * 平衡二叉搜索树(AVL树)节点
  */
+@ToString
 public class AVLNode<T extends Comparable> {
 
     public AVLNode<T> left;//左结点

@@ -3,6 +3,8 @@ package newb.c.a_web.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import newb.c.a_spring.backend.sql.service.ResultService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -148,10 +150,17 @@ public class DbController {
 	 * @return
 	 */
 	@RequestMapping(value = "/user/selectuser", method = RequestMethod.GET)
-	@ApiOperation("测试 有索引的查询速度")
+	@ApiOperation("测试 有索引的查询速度 使用 pagehelper ")
 	@ResponseBody
 	public String selectUserForUpdate(ModelMap modelMap) {
+		PageHelper.startPage(1,5);
 		List<User> userList = userService.selectAllForUpdate();
+		PageInfo page = new PageInfo(userList);
+		System.out.println(page.getTotal());
+		System.out.println(page.getPages());
+		System.out.println(page.getPageNum());
+		System.out.println(page.getPageSize());
+		System.out.println(page.getSize());
 		System.out.println("有索引 forupdate--" + userList.size());
 		return "/views/jsp/showInfo";
 	}

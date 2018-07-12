@@ -221,10 +221,11 @@ public class NewTree {
                 //获取右孩子
                 NewNode top = (NewNode) stack.peek();
                 NewNode rightNode = top.rightNode;
-
-                if(rightNode==null|| rightNode==prev){
+                //先判断是否有右孩子或者右孩子是否已被访问过
+                if(rightNode==null|| rightNode==prev){//没有右孩子||右孩子已被访问过
+                    //如果没有右孩子或者右孩子已被访问,则弹出父结点并访问
                     currentNode = (NewNode) stack.pop();
-                    sb.append(currentNode.data+",");//将 左孩子全部入栈
+                    sb.append(currentNode.data+",");
                     //记录已访问过的结点
                     prev=currentNode;
                     //置空当前结点
