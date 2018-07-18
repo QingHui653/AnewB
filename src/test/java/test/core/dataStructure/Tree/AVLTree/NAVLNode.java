@@ -121,7 +121,6 @@ public class NAVLNode<T extends Comparable> {
         avlTree.insert(2);
         avlTree.insert(4);
         avlTree.insert(1);
-        Hashtable
 
         System.out.println(avlTree.toString());
 
