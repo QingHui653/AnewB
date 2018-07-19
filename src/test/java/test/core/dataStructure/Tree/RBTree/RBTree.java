@@ -102,6 +102,8 @@ public class RBTree<T extends Comparable> {
             }
         }
 
+        //根节点始终为黑色
+        setBlack(this.root);
     }
 
 
@@ -167,15 +169,21 @@ public class RBTree<T extends Comparable> {
 
     @Test
     public void testRBTree(){
+        // 测试 插入 始终是在 同一边的.
         RBTree rbTree = new RBTree();
         rbTree.insert(1);
         rbTree.insert(2);
         rbTree.insert(3);
         rbTree.insert(4);
         rbTree.insert(5);
-        rbTree.insert(6);
-        rbTree.insert(7);
 
-        System.out.println(rbTree.toString());
+        // 左旋 右旋 未判断 右树 为null  暂时不做了
+        RBTree rbTree2 = new RBTree();
+        rbTree2.insert(16);
+        rbTree2.insert(3);
+        rbTree2.insert(7);
+        //16, 3, 7, 11, 9, 26, 18, 14, 15
+
+        System.out.println(rbTree2.toString());
     }
 }
