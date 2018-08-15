@@ -1112,15 +1112,6 @@
             <version>1.4</version>
         </dependency>
 
-
-        <dependency>
-            <groupId>jdk.tools</groupId>
-            <artifactId>jdk.tools</artifactId>
-            <version>1.8</version>
-            <scope>system</scope>
-            <systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
-        </dependency>
-
         <dependency>
             <groupId>jp.sourceforge</groupId>
             <artifactId>qrcode</artifactId>
@@ -1217,7 +1208,12 @@
                 <!-- <configuration> <port>8081</port> <path>/AnewB</path> <uriEncoding>UTF-8</uriEncoding>
                     <finalName>AnewB</finalName> <server>tomcat7</server> </configuration> -->
             </plugin>
-
+            <plugin>
+                <!-- https://mvnrepository.com/artifact/org.sonarsource.scanner.maven/sonar-maven-plugin -->
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.4.1.1168</version>
+            </plugin>
         </plugins>
         <pluginManagement>
             <plugins>
