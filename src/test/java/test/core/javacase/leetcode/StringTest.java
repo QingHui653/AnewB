@@ -16,8 +16,14 @@ public class StringTest {
 
 //        System.out.println(Solution("rat","cat"));
 //        System.out.println(isPalindrome("A man, a plan, a canal: Panama"));
-        System.out.println(myAtoi("  0000000000012345678"));
+//        System.out.println(myAtoi("  0000000000012345678"));
+//        System.out.println(strStr("mississippi","issi"));
+//        System.out.println(countAndSay(6));
+        //["c","acc","ccc"]  {"ca","a"}
+        String[] strings = {"flower","owfl","flight"};
+        System.out.println(longestCommonPrefix(strings));
     }
+
 
     /**
      * 反转 字符串
@@ -229,4 +235,176 @@ public class StringTest {
 
         return l.intValue();
     }
+
+
+    /**
+     * 实现 strStr() 函数。
+     * 给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。
+     * haystack = "hello", needle = "ll"
+     * haystack = "aaaaa", needle = "bba"
+     * @param haystack
+     * @param needle
+     * @return
+     */
+    public int strStr(String haystack, String needle) {
+        /*if(needle==null || needle.length()==0) return 0;
+        char[] iC = haystack.toCharArray();
+        char[] jC = needle.toCharArray();
+        for (int i = 0; i < iC.length ; i++) {
+            int j = 0; int first = i ;
+            while (j<jC.length){
+                if(first>=iC.length || j>= jC.length) return -1;
+                if(iC[first]==jC[j]){
+                    if(j==jC.length-1) return i;
+                    first++;
+                    j++;
+                }else {
+                    break;
+                }
+            }
+        }
+        return -1;*/
+        // 投机分子
+        return haystack.indexOf(needle);
+    }
+
+    /**
+     * 报数序列是指一个整数序列，按照其中的整数的顺序进行报数，得到下一个数。其前五项如下：
+     *
+     * 1.     1
+     * 2.     11
+     * 3.     21
+     * 4.     1211
+     * 5.     111221
+     * 1 被读作  "one 1"  ("一个一") , 即 11。
+     * 11 被读作 "two 1s" ("两个一"）, 即 21。
+     * 21 被读作 "one 2",  "one 1" （"一个二" ,  "一个一") , 即 1211。
+     *
+     * 给定一个正整数 n ，输出报数序列的第 n 项。
+     *
+     * 注意：整数顺序将表示为一个字符串。
+     *
+     * 示例 1:
+     *
+     * 输入: 1
+     * 输出: "1"
+     * 示例 2:
+     *
+     * 输入: 4
+     * 输出: "1211"
+     * @param n
+     * @return
+     */
+    public String countAndSay(int n) {
+        if (n <= 0)
+            return "";
+        StringBuilder res = new StringBuilder();
+        StringBuilder pre = new StringBuilder();
+        res.append("1");
+        for (int i = 1; i < n; i++) {
+            pre = res;
+            res = new StringBuilder();
+            int count = 1;
+            for (int j = 1; j < pre.length(); j++) {
+                if (pre.charAt(j) == pre.charAt(j - 1)) {
+                    count++;
+                } else {
+                    res.append(count).append(pre.charAt(j - 1));
+                    count = 1;
+                }
+            }
+            res.append(count).append(pre.charAt(pre.length() - 1));
+        }
+
+        return res.toString();
+    }
+
+    /**
+     * 编写一个函数来查找字符串数组中的最长公共前缀。
+     * 如果不存在公共前缀，返回空字符串 ""。
+     * ["flower","owfl","igflht"]
+     * 输出: "fl"
+     *
+     * ["dog","racecar","car"]
+     * 输出: ""
+     * @param strs
+     * @return
+     */
+
+    public String longestCommonPrefix(String[] strs) {
+        // MMP 这 找的不是最长 公共前缀.找到 是最长公共子串了
+        // 前缀要求 从 0 开始相同
+        /*if(strs==null || strs.length ==0 ) return "";
+        if(strs.length==1) return strs[0];
+
+        int len = strs.length,preLen=0;
+        int[] curr =new int[strs.length];
+        StringBuilder res = new StringBuilder("");
+        StringBuilder before = new StringBuilder("");
+        for (int i = curr[0]; i < strs[0].length(); i++) {
+
+            boolean found =false;
+            // 遍历数组
+            for (int index = 1; index<len ;index++){
+                if(strs[index]==null || strs[index].length()==0) return "";
+                boolean noFound = false ;
+
+                //已经 全部有第一位了.只需判断接下来的 位数
+                if(preLen!=0){
+                    if(curr[index]+preLen < strs[index].length() && strs[0].charAt(curr[0]+preLen)==strs[index].charAt(curr[index]+preLen)){
+
+                    }else {
+                        preLen=0;i--;
+                        noFound = true;
+                    }
+
+                }else {
+                    //遍历 数组 字符串
+                    for (int j = curr[index]; j < strs[index].length() ; j++) {
+                        if(strs[index].charAt(j) == strs[0].charAt(i)){
+                            curr[0] = i;
+                            curr[index] = j;
+                            break;
+                        }
+
+                        if(j== strs[index].length()-1) noFound=true;
+                    }
+                }
+
+                if(noFound){
+                    before=res.length()>=before.length()?new StringBuilder(res):new StringBuilder(before);
+                    res = new StringBuilder();
+                    break;
+                }
+
+                if(index==len-1) {
+                    found=true;
+                    res.append(strs[0].charAt(i));
+                }
+            }
+            if(found)
+                preLen++;
+        }
+        return res.length()>=before.length()?res.toString():before.toString();*/
+
+
+
+       int index = 0;
+        if (strs.length == 0) {
+            return "";
+        }
+        for (int i = 0; i < strs[0].length(); i++) {
+            char current = strs[0].charAt(index);
+            for (String str : strs) {
+                if (str.length() == i || current != str.charAt(index)) {
+                    return str.substring(0, index);
+                }
+            }
+            index++;
+        }
+
+        return strs[0].substring(0, index);
+
+    }
+
 }
