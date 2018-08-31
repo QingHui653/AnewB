@@ -1133,9 +1133,20 @@
         <!--hbase-->
         <dependency>
             <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-common</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-client</artifactId>
             <version>2.1.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-protocol</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.apache.commons</groupId>
