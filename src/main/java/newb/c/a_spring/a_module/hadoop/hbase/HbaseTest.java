@@ -25,8 +25,7 @@ import org.junit.Test;
 
 /**
  * Java - API操作Hbase数据库
- *
- * @author yuanxw
+ * docker run -d -p 2181:2181 -p 16000:16000 -p 16010:16010 -p 16201:16201 -p 16301:16301 --name hbase harisekhon/hbase
  */
 public class HbaseTest {
     // Hbase数据库配置
@@ -39,9 +38,9 @@ public class HbaseTest {
         System.out.println("*********HbaseDemo.init()，执行开始*********");
         // 指定zk的地址，多个用“,”分割
         conf = HBaseConfiguration.create();
-        conf.set("hbase.zookeeper.quorum", "193.112.44.172:2181");
-//        conf.set("hbase.zookeeper.quorum", "192.168.1.103:2181");
-//        conf.set("hbase.master", "193.112.44.172:16000");
+//        conf.set("hbase.zookeeper.quorum", "193.112.44.172:2181");
+        conf.set("hbase.zookeeper.quorum", "192.168.1.103:2181");
+//        conf.set("hbase.master", "192.168.1.103:16000");// 没用 会去找 zookeeper,没配置 找 localhost:2181
         try {
             conn = ConnectionFactory.createConnection(conf);
         } catch (IOException e) {
@@ -77,6 +76,19 @@ public class HbaseTest {
         System.out.println("*********HbaseDemo.testCreateTable()，执行完毕*********");
     }
 
+    @Test
+    public void testDeleteTable() throws IOException {
+        System.out.println("*********HbaseDemo.testDeleteTable()，执行开始*********");
+        // 获得管理员
+        HBaseAdmin admin = (HBaseAdmin) conn.getAdmin();
+        //先 禁用 表; 才能 删除表
+        admin.disableTable(TableName.valueOf("student"));
+        admin.deleteTable(TableName.valueOf("student"));
+        // 关闭链接
+        admin.close();
+        System.out.println("*********HbaseDemo.testDeleteTable()，执行完毕*********");
+    }
+
     /**
      * 插入数据
      */
@@ -98,6 +110,44 @@ public class HbaseTest {
             e.printStackTrace();
         }
         System.out.println("*********HbaseDemo.testPut()，执行完毕*********");
+    }
+
+    /**
+     * 插入数据
+     * 当 put的 数据 存在时.即 更新当前数据
+     */
+    @Test
+    public void testUpdate() {
+        System.out.println("*********HbaseDemo.testUpdate()，执行开始*********");
+        try {
+            // 获得表
+            HTable table = (HTable) conn.getTable(TableName.valueOf("student"));
+
+            Get get = new Get(Bytes.toBytes("rowkey001"));
+            Result result = table.get(get);
+            byte[] no = result.getValue(Bytes.toBytes("student_info"), Bytes.toBytes("seq_no"));
+            byte[] realName = result.getValue(Bytes.toBytes("student_info"), Bytes.toBytes("real_name"));
+            byte[] studentName = result.getValue(Bytes.toBytes("student_info"), Bytes.toBytes("student_name"));
+            byte[] schoolNo = result.getValue(Bytes.toBytes("student_info"), Bytes.toBytes("school_seq_no"));
+            String noS = Bytes.toString(no);
+            String realNameS = Bytes.toString(realName);
+            String studentNameS = Bytes.toString(studentName);
+            String schoolNoS = Bytes.toString(schoolNo);
+
+            System.out.println(noS+"-"+realNameS+"-"+studentNameS+"-"+schoolNoS);
+
+            // update
+            Put put = new Put(Bytes.toBytes("rowkey001"));
+            put.addColumn(Bytes.toBytes("student_info"), Bytes.toBytes("seq_no"), Bytes.toBytes("0012"));
+            put.addColumn(Bytes.toBytes("student_info"), Bytes.toBytes("real_name"), Bytes.toBytes("wangjiajia2"));
+            put.addColumn(Bytes.toBytes("student_info"), Bytes.toBytes("student_name"), Bytes.toBytes("王佳佳2"));
+            put.addColumn(Bytes.toBytes("student_info"), Bytes.toBytes("school_seq_no"), Bytes.toBytes("s0012"));
+            table.put(put);
+            table.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("*********HbaseDemo.testUpdate()，执行完毕*********");
     }
 
     /**
