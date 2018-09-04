@@ -1147,6 +1147,13 @@
             <version>2.1.0</version>
         </dependency>
 
+        <!--hive-->
+        <dependency>
+            <groupId>org.apache.hive</groupId>
+            <artifactId>hive-jdbc</artifactId>
+            <version>2.3.3</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.apache.commons</groupId>
