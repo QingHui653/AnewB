@@ -15,8 +15,11 @@
 
     <context:component-scan base-package="newb.c..a_module.joba_springs" />
 	
-    <task:annotation-driven scheduler="qbScheduler" mode="proxy" />
+    <task:annotation-driven executor="annotationExecutor" scheduler="qbScheduler" mode="proxy" />
+
     <task:scheduler id="qbScheduler" pool-size="10" />
+    <!--Async配置 https://www.cnblogs.com/zhengbin/p/6104502.html-->
+    <task:executor id="annotationExecutor" pool-size="20"/>
     <!--
     fixedRate：每隔多少毫秒执行一次该方法
     fixed-delay="1000"  每秒触发一次

@@ -8,7 +8,8 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
-
+/*Async配置 https://www.cnblogs.com/zhengbin/p/6104502.html*/
+/*配置了 Async报错 https://my.oschina.net/tridays/blog/805111*/
 @Service
 public class AyscTask{
 
