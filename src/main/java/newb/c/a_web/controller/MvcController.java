@@ -8,7 +8,7 @@ import java.util.concurrent.Future;
 
 import javax.servlet.http.HttpServletRequest;
 
-import newb.c.a_web.controller.component.AyscTask;
+import newb.c.a_web.controller.component.AsyncTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -40,14 +40,10 @@ public class MvcController {
 	@Autowired
 	private UserService userService;
 	@Autowired
-	private AyscTask ayscTask;
+	private AsyncTask ayscTask;
 
 	/**
 	 * 返回中文字符串,需要在MVC中配置 不然会自动加引号
-	 * 
-	 * @param modelMap
-	 * @param userId
-	 * @return
 	 */
 	@RequestMapping(value = "/string", method = RequestMethod.GET) // ,produces
 																	// ="text/html;charset=UTF-8"
