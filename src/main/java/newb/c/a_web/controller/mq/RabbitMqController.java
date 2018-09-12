@@ -1,5 +1,6 @@
 package newb.c.a_web.controller.mq;
 
+import lombok.extern.slf4j.Slf4j;
 import newb.c.a_spring.backend.sql.model.basemodel.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,10 +29,8 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("rabbitmq")
+@Slf4j
 public class  RabbitMqController {
-
-    private static final Logger logger = LoggerFactory.getLogger(RabbitMqController.class);
-
     @Autowired(required=false)
     private RabbitTemplate rabbitTemplate;
 //    @Autowired(required=false)

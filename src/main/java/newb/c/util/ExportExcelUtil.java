@@ -20,6 +20,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Test;
 
@@ -129,6 +130,7 @@ public class ExportExcelUtil {
 			wb = new HSSFWorkbook(inStr); // 2003-
 		} else if (excel2007U.equals(fileType)) {
 			wb = new XSSFWorkbook(inStr); // 2007+
+			wb = new SXSSFWorkbook((XSSFWorkbook)wb);//导出 大容量 使用 SXSSFWorkbook
 		} else {
 			throw new Exception("解析的文件格式有误！");
 		}

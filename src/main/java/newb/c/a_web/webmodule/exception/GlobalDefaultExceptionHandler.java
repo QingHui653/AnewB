@@ -2,8 +2,7 @@ package newb.c.a_web.webmodule.exception;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,10 +16,8 @@ import newb.c.util.common.ResultUtil;
  *
  */
 @ControllerAdvice
+@Slf4j
 public class GlobalDefaultExceptionHandler {
-	
-	private static final Logger logger = LoggerFactory.getLogger(GlobalDefaultExceptionHandler.class);
-	
 	@ExceptionHandler
 	@ResponseBody
 	public Object defaultErrorHandler(HttpServletRequest req, Exception e) {
@@ -41,7 +38,7 @@ public class GlobalDefaultExceptionHandler {
 		// return mav;
 		
 		System.out.println("---------进入全局异常处理-------GlobalDefaultExceptionHandler.defaultErrorHandler()");
-		logger.error("--全局捕获类捕获异常  ", e);
+		log.error("--全局捕获类捕获异常  ", e);
 		ResultUtil res = new ResultUtil();
 		res.setSuccessful(false);
 		if(e.getMessage()!=null){

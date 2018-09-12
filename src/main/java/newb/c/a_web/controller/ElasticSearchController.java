@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import lombok.extern.slf4j.Slf4j;
 import newb.c.a_spring.backend.elasticsearch.service.EsMovieService;
 import org.apache.commons.lang.StringUtils;
 import org.elasticsearch.action.ActionFuture;
@@ -20,8 +21,6 @@ import org.elasticsearch.index.query.QueryStringQueryBuilder;
 import org.elasticsearch.index.query.TermsQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.sort.SortOrder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -38,10 +37,8 @@ import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
 
 @Controller
 @RequestMapping("resources/elasticsearch")
+@Slf4j
 public class ElasticSearchController {
-
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
-
 	@Autowired(required=false)
 	private ElasticsearchTemplate elasticsearchTemplate;
 
@@ -137,7 +134,7 @@ public class ElasticSearchController {
 			elasticsearchTemplate.index(indexQuery);
 			return "true";
 		} catch (Exception e) {
-			logger.error("insert or update task info error.", e);
+			log.error("insert or update task info error.", e);
 			return "false";
 		}
 	}
@@ -164,7 +161,7 @@ public class ElasticSearchController {
 			elasticsearchTemplate.delete(clzz.getClass(),id);
 			return "true";
 		} catch (Exception e) {
-			logger.error("delete " + clzz + " by id " + id + " error.", e);
+			log.error("delete " + clzz + " by id " + id + " error.", e);
 			return "false";
 		}
 	}
@@ -199,7 +196,7 @@ public class ElasticSearchController {
 			}
 			return true;
 		} catch (Exception e) {
-			logger.error("ping elasticsearch error.", e);
+			log.error("ping elasticsearch error.", e);
 			return false;
 		}
 	}
@@ -363,9 +360,12 @@ public class ElasticSearchController {
             results.add(hit.getSource());    
         }    
         return results;    
-    }    
-    
-    public void afterPropertiesSet() throws Exception {    
+    }
+
+	/**
+	 * 没有 继承 InitializingBean 不会运行
+	 */
+	public void afterPropertiesSet() throws Exception {
         System.out.println("init...");    
     
     }

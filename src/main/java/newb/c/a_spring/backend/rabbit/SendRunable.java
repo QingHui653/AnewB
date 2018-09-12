@@ -3,11 +3,8 @@ package newb.c.a_spring.backend.rabbit;
 import newb.c.a_spring.backend.sql.model.MqTeachDTO;
 import newb.c.a_spring.backend.sql.model.basemodel.MqStudent;
 import newb.c.a_spring.backend.sql.model.basemodel.MqTeach;
-import newb.c.a_spring.backend.sql.model.basemodel.Result;
-import newb.c.util.common.ResultUtil;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 

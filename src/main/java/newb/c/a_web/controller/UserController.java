@@ -85,7 +85,6 @@ public class UserController {
 	/**
 	 * 转换时间类型现在使用@DateTimeFormat代替
 	 * 数字使用@NumberFormat 
-	 * @param binder
 	 */
 	/* 与@DateTimeFormat注解只能存在一种 */
 	/*@InitBinder
@@ -253,9 +252,7 @@ public class UserController {
 	  *  使用JQ serializeArray 表单格式化传入  这个看views下xzjl的JS
 	  *  Spring MVC自动转换失败 只能使用Map<String Object>接受
 	  *  使用GSON 转换为 bean
-	  * @param
-	  * Spring MVC自动转换失败 使用Map<String Object>接受
-	  * @return success字符串
+	  *  Spring MVC自动转换失败 使用Map<String Object>接受
 	  */
 	 @SuppressWarnings("unused")
 	@RequestMapping(value="/xzjl",method=RequestMethod.POST)

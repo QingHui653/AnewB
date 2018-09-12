@@ -9,7 +9,6 @@ import org.springframework.context.ApplicationListener;
  *
  * //http://blog.csdn.net/ilovejava_2010/article/details/7953419
  */
-@Slf4j
 public class TestApplicationListener implements ApplicationListener {
     /**
      * Handle an application event.
@@ -18,6 +17,6 @@ public class TestApplicationListener implements ApplicationListener {
      */
     @Override
     public void onApplicationEvent(ApplicationEvent event) {
-        log.info("进入TestApplicationListener"+event.toString());
+        System.out.println("进入TestApplicationListener"+event.toString());
     }
 }

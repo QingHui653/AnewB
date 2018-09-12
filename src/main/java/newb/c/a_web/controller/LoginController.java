@@ -18,7 +18,6 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * @ClassName LoginController
- * @author yuan
  * @version 1.0
  */
 @Controller
@@ -29,9 +28,6 @@ public class LoginController {
 	 *  将user 绑定到modelMap
 	 *  在JSP页面 使用 ${user.username}等访问
 	 *  跳转到/user/showInfo
-	 * @param modelMap
-	 * @param userId
-	 * @return
 	 */
 	@RequestMapping(value="/login",method={RequestMethod.GET,RequestMethod.POST})
 	@ApiOperation("使用shiro  进行登录调用")

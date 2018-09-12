@@ -32,10 +32,8 @@ import newb.c.a_spring.backend.sql.model.basemodel.User;
 
 /**
  * @ClassName LoginController
- * @author yuan
  * @version 1.0
  */
-@SuppressWarnings("static-access")
 @Controller
 @RequestMapping("resources/mongodb")
 public class MongodbController {

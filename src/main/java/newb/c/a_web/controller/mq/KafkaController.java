@@ -2,6 +2,7 @@ package newb.c.a_web.controller.mq;
 
 import java.util.Map;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,8 @@ import newb.c.a_spring.api.mq.kafka.KafkaProducerServer;
  */
 @Controller
 @RequestMapping("kafka")
+@Slf4j
 public class KafkaController {
-
-    private static final Logger logger = LoggerFactory.getLogger(KafkaController.class);
-    
     @Autowired(required=false)
     private KafkaProducerServer kafkaProducer;
     
@@ -55,7 +54,7 @@ public class KafkaController {
     @ResponseBody
     public  Object index() {
         for (int i = 0; i < 50; i++) {
-            logger.info("======send=====" + i);
+            log.info("======send=====" + i);
             kafkaTemplate.send("test", "key", "测试"+i);
         }
         return "finished";

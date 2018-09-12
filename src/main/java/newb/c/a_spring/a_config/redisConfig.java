@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 
 @Configuration
-@EnableRedisRepositories(basePackages = {"new.c.a_spring.backend.redis"})
+@EnableRedisRepositories(basePackages = {"newb.c.a_spring.backend.redis"})
 public class redisConfig {
 
 }

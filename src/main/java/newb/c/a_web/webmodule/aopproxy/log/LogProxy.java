@@ -3,18 +3,15 @@ package newb.c.a_web.webmodule.aopproxy.log;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Aspect
 @Service
+@Slf4j
 public class LogProxy {
-
-	private static final Logger logger = LoggerFactory.getLogger(LogProxy.class);
-
 	private Map<Integer,Integer> trackCounts =new HashMap<>();
 
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import lombok.extern.slf4j.Slf4j;
 import newb.c.a_spring.backend.sql.service.ResultService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import newb.c.a_spring.backend.sql.service.UserService;
 
 @Controller
 @RequestMapping("db")
+@Slf4j
 public class DbController {
 
 	@Autowired
@@ -92,9 +94,6 @@ public class DbController {
 	/**
 	 * save 测试批量插入
 	 *
-	 * @param modelMap
-	 * @param userId
-	 * @return
 	 */
 	@RequestMapping(value = "/user/save", method = RequestMethod.GET)
 	@ApiOperation("测试批量插入方法")
@@ -127,9 +126,6 @@ public class DbController {
 
 	 /**
 	  * 多线程 测试批量插入
-	  * @param modelMap
-	  * @param userId
-	  * @return
 	  */
 	 @RequestMapping(value="/user/saveByMultiThread",method= RequestMethod.GET)
 	 @ApiOperation("多线程测试批量插入方法")
@@ -144,11 +140,6 @@ public class DbController {
 
 
 
-	/**
-	 * @param modelMap
-	 * @param userId
-	 * @return
-	 */
 	@RequestMapping(value = "/user/selectuser", method = RequestMethod.GET)
 	@ApiOperation("测试 有索引的查询速度 使用 pagehelper ")
 	@ResponseBody
@@ -167,10 +158,6 @@ public class DbController {
 
 	/**
 	 * userCahce表，测试插入10w条数据
-	 *
-	 * @param modelMap
-	 * @param userId
-	 * @return
 	 */
 	@RequestMapping(value = "/userCache/save", method = RequestMethod.GET)
 	@ApiOperation("测试usercache 批量插入数据")
@@ -203,10 +190,6 @@ public class DbController {
 
 	/**
 	 * del 测试事务 具体看BaseServiceImpl
-	 *
-	 * @param modelMap
-	 * @param userId
-	 * @return
 	 */
 
 	@RequestMapping(value = "/newb/del", method = RequestMethod.POST)
