@@ -588,6 +588,21 @@
             <version>2.2.3</version>
         </dependency>
 
+        <!--jar包冲突-->
+        <!-- 引入elastic-job-lite核心模块 -->
+        <!--<dependency>
+            <groupId>com.dangdang</groupId>
+            <artifactId>elastic-job-lite-core</artifactId>
+            <version>2.1.5</version>
+        </dependency>
+
+        &lt;!&ndash; 使用springframework自定义命名空间时引入 &ndash;&gt;
+        <dependency>
+            <groupId>com.dangdang</groupId>
+            <artifactId>elastic-job-lite-spring</artifactId>
+            <version>2.1.5</version>
+        </dependency>-->
+
         <!-- https://mvnrepository.com/artifact/com.google.zxing/core -->
         <!-- google 二维码 -->
         <dependency>
@@ -1105,6 +1120,16 @@
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-common</artifactId>
             <version>2.9.1</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>curator-client</artifactId>
+                    <groupId>org.apache.curator</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>curator-framework</artifactId>
+                    <groupId>org.apache.curator</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.hadoop</groupId>

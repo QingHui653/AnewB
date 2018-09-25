@@ -42,8 +42,10 @@
 
 	<!-- 定时任务 -->
 	<!--<import resource="job/spring-task.xml" />-->
-	<!-- <import resource="job/spring-job2.xml" /> -->
-	<!-- <import resource="job/spring-quarz-distributed.xml" /> -->
+	<!--<import resource="job/spring-job2.xml" /> -->
+	<!--<import resource="job/spring-quarz-distributed.xml" /> -->
+	<!--分布式集群定时任务 elastic-job -->
+	<!--<import resource="job/spring-elastic-job.xml" />-->
 
 	<!-- 分布式事务 -->
 	<!-- <import resource="atomikos/spring-jta.xml" /> -->
