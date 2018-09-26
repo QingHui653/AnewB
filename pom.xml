@@ -820,6 +820,30 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--操作zookeeper客户端 通常使用这个 不使用zookeeper 自带-->
+        <!-- https://mvnrepository.com/artifact/org.apache.curator/curator-recipes -->
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-framework</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-client</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.curator/curator-examples -->
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-examples</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+
 
         <!-- dubbox REST依赖 -->
         <dependency>
