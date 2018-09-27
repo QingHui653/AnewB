@@ -3,8 +3,7 @@ package test.core.javacase.leetcode;
 import io.swagger.models.auth.In;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Auther:woshizbh
@@ -24,9 +23,26 @@ public class LinkTest {
         node2.next=node3;
         node3.next=node4;
         node4.next=node5;
+        node5.next=node1;
 
-        node1= reverseList(node1);
-        System.out.println(node1);
+
+        ListNode node11 = new ListNode(2);
+        ListNode node12 = new ListNode(5);
+        ListNode node13 = new ListNode(7);
+        node11.next=node12;
+        node12.next = node13;
+//        node1= reverseList(node1);
+//        System.out.println(node1);
+
+//        ListNode ret = mergeTwoLists(node1,node11);
+//        System.out.println(ret);
+
+//        ListNode node21 = new ListNode(-129);
+//        ListNode node22 = new ListNode(-129);
+//        node21.next=node22;
+//        System.out.println(isPalindrome(node21));
+
+        System.out.println(hasCycle(node1));
     }
 
     /**
@@ -133,5 +149,132 @@ public class LinkTest {
         }
 
         return prev;
+    }
+
+    /**
+     * 将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
+     * 示例：
+     *
+     * 输入：1->2->4, 1->3->4
+     * 输出：1->1->2->3->4->4
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode listNode = new ListNode(0);
+
+        ListNode tmp = listNode;
+
+        while (l1!=null && l2!=null){
+            if(l1.val<=l2.val){
+                listNode.next=l1;
+                listNode=listNode.next;
+                l1=l1.next;
+            }else {
+                listNode.next=l2;
+                listNode=listNode.next;
+                l2=l2.next;
+            }
+        }
+
+        if(l2!=null){
+            listNode.next=l2;
+        }
+
+        if(l1!=null){
+            listNode.next=l1;
+        }
+
+        return tmp.next;
+    }
+
+    public ListNode mergeTwoLists2(ListNode l1, ListNode l2) {
+        if(l1 == null)
+            return l2;
+        else if(l2 == null)
+            return l1;
+        ListNode root = null;
+        if(l1.val < l2.val) {
+            root = l1;
+            root.next = mergeTwoLists(l1.next, l2);
+        } else {
+            root = l2;
+            root.next = mergeTwoLists(l1, l2.next);
+        }
+        return root;
+    }
+
+
+    /**
+     * 请判断一个链表是否为回文链表。
+     *
+     * 示例 1:
+     *
+     * 输入: 1->2
+     * 输出: false
+     * 示例 2:
+     *
+     * 输入: 1->2->2->1
+     * 输出: true
+     * 进阶：
+     * 你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？
+     * @param head
+     * @return
+     */
+    public boolean isPalindrome(ListNode head) {
+
+//        List list = new ArrayList<>();
+//
+//        while (head!=null){
+//            list.add(head.val);
+//            head=head.next;
+//        }
+//
+//        for (int i = 0,j=list.size()-1; i <list.size() ; i++,j--) {
+//            if(!list.get(i).equals(list.get(j)))
+//                return false;
+//        }
+//
+//        return true;
+
+        Stack<Integer> stack = new Stack<>();
+        ListNode cur = head;
+        //全部压入栈中
+        while(cur!=null){
+            stack.push(cur.val);
+            cur = cur.next;
+        }
+        cur = head;
+        //与栈中值对比
+        while(cur!= null){
+            if(cur.val!=stack.pop()){
+                return false;
+            }
+            cur = cur.next;
+        }
+        return true;
+    }
+
+
+    /**
+     * 给定一个链表，判断链表中是否有环。
+     * 进阶：
+     * 你能否不使用额外空间解决此题？
+     * @param head
+     * @return
+     * 在链表中跑圈,必定会相遇
+     */
+    public boolean hasCycle(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+        while (fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+
+            if(slow==fast)
+                return true;
+        }
+        return false;
     }
 }
