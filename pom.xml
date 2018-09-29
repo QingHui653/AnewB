@@ -1219,6 +1219,13 @@
             </exclusions>
         </dependency>
 
+        <!-- disruptor 高性能 无锁队列 -->
+        <!-- https://mvnrepository.com/artifact/com.lmax/disruptor -->
+        <dependency>
+            <groupId>com.lmax</groupId>
+            <artifactId>disruptor</artifactId>
+            <version>3.4.2</version>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.commons</groupId>
