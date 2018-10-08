@@ -616,6 +616,14 @@
             <version>2.1.5</version>
         </dependency>-->
 
+        <!-- https://mvnrepository.com/artifact/com.xuxueli/xxl-job-core -->
+        <!--<dependency>
+            <groupId>com.xuxueli</groupId>
+            <artifactId>xxl-job-core</artifactId>
+            <version>1.9.2</version>
+        </dependency>-->
+
+
         <!-- https://mvnrepository.com/artifact/com.google.zxing/core -->
         <!-- google 二维码 -->
         <dependency>
