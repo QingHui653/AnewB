@@ -97,8 +97,8 @@ public class TreeTest {
             return 0;
         }
 
-        int left = maxDepth(root.left);
-        int right = maxDepth(root.right);
+        int left = maxDepth1(root.left);
+        int right = maxDepth1(root.right);
         return left>=right?left+1:right+1;
     }
 
@@ -289,11 +289,22 @@ public class TreeTest {
      * @param nums
      * @return
      */
-    // 按照输入 生成树,当高度差=2时,旋转
-    // 平衡二叉树的 生成
+    // 已经是有序, 直接取中值做完 root ,然后左边为左树,右边做右树
     public TreeNode sortedArrayToBST(int[] nums) {
-        if(nums==null || nums.length==0) return null;
+        return sortedArrayToBST(nums, 0, nums.length - 1);
+    }
 
-        return null;
+    public TreeNode sortedArrayToBST(int[] nums, int start, int end) {
+        if (start > end) {
+            return null;
+        } else if (start == end) {
+            return new TreeNode(nums[start]);
+        } else {
+            int mid = (start + end) / 2;
+            TreeNode root = new TreeNode(nums[mid]);
+            root.left = sortedArrayToBST(nums, start, mid - 1);
+            root.right = sortedArrayToBST(nums, mid + 1, end);
+            return root;
+        }
     }
 }
