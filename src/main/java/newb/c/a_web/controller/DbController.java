@@ -6,6 +6,7 @@ import java.util.List;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
+import newb.c.a_spring.backend.sql.service.MovieService;
 import newb.c.a_spring.backend.sql.service.ResultService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,8 @@ public class DbController {
 	private TestCacheService userCacheService;
 	@Autowired
 	private ResultService resultService;
+	@Autowired
+	private MovieService movieService;
 
 	public volatile Integer threadCount = 0;
 
@@ -221,5 +224,18 @@ public class DbController {
 		}
 //		System.out.println("--- "+userList.size());
 		return userList;
+	}
+
+
+	/**
+	 * 在A中调用循环调用B 第51 次B失败,A全部回滚,B提交前50次.
+	 * @return
+	 */
+	@RequestMapping("/testAOrB")
+	@ResponseBody
+	@ApiOperation("测试 REQUIRES_NEW")
+	public Object testTranscation(){
+		movieService.testAOrB();
+		return "OK";
 	}
 }
