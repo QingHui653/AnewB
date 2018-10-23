@@ -2,6 +2,7 @@ package newb.c.a_web.controller.component;
 
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Future;
 
 import lombok.extern.slf4j.Slf4j;
@@ -45,6 +46,17 @@ public class AsyncTask {
         long end = System.currentTimeMillis();
         System.out.println("完成任务三，耗时：" + (end - start) + "毫秒");
         return new AsyncResult<>("任务三OK");
+    }
+
+    @Async("myAsync")
+    public Future<String> doTask(CountDownLatch countDownLatch,Integer i) throws Exception {
+        log.info("开始做任务三"+i);
+        long start = System.currentTimeMillis();
+        Thread.sleep(random.nextInt(10000));
+        long end = System.currentTimeMillis();
+        System.out.println("完成任务"+i+"，耗时：" + (end - start) + "毫秒");
+        countDownLatch.countDown();
+        return new AsyncResult<>("任务"+i+"OK");
     }
     
     //CompletableFuture jdk 1.8自带

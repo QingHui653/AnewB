@@ -4,6 +4,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Future;
 
 import javax.servlet.http.HttpServletRequest;
@@ -168,6 +169,27 @@ public class MvcController {
 		System.out.println("任务全部完成，总耗时：" + (end - start) + "毫秒");
 	}
 
+
+	/**
+	 * springmvc 返回异步任务
+	 *
+	 * @throws Exception
+	 */
+	@ApiOperation("调用异步任务")
+	@GetMapping("/asycTest2")
+	public void asycTest2() throws Exception {
+		CountDownLatch countDownLatch = new CountDownLatch(3);
+		long start = System.currentTimeMillis();
+		Future<String> task1 = ayscTask.doTask(countDownLatch,1);
+		Future<String> task2 = ayscTask.doTask(countDownLatch,2);
+		Future<String> task3 = ayscTask.doTask(countDownLatch,3);
+		countDownLatch.await();
+		System.out.println(task1.get());
+		System.out.println(task2.get());
+		System.out.println(task3.get());
+		long end = System.currentTimeMillis();
+		System.out.println("任务全部完成，总耗时：" + (end - start) + "毫秒");
+	}
 
 	/**
 	 * 使用forward 使之 重新进入另一个controller /user/newbs 转发
