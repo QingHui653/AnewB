@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import newb.c.util.ExcelUtil;
 import org.junit.Test;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -88,7 +89,7 @@ public class ExcelController {
 
     }
 
-    @RequestMapping("/getExcByHutool")
+    @GetMapping("/getExcByHutool")
     @ApiOperation("测试使用hutool获取excel文档  ")
     public void getExcByHutool(HttpServletRequest request,HttpServletResponse response) throws IOException {
 

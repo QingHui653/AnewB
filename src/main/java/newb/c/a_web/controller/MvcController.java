@@ -1,13 +1,11 @@
 package newb.c.a_web.controller;
 
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Future;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import newb.c.a_web.controller.component.AsyncTask;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +24,8 @@ import io.swagger.annotations.ApiParam;
 import newb.c.a_spring.backend.sql.model.basemodel.User;
 import newb.c.a_spring.backend.sql.service.UserService;
 import newb.c.util.annotation.RequestLimit;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import tk.mybatis.mapper.entity.Example;
 
 /**
@@ -222,5 +222,23 @@ public class MvcController {
 		// return "redi:/user/newbs";
 		return "redirect:/views/jsp/user/newbs";
 	}
-	
+
+
+	@ApiOperation("在方法未传入 httprequest 的 情况下获取 httprequest")
+	@RequestMapping(value = "/getHttpRequest", method = RequestMethod.GET)
+	@ResponseBody
+	public String getHttpRequest() {
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
+				.getRequestAttributes())
+				.getRequest();
+		Map<String, String[]> parameterMap = request.getParameterMap();
+
+		for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
+			System.out.println("params--"+entry.getKey()+"--"+ Arrays.toString(entry.getValue()));
+		}
+		HttpSession session = request.getSession();
+		System.out.println("session--"+session.toString());
+
+		return "OK";
+	}
 }

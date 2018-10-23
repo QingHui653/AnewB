@@ -40,12 +40,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -75,7 +70,7 @@ public class UserController {
 	Gson gson = new Gson();
 	
 	
-	@RequestMapping("date")
+	@GetMapping("date")
 	@ResponseBody
 	public Object date(@DateTimeFormat(iso=ISO.DATE) Date date) {
 		String dateString = sdf.format(date);
@@ -143,7 +138,7 @@ public class UserController {
 	
 	
 	@ResponseBody
-	@RequestMapping("/addCookie")
+	@GetMapping("/addCookie")
 	public void addCookie(HttpServletRequest request,HttpServletResponse response){
 	    Cookie cookie=new Cookie("test","hello cookie"+System.currentTimeMillis());
 	    cookie.setMaxAge(300);//设置生命周期以秒为单位
@@ -154,7 +149,7 @@ public class UserController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/showCookie")
+	@GetMapping("/showCookie")
 	public void showCookie(HttpServletRequest request,HttpServletResponse response){
 	    Cookie[] cookies=request.getCookies();//获取请求中的所有cookie
 	    if(null!=cookies) {
@@ -171,7 +166,7 @@ public class UserController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/getCookie")
+	@GetMapping("/getCookie")
 	public void getCookieBySpring(@CookieValue(value = "test", defaultValue = "hello") String cookie) {
 	        return;
 	}

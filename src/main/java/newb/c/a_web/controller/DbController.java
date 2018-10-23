@@ -12,10 +12,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import io.swagger.annotations.ApiOperation;
 import newb.c.a_spring.backend.sql.model.UserTrin;
@@ -231,7 +228,7 @@ public class DbController {
 	 * 在A中调用循环调用B 第51 次B失败,A全部回滚,B提交前50次.
 	 * @return
 	 */
-	@RequestMapping("/testAOrB")
+	@GetMapping("/testAOrB")
 	@ResponseBody
 	@ApiOperation("测试 REQUIRES_NEW")
 	public Object testTranscation(){
