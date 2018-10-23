@@ -1,33 +1,26 @@
 package newb.c.a_web.controller;
 
-import com.alibaba.excel.ExcelReader;
-import com.alibaba.excel.ExcelWriter;
-import com.alibaba.excel.metadata.Sheet;
-import com.alibaba.excel.read.context.AnalysisContext;
-import com.alibaba.excel.read.event.AnalysisEventListener;
-import com.alibaba.excel.support.ExcelTypeEnum;
+//import com.alibaba.excel.ExcelReader;
+//import com.alibaba.excel.ExcelWriter;
+//import com.alibaba.excel.metadata.Sheet;
+//import com.alibaba.excel.read.context.AnalysisContext;
+//import com.alibaba.excel.read.event.AnalysisEventListener;
+//import com.alibaba.excel.support.ExcelTypeEnum;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.poi.excel.ExcelWriter;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import newb.c.util.ExcelUtil;
 import org.junit.Test;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -95,8 +88,32 @@ public class ExcelController {
 
     }
 
+    @RequestMapping("/getExcByHutool")
+    @ApiOperation("测试使用hutool获取excel文档  ")
+    public void getExcByHutool(HttpServletRequest request,HttpServletResponse response) throws IOException {
+
+        List<String> row1 = CollUtil.newArrayList("aa", "bb", "cc", "dd");
+        List<String> row2 = CollUtil.newArrayList("aa1", "bb1", "cc1", "dd1");
+        List<String> row3 = CollUtil.newArrayList("aa2", "bb2", "cc2", "dd2");
+        List<String> row4 = CollUtil.newArrayList("aa3", "bb3", "cc3", "dd3");
+        List<String> row5 = CollUtil.newArrayList("aa4", "bb4", "cc4", "dd4");
+
+        List<List<String>> rows = CollUtil.newArrayList(row1, row2, row3, row4, row5);
+        ExcelWriter writer = cn.hutool.poi.excel.ExcelUtil.getWriter();
+        writer.merge(3, "全部");
+        writer.write(rows);
+
+        response.setContentType("application/vnd.ms-excel;charset=utf-8");
+        response.setHeader("Content-Disposition","attachment;filename=1.xls");
+
+        writer.flush(response.getOutputStream());
+        writer.close();
+
+    }
+
     /* 更多 样例 查看 github easyExcel */
-    @GetMapping("/writeExcelByEasyExcel")
+    //操作 excel 不使用 easyExcel, 请使用hutool
+    /*@GetMapping("/writeExcelByEasyExcel")
     @ApiOperation("测试使用EasyExcel获取excel文档 ")
     public void writeExcelByEasyExcel(HttpServletRequest request, HttpServletResponse response) throws IOException {
         ServletOutputStream out = out = response.getOutputStream();;
@@ -129,10 +146,10 @@ public class ExcelController {
         }
     }
 
-    /**
+    *//**
      * 在 controller 中 无法解析,需要在单独的类中
      * @throws IOException
-     */
+     *//*
     @GetMapping("/readByEasyExcel")
     @Test
     public void readByEasyExcel() throws IOException {
@@ -205,6 +222,6 @@ public class ExcelController {
         ll.add(list1);
 
         return ll;
-    }
+    }*/
 
 }
