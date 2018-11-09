@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import io.swagger.annotations.ApiOperation;
 import newb.c.a_web.controller.component.webmagic.GithubRepoPageProcessor;
-import newb.c.a_web.controller.component.webmagic.BearProcessor;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.pipeline.ConsolePipeline;
 
@@ -38,8 +37,8 @@ public class WebMagicController {
 	private MongoDbSaveMoviePipeline mongoDbSaveMoviePipeline;
 	@Autowired(required=false)
 	private EsSaveMoviePipeline esSaveMoviePipeline;
-	@Autowired
-	private BearProcessor bearProcessor;
+//	@Autowired
+//	private BearProcessor bearProcessor;
 	@Autowired(required=false)
 	private MongoTemplate mongoTemplate;
 
@@ -67,16 +66,6 @@ public class WebMagicController {
         .addPipeline(mongoDbSaveMoviePipeline)
         .thread(50)
         .run();
-	}
-
-	@RequestMapping(value="getBearMovie",method=RequestMethod.GET)
-	public void getBearMovie(){
-		Spider.create(bearProcessor)
-				.addUrl("http://98.126.159.33/V1/Product/detail?pid=1&")
-				.addPipeline(new ConsolePipeline())
-				.thread(5)
-				.run();
-		System.out.println("****************************************************");
 	}
 
 	@RequestMapping(value="getBearMovieExcel",method=RequestMethod.GET)
