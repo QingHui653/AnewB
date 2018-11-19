@@ -13,6 +13,7 @@ public class SpringConfig {
         ProcessBean processBean = new ProcessBean();
         processBean.setUsername("1");
         processBean.setPassword("1");
+        System.out.println("-- "+processBean.toString());
         return processBean;
     }
 
@@ -36,6 +37,7 @@ public class SpringConfig {
         return new TestBeanNameAware();
     }
 
+    // 不注释掉 .所以的 bean 初始化都会走 这个 钩子函数.
 //    @Bean
     public TestBeanPostProcessor testBeanPostProcessor(){
         return new TestBeanPostProcessor();

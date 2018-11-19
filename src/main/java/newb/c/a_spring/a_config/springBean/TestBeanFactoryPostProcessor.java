@@ -17,8 +17,6 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
  */
 public class TestBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
 
-    private static Logger logger = LoggerFactory.getLogger(TestBeanFactoryPostProcessor.class);
-
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         //BeanFactoryPostProcessor可以修改BEAN的配置信息而BeanPostProcessor不能
