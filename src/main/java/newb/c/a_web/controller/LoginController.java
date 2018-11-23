@@ -83,4 +83,15 @@ public class LoginController {
 		Subject subject = SecurityUtils.getSubject();
 		subject.logout();
 	}
+
+	// 退出
+	@RequestMapping(value="/security/index",method={RequestMethod.GET})
+	public String index() {
+		return "index.html";
+	}
+
+	@RequestMapping(value="/security/logout",method={RequestMethod.GET})
+	public String securityLogout() {
+		return "index.html";
+	}
 }

@@ -1,6 +1,5 @@
 package newb.c.a_spring.a_module.dubbo.test.zipkin;
 
-import newb.c.a_spring.a_module.dubbo.DemoService;
 import newb.c.a_spring.a_module.dubbo.ZipkinRefService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

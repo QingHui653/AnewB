@@ -60,6 +60,7 @@
 
         <!--spring -->
         <logger name="org.springframework" level="INFO"/>
+        <logger name="org.springframework.security" level="DEBUG"/>
 
         <!-- mybatis -->
         <logger name="org.apache.ibatis" level="DEBUG"/>

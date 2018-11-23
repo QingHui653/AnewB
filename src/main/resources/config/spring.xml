@@ -38,6 +38,9 @@
 	<!-- <import resource="mybatis/spring-mybatis-Shard.xml" /> -->
 	<!-- <import resource="mail/spring-mail.xml"/> -->
 
+	<!-- 权限 -->
+	<!--<import resource="shiro/springT-shiro.xml" />-->
+	<!--<import resource="security/springT-security.xml" />-->
 	<!-- 定时任务 -->
 	<!--<import resource="job/spring-task.xml" />-->
 	<!--<import resource="job/spring-job2.xml" /> -->
