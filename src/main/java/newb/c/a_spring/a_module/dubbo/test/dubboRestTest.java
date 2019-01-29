@@ -9,9 +9,12 @@ import newb.c.a_spring.backend.sql.model.basemodel.User;
 
 public class dubboRestTest {  
   
-    public static void main(String[] args) throws Exception {  
-        @SuppressWarnings("resource")
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "main/resources/dubbo/spring-dubbox-test.xml" });  
+    public static void main(String[] args) throws Exception {
+
+        ClassPathXmlApplicationContext RegistContext = new ClassPathXmlApplicationContext(new String[] { "config/dubbo/spring-dubboxRest.xml" });
+        RegistContext.start();
+
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "config/dubbo/spring-dubbox-test.xml" });
         context.start();  
   
         RestService restService = (RestService) context.getBean("restService"); //

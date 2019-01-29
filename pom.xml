@@ -839,10 +839,16 @@
         </dependency> -->
         <!-- https://mvnrepository.com/artifact/com.uogome/dubbo2 -->
         <!-- 整合的dubbox 2.8.4 的重新打包 上传到mvn -->
-        <dependency>
+        <!--<dependency>
             <groupId>com.uogome</groupId>
             <artifactId>dubbo2</artifactId>
             <version>1.0</version>
+        </dependency>-->
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>2.6.5</version>
         </dependency>
 
         <!-- zipkin -->
@@ -850,6 +856,12 @@
             <groupId>io.zipkin.brave</groupId>
             <artifactId>brave-instrumentation-dubbo-rpc</artifactId>
             <version>5.5.0</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>dubbo</artifactId>
+                    <groupId>com.alibaba</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
