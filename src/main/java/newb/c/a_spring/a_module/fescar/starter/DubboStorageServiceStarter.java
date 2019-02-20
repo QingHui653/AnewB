@@ -31,7 +31,7 @@ public class DubboStorageServiceStarter {
      */
     public static void main(String[] args) {
         ClassPathXmlApplicationContext storageContext = new ClassPathXmlApplicationContext(
-            new String[]{"spring/dubbo-storage-service.xml"});
+            new String[]{"config/fescar/fescar-dubbo-storage.xml"});
         storageContext.getBean("service");
         JdbcTemplate storageJdbcTemplate = (JdbcTemplate) storageContext.getBean("jdbcTemplate");
         storageJdbcTemplate.update("delete from storage_tbl where commodity_code = 'C00321'");

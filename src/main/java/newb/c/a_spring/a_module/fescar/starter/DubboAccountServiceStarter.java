@@ -31,7 +31,7 @@ public class DubboAccountServiceStarter {
      * @param args the input arguments
      */
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext accountContext = new ClassPathXmlApplicationContext(new String[]{"spring/dubbo-account-service.xml"});
+        ClassPathXmlApplicationContext accountContext = new ClassPathXmlApplicationContext(new String[]{"config/fescar/fescar-dubbo-account.xml"});
         accountContext.getBean("service");
         JdbcTemplate accountJdbcTemplate = (JdbcTemplate) accountContext.getBean("jdbcTemplate");
         accountJdbcTemplate.update("delete from account_tbl where user_id = 'U100001'");

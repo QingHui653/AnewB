@@ -21,11 +21,10 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import com.alibaba.fescar.core.context.RootContext;
-import com.alibaba.fescar.samples.dubbo.service.AccountService;
-import com.alibaba.fescar.samples.dubbo.ApplicationKeeper;
-import com.alibaba.fescar.samples.dubbo.Order;
-import com.alibaba.fescar.samples.dubbo.service.OrderService;
 
+import newb.c.a_spring.a_module.fescar.Order;
+import newb.c.a_spring.a_module.fescar.service.AccountService;
+import newb.c.a_spring.a_module.fescar.service.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

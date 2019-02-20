@@ -43,9 +43,9 @@
         <property name="dataSource" ref="dataSourceProxy" />
     </bean>
 
-    <dubbo:application name="dubbo-demo-account-service"  />
-    <dubbo:registry address="nacos://192.168.1.103:8848" />
-    <dubbo:protocol name="dubbo" port="20880" />
+    <dubbo:application name="dubbo-demo-storage-service"  />
+    <dubbo:registry address="zookeeper://192.168.1.188:2181" />
+    <dubbo:protocol name="dubbo" port="25883" />
     <dubbo:service interface="newb.c.a_spring.a_module.fescar.service.StorageService" ref="service" />
 
     <bean id="service" class="newb.c.a_spring.a_module.fescar.service.impl.StorageServiceImpl">
@@ -54,7 +54,7 @@
 
 
     <bean class="com.alibaba.fescar.spring.annotation.GlobalTransactionScanner">
-        <constructor-arg value="dubbo-demo-account-service"/>
+        <constructor-arg value="dubbo-demo-storage-service"/>
         <constructor-arg value="my_test_tx_group"/>
     </bean>
 </beans>  

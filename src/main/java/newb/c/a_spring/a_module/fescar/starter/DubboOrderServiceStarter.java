@@ -32,7 +32,7 @@ public class DubboOrderServiceStarter {
         /**
          *  3. Order service is ready . Waiting for buyers to order
          */
-        ClassPathXmlApplicationContext orderContext = new ClassPathXmlApplicationContext(new String[]{"spring/dubbo-order-service.xml"});
+        ClassPathXmlApplicationContext orderContext = new ClassPathXmlApplicationContext(new String[]{"config/fescar/fescar-dubbo-order.xml"});
         orderContext.getBean("service");
         new ApplicationKeeper(orderContext).keep();
     }

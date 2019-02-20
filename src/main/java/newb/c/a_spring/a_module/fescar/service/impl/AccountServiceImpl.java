@@ -17,9 +17,8 @@
 package newb.c.a_spring.a_module.fescar.service.impl;
 
 import com.alibaba.fescar.core.context.RootContext;
-import com.alibaba.fescar.samples.dubbo.service.AccountService;
-import com.alibaba.fescar.samples.dubbo.ApplicationKeeper;
 
+import newb.c.a_spring.a_module.fescar.service.AccountService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
