@@ -9,7 +9,9 @@
         ">
 
 
-    <dubbo:application name="dubbo-demo-app"  />
+    <dubbo:application name="dubbo-demo-app">
+        <dubbo:parameter key="qos.enable" value="false"/>
+    </dubbo:application>
     <dubbo:registry address="zookeeper://192.168.1.188:2181" />
     <dubbo:reference id="orderService" check="false" interface="newb.c.a_spring.a_module.fescar.service.OrderService"/>
     <dubbo:reference id="storageService" check="false" interface="newb.c.a_spring.a_module.fescar.service.StorageService"/>

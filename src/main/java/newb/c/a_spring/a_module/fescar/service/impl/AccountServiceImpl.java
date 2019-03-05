@@ -48,6 +48,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void debit(String userId, int money) {
         LOGGER.info("Account Service ... xid: " + RootContext.getXID());
+        RootContext.bind("192.168.1.103"+RootContext.getXID().substring(RootContext.getXID().indexOf(":")));
         LOGGER.info("Deducting balance SQL: update account_tbl set money = money - {} where user_id = {}",money,userId);
 
         jdbcTemplate.update("update account_tbl set money = money - ? where user_id = ?", new Object[] {money, userId});

@@ -48,6 +48,7 @@ public class StorageServiceImpl implements StorageService {
     @Override
     public void deduct(String commodityCode, int count) {
         LOGGER.info("Storage Service Begin ... xid: " + RootContext.getXID());
+        RootContext.bind("192.168.1.103"+RootContext.getXID().substring(RootContext.getXID().indexOf(":")));
         LOGGER.info("Deducting inventory SQL: update storage_tbl set count = count - {} where commodity_code = {}",
             count, commodityCode);
 

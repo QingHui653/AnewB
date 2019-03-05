@@ -50,6 +50,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order create(String userId, String commodityCode, int orderCount) {
         LOGGER.info("Order Service Begin ... xid: " + RootContext.getXID());
+        RootContext.bind("192.168.1.103"+RootContext.getXID().substring(RootContext.getXID().indexOf(":")));
 
         // 计算订单金额
         int orderMoney = calculate(commodityCode, orderCount);

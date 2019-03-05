@@ -40,12 +40,15 @@ public class BusinessServiceImpl implements BusinessService {
     private OrderService orderService;
 
     @Override
-    @GlobalTransactional(timeoutMills = 300000, name = "dubbo-demo-tx")
+    @GlobalTransactional(timeoutMills = 900000, name = "dubbo-demo-tx")
     public void purchase(String userId, String commodityCode, int orderCount) {
         LOGGER.info("purchase begin ... xid: " + RootContext.getXID());
+        // fescar xid 默认为 局域网 地址. 直接 重新指定Ip 地址.
+        RootContext.bind("192.168.1.103"+RootContext.getXID().substring(RootContext.getXID().indexOf(":")));
         storageService.deduct(commodityCode, orderCount);
         orderService.create(userId, commodityCode, orderCount);
-        throw new RuntimeException("xxx");
+        // 不知道为什么 没有 回滚.已经在 undo_log中 存在日志
+        throw new RuntimeException("抛出异常 回滚 操作.");
 
     }
 
