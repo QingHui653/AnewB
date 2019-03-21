@@ -1,4 +1,4 @@
-package test.core.javacase.leetcode;
+package test.core.javacase.junior;
 
 import org.junit.Test;
 
