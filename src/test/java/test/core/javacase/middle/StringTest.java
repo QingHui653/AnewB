@@ -15,7 +15,10 @@ public class StringTest {
     public void test(){
 
         String s = "dvdf";
-        lengthOfLongestSubstring2(s);
+//        lengthOfLongestSubstring2(s);
+
+        s="babadabba";
+        longestPalindrome2(s);
     }
     /**
      * 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
@@ -107,5 +110,65 @@ public class StringTest {
             }
             return ans;
          */
+    }
+
+    /**
+     * 给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。
+     *
+     * 示例 1： //一字回文
+     * 输入: "babad"
+     * 输出: "bab"
+     * 注意: "aba" 也是一个有效答案。
+     * 示例 2：// 二字回文
+     * 输入: "cbbd"
+     * 输出: "bb"
+     * @param s
+     * @return
+     */
+    //https://leetcode-cn.com/articles/longest-palindromic-substring/
+    //参考上面链接 动态规格,先从1 开始 比如 1, bb, abba,1abba1. 二字回文 首尾相同,为三字回文
+    public String longestPalindrome(String s) {
+        boolean[][] dp = new boolean[s.length()][s.length()];
+        int maxstart = 0;
+        int maxlen = 0;
+        for(int i = s.length()-1; i >= 0; --i) {
+            for(int j = i; j < s.length(); ++j) {
+                dp[i][j] = s.charAt(i) == s.charAt(j) && (j-i <= 1 || dp[i+1][j-1]);
+                System.out.println("dp-- "+dp[i][j]);
+                if(dp[i][j] && j-i+1 > maxlen) {
+                    maxlen = j-i+1;
+                    maxstart = i;
+                }
+            }
+        }
+        System.out.println(s.substring(maxstart, maxstart+maxlen));
+        return s.substring(maxstart, maxstart+maxlen);
+    }
+
+    public String longestPalindrome2(String s) {
+        if (s == null || s.length() < 1) return "";
+        int start = 0, end = 0;
+        for (int i = 0; i < s.length(); i++) {
+            // 判断 bab 这种的 回文
+            int len1 = expandAroundCenter(s, i, i);
+            //判断 偶数个的 回文 abba
+            int len2 = expandAroundCenter(s, i, i + 1);
+            int len = Math.max(len1, len2);
+            if (len > end - start) {
+                start = i - (len - 1) / 2;
+                end = i + len / 2;
+            }
+        }
+        return s.substring(start, end + 1);
+    }
+
+    //中心扩展法
+    private int expandAroundCenter(String s, int left, int right) {
+        int L = left, R = right;
+        while (L >= 0 && R < s.length() && s.charAt(L) == s.charAt(R)) {
+            L--;
+            R++;
+        }
+        return R - L - 1;
     }
 }
