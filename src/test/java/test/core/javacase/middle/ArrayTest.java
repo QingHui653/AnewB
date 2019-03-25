@@ -22,8 +22,11 @@ public class ArrayTest {
 //        setZeroes(nums2);
 
 //        String[] a=  {"eat", "tea", "tan", "ate", "nat", "bat"};
-        String[] a=  {"", "",};
-        groupAnagrams2(a);
+//        String[] a=  {"", "",};
+//        groupAnagrams2(a);
+
+        int [] nums = {5,1,5,5,2,5,4};
+        System.out.println(increasingTriplet(nums));
     }
 
     /**
@@ -279,5 +282,38 @@ public class ArrayTest {
 
         System.out.println(list.toString());*/
         return new ArrayList<>(map.values());
+    }
+
+
+    /**
+     * 给定一个未排序的数组，判断这个数组中是否存在长度为 3 的递增子序列。
+     * 数学表达式如下:
+     * 如果存在这样的 i, j, k,  且满足 0 ≤ i < j < k ≤ n-1，
+     * 使得 arr[i] < arr[j] < arr[k] ，返回 true ; 否则返回 false 。
+     * 说明: 要求算法的时间复杂度为 O(n)，空间复杂度为 O(1) 。
+     *
+     * 示例 1:
+     * 输入: [1,2,3,4,5]
+     * 输出: true
+     * 示例 2:
+     * 输入: [5,4,3,2,1]
+     * 输出: false
+     * 45123
+     * // 并不 需要 连续的 5,1,5,5,2,5,4 - true
+     * @param nums
+     * @return
+     */
+    //双指针
+    // O(1) 表示 固定的 空间数 ,而不是 只有 一个 int
+    public boolean increasingTriplet(int[] nums) {
+        if(nums.length<3) return false;
+        //first 找最小的 second 找中间值
+        int first = Integer.MAX_VALUE,second = Integer.MAX_VALUE;
+        for(int num:nums){
+            if(first>num) first = num;
+            else if(first<num && second>num) second = num;
+            else if(num>second) return true;
+        }
+        return false;
     }
 }
