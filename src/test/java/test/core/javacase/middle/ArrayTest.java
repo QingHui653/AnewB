@@ -304,7 +304,8 @@ public class ArrayTest {
      * @return
      */
     //双指针
-    // O(1) 表示 固定的 空间数 ,而不是 只有 一个 int
+    //时间复杂度O(n)表示程序运行时间跟n有关，并且是线性关系。
+    //空间复杂度O(1)，表示所需空间为常量，并且与n无关。
     public boolean increasingTriplet(int[] nums) {
         if(nums.length<3) return false;
         //first 找最小的 second 找中间值
