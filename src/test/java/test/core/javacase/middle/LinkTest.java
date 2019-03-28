@@ -26,17 +26,44 @@ public class LinkTest {
 //        node2.next=node2_2;
 //        addTwoNumbers(node1,node2);
 
-        ListNode node1 = new ListNode(1);
-        ListNode node2 = new ListNode(2);
-        ListNode node3 = new ListNode(3);
-        ListNode node4 = new ListNode(4);
-        ListNode node5 = new ListNode(5);
+//        ListNode node1 = new ListNode(1);
+//        ListNode node2 = new ListNode(2);
+//        ListNode node3 = new ListNode(3);
+//        ListNode node4 = new ListNode(4);
+//        ListNode node5 = new ListNode(5);
+//
+//        node1.next = node2;
+//        node2.next = node3;
+//        node3.next = node4;
+//        node4.next = node5;
+//        ListNode result = oddEvenList(node1);
+
+        //[0,9,1,2,4], listB = [3,2,4],
+        ListNode node1 = new ListNode(0);
+        ListNode node2 = new ListNode(9);
+        ListNode node3 = new ListNode(1);
+        ListNode node4 = new ListNode(2);
+        ListNode node5 = new ListNode(4);
 
         node1.next = node2;
         node2.next = node3;
         node3.next = node4;
         node4.next = node5;
-        ListNode result = oddEvenList(node1);
+
+        ListNode nodeb0 = new ListNode(3);
+        ListNode nodeb1 = new ListNode(2);
+        ListNode nodeb2 = new ListNode(4);
+//        ListNode nodeb3 = new ListNode(1);
+//        ListNode nodeb4 = new ListNode(4);
+//        ListNode nodeb5 = new ListNode(5);
+
+        nodeb0.next = nodeb1;
+        nodeb1.next = node2;
+        nodeb2.next = node3;
+//        nodeb3.next = node4;
+//        nodeb4.next = node5;
+
+        ListNode result = getIntersectionNode2(node1,nodeb0);
 
         while (result != null) {
             System.out.print(result.val + " ");
@@ -131,5 +158,93 @@ public class LinkTest {
         }
         odd.next=evenHead;
         return head;
+    }
+
+    /**
+     * 编写一个程序，找到两个单链表相交的起始节点。
+     * 输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3
+     * 输出：Reference of the node with value = 8
+     * 输入解释：相交节点的值为 8 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。
+     *
+     * 输入：intersectVal = 2, listA = [0,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1
+     * 输出：Reference of the node with value = 2
+     * 输入解释：相交节点的值为 2 （注意，如果两个列表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [0,9,1,2,4]，链表 B 为 [3,2,4]。在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。
+     *
+     * 输入：intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2
+     * 输出：null
+     * 输入解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。由于这两个链表不相交，所以 intersectVal 必须为 0，而 skipA 和 skipB 可以是任意值。
+     * 解释：这两个链表不相交，因此返回 null。
+     *
+     * 注意：
+     * 如果两个链表没有交点，返回 null.
+     * 在返回结果后，两个链表仍须保持原有的结构。
+     * 可假定整个链表结构中没有循环。
+     * 程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。
+     * @param headA
+     * @param headB
+     * @return
+     */
+    //O(n) 遍历一次.不改变 原链表结构.
+    //1. 相交的 话. headB的 尾节点 一定存在 A 中.将 B 反转, 遍历A ,无法 保证O(n)
+    //2. 相交的 话, 相交的 长度一定是相等的 ,所以让 长的 先走几步,在 同时前进
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+//        ListNode reverNode = new ListNode(-1);
+//        //反转 B
+//        while (headB.next!=null){
+//            reverNode=headB.next;
+//            reverNode.next=new ListNode(headB.val);
+//            reverNode=reverNode.next;
+//        }
+//        reverNode=reverNode.next;
+        if (headA == null || headB == null)  return null;
+        int countA = 1, countB = 1;
+        ListNode ANode = headA, BNode = headB;
+        // 遍历长度
+        while(ANode.next != null){
+            ++countA;
+            ANode = ANode.next;
+        }
+        // 遍历长度
+        while(BNode.next != null){
+            ++countB;
+            BNode = BNode.next;
+        }
+        //  长的 先行
+        if(countB > countA){
+            int temp = countB - countA;
+            while(temp>0 && headB != null){
+                headB = headB.next;
+                temp--;
+            }
+        }else{
+            int temp = countA - countB;
+            while(temp>0 && headA != null){
+                headA = headA.next;
+                temp--;
+            }
+        }
+
+        // 不同 则前进,相同则返回
+        while (headA != null && headB != null) {
+            if(headA == headB) return headA;
+            headA = headA.next;
+            headB = headB.next;
+        }
+        return null;
+    }
+
+    //**
+    // 两个 指针,一直循环 至到 相遇.
+    // 当短的 为null ,交换长的 ,并且让长的 先行
+    // 长的 为null ,交换为 短的 .此时长的 已经先行
+    public ListNode getIntersectionNode2(ListNode headA, ListNode headB) {
+        //[0,9,1,2,4], listB = [3,2,4]
+        if (headA == null || headB == null) return null;
+        ListNode pA = headA, pB = headB;
+        while(pA != pB){
+            pA = pA == null ? headB : pA.next;
+            pB = pB == null ? headA: pB.next;
+        }
+        return pA;
     }
 }
