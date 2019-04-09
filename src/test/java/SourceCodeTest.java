@@ -2,6 +2,7 @@ import org.junit.Test;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListMap;
 
 public class SourceCodeTest {
 
@@ -25,6 +26,7 @@ public class SourceCodeTest {
     public void currentCollectionTest(){
 
         ConcurrentHashMap concurrentHashMap = new ConcurrentHashMap();
+        ConcurrentSkipListMap concurrentSkipListMap = new ConcurrentSkipListMap();
 
     }
 }
