@@ -447,6 +447,8 @@ public class TreeTest {
      * 这样在嵌套的过程中记录出现1的个数，在dfs会把它相邻的1全部去掉，所以不会出现多加或者少加的情况。
      */
     //了解 DFS 与 BFS
+    //深度遍历.遇到1 ,将1周围的 全变为 0,递归.这样 就会只剩下一个1.
+    //将 大岛 化为 只有 1个1 的 小岛.
     public int numIslands(char[][] grid) {
         int count = 0;
         for (int i = 0; i < grid.length; i++) {
