@@ -15,7 +15,8 @@ public class BackTrackTest {
 
     @Test
     public void test(){
-        System.out.println(letterCombinations("23").toString());
+//        System.out.println(letterCombinations("23").toString());
+        System.out.println(generateParenthesis(3).toString());
     }
 
     /**
@@ -78,4 +79,49 @@ public class BackTrackTest {
 
         return result;
     }
+
+    /**
+     * 给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。
+     *
+     * 例如，给出 n = 3，生成结果为：
+     *
+     * [
+     *   "((()))",
+     *   "(()())",
+     *   "(())()",
+     *   "()(())",
+     *   "()()()"
+     * ]
+     * @param n
+     * @return
+     */
+    // 有效的 括号(保证每一个 括号都能封闭)
+    //n个左右括号 , 左右括号都用完为一个解.左括号的数不能大于右括号
+    public List<String> generateParenthesis(int n) {
+        List<String> res = new ArrayList<String>();
+        dfs(res, "", n, 0, 0);
+        return res;
+    }
+    // DFS 深度遍历 (回溯算法的 一种): 主题思想: 不撞南墙不回头 ;
+    // 重要 https://blog.csdn.net/chensanwa/article/details/79717835
+    //伪代码
+    /**
+     * DFS(dep,、、、）        //dep代表目前DFS的深度
+     * {
+     *     if(找到解 || 走不下去){
+     *         、、、     //在此处进行相应的操作
+     *         return ;
+     *     }
+     *     枚举下一种情况，DFS（dep+1,、、、）
+     * }
+     */
+    private void dfs(List<String> res, String temp, int n, int left, int right) {
+        if(right == n) {
+            res.add(temp);
+            return;
+        }
+        if (left < n) dfs(res, temp+"(", n, left+1, right);
+        if (right < left) dfs(res, temp+")", n, left, right+1);
+    }
+
 }

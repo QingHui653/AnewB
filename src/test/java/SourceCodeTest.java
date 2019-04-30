@@ -1,8 +1,11 @@
 import org.junit.Test;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.concurrent.*;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class SourceCodeTest {
 
@@ -11,14 +14,15 @@ public class SourceCodeTest {
         List arrayList = new ArrayList(10);
         List linkedList = new LinkedList();
 
-        Map map =new HashMap();
-        Map treeMap = new TreeMap();
-        Map linkedHashMap =new LinkedHashMap();
-        Map table =new Hashtable();
+        HashMap map =new HashMap();
+        TreeMap treeMap = new TreeMap();
+        LinkedHashMap linkedHashMap =new LinkedHashMap();
+        Hashtable table =new Hashtable();
 
-        Set set = new HashSet();
-        Set treeSet = new TreeSet();
-        Set linkHashSet = new LinkedHashSet();
+        HashSet set = new HashSet();
+        set.add("1");
+        TreeSet treeSet = new TreeSet();
+        LinkedHashSet linkHashSet = new LinkedHashSet();
 
     }
 
@@ -27,6 +31,16 @@ public class SourceCodeTest {
 
         ConcurrentHashMap concurrentHashMap = new ConcurrentHashMap();
         ConcurrentSkipListMap concurrentSkipListMap = new ConcurrentSkipListMap();
+        ConcurrentSkipListSet concurrentSkipListSet = new ConcurrentSkipListSet();
 
+    }
+
+    public void lock(){
+        ReentrantLock lock = new ReentrantLock();
+        Condition condition = lock.newCondition();
+    }
+
+    public void poolTest(){
+        Executor executors = Executors.newCachedThreadPool();
     }
 }

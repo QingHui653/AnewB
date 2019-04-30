@@ -31,7 +31,6 @@ import newb.c.a_spring.backend.sql.model.basemodel.Movie;
 import newb.c.a_spring.backend.sql.model.basemodel.User;
 
 /**
- * @ClassName LoginController
  * @version 1.0
  */
 @Controller
@@ -84,7 +83,7 @@ public class MongodbController {
 	@ApiOperation(value="测试mongdb插入数据")
     public void testAddUser() {
 	    List<User> userList =new ArrayList<>();
-	    User user =null;
+	    User user;
         for (int i = 0; i < 10; i++) {
             user=new User();
             user.setOid(i);
@@ -102,8 +101,8 @@ public class MongodbController {
     @ApiOperation(value="测试mongdb插入 内嵌 数据 手动方式")
     public void testAddUserTrin() {
         List<UserTrin> userTrinList =new ArrayList<>();
-        User user =null;
-        UserTrin userTrin=null;
+        User user;
+        UserTrin userTrin;
         for (int i = 0; i < 10; i++) {
             user=new User();
             user.setOid(i);
@@ -158,8 +157,8 @@ public class MongodbController {
     @ApiOperation(value="测试mongdb插入 内嵌 数据 引用方式")
     public void testAddUserTrin2() {
         List<UserTrin> userTrinList =new ArrayList<>();
-        UserTrin userTrin=null;
-        Movie movie =null;
+        UserTrin userTrin;
+        Movie movie;
         for (int i = 10; i < 20; i++) {
             movie=new Movie();
             movie.setId(i);
@@ -298,7 +297,7 @@ public class MongodbController {
     @ApiOperation(value="测试mongdb插入 Movie数据")
     public void testAddMovie() {
         List<Movie> movieList =new ArrayList<>();
-        Movie movie =null;
+        Movie movie;
         for (int i = 0; i < 20; i++) {
             movie=new Movie();
             movie.setId(i);
