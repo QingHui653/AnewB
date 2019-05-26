@@ -3,19 +3,17 @@
 	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-4.1.xsd
-	http://www.springframework.org/schema/data/jpa
-    http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
 ">
 
-	<bean id="processBean" class="newb.c.a_spring.a_config.springBean.ProcessBean">
+	<!--在newb.c.a_spring.a_config.springBean.SpringConfig 中 已经定义-->
+	<!--<bean id="processBean" class="newb.c.a_spring.a_config.springBean.ProcessBean">
 		<property name="username" value="1" />
 		<property name="password" value="1" />
-	</bean>
+	</bean>-->
 	<!--引入配置属性文件 -->
 	<!-- 记得以前这里也报过错，暂时不要删除 -->
 	<context:property-placeholder location="classpath:config/properties/*.properties" />
@@ -40,10 +38,15 @@
 	<!-- <import resource="mybatis/spring-mybatis-Shard.xml" /> -->
 	<!-- <import resource="mail/spring-mail.xml"/> -->
 
+	<!-- 权限 -->
+	<!--<import resource="shiro/springT-shiro.xml" />-->
+	<!--<import resource="security/springT-security.xml" />-->
 	<!-- 定时任务 -->
 	<!--<import resource="job/spring-task.xml" />-->
-	<!-- <import resource="job/spring-job2.xml" /> -->
-	<!-- <import resource="job/spring-quarz-distributed.xml" /> -->
+	<!--<import resource="job/spring-job2.xml" /> -->
+	<!--<import resource="job/spring-quarz-distributed.xml" /> -->
+	<!--分布式集群定时任务 elastic-job -->
+	<!--<import resource="job/spring-elastic-job.xml" />-->
 
 	<!-- 分布式事务 -->
 	<!-- <import resource="atomikos/spring-jta.xml" /> -->

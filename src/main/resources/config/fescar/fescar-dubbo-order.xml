@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.1.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        ">
+
+    <context:property-placeholder location="classpath:config/fescar/jdbc.properties" />
+
+    <bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+        init-method="init" destroy-method="close">
+        <property name="url" value="${jdbc.order.url}"/>
+        <property name="username" value="${jdbc.order.username}"/>
+        <property name="password" value="${jdbc.order.password}"/>
+        <property name="driverClassName" value="${jdbc.order.driver}"/>
+        <property name="initialSize" value="0"/>
+        <property name="maxActive" value="180"/>
+        <property name="minIdle" value="0"/>
+        <property name="maxWait" value="60000"/>
+        <property name="validationQuery" value="Select 'x' from DUAL"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <property name="minEvictableIdleTimeMillis" value="25200000"/>
+        <property name="removeAbandoned" value="true"/>
+        <property name="removeAbandonedTimeout" value="1800"/>
+        <property name="logAbandoned" value="true"/>
+        <property name="filters" value="mergeStat"/>
+    </bean>
+
+    <bean id="dataSourceProxy" class="com.alibaba.fescar.rm.datasource.DataSourceProxy">
+        <constructor-arg ref="dataSource" />
+    </bean>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSourceProxy" />
+    </bean>
+
+    <dubbo:application name="dubbo-demo-order-service"  />
+    <dubbo:registry address="zookeeper://192.168.1.188:2181" />
+    <dubbo:protocol name="dubbo" port="25882" />
+    <dubbo:service interface="newb.c.a_spring.a_module.fescar.service.OrderService" ref="service" />
+    <dubbo:reference id="accountService" check="false" interface="newb.c.a_spring.a_module.fescar.service.AccountService"/>
+
+    <bean id="service" class="newb.c.a_spring.a_module.fescar.service.impl.OrderServiceImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+        <property name="accountService" ref="accountService"/>
+    </bean>
+
+
+    <bean class="com.alibaba.fescar.spring.annotation.GlobalTransactionScanner">
+        <constructor-arg value="dubbo-demo-order-service"/>
+        <constructor-arg value="my_test_tx_group"/>
+    </bean>
+</beans>

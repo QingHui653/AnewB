@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://code.alibabatech.com/schema/dubbo  
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd  
+        ">  
+    <!--
+    1. 将对 dubbo 服务的 每一步 操作 通过 filter 拦截发送到 zipkin
+    2.先启动 service,在 启动 service2 .在 service2中 调用了 service的 引用
+    3.启动client ,运行 service2,service2会调用 service ,在 zipkin 中 能看见 链路调用
+    -->
+
+    <dubbo:application name="zipkin-client"  />
+   
+    <dubbo:registry address="zookeeper://192.168.1.188:2181" />
+
+    <!--调用引用 -->
+    <dubbo:reference id="zipkinRefService" interface="newb.c.a_spring.a_module.dubbo.ZipkinRefService" check="false"  filter="tracing"/>
+
+    <bean id="sender" class="zipkin2.reporter.beans.OkHttpSenderFactoryBean">
+        <property name="endpoint" value="http://192.168.1.103:9411/api/v2/spans"/>
+    </bean>
+
+    <bean id="tracing" class="brave.spring.beans.TracingFactoryBean">
+        <property name="localServiceName" value="client"/>
+        <property name="spanReporter">
+            <bean class="zipkin2.reporter.beans.AsyncReporterFactoryBean">
+                <property name="sender" ref="sender"/>
+                <!-- wait up to half a second for any in-flight spans on close -->
+                <property name="closeTimeout" value="500"/>
+            </bean>
+        </property>
+        <property name="currentTraceContext">
+            <bean class="brave.spring.beans.CurrentTraceContextFactoryBean">
+                <property name="scopeDecorators">
+                    <bean class="brave.context.slf4j.MDCScopeDecorator" factory-method="create"/>
+                </property>
+            </bean>
+        </property>
+    </bean>
+</beans>

@@ -3,6 +3,11 @@ package test.core.dataStructure.Tree.RBTree;
 import lombok.ToString;
 import org.junit.Test;
 
+/**
+ * 默认传入 类型为 int 其他未处理
+ * @param <T>
+ * // ...参考 treeMap
+ */
 @ToString
 public class RBTree<T extends Comparable> {
 
@@ -13,6 +18,11 @@ public class RBTree<T extends Comparable> {
         insert(node);
     }
 
+    public void remove(T data){
+        RBNode node = getNode(data);
+        if(node==null) return;
+        remove(node);
+    }
 
     public RBNode insert(RBNode node){
         int cmp;
@@ -50,6 +60,15 @@ public class RBTree<T extends Comparable> {
         return  y;
     }
 
+    /**
+     * 先删除,在变色
+     */
+    public RBNode remove(RBNode node){
+        //删除 元素 node
+        //变色
+        deleteFixUp(this.root);
+        return node;
+    }
     // 旋转变色
     //插入 分为 五种情况
     private void insertFixUp(RBNode node) {
@@ -106,6 +125,25 @@ public class RBTree<T extends Comparable> {
         setBlack(this.root);
     }
 
+    private void deleteFixUp(RBNode node){
+
+    }
+
+    private RBNode getNode(T data) {
+        if(root==null) return null;
+        RBNode p = root;
+        while (p!=null){
+            int cmp = p.data.compareTo(data);
+
+            if(cmp<0)
+                p=p.left;
+            else if ( cmp>0 )
+                p=p.right;
+            else
+                return p;
+        }
+        return null;
+    }
 
     //左旋
     public RBNode<T> leftHanded(RBNode x){

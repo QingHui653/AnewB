@@ -4,12 +4,11 @@ import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 
+import lombok.extern.slf4j.Slf4j;
 import newb.c.a_web.webmodule.exception.RequestLimitException;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
@@ -25,10 +24,8 @@ import org.springframework.stereotype.Service;
  */
 @Aspect
 @Service
+@Slf4j
 public class RequestLimitContract {
-
-	private static Logger logger = LoggerFactory.getLogger(RequestLimitContract.class);
-
 	@Autowired
 	private RedisTemplate<String, String> redisTemplate;
 	
@@ -59,13 +56,13 @@ public class RequestLimitContract {
 				redisTemplate.expire(key, limit.time(), TimeUnit.MILLISECONDS);
 			}
 			if (count > limit.count()) {
-				logger.info("用户IP[" + ip + "]访问地址[" + url + "]超过了限定的次数[" + limit.count() + "]");
+				log.info("用户IP[" + ip + "]访问地址[" + url + "]超过了限定的次数[" + limit.count() + "]");
 				throw new RequestLimitException();
 			}
 		} catch (RequestLimitException e) {
 			throw e;
 		} catch (Exception e) {
-			logger.error("发生异常: ", e);
+			log.error("发生异常: ", e);
 		}
 	}
 }

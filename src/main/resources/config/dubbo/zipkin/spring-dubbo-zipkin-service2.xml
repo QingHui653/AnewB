@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://code.alibabatech.com/schema/dubbo  
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd  
+        ">  
+    
+    <dubbo:application name="zipken-service2-provider"  />
+   
+    <dubbo:registry address="zookeeper://192.168.1.188:2181" />
+
+    <dubbo:protocol name="dubbo" port="20881" />
+   
+    <!--调用引用 -->
+    <dubbo:reference id="demoService" interface="newb.c.a_spring.a_module.dubbo.DemoService" check="false"  filter="tracing"/>
+
+    <!--服务引用服务 -->
+    <bean id="zipkinRefService" class="newb.c.a_spring.a_module.dubbo.ZipkinRefServiceImpl">
+        <property name="demoService" ref="demoService"></property>
+    </bean>
+    <dubbo:service interface="newb.c.a_spring.a_module.dubbo.ZipkinRefService" ref="zipkinRefService"  filter="tracing"/>
+
+
+    <!-- 7. zipkin 相关的配置 -->
+    <bean id="sender" class="zipkin2.reporter.beans.OkHttpSenderFactoryBean">
+        <property name="endpoint" value="http://192.168.1.103:9411/api/v2/spans"/>
+    </bean>
+
+    <bean id="tracing" class="brave.spring.beans.TracingFactoryBean">
+        <property name="localServiceName" value="greeting-service"/>
+        <property name="spanReporter">
+            <bean class="zipkin2.reporter.beans.AsyncReporterFactoryBean">
+                <property name="sender" ref="sender"/>
+                <!-- wait up to half a second for any in-flight spans on close -->
+                <property name="closeTimeout" value="500"/>
+            </bean>
+        </property>
+        <property name="currentTraceContext">
+            <bean class="brave.spring.beans.CurrentTraceContextFactoryBean">
+                <property name="scopeDecorators">
+                    <bean class="brave.context.slf4j.MDCScopeDecorator" factory-method="create"/>
+                </property>
+            </bean>
+        </property>
+    </bean>
+</beans>

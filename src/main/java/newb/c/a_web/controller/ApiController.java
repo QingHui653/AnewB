@@ -14,10 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import lombok.extern.slf4j.Slf4j;
 import newb.c.a_spring.api.weather.retrofit.RetrofitWeather;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -59,10 +58,8 @@ import tk.mybatis.mapper.entity.Example;
 
 @Controller
 @RequestMapping("api")
+@Slf4j
 public class ApiController {
-
-	private static final Logger logger = LoggerFactory.getLogger(ApiController.class);
-
 	@Autowired
 	private ResultService resultService;
 	@Autowired
@@ -71,64 +68,6 @@ public class ApiController {
 	public weather weather = new weather();
 
 	public RetrofitWeather retrofitWeather = new RetrofitWeather();
-
-	DataHandle data =new DataHandle();
-
-	/**
-	 *   获取excel 文档  JXL
-	 */
-	@RequestMapping(value="/getExcByJXL",method=RequestMethod.GET)
-	@ApiOperation("测试使用JXL获取excel文档  已替换为POI 去掉JXL jar包")
-	@Test
-	@Deprecated
-	public void getExcByJXL() throws SQLException,IOException{
-		/*String[] title = {"姓名"};
-		String filePath = "g:\\newbc.xls";
-		Connection send = DriverManager.getConnection("proxool.local");
-		String a0101 = "select username from user";
-		List<String> a0101List = data.getDataStringList(a0101, send);
-		WritableWorkbook wwb;
-		OutputStream out = new FileOutputStream(filePath);
-		wwb = Workbook.createWorkbook(out);
-		WritableSheet sheet = wwb.createSheet("第一页", 0);
-		Label label;
-		for (int i = 0; i < title.length; i++) {
-			// Label(x,y,z) 代表单元格的第x+1列，第y+1行, 内容z
-			// 在Label对象的子对象中指明单元格的位置和内容
-			label = new Label(i, 0, title[i]);
-			// 将定义好的单元格添加到工作表中
-			sheet.addCell(label);
-		}
-		for (int j = 0; j < a0101List.size(); j++) {
-			label = new Label(1, j+1, a0101List.get(j).toString());
-			sheet.addCell(label);
-		}
-		logger.info("保存路径为-- "+filePath);
-		wwb.write();
-		wwb.close();
-		logger.info("保存成功");*/
-	}
-
-	/**
-	 *   获取excel 文档 POI
-	 */
-	@RequestMapping(value="/getExcByPOI",method=RequestMethod.GET)
-	@ApiOperation("测试使用POI获取excel文档  ")
-	@Test
-	public void getExcByPOI(HttpServletResponse response) throws SQLException,IOException{
-		ExcelUtil excelUtil =new ExcelUtil();
-//		excelUtil.demoExport(response);
-
-		String[] headList ={"姓名","班级"};
-		List<String[]> bodyList =new ArrayList<String[]>();
-			String[] body1 ={"李明","As178"};
-			String[] body2 ={"李明2","As179"};
-		bodyList.add(body1);
-		bodyList.add(body2);
-
-		excelUtil.simpleExport(response, headList,bodyList);
-
-	}
 
 	@RequestMapping(value="/getrep",method=RequestMethod.GET)
 	@ApiOperation("测试使用通用mapper,自定义通用接口删除数据,重定向到bootstarap")
@@ -239,7 +178,7 @@ public class ApiController {
 	        captcha.out(response.getOutputStream());
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("获取验证码异常：%s",e.getMessage());
+			log.error("获取验证码异常：%s",e.getMessage());
 		}
 	}
 
@@ -266,7 +205,7 @@ public class ApiController {
 			//输出
 			captcha.out(response.getOutputStream());
 		} catch (Exception e) {
-			logger.error("获取验证码异常：%s",e.toString());
+			log.error("获取验证码异常：%s",e.toString());
 		}
 	}
 
@@ -376,10 +315,10 @@ public class ApiController {
                 return modelAndView;
 
             } else {
-                logger.info("upload referer not find");
+                log.info("upload referer not find");
             }
         } catch (Exception e) {
-            logger.error("upload error", e);
+            log.error("upload error", e);
         }
         return null;
     }
@@ -390,11 +329,11 @@ public class ApiController {
 	 */
 	@GetMapping("fastJson")
 	private void fastJson(String data) {
-		logger.info("接受到json "+data.toString());
+		log.info("接受到json "+data.toString());
 		Map<String,Object> map = (Map<String, Object>) JSON.parse(data.toString());
 		Map<String, String> params = (Map<String, String>) JSON.parse(map.get("parameters").toString());
 		List<User> spuParamList = JSON.parseArray(map.get("list").toString(),User.class);
-		logger.info("转为params "+params.toString());
+		log.info("转为params "+params.toString());
 	}
 
 	/**
@@ -404,11 +343,11 @@ public class ApiController {
 	@GetMapping("gson")
 	private void gson(String data) {
 		Gson gson =new Gson();
-		logger.info("接受到json "+data.toString());
+		log.info("接受到json "+data.toString());
 		Map<String, Object> mapData = gson.fromJson(data, new TypeToken<Map<String, Object>>(){}.getType());
-		logger.info("转为map "+mapData.toString());
+		log.info("转为map "+mapData.toString());
 		Map<String, String> params = gson.fromJson(mapData.get("parameters").toString(), new TypeToken<Map<String, String>>(){}.getType());
 		List<User> spuParamList = gson.fromJson(mapData.get("list").toString(), new TypeToken<List<User>>(){}.getType());
-		logger.info("转为params "+params.toString());
+		log.info("转为params "+params.toString());
 	}
 }

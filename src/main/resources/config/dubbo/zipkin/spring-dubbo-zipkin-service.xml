@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://code.alibabatech.com/schema/dubbo  
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd  
+        ">  
+    
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="ihih_provider"  />
+   
+    <!-- 使用multicast广播注册中心暴露服务地址    -->
+    <!-- 使用多播 multicast 注册不知道为什么消费者无法 获取bean 报错 -->  
+    <!-- <dubbo:registry address="multicast://224.5.6.7:1234" />   -->
+    
+    <!-- 使用zookeeper注册中心暴露服务地址 -->  
+    <!-- <dubbo:registry address="zookeeper://127.0.0.1:2181" />    -->
+    <!--<dubbo:registry address="${dubbo.url}" /> -->
+    <dubbo:registry address="zookeeper://192.168.1.188:2181" />
+
+    <!-- 用dubbo协议在20880端口暴露服务 -->  
+    <dubbo:protocol name="dubbo" port="20880" />  
+   
+   
+    <!-- 具体的实现bean -->  
+    <bean id="demoService" class="newb.c.a_spring.a_module.dubbo.DemoServiceImpl" />
+    <bean id="demoService2" class="newb.c.a_spring.a_module.dubbo.DemoServiceImpl2" />
+    <bean id="demoService3" class="newb.c.a_spring.a_module.dubbo.DemoServiceImpl3" />
+   
+    <!-- 声明需要暴露的服务接口 -->  
+    <dubbo:service interface="newb.c.a_spring.a_module.dubbo.DemoService"  ref="demoService"   filter="tracing"/>
+    <dubbo:service interface="newb.c.a_spring.a_module.dubbo.DemoService2" ref="demoService2"  filter="tracing"/>
+    <dubbo:service interface="newb.c.a_spring.a_module.dubbo.DemoService3" ref="demoService3"  filter="tracing"/>
+
+    <!-- 2. zipkin 相关的配置 -->
+    <!-- 使用 OKHttp 来发送 trace 信息到 Zipkin Server。这里的 Zipkin Server 启动在本地 -->
+    <bean id="sender" class="zipkin2.reporter.beans.OkHttpSenderFactoryBean">
+        <property name="endpoint" value="http://192.168.1.103:9411/api/v2/spans"/>
+    </bean>
+
+    <bean id="tracing" class="brave.spring.beans.TracingFactoryBean">
+        <property name="localServiceName" value="hello-service"/>
+        <property name="spanReporter">
+            <bean class="zipkin2.reporter.beans.AsyncReporterFactoryBean">
+                <property name="sender" ref="sender"/>
+                <!-- wait up to half a second for any in-flight spans on close -->
+                <property name="closeTimeout" value="500"/>
+            </bean>
+        </property>
+        <property name="currentTraceContext">
+            <bean class="brave.spring.beans.CurrentTraceContextFactoryBean">
+                <property name="scopeDecorators">
+                    <bean class="brave.context.slf4j.MDCScopeDecorator" factory-method="create"/>
+                </property>
+            </bean>
+        </property>
+    </bean>
+</beans>

@@ -168,12 +168,12 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>2.8.5</version>
+            <version>2.9.6</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.8.5</version>
+            <version>2.9.6</version>
         </dependency>
         <!-- Springmvc,文件上传下载 -->
         <dependency>
@@ -263,29 +263,68 @@
         <!-- WEB................................ -->
         <!-- 组件=============================== -->
         <!-- Spring security 权限包 -->
-        <!-- <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-web</artifactId>
-            <version>4.1.3.RELEASE</version> </dependency> <dependency> <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId> <version>4.1.3.RELEASE</version>
-            </dependency> <dependency> <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-acl</artifactId> <version>4.1.3.RELEASE</version>
-            </dependency> <dependency> <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-aspects</artifactId> <version>4.1.3.RELEASE</version>
-            </dependency> <dependency> <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-cas</artifactId> <version>4.1.3.RELEASE</version>
-            </dependency> <dependency> <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId> <version>4.1.3.RELEASE</version>
-            </dependency> <dependency> <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-crypto</artifactId> <version>4.1.3.RELEASE</version>
-            </dependency> <dependency> <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-ldap</artifactId> <version>4.1.3.RELEASE</version>
-            </dependency> <dependency> <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-openid</artifactId> <version>4.1.3.RELEASE</version>
-            <exclusions> <exclusion> <artifactId>httpclient</artifactId> <groupId>org.apache.httpcomponents</groupId>
-            </exclusion> </exclusions> </dependency> <dependency> <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-remoting</artifactId> <version>4.1.3.RELEASE</version>
-            </dependency> <dependency> <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-taglibs</artifactId> <version>4.1.3.RELEASE</version>
-            </dependency> -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>4.2.9.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>4.2.9.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-aspects</artifactId>
+            <version>4.2.9.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>4.2.9.RELEASE</version>
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-acl</artifactId>
+            <version>4.2.9.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-cas</artifactId>
+            <version>4.2.9.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+            <version>4.2.9.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-ldap</artifactId>
+            <version>4.2.9.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-openid</artifactId>
+            <version>4.2.9.RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>httpclient</artifactId>
+                    <groupId>org.apache.httpcomponents</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-remoting</artifactId>
+            <version>4.2.9.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>4.2.9.RELEASE</version>
+        </dependency>-->
         <!-- Spring webflow -->
         <!-- <dependency> <groupId>org.springframework.webflow</groupId> <artifactId>spring-faces</artifactId>
             <version>2.4.2.RELEASE</version> </dependency> <dependency> <groupId>org.springframework.webflow</groupId>
@@ -297,7 +336,8 @@
             <dependency> <groupId>org.springframework.webflow</groupId> <artifactId>spring-js-resources</artifactId>
             <version>2.4.2.RELEASE</version> </dependency> -->
         <!-- 连接池 -->
-        <dependency>
+
+        <!--<dependency>
             <groupId>commons-pool</groupId>
             <artifactId>commons-pool</artifactId>
             <version>1.6</version>
@@ -326,7 +366,8 @@
                     <groupId>geronimo-spec</groupId>
                 </exclusion>
             </exclusions>
-        </dependency>
+        </dependency>-->
+
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
@@ -360,6 +401,12 @@
             <groupId>org.jmock</groupId>
             <artifactId>jmock</artifactId>
             <version>2.8.2</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>asm</artifactId>
+                    <groupId>org.ow2.asm</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- OGNL -->
         <dependency>
@@ -382,17 +429,17 @@
         </dependency>
 
         <!-- SQL server -->
-        <dependency>
+        <!--<dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>sqljdbc4</artifactId>
             <version>4.0</version>
-        </dependency>
+        </dependency>-->
         <!-- JSON -->
         <!-- alibaba fastjson -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.8</version>
+            <version>1.2.31</version>
         </dependency>
         <!-- GSON -->
         <dependency>
@@ -546,17 +593,26 @@
             <version>0.6.1</version>
         </dependency>
         <!-- poi 操作word,excel等 -->
+        <!--03-->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
             <version>3.16</version>
         </dependency>
+        <!--07-->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>3.16</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.alibaba/easyexcel -->
+        <!-- ALi easyExcel -->
+        <!--<dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>1.0.4</version>
+        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
         <!-- Swagger -->
@@ -587,6 +643,29 @@
             <artifactId>quartz</artifactId>
             <version>2.2.3</version>
         </dependency>
+
+        <!--jar包冲突-->
+        <!-- 引入elastic-job-lite核心模块 -->
+        <!--<dependency>
+            <groupId>com.dangdang</groupId>
+            <artifactId>elastic-job-lite-core</artifactId>
+            <version>2.1.5</version>
+        </dependency>
+
+        &lt;!&ndash; 使用springframework自定义命名空间时引入 &ndash;&gt;
+        <dependency>
+            <groupId>com.dangdang</groupId>
+            <artifactId>elastic-job-lite-spring</artifactId>
+            <version>2.1.5</version>
+        </dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/com.xuxueli/xxl-job-core -->
+        <!--<dependency>
+            <groupId>com.xuxueli</groupId>
+            <artifactId>xxl-job-core</artifactId>
+            <version>1.9.2</version>
+        </dependency>-->
+
 
         <!-- https://mvnrepository.com/artifact/com.google.zxing/core -->
         <!-- google 二维码 -->
@@ -760,12 +839,66 @@
         </dependency> -->
         <!-- https://mvnrepository.com/artifact/com.uogome/dubbo2 -->
         <!-- 整合的dubbox 2.8.4 的重新打包 上传到mvn -->
-        <dependency>
+        <!--<dependency>
             <groupId>com.uogome</groupId>
             <artifactId>dubbo2</artifactId>
             <version>1.0</version>
+        </dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/org.apache.dubbo/dubbo -->
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+        <!--fescar-->
+        <!--<dependency>
+            <groupId>com.alibaba.fescar</groupId>
+            <artifactId>fescar-all</artifactId>
+            <version>0.2.1</version>
+            <type>pom</type>
+        </dependency>-->
+        <dependency>
+            <groupId>com.alibaba.fescar</groupId>
+            <artifactId>fescar-core</artifactId>
+            <version>0.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.fescar</groupId>
+            <artifactId>fescar-spring</artifactId>
+            <version>0.2.1</version>
         </dependency>
 
+        <!-- zipkin -->
+        <dependency>
+            <groupId>io.zipkin.brave</groupId>
+            <artifactId>brave-instrumentation-dubbo-rpc</artifactId>
+            <version>5.5.0</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>dubbo</artifactId>
+                    <groupId>com.alibaba</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>io.zipkin.brave</groupId>
+            <artifactId>brave-spring-beans</artifactId>
+            <version>5.5.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.zipkin.brave</groupId>
+            <artifactId>brave-context-slf4j</artifactId>
+            <version>5.5.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.zipkin.reporter2</groupId>
+            <artifactId>zipkin-sender-okhttp3</artifactId>
+            <version>2.7.10</version>
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.101tec/zkclient -->
         <dependency>
@@ -805,6 +938,30 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--操作zookeeper客户端 通常使用这个 不使用zookeeper 自带-->
+        <!-- https://mvnrepository.com/artifact/org.apache.curator/curator-recipes -->
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-framework</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-client</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.curator/curator-examples -->
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-examples</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+
 
         <!-- dubbox REST依赖 -->
         <dependency>
@@ -855,12 +1012,12 @@
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
-            <version>8.0.11</version>
+            <version>8.0.53</version>
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-logging-juli</artifactId>
-            <version>8.0.11</version>
+            <version>8.0.53</version>
         </dependency>
 
         <!-- dubbox Kyro序列化 -->
@@ -908,7 +1065,7 @@
         <dependency>
             <groupId>com.rabbitmq</groupId>
             <artifactId>amqp-client</artifactId>
-            <version>4.2.0</version>
+            <version>4.8.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.amqp</groupId>
@@ -1088,37 +1245,98 @@
             <version>2.8.5</version>
         </dependency> -->
 
-        <!-- https://mvnrepository.com/artifact/com.xiaoleilu/hutool-core -->
         <dependency>
-            <groupId>com.xiaoleilu</groupId>
+            <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-            <version>3.0.4</version>
+            <version>4.1.17</version>
+            <scope>compile</scope>
         </dependency>
+
         <!-- hadoop -->
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-common</artifactId>
-            <version>2.8.1</version>
+            <version>2.9.1</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>curator-client</artifactId>
+                    <groupId>org.apache.curator</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>curator-framework</artifactId>
+                    <groupId>org.apache.curator</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>asm</artifactId>
+                    <groupId>asm</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-hdfs</artifactId>
-            <version>2.8.1</version>
+            <version>2.9.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-mapreduce-client-core</artifactId>
+            <version>2.9.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-mapreduce-client-common -->
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-mapreduce-client-common</artifactId>
+            <version>2.9.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-mapreduce-client-jobclient -->
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-mapreduce-client-jobclient</artifactId>
+            <version>2.9.1</version>
+        </dependency>
+
+        <!--hbase-->
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-common</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-client</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-protocol</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+
+        <!--hive-->
+        <dependency>
+            <groupId>org.apache.hive</groupId>
+            <artifactId>hive-jdbc</artifactId>
+            <version>2.3.4</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>asm-commons</artifactId>
+                    <groupId>asm</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- disruptor 高性能 无锁队列 -->
+        <!-- https://mvnrepository.com/artifact/com.lmax/disruptor -->
+        <dependency>
+            <groupId>com.lmax</groupId>
+            <artifactId>disruptor</artifactId>
+            <version>3.4.2</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-email</artifactId>
             <version>1.4</version>
-        </dependency>
-
-
-        <dependency>
-            <groupId>jdk.tools</groupId>
-            <artifactId>jdk.tools</artifactId>
-            <version>1.8</version>
-            <scope>system</scope>
-            <systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
         </dependency>
 
         <dependency>
@@ -1217,7 +1435,12 @@
                 <!-- <configuration> <port>8081</port> <path>/AnewB</path> <uriEncoding>UTF-8</uriEncoding>
                     <finalName>AnewB</finalName> <server>tomcat7</server> </configuration> -->
             </plugin>
-
+            <plugin>
+                <!-- https://mvnrepository.com/artifact/org.sonarsource.scanner.maven/sonar-maven-plugin -->
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.4.1.1168</version>
+            </plugin>
         </plugins>
         <pluginManagement>
             <plugins>

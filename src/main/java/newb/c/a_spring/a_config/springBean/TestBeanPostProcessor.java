@@ -1,7 +1,5 @@
 package newb.c.a_spring.a_config.springBean;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 
@@ -14,9 +12,6 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
  * 会拦截所有的bean 需要继续判断bean
  */
 public class TestBeanPostProcessor implements BeanPostProcessor {
-
-    private static Logger logger = LoggerFactory.getLogger(TestBeanPostProcessor.class);
-
     /**
      * @see org.springframework.beans.factory.config.BeanPostProcessor#postProcessBeforeInitialization(java.lang.Object, java.lang.String)
      */
@@ -24,7 +19,7 @@ public class TestBeanPostProcessor implements BeanPostProcessor {
     public Object postProcessBeforeInitialization(Object bean, String beanName)
             throws BeansException {
         //在 最先调用 多个BeanPostProcessor 好像会覆盖
-        logger.info("1.---bean初始化之前调用：bean=" + bean + ", beanName" + beanName);
+        System.out.println("1.---bean初始化之前调用：bean=" + bean + ", beanName" + beanName);
         if(bean instanceof ProcessBean) {
             ProcessBean pb = (ProcessBean)bean;
             System.out.println("username:"+pb.getUsername()); //2 被beanFactory修改
@@ -44,7 +39,7 @@ public class TestBeanPostProcessor implements BeanPostProcessor {
     public Object postProcessAfterInitialization(Object bean, String beanName)
             throws BeansException {
         //在 最后调用 多个BeanPostProcessor 好像会覆盖
-        logger.info("5.---bean初始化之后调用：bean=" + bean + ", beanName" + beanName);
+        System.out.println("5.---bean初始化之后调用：bean=" + bean + ", beanName" + beanName);
         if(bean instanceof ProcessBean) {
             ProcessBean pb = (ProcessBean)bean;
             System.out.println("username:"+pb.getUsername());

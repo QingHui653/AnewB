@@ -2,6 +2,7 @@ package newb.c.a_web.controller.mq;
 
 import javax.jms.Destination;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.activemq.command.ActiveMQTopic;
 import org.slf4j.Logger;
@@ -31,10 +32,8 @@ import newb.c.a_spring.backend.sql.model.basemodel.User;
  */
 @Controller
 @RequestMapping("resources/mq")
+@Slf4j
 public class ActiveMqController {
-
-	private static final Logger logger =LoggerFactory.getLogger(ActiveMqController.class);
-
 	@Autowired(required=false)
 	private ProducerServiceImpl producerServiceImpl;
 	// queue 点对点模式

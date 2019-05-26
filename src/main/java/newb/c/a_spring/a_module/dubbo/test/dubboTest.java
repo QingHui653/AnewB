@@ -12,12 +12,12 @@ public class dubboTest {
   
 	@SuppressWarnings("resource")
     public static void main(String[] args) throws Exception {  
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "main/resources/dubbo/spring-dubbo-test.xml" });  
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] { "config/dubbo/spring-dubbo-test.xml" });
         context.start(); 
   
-        DemoService demoService = (DemoService) context.getBean("demoService"); //
-        String hello = demoService.sayHello("tom"); // 
-        System.out.println(hello); //   
+        DemoService demoService = (DemoService) context.getBean("demoService");
+        String hello = demoService.sayHello("tom");
+        System.out.println(hello);
   
         List<User> list = demoService.getUsers();  
         if (list != null && list.size() > 0) {  
@@ -25,8 +25,8 @@ public class dubboTest {
                 System.out.println(list.get(i));  
             }  
         }  
-//        System.out.println(demoService.hehe());  
-//        System.in.read();  
+//        System.out.println(demoService.hehe());
+//        System.in.read();
     }  
   
 } 

@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.mail.MessagingException;
 
 import org.apache.commons.mail.EmailException;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -45,16 +46,18 @@ public class EmailTestController {
 	}
 
 	@GetMapping("sendByApache")
+	@Test
 	public void sendEmailByApache() throws EmailException {
 		org.apache.commons.mail.SimpleEmail emails = new org.apache.commons.mail.SimpleEmail();
-		emails.setHostName("smtp.qq.com");
-		emails.setSmtpPort(587);
-		emails.setAuthentication("1243618999@qq.com", "scrdsmokfsfnhche");
+		emails.setSSL(true);
+		emails.setHostName("smtp.ivyb2b.com");
+		emails.setSmtpPort(465);
+		emails.setAuthentication("test@ivyb2b.com","ivyb2b@2016");
 		emails.addTo("910944453@qq.com", "me");
-		emails.setFrom("1243618999@qq.com", "常青藤");
+		emails.setFrom("test@ivyb2b.com", "常青藤");
 		emails.setSubject("更换邮箱校验");
 		emails.setCharset("UTF-8");
-		emails.setMsg("邮箱校验码为：3006");
+		emails.setMsg("邮箱校验码为：2017090791624");
 		String message = emails.send();
 		System.out.println("返回 状态"+ message);
 	}

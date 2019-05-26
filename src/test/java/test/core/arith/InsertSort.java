@@ -1,11 +1,24 @@
 package test.core.arith;
 
+import org.junit.Test;
+
 import java.util.Arrays;
 
 /**
  * 插入排序
  * @author woshizbh
  *
+ */
+
+/**
+ * 从第一个元素开始，该元素可以认为已经被排序
+ * 取出下一个元素，在已经排序的元素序列中从后向前扫描
+ * 如果该元素（已排序）大于新元素，将该元素移到下一位置
+ * 重复步骤3，直到找到已排序的元素小于或者等于新元素的位置
+ * 将新元素插入到该位置后
+ * 重复步骤2~5
+ *
+ * 如果比较操作的代价比交换操作大的话，可以采用二分查找法来减少比较操作的数目。该算法可以认为是插入排序的一个变种，称为二分查找插入排序。
  */
 public class InsertSort {
 
@@ -15,8 +28,8 @@ public class InsertSort {
 	public static void main(String[] args) {
 		/**
 		 * 直接插入排序 
-		 * 1.数组的第0位不能有数据
-		 * 2.数组从第二个数据开始处理
+		 * 1.数组的第0位不能有数据     // 默认第一个 元素已经排序.
+		 * 2.数组从第二个数据开始处理  //
 		 * (如果该数据比前一位要小，说明要前移)
 		 * (先将该数据备份到第0位)
 		 * (将该数据前面那个数据后移)
@@ -100,6 +113,28 @@ public class InsertSort {
             array[j + 1] = key;
         }
         return array;
+	}
+
+	public void insertSort2(int[] arrays){
+		for (int i = 1; i < arrays.length; i++) {
+			int key = arrays[i];
+			int j =i-1;
+			while (j>=0 && arrays[j] >key){
+				arrays[j+1]=arrays[j];
+				j--;
+			}
+			arrays[j+1]=key;
+		}
+	}
+
+	@Test
+	public void TestInsertSort(){
+		int[] arr = {3,44,38,5,47,15,36,26,27,2,46,4,19,50,48};
+		insertionSort(arr);
+		System.out.println(Arrays.toString(arr));
+		int[] arr2 = {3,44,38,5,47,15,36,26,27,2,46,4,19,50,48};
+		insertSort2(arr2);
+		System.out.println(Arrays.toString(arr2));
 	}
 
 }

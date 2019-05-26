@@ -1,26 +1,29 @@
 package newb.c.util;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableCell;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.junit.Test;
 
 /**
@@ -129,6 +132,7 @@ public class ExportExcelUtil {
 			wb = new HSSFWorkbook(inStr); // 2003-
 		} else if (excel2007U.equals(fileType)) {
 			wb = new XSSFWorkbook(inStr); // 2007+
+			wb = new SXSSFWorkbook((XSSFWorkbook)wb);//导出 大容量 使用 SXSSFWorkbook
 		} else {
 			throw new Exception("解析的文件格式有误！");
 		}
@@ -339,14 +343,105 @@ public class ExportExcelUtil {
 		sheet.addMergedRegion(new CellRangeAddress(firstRow, lastRow, firstCol, lastCol));
 	}
 
+	public void testWord(String filePath){
+		try{
+			FileInputStream in = new FileInputStream(filePath);//载入文档
+			// 处理docx格式 即office2007以后版本
+			if(filePath.toLowerCase().endsWith("docx")){
+				//word 2007 图片不会被读取， 表格中的数据会被放在字符串的最后
+				XWPFDocument xwpf = new XWPFDocument(in);//得到word文档的信息
+				Iterator<XWPFTable> it = xwpf.getTablesIterator();//得到word中的表格
+				// 设置需要读取的表格  set是设置需要读取的第几个表格，total是文件中表格的总数
+				int set = 2, total = 2;
+				int num = set;
+				// 过滤前面不需要的表格
+				for (int i = 0; i < set-1; i++) {
+					it.hasNext();
+					it.next();
+				}
+				while(it.hasNext()){
+					XWPFTable table = it.next();
+					System.out.println("这是第" + num + "个表的数据");
+					List<XWPFTableRow> rows = table.getRows();
+					//读取每一行数据
+					for (int i = 0; i < rows.size(); i++) {
+						XWPFTableRow  row = rows.get(i);
+						//读取每一列数据
+						List<XWPFTableCell> cells = row.getTableCells();
+						for (int j = 0; j < cells.size(); j++) {
+							XWPFTableCell cell = cells.get(j);
+							//输出当前的单元格的数据
+							System.out.print(cell.getText() + "\t");
+						}
+						System.out.println();
+					}
+					// 过滤多余的表格
+					while (num < total) {
+						it.hasNext();
+						it.next();
+						num += 1;
+					}
+				}
+			}else{
+				// 处理doc格式 即office2003版本
+//				POIFSFileSystem pfs = new POIFSFileSystem(in);
+//				HWPFDocument hwpf = new HWPFDocument(pfs);
+//				Range range = hwpf.getRange();//得到文档的读取范围
+//				TableIterator it = new TableIterator(range);
+//				// 迭代文档中的表格
+//				// 如果有多个表格只读取需要的一个 set是设置需要读取的第几个表格，total是文件中表格的总数
+//				int set = 1, total = 4;
+//				int num = set;
+//				for (int i = 0; i < set-1; i++) {
+//					it.hasNext();
+//					it.next();
+//				}
+//				while (it.hasNext()) {
+//					Table tb = (Table) it.next();
+//					System.out.println("这是第" + num + "个表的数据");
+//					//迭代行，默认从0开始,可以依据需要设置i的值,改变起始行数，也可设置读取到那行，只需修改循环的判断条件即可
+//					for (int i = 0; i < tb.numRows(); i++) {
+//						TableRow tr = tb.getRow(i);
+//						//迭代列，默认从0开始
+//						for (int j = 0; j < tr.numCells(); j++) {
+//							TableCell td = tr.getCell(j);//取得单元格
+//							//取得单元格的内容
+//							for(int k = 0; k < td.numParagraphs(); k++){
+//								Paragraph para = td.getParagraph(k);
+//								String s = para.text();
+//								//去除后面的特殊符号
+//								if(null != s && !"".equals(s)){
+//									s = s.substring(0, s.length()-1);
+//								}
+//								System.out.print(s + "\t");
+//							}
+//						}
+//						System.out.println();
+//					}
+//					// 过滤多余的表格
+//					while (num < total) {
+//						it.hasNext();
+//						it.next();
+//						num += 1;
+//					}
+//				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
 	@Test
 	public void getListByExcelTest() throws Exception {
 		ExportExcelUtil excelUtil = new ExportExcelUtil();
-		InputStream in = new FileInputStream(new File("D:\\2.xlsx"));
-		List<List<Object>> list = excelUtil.simpleImport(in, "2.xlsx");
-		System.out.println(list.size());
+//		InputStream in = new FileInputStream(new File("D:\\2.xlsx"));
+//		List<List<Object>> list = excelUtil.simpleImport(in, "2.xlsx");
+//		System.out.println(list.size());
+//
+//		excelUtil.readExcelToObj("D:\\2.xlsx");
 
-		excelUtil.readExcelToObj("D:\\2.xlsx");
+		excelUtil.testWord("F:\\1.docx");
+
 	}
 
 }

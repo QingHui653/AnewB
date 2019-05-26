@@ -1,14 +1,13 @@
 package newb.c.a_web.controller;
 
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Future;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
-import newb.c.a_web.controller.component.AyscTask;
+import newb.c.a_web.controller.component.AsyncTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,6 +24,8 @@ import io.swagger.annotations.ApiParam;
 import newb.c.a_spring.backend.sql.model.basemodel.User;
 import newb.c.a_spring.backend.sql.service.UserService;
 import newb.c.util.annotation.RequestLimit;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import tk.mybatis.mapper.entity.Example;
 
 /**
@@ -40,14 +41,10 @@ public class MvcController {
 	@Autowired
 	private UserService userService;
 	@Autowired
-	private AyscTask ayscTask;
+	private AsyncTask ayscTask;
 
 	/**
 	 * 返回中文字符串,需要在MVC中配置 不然会自动加引号
-	 * 
-	 * @param modelMap
-	 * @param userId
-	 * @return
 	 */
 	@RequestMapping(value = "/string", method = RequestMethod.GET) // ,produces
 																	// ="text/html;charset=UTF-8"
@@ -174,6 +171,27 @@ public class MvcController {
 
 
 	/**
+	 * springmvc 返回异步任务
+	 *
+	 * @throws Exception
+	 */
+	@ApiOperation("调用异步任务")
+	@GetMapping("/asycTest2")
+	public void asycTest2() throws Exception {
+		CountDownLatch countDownLatch = new CountDownLatch(3);
+		long start = System.currentTimeMillis();
+		Future<String> task1 = ayscTask.doTask(countDownLatch,1);
+		Future<String> task2 = ayscTask.doTask(countDownLatch,2);
+		Future<String> task3 = ayscTask.doTask(countDownLatch,3);
+		countDownLatch.await();
+		System.out.println(task1.get());
+		System.out.println(task2.get());
+		System.out.println(task3.get());
+		long end = System.currentTimeMillis();
+		System.out.println("任务全部完成，总耗时：" + (end - start) + "毫秒");
+	}
+
+	/**
 	 * 使用forward 使之 重新进入另一个controller /user/newbs 转发
 	 */
 	@RequestMapping(value = "/forward", method = RequestMethod.POST)
@@ -204,5 +222,23 @@ public class MvcController {
 		// return "redi:/user/newbs";
 		return "redirect:/views/jsp/user/newbs";
 	}
-	
+
+
+	@ApiOperation("在方法未传入 httprequest 的 情况下获取 httprequest")
+	@RequestMapping(value = "/getHttpRequest", method = RequestMethod.GET)
+	@ResponseBody
+	public String getHttpRequest() {
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
+				.getRequestAttributes())
+				.getRequest();
+		Map<String, String[]> parameterMap = request.getParameterMap();
+
+		for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
+			System.out.println("params--"+entry.getKey()+"--"+ Arrays.toString(entry.getValue()));
+		}
+		HttpSession session = request.getSession();
+		System.out.println("session--"+session.toString());
+
+		return "OK";
+	}
 }

@@ -9,6 +9,7 @@ public class DemoServiceImpl implements DemoService {
 
 	@Override
 	public String sayHello(String name) {
+        System.out.println("进入 demoService 服务");
 		return "Hello1 " + name;
 	}
 

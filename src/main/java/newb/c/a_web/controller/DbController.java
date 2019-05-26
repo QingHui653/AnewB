@@ -5,15 +5,14 @@ import java.util.List;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import lombok.extern.slf4j.Slf4j;
+import newb.c.a_spring.backend.sql.service.MovieService;
 import newb.c.a_spring.backend.sql.service.ResultService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import io.swagger.annotations.ApiOperation;
 import newb.c.a_spring.backend.sql.model.UserTrin;
@@ -24,6 +23,7 @@ import newb.c.a_spring.backend.sql.service.UserService;
 
 @Controller
 @RequestMapping("db")
+@Slf4j
 public class DbController {
 
 	@Autowired
@@ -32,6 +32,8 @@ public class DbController {
 	private TestCacheService userCacheService;
 	@Autowired
 	private ResultService resultService;
+	@Autowired
+	private MovieService movieService;
 
 	public volatile Integer threadCount = 0;
 
@@ -92,9 +94,6 @@ public class DbController {
 	/**
 	 * save 测试批量插入
 	 *
-	 * @param modelMap
-	 * @param userId
-	 * @return
 	 */
 	@RequestMapping(value = "/user/save", method = RequestMethod.GET)
 	@ApiOperation("测试批量插入方法")
@@ -127,9 +126,6 @@ public class DbController {
 
 	 /**
 	  * 多线程 测试批量插入
-	  * @param modelMap
-	  * @param userId
-	  * @return
 	  */
 	 @RequestMapping(value="/user/saveByMultiThread",method= RequestMethod.GET)
 	 @ApiOperation("多线程测试批量插入方法")
@@ -144,11 +140,6 @@ public class DbController {
 
 
 
-	/**
-	 * @param modelMap
-	 * @param userId
-	 * @return
-	 */
 	@RequestMapping(value = "/user/selectuser", method = RequestMethod.GET)
 	@ApiOperation("测试 有索引的查询速度 使用 pagehelper ")
 	@ResponseBody
@@ -167,10 +158,6 @@ public class DbController {
 
 	/**
 	 * userCahce表，测试插入10w条数据
-	 *
-	 * @param modelMap
-	 * @param userId
-	 * @return
 	 */
 	@RequestMapping(value = "/userCache/save", method = RequestMethod.GET)
 	@ApiOperation("测试usercache 批量插入数据")
@@ -203,10 +190,6 @@ public class DbController {
 
 	/**
 	 * del 测试事务 具体看BaseServiceImpl
-	 *
-	 * @param modelMap
-	 * @param userId
-	 * @return
 	 */
 
 	@RequestMapping(value = "/newb/del", method = RequestMethod.POST)
@@ -238,5 +221,18 @@ public class DbController {
 		}
 //		System.out.println("--- "+userList.size());
 		return userList;
+	}
+
+
+	/**
+	 * 在A中调用循环调用B 第51 次B失败,A全部回滚,B提交前50次.
+	 * @return
+	 */
+	@GetMapping("/testAOrB")
+	@ResponseBody
+	@ApiOperation("测试 REQUIRES_NEW")
+	public Object testTranscation(){
+		movieService.testAOrB();
+		return "OK";
 	}
 }

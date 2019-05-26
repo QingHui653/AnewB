@@ -40,15 +40,22 @@ public class MybatisInterceptor implements Interceptor {
         String sqlId = mappedStatement.getId();
         BoundSql boundSql = mappedStatement.getBoundSql(parameter);
         Configuration configuration = mappedStatement.getConfiguration();
+
+        long time = 0;
+        if (true) {
+            try{
+                String sql = getSql(configuration, boundSql, sqlId, time);
+                log.info(sql);
+            }catch (Exception e){
+                log.info("SQL 拼接 ? 报错");
+            }
+        }
+
         Object returnValue = null;
         long start = System.currentTimeMillis();
         returnValue = invocation.proceed();
         long end = System.currentTimeMillis();
-        long time = (end - start);
-        if (time > 1) {
-            String sql = getSql(configuration, boundSql, sqlId, time);
-            log.info(sql);
-        }
+
         return returnValue;
     }
 

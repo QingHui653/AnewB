@@ -142,10 +142,11 @@
 		事务处理选项有如下几个：（前面2个常用）
 		PROPAGATION_REQUIRED － 需要事务处理。如果当前不存在事务环境，则创建一个
 		PROPAGATION_SUPPORTS － 如果当前存在事务环境，则作为其中的一部分。如果不存在，则按非事务方式执行
-		PROPAGATION_REQUIRES_NEW － 需要事务处理。并总是开启一个新事务。如果已经存在事务环境，则挂起之
 		PROPAGATION_MANDATORY － 执行到指定方法时，必须已经存在事务环境，否则出错
-		PROPAGATION_NEVER － 不支持事务操作，如果存在事务环境会出错
+		PROPAGATION_REQUIRES_NEW － 需要事务处理。并总是开启一个新事务。如果已经存在事务环境，则挂起之
 		PROPAGATION_NOT_SUPPORTED － 不支持事务操作。如果存在事务，则挂起
+		PROPAGATION_NEVER － 不支持事务操作，如果存在事务环境会出错
+		PROPAGATION_NESTED：如果当前事务存在，则在嵌套事务中执行，如果当前没有事务，则执行与 PROPAGATION_REQUIRED 类似的操作（注意：当应用到JDBC时，只适用JDBC 3.0以上驱动）。
 	-->
 	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
@@ -161,7 +162,9 @@
 	</tx:advice>
 
 	<!--把事务控制在Service层-->
-	<aop:config>
+	<!-- 开启暴露Aop代理到ThreadLocal支持，解决事务嵌套不生效问题。 -->
+	<aop:aspectj-autoproxy expose-proxy="true"/><!--注解风格支持-->
+	<aop:config expose-proxy="true">
 		<aop:pointcut id="transactionPointcut" expression="execution(* newb.c.a_spring.backend.sql.service..*Impl.*(..))" />
 		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
 	</aop:config>
