@@ -104,13 +104,12 @@ public class RabbitMqListener  {
 		String json = new String(msg.getBody(),"UTF-8");
 		System.out.println("all " + json);
 
-		MqTeachDTO mqTeachDTO = JSON.parseObject(json,MqTeachDTO.class);
-
 		try {
+			MqTeachDTO mqTeachDTO = JSON.parseObject(json,MqTeachDTO.class);
 			mqTeachMapper.insert(mqTeachDTO.getMqTeach());
 			mqStudentMapper.insert(mqTeachDTO.getMqStudent());
 		}catch (Exception e){
-			System.out.println("error   "+mqTeachDTO.getMqTeach().getId());
+			System.out.println("error   "+json);
 		}
 
 	}
