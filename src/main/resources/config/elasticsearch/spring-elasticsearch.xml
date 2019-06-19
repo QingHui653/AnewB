@@ -11,4 +11,9 @@
         <constructor-arg name="client" ref="client"/>
     </bean>
 
+    <!--    spring-data-es 在 3.2版本才有 rest-->
+    <!--    <elasticsearch:rest-client id="restclient" hosts="${elasticsearch.esClient}"/>-->
+    <!--<bean name="elasticsearchTemplate" class="org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate">
+        <constructor-arg name="client" ref="restclient"/>
+    </bean>-->
 </beans>

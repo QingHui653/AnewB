@@ -14,13 +14,15 @@
 
     <!-- 不推荐 使用 transport 9300 -->
     <!-- elasticsearch.esNodes=localhost:9300   -->
-    <!--<elasticsearch:client id="client" properties="esproperties" esNodes="${elasticsearch.esNodes}" />  -->
+    <elasticsearch:client id="client" properties="esproperties" esNodes="${elasticsearch.esNodes}" />
+    <bean name="elasticsearchTemplate" class="org.springframework.data.elasticsearch.core.ElasticsearchTemplate">
+        <constructor-arg name="client" ref="client" />
+    </bean>
 
-    <!-- 使用 rest client -->
-    <elasticsearch:rest-client id="client" properties="esproperties" esNodes="${elasticsearch.esClient}" />
-    
-    <bean name="elasticsearchTemplate" class="org.springframework.data.elasticsearch.core.ElasticsearchTemplate">    
-        <constructor-arg name="client" ref="client" />    
-    </bean>    
+    <!-- 使用 rest client  在 sprin-data-client 3.2.0版本才存在. es7.0已弃用 transport-->
+    <!--    <elasticsearch:rest-client id="restClient" properties="esproperties" esNodes="${elasticsearch.esClient}" />-->
+    <!--<bean name="elasticsearchTemplate" class="org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate">
+        <constructor-arg name="client" ref="restClient"/>
+    </bean>-->
 
 </beans>
