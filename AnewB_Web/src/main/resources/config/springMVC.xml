@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/task
+		http://www.springframework.org/schema/task/spring-task-4.2.xsd
+		">
+
+	<!-- 此处必须存在不能删除，不然使用@vaule(${})取不到值 -->
+	<!-- <context:property-placeholder location="classpath*:main/resources/*.properties" /> -->
+	<!-- 自动扫描下的包自动装配 -->
+	<!--resource-pattern="api/*.class" 基类包下的所有类-->
+	<!-- <context:component-scan base-package="newb.c.controller.test" /> -->
+    <!-- 加载controller的时候,不加载service,因为此时事物并未生效,若此时加载了service,那么事物无法对service进行拦截 -->
+    <!-- 配置在spring中，在一开始就加载 -->
+    <!-- <context:component-scan base-package="newb.c">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+    </context:component-scan> -->
+
+	<context:component-scan base-package="newb.c.a_web"/>
+
+	<!--<context:component-scan base-package="newb.c" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect" />
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>-->
+
+    <task:annotation-driven />
+
+	<!--注册swagger2 -->
+	<bean class="newb.c.a_spring.api.SpringfoxDocConfig"/>
+    <!-- 日志代理配置 -->
+    <!-- <aop:aspectj-autoproxy/>
+    <bean id="LogProxy" class="newb.c.proxy.log.LogProxy"/>
+    <bean id="LimitProxy" class="newb.c.proxy.limit.RequestLimitContract"/> -->
+
+    <!-- 必须配置在springmvc中 ，不然不起作用，未经过确认，但在e账柜OA中无法识别到-->
+    <aop:aspectj-autoproxy/>
+
+	<!-- 启用spring mvc 注解 -->
+    <!--
+    @Controller 声明Action组件
+    @Service    声明Service组件    @Service("myMovieLister")
+    @Repository 声明Dao组件
+    @Component   泛指组件, 当不好归类时.
+    @RequestMapping("/menu")  请求映射
+    @Resource  用于注入，( j2ee提供的 ) 默认按名称装配，@Resource(name="beanName")
+    @Autowired 用于注入，(spring提供的) 默认按类型装配
+    @Transactional( rollbackFor={Exception.class}) 事务管理
+    @ResponseBody
+    @Scope("prototype")   设定bean的作用域 -->
+
+	<!--RequestMappingHandlerAdapter 返回映射处理适配器-->
+	<!-- validator="validator" 校验 -->
+	<!-- 配置HandlerAdapter -->
+	<mvc:annotation-driven validator="validator" enable-matrix-variables="true">
+		<mvc:message-converters>
+			<ref bean="stringHttpMessageConverter" />
+			<ref bean="marshallingHttpMessageConverter" />
+			<ref bean="mappingJackson2HttpMessageConverter" />
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="providerClass" value="org.hibernate.validator.HibernateValidator"></property>
+		<!-- 国际化 -->
+		 <property name="validationMessageSource" ref="messageSource"></property>
+	</bean>
+
+	<!-- validator 国际化 -->
+	<!--国际化加载的资源路径-->
+	<!--不存在时 使用编码-->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"
+		  p:basename="i18n/messages"
+		  p:defaultEncoding="UTF-8"
+		  p:useCodeAsDefaultMessage="true"
+		  p:cacheSeconds="0" />
+	<!-- cookie加载器 同理存在 session加载器。controller 调用 setLocale 修改语言  -->
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="defaultLocale" value="zh_CN" />
+		<property name="cookieMaxAge" value="2592000"/>
+	</bean>
+	<!-- 国际化拦截器 看 mvc：interceptors -->
+
+	<!--解决Spring MVC返回字符串自动加"引号"和 中文乱码 -->
+	<bean id="stringHttpMessageConverter"
+		class="org.springframework.http.converter.StringHttpMessageConverter">
+		<constructor-arg value="UTF-8" />
+	</bean>
+	<!-- XML转换器 -->
+	<bean id="marshallingHttpMessageConverter"
+		class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+		<property name="marshaller" ref="castorMarshaller" />
+		<property name="unmarshaller" ref="castorMarshaller" />
+	</bean>
+
+	<!-- bean 转xml 供marshaller和unmarshaller使用 -->
+	<bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller" />
+
+	<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+	<bean id="mappingJackson2HttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>application/json</value>
+				<value>application/xml</value>
+				<value>text/html</value>
+				<value>text/plain</value>
+				<value>text/xml</value>
+			</list>
+		</property>
+	</bean>
+
+
+	 <!-- 全局拦截器   会拦截静态资源
+    Spring为我们提供了：
+    org.springframework.web.servlet.HandlerInterceptor接口，
+    org.springframework.web.servlet.handler.HandlerInterceptorAdapter适配器，
+           实现这个接口或继承此类，可以非常方便的实现自己的拦截器。
+
+          有以下三个方法：
+
+    Action之前执行:
+     public boolean preHandle(HttpServletRequest request,
+       HttpServletResponse response, Object handler);
+
+           生成视图之前执行
+     public void postHandle(HttpServletRequest request,
+       HttpServletResponse response, Object handler,
+       ModelAndView modelAndView);
+
+           最后执行，可用于释放资源
+     public void afterCompletion(HttpServletRequest request,
+       HttpServletResponse response, Object handler, Exception ex);
+    <mvc:interceptors >
+     <mvc:interceptor>
+            <mvc:mapping path="/user/*" />  /user/*
+            <bean class="com.mvc.MyInteceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+    -->
+
+	<!-- 配置权限拦截器  多个拦截器,顺序执行-->
+	<!-- 当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法 -->
+	<mvc:interceptors>
+		<!--测试 自定义拦截器-->
+		<mvc:interceptor>
+			<mvc:mapping path="/user/**" /><!-- 匹配的是url路径， 如果不配置或/**,将拦截所有的Controller -->
+			<bean class="newb.c.a_web.webmodule.interceptor.MemberInterceptor"></bean>
+		</mvc:interceptor>
+		<!--国际化 请求 拦截 参数为 language 切换-->
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" p:paramName="language" />
+		</mvc:interceptor>
+	 </mvc:interceptors>
+
+	<!-- 总错误处理   异常处理方式一：使用spring自带clss
+		   这里主要的类是SimpleMappingExceptionResolver类，和他的父类AbstractHandlerExceptionResolver类。
+		   具体可以配置哪些属性，我是通过查看源码知道的。
+		   你也可以实现HandlerExceptionResolver接口，写一个自己的异常处理程序。-->
+    <!--
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<!- - 定义默认的异常处理页面，当该异常类型的注册时使用 - ->
+		<property name="defaultErrorView" value="error"></property>
+		<!- - 定义异常处理页面用来获取异常信息的变量名，默认名为exception - ->
+		<property name="exceptionAttribute" value="ex"></property>
+		<!- - 定义需要特殊处理的异常，用类名或完全路径名作为key，异常也页名作为值 - ->
+		<property name="exceptionMappings">
+			<props>
+				<prop key="cn.basttg.core.exception.BusinessException">error-business</prop>
+				<prop key="cn.basttg.core.exception.ParameterException">error-parameter</prop>
+			</props>
+		</property>
+
+		<!- - 相关状态码对应的错误页面 - ->
+		<property name="statusCodes">
+			<props>
+				<prop key="errors/500">500</prop>
+				<prop key="errors/404">404</prop>
+			</props>
+		</property>
+		<!- - 设置日志输出级别，不定义则默认不输出警告等错误日志信息 - ->
+		<property name="warnLogCategory" value="WARN" />
+		<!- - 默认HTTP状态码 - ->
+		<property name="defaultStatusCode" value="500" />
+	</bean>
+	 -->
+	 <!-- 异常处理第二种：自定义 -->
+    <!-- <bean id="exceptionHandler" class="ErrorLogSendEmail"/> -->
+
+	<!-- 对静态资源文件的访问  方案一 （二选一）
+                       会把"/**" url,注册到SimpleUrlHandlerMapping的urlMap中,把对静态资源的访问由HandlerMapping转到
+    org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler处理并返回.
+    DefaultServletHttpRequestHandler使用就是各个Servlet容器自己的默认Servlet. -->
+	<!--静态资源访问-->
+    <mvc:default-servlet-handler/>
+
+   <!--  对静态资源文件的访问  方案二 （二选一）/images/**映射到ResourceHttpRequestHandler进行处理，
+    location指定静态资源的位置.可以是web application根目录下、jar包里面，这样可以把静态资源压缩到jar包中。
+    cache-period 可以使得静态资源进行web cache  -->
+    <!-- <mvc:resources mapping="/images/**" location="/images/" cache-period="31556926"/>
+    <mvc:resources mapping="/js/**" location="/js/" cache-period="31556926"/>
+    <mvc:resources mapping="/css/**" location="/css/" cache-period="31556926"/> -->
+	<!-- <mvc:resources mapping="/css/**" location="/css/" />
+	<mvc:resources mapping="/font/**" location="/css/"/>
+	<mvc:resources mapping="/images/**" location="/images/" />
+	<mvc:resources mapping="/js/**" location="/js/" /> -->
+
+	<!-- 配置多文件上传 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding">
+			<value>UTF-8</value>
+		</property>
+		<property name="maxUploadSize">
+			<!-- 上传文件大小限制为31M，31*1024*1024 -->
+			<value>512051200</value>
+		</property>
+		<property name="maxInMemorySize">
+			<value>4096</value>
+		</property>
+	</bean>
+	<!--跨域问题-->
+	<mvc:cors>
+        <mvc:mapping path="/**" allowed-origins="*" allow-credentials="true" max-age="1800" allowed-methods="GET,POST,OPTIONS"/>
+    </mvc:cors>
+	<!--跨域问题-->
+	<!-- <mvc:cors>
+
+    <mvc:mapping path="/api/**"
+        allowed-origins="http://domain1.com, http://domain2.com"
+        allowed-methods="GET, PUT"
+        allowed-headers="header1, header2, header3"
+        exposed-headers="header1, header2" allow-credentials="false"
+        max-age="123" />
+
+    <mvc:mapping path="/resources/**"
+        allowed-origins="http://domain1.com" />
+
+</mvc:cors> -->
+
+	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
+	<!--内容协商 -->
+	<!--  这里是使用RESTful时配置文件 ，可在这配置视图 解析器-->
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="contentNegotiationManager">
+			<bean
+				class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+				<property name="defaultContentType" value="text/html" />
+				<property name="mediaTypes">
+					<map>
+						<entry key="json" value="application/json" />
+						<entry key="xml" value="application/xml" />
+						<entry key="html" value="text/html" />
+					</map>
+				</property>
+			</bean>
+		</property>
+		<!-- <property name="viewResolvers">
+			<list>
+				<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+					<property name="prefix" value="/" />
+					<property name="suffix" value=".jsp" />
+				</bean>
+			</list>
+		</property> -->
+		<property name="defaultViews">
+			<list>
+				<bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+				<bean class="org.springframework.web.servlet.view.xml.MarshallingView">
+					<property name="marshaller" ref="castorMarshaller" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- jsp -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/" />
+		<!--<property name="suffix" value=".jsp" />-->
+	</bean>
+
+	<!-- Freemarker配置 -->
+
+	<!-- <bean id="viewResolver"  class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+	    <property name="suffix" value=".ftl"/>
+	    <property name="contentType" value="text/html;charset=UTF-8"></property>
+	</bean>
+
+	<bean id="freemarkerConfig"  class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+	    <property name="templateLoaderPath" value="/" />
+	    <property name="freemarkerSettings">
+	        <props>
+	            <prop key="template_update_delay">0</prop>
+	            <prop key="default_encoding">UTF-8</prop>
+	            <prop key="number_format">0.##########</prop>
+	            <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+	            <prop key="classic_compatible">true</prop>
+	            <prop key="template_exception_handler">ignore</prop>
+	        </props>
+	    </property>
+	</bean>  -->
+
+	<!-- velocity环境配置 -->
+	<!-- <bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+	    velocity配置文件路径  或者直接用velocityProperties属性
+	    <property name="configLocation" value="classpath:main/resources/velocity.properties"/>
+	    velocity模板路径
+	    <property name="resourceLoaderPath" value="/"/>
+	</bean>
+	velocity视图解析器
+	<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+	    velocity配置文件路径  或者直接用velocityProperties属性
+	    <property name="configLocation" value="classpath:main/resources/velocity.properties"/>
+	      velocity模板路径
+	    <property name="resourceLoaderPath" value="/"/>
+	</bean> -->
+
+
+</beans>

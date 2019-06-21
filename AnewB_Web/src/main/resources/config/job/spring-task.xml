@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/task
+        http://www.springframework.org/schema/task/spring-task.xsd
+        http://www.springframework.org/schema/context
+       	http://www.springframework.org/schema/context/spring-context.xsd
+">
+
+
+    <context:component-scan base-package="newb.c..a_module.joba_springs" />
+	
+    <task:annotation-driven executor="annotationExecutor" scheduler="qbScheduler" mode="proxy" />
+
+    <task:scheduler id="qbScheduler" pool-size="10" />
+    <!--Async配置 https://www.cnblogs.com/zhengbin/p/6104502.html-->
+    <task:executor id="annotationExecutor" pool-size="20"/>
+    <!--
+    fixedRate：每隔多少毫秒执行一次该方法
+    fixed-delay="1000"  每秒触发一次
+    cron：详细配置了该方法在什么时候执行
+    initial-delay="3000"  启动后延迟3秒后开始首次触发
+    -->
+</beans>
