@@ -17,57 +17,8 @@
         <project.basedir.lib>/src/main/webapp/WEB-INF</project.basedir.lib>
     </properties>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-framework-bom</artifactId>
-                <version>4.3.3.RELEASE</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <dependencies>
         <!-- **********************Spring -->
-        <!-- =================Spring core -->
-        <!-- spring-core：依赖注入IoC与DI的最基本实现 -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-        </dependency>
-        <!-- spring-beans：Bean工厂与bean的装配 -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-        </dependency>
-        <!-- Spring IOC的高级扩展,如任务调度等 spring-context：spring的context上下文即IoC容器 -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-        <!-- spring-expression：spring表达式语言 -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-expression</artifactId>
-        </dependency>
-        <!-- =================Spring core -->
-        <!-- =================Spring AOP -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-        </dependency>
-        <!-- 提供对AspectJ的支持，以便可以方便的将面向方面的功能集成进IDE中，比如Eclipse AJDT。 -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aspects</artifactId>
-        </dependency>
-        <!-- 提供一些类级的工具支持和ClassLoader级的实现，用于服务器 -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-instrument</artifactId>
-        </dependency>
         <!-- 针对tomcat的instrument实现 -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -392,12 +343,6 @@
             <artifactId>testng</artifactId>
             <version>6.9.10</version>
         </dependency>
-        <!-- 测试 junit -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-        </dependency>
         <!-- 伪装数据 -->
         <!-- https://mvnrepository.com/artifact/org.jmock/jmock -->
         <dependency>
@@ -437,19 +382,6 @@
             <artifactId>sqljdbc4</artifactId>
             <version>4.0</version>
         </dependency>-->
-        <!-- JSON -->
-        <!-- alibaba fastjson -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.31</version>
-        </dependency>
-        <!-- GSON -->
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.7</version>
-        </dependency>
         <!--apache 工具包 -->
         <dependency>
             <groupId>commons-httpclient</groupId>
@@ -464,11 +396,6 @@
             <version>1.10</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.4</version>
-        </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-configuration2</artifactId>
