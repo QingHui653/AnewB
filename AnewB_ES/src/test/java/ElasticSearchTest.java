@@ -1,4 +1,3 @@
-package newb.c.test;
 
 import java.util.List;
 
@@ -15,8 +14,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import newb.c.a_spring.backend.elasticsearch.model.MovieDTO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:/config/properties/config.properties","classpath:/config/elasticsearch/elasticsearch.xml"})
-public class ElasticSearchUtil {
+@ContextConfiguration({"classpath:/config/elasticsearch/elasticsearch5.xml"})
+public class ElasticSearchTest {
 	
 	@Autowired
 	private ElasticsearchTemplate elasticsearchTemplate;
