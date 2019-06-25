@@ -14,6 +14,7 @@ import org.elasticsearch.action.admin.cluster.health.ClusterHealthResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
+import org.elasticsearch.client.Client;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.cluster.health.ClusterHealthStatus;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -46,6 +47,9 @@ public class ElasticSearchController {
 	private EsMovieService esMovieService;
 
 	@Autowired(required = false)
+	private Client client;
+
+	@Autowired(required = false)
 	private RestClient restClient;
 
 	private String esIndexName = "heros";
@@ -70,7 +74,6 @@ public class ElasticSearchController {
 	}
 
 
-	@SuppressWarnings("static-access")
 	@RequestMapping(value="queryMovie",method={RequestMethod.GET})
 	@ApiOperation(value="查询电影")
 	@ResponseBody
@@ -86,7 +89,6 @@ public class ElasticSearchController {
 		return movieList;
 	}
 
-	@SuppressWarnings("static-access")
 	@RequestMapping(value="querylikeMovie",method={RequestMethod.GET})
 	@ApiOperation(value="查询电影")
 	@ResponseBody

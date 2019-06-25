@@ -13,7 +13,7 @@ public class CreateIndexAndMapping {
 	 * 创建index索引
 	 * //首先创建索引
 	 */
-//	@Test
+	@Test
 	public void createIndex() {
 		//构建一个Index（索引）首字母不能大写  
 		CreateIndexRequest request = new CreateIndexRequest("wow");

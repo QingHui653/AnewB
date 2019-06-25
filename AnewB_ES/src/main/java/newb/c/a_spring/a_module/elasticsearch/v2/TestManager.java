@@ -15,7 +15,7 @@ public class TestManager {
 	
 	private QueryManage queryManage =new QueryManage();
 	
-//	@Test
+	@Test
 	public void testSave() {
 		Map<String,Object> map =new HashMap<>();
 			map.put("author", "qh");

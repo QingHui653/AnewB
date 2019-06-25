@@ -27,7 +27,9 @@ public class ESTools {
 			return client;
 		}
 		Client client = null;
-		String ip = "119.23.231.239";
+		String ip = "frp1.chuantou.org";
+		Integer port =54130;
+//		String ip = "119.23.231.239";
 //		String ip = "127.0.0.1";
 		System.out.println("获取ESIP地址"+ip);
 		try {
@@ -46,7 +48,7 @@ public class ESTools {
 //			client = TransportClient.builder().build().addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(ip), 9300));
 
 			//创建客户端 版本 5.6.7
-			client = new PreBuiltTransportClient(Settings.EMPTY).addTransportAddresses(new InetSocketTransportAddress(InetAddress.getByName(ip),9300));
+			client = new PreBuiltTransportClient(Settings.EMPTY).addTransportAddresses(new InetSocketTransportAddress(InetAddress.getByName(ip),port));
 
 			System.out.println("创建Elasticsearch Client 结束");
 		} catch (Exception e) {

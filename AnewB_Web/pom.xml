@@ -18,6 +18,20 @@
     </properties>
 
     <dependencies>
+        <!--模块引用-->
+        <dependency>
+            <groupId>AnewB</groupId>
+            <artifactId>AnewB_Common</artifactId>
+            <version>5.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>AnewB</groupId>
+            <artifactId>AnewB_ES</artifactId>
+            <version>5.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+
         <!-- **********************Spring -->
         <!-- 针对tomcat的instrument实现 -->
         <dependency>
@@ -389,13 +403,6 @@
             <version>3.1</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.10</version>
-        </dependency>
-
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-configuration2</artifactId>
@@ -473,33 +480,6 @@
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>-->
-
-        <!-- log4j2 日志 -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>2.9.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.9.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <version>2.9.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-web</artifactId>
-            <version>2.9.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-1.2-api</artifactId>
-            <version>2.9.1</version>
-        </dependency>
 
         <!-- 爬虫框架 -->
         <dependency>
@@ -1049,23 +1029,6 @@
             <version>1.2.2.RELEASE</version>
         </dependency>
 
-        <!-- elasticsearch -->
-        <!-- https://mvnrepository.com/artifact/org.elasticsearch/elasticsearch -->
-        <dependency>
-            <groupId>org.elasticsearch</groupId>
-            <artifactId>elasticsearch</artifactId>
-            <version>5.6.7</version>
-        </dependency>
-        <dependency>
-            <groupId>org.elasticsearch.client</groupId>
-            <artifactId>elasticsearch-rest-client</artifactId>
-            <version>5.6.7</version>
-        </dependency>
-        <dependency>
-            <groupId>org.elasticsearch.client</groupId>
-            <artifactId>transport</artifactId>
-            <version>5.6.7</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/net.sf.ezmorph/ezmorph -->
         <dependency>
             <groupId>net.sf.ezmorph</groupId>
@@ -1079,29 +1042,6 @@
             <artifactId>morph</artifactId>
             <version>0.3.0</version>
         </dependency>
-
-
-        <!-- https://mvnrepository.com/artifact/fr.pilato.spring/spring-elasticsearch -->
-        <dependency>
-            <groupId>fr.pilato.spring</groupId>
-            <artifactId>spring-elasticsearch</artifactId>
-            <version>5.0</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-jpa</artifactId>
-            <version>2.0.3.RELEASE</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-elasticsearch -->
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-elasticsearch</artifactId>
-            <version>3.0.3.RELEASE</version>
-        </dependency>
-
 
         <!-- solr-solrj -->
         <dependency>

@@ -99,7 +99,7 @@
 <!--	目前es 无法使用 spring-data-es .都有jar包问题 如果要使用请 使用 原生-->
 <!--	<import resource="elasticsearch/elasticsearch2.xml"/>-->
 <!--	更新 5.0 有 修改 spring-data jar 为2.0 需要 替换 spring-data-* 开头的 全部jar-->
-<!--	<import resource="elasticsearch/elasticsearch5.xml"/>-->
+	<import resource="classpath*:config/elasticsearch/elasticsearch5.xml"/>
 <!--	<import resource="elasticsearch/spring-elasticsearch.xml"/>-->
 
 

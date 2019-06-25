@@ -15,9 +15,8 @@ public class ElasticsearchCreat {
 
     private Logger logger = LoggerFactory.getLogger(ElasticsearchCreat.class);
 
-    public final static String HOST = "119.23.231.239";
-
-    public final static int PORT = 9300;//http请求的端口是9200，客户端是9300
+    public final static String HOST = "frp1.chuantou.org";
+    public final static int PORT = 54130;
 
     /**
      * 测试Elasticsearch客户端连接
