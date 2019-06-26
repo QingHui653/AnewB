@@ -16,7 +16,7 @@
 	</bean>-->
 	<!--引入配置属性文件 -->
 	<!-- 记得以前这里也报过错，暂时不要删除 -->
-	<context:property-placeholder location="classpath:config/properties/*.properties" />
+	<context:property-placeholder location="classpath*:config/*.properties" />
 
     <context:component-scan base-package="newb.c.a_spring"/>
 

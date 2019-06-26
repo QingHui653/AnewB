@@ -12,6 +12,7 @@
         <module>AnewB_Web</module>
         <module>AnewB_Test</module>
         <module>AnewB_ES</module>
+        <module>AnewB_Config</module>
     </modules>
 
     <properties>

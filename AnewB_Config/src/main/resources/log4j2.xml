@@ -94,8 +94,7 @@
 
         <logger name="org.mongodb.driver" level="INFO"/>
 
-        <logger name="org.elasticsearch.client" level="DEBUG"/>
-        <logger name="org.elasticsearch.transport" level="DEBUG"/>
+        <logger name="org.elasticsearch" level="INFO"/>
 
         <logger name="org.apache.kafka" level="INFO"/>
 

@@ -18,6 +18,12 @@
             <version>5.0.0</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>AnewB</groupId>
+            <artifactId>AnewB_Config</artifactId>
+            <version>5.0.0</version>
+            <scope>compile</scope>
+        </dependency>
         <!-- elasticsearch -->
         <!-- https://mvnrepository.com/artifact/org.elasticsearch/elasticsearch -->
         <dependency>
@@ -42,12 +48,13 @@
             <artifactId>spring-elasticsearch</artifactId>
             <version>5.0</version>
         </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-jpa</artifactId>
-            <version>2.0.3.RELEASE</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.data</groupId>-->
+<!--            <artifactId>spring-data-jpa</artifactId>-->
+<!--            <version>2.0.3.RELEASE</version>-->
+<!--        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-elasticsearch -->
         <dependency>
