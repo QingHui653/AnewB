@@ -1273,6 +1273,12 @@
             <scope>system</scope>
             <systemPath>${basedir}${project.basedir.lib}/lib/ws-commons-util-1.0.1.jar</systemPath>
         </dependency>
+        <!--        rocketmq-->
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>4.3.0</version>
+        </dependency>
     </dependencies>
 
 
@@ -1382,5 +1388,18 @@
             </plugins>
         </pluginManagement>
     </build>
+
+<!--    morph jar 不在 maven 中央仓库 需要配置此处-->
+    <!--<mirror>
+        <id>clojars</id>
+        <mirrorOf>clojars</mirrorOf>
+        <url>http://clojars.org/repo/</url>
+    </mirror>-->
+    <repositories>
+        <repository>
+            <id>clojars</id>
+            <url>http://clojars.org/repo/</url>
+        </repository>
+    </repositories>
 
 </project>
