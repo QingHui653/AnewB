@@ -50,11 +50,11 @@ public class EmailTestController {
 	public void sendEmailByApache() throws EmailException {
 		org.apache.commons.mail.SimpleEmail emails = new org.apache.commons.mail.SimpleEmail();
 		emails.setSSL(true);
-		emails.setHostName("smtp.ivyb2b.com");
+		emails.setHostName("");
 		emails.setSmtpPort(465);
-		emails.setAuthentication("test@ivyb2b.com","ivyb2b@2016");
+		emails.setAuthentication("","");
 		emails.addTo("910944453@qq.com", "me");
-		emails.setFrom("test@ivyb2b.com", "常青藤");
+		emails.setFrom("", "");
 		emails.setSubject("更换邮箱校验");
 		emails.setCharset("UTF-8");
 		emails.setMsg("邮箱校验码为：2017090791624");
