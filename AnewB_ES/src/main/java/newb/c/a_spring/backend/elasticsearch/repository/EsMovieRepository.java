@@ -1,7 +1,7 @@
 package newb.c.a_spring.backend.elasticsearch.repository;
 
 import newb.c.a_spring.backend.elasticsearch.model.MovieDTO;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
  * mapper [id] of different type, current_type [long], merged_type [string]
  */
 @Repository
-public interface EsMovieRepository extends PagingAndSortingRepository<MovieDTO, String> {
+//public interface EsMovieRepository extends PagingAndSortingRepository<MovieDTO, String> {
+public interface EsMovieRepository extends ElasticsearchRepository<MovieDTO, String> {
 
 }
