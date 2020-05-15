@@ -35,7 +35,7 @@
     </mongo:mongo> -->
     
     <!-- mongodb3.0  -->
-    <mongo:mongo-client  id="mongo" host="${mongo.host}" port="${mongo.port}">
+    <mongo:mongo-client  id="mongo" host="${mongo.host}" port="${mongo.port}" credentials="${mongo.user}:{$mongo.password}@${mongo.database}">
 	<mongo:client-options 
 			connections-per-host="${mongo.connectionsPerHost}" 
             threads-allowed-to-block-for-connection-multiplier="${mongo.threadsAllowedToBlockForConnectionMultiplier}" 
@@ -45,22 +45,21 @@
             socket-timeout="${mongo.socketTimeout}" 
             /> 
 	</mongo:mongo-client>
-	
-	<!-- 权限配置 -->
-	
-	<bean id="userCredentials" class="org.springframework.data.authentication.UserCredentials">
-		<constructor-arg name="username" value="${mongo.user}" />
-		<constructor-arg name="password" value="${mongo.password}" />
-	</bean>
-	
+
     <!-- 设置使用的数据库 给工厂设置数据库 -->
-    <mongo:db-factory mongo-ref="mongo"/>
+    <mongo:db-factory id="mongoDbFactory" mongo-ref="mongo"/>
     <!-- mongodb的模板 单独给 template 设置数据库 -->
     <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-       <!--<constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>-->
-       <!-- 数据库名称 -->
        <constructor-arg ref="mongo"/>
 	   <constructor-arg value="${mongo.database}" />
-        <!--<constructor-arg ref="userCredentials" /> -->
     </bean>
+<!--    2.0版本-->
+
+    <!-- 权限配置 -->
+<!--    <bean id="userCredentials" class="org.springframework.data.authentication.UserCredentials">-->
+<!--        <constructor-arg name="username" value="${mongo.user}" />-->
+<!--        <constructor-arg name="password" value="${mongo.password}" />-->
+<!--    </bean>-->
+<!--    在mongoTemplate中加入-->
+<!--    constructor-arg ref="userCredentials" />-->
 </beans>

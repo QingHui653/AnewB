@@ -68,7 +68,7 @@
 
 
 	<!-- mongodb 不能注释，连不上没关系 -->
-<!--	<import resource="mongodb/spring-mongodb.xml"/>-->
+	<import resource="mongodb/spring-mongodb.xml"/>
 
 	<!-- aop -->
 	<!-- <import resource="aop/spring-aop.xml" /> -->
