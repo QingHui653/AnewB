@@ -15,7 +15,7 @@ public class ElasticsearchCreat {
 
     private Logger logger = LoggerFactory.getLogger(ElasticsearchCreat.class);
 
-    public final static String HOST = "frp1.chuantou.org";
+    public final static String HOST = "frp.bob.kim";
     public final static int PORT = 54130;
 
     /**

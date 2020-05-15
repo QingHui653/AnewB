@@ -27,7 +27,7 @@ public class ESTools {
 			return client;
 		}
 		Client client = null;
-		String ip = "frp1.chuantou.org";
+		String ip = "frp.bob.kim";
 		Integer port =54130;
 //		String ip = "119.23.231.239";
 //		String ip = "127.0.0.1";

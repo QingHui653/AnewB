@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class EsMovieService {
 
-    @Autowired
+    @Autowired(required = false)
     private EsMovieRepository esMovieRepository;
 
     public Iterable<MovieDTO> findAll(Pageable pageable){
