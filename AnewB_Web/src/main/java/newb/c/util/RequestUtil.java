@@ -32,37 +32,64 @@ public class RequestUtil {
     private final static String JSON_METHOD="JSON";
     private final static String FILE_METHOD="FILE";
 
-    private HttpUriRequest buildGetReq(String url, String param){
-        return new HttpGet(url+"&"+param);
+    private HttpUriRequest buildGetReq(String url, String param) {
+        return new HttpGet(url + "?" + param);
     }
 
-    private Request buildGetHttp(String url, String param){
-        return new Request.Builder().url(url+"&"+param).get().build();
+    private Request buildGetHttp(String url, String param, Map<String, String> header) {
+        Request.Builder builder = new Request.Builder().url(url + "?" + param);
+        if (header != null) {
+            for (Map.Entry<String, String> headerMap : header.entrySet()) {
+                builder.addHeader(headerMap.getKey(), headerMap.getValue());
+            }
+        }
+        return builder.get().build();
     }
 
-    private Request buildJsonPostHttp(String url, Map<String,Object> map){
+    private Request buildJsonPostHttp(String url, Map<String, Object> map, Map<String, String> header) {
         String data = JSON.toJSONString(map);
-        RequestBody requestBody = FormBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),data);
-        return new Request.Builder().url(url).post(requestBody).build();
+        RequestBody requestBody = FormBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), data);
+
+        Request.Builder builder = new Request.Builder().url(url);
+        if (header != null) {
+            for (Map.Entry<String, String> headerMap : header.entrySet()) {
+                builder.addHeader(headerMap.getKey(), headerMap.getValue());
+            }
+        }
+        return builder.post(requestBody).build();
     }
 
-    private Request buildFormPostHttp(String url, Map<String,Object> map){
+    private Request buildFormPostHttp(String url, Map<String, Object> map, Map<String, String> header) {
         FormBody.Builder builder = new FormBody.Builder();
         for (Map.Entry<String, Object> entry : map.entrySet()) {
-            builder.add(entry.getKey(),(String) entry.getValue());
+            builder.add(entry.getKey(), (String) entry.getValue());
         }
         FormBody formBody = builder.build();
-        return new Request.Builder().url(url).post(formBody).build();
+
+        Request.Builder reqBuild = new Request.Builder().url(url);
+        if (header != null) {
+            for (Map.Entry<String, String> headerMap : header.entrySet()) {
+                reqBuild.addHeader(headerMap.getKey(), headerMap.getValue());
+            }
+        }
+        return reqBuild.url(url).post(formBody).build();
     }
 
-    private Request buildFilePostHttp(String url, Map<String,Object> map, File file){
+    private Request buildFilePostHttp(String url, Map<String, Object> map, Map<String, String> header, File file, String postFileName) {
         RequestBody fileBody = RequestBody.create(okhttp3.MediaType.parse("image/png"), file);
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
         for (Map.Entry<String, Object> entry : map.entrySet()) {
-            builder.addFormDataPart(entry.getKey(),(String) entry.getValue());
+            builder.addFormDataPart(entry.getKey(), (String) entry.getValue());
         }
-        MultipartBody multipartBody = builder.addFormDataPart("img", "fileName", fileBody).build();
-        return new Request.Builder().url(url).post(multipartBody).build();
+        MultipartBody multipartBody = builder.addFormDataPart(postFileName, "fileName", fileBody).build();
+
+        Request.Builder reqBuild = new Request.Builder().url(url);
+        if (header != null) {
+            for (Map.Entry<String, String> headerMap : header.entrySet()) {
+                reqBuild.addHeader(headerMap.getKey(), headerMap.getValue());
+            }
+        }
+        return reqBuild.url(url).post(multipartBody).build();
     }
 
     private HttpUriRequest buildJsonPostReq(String url, Map<String,Object> map){
@@ -78,25 +105,37 @@ public class RequestUtil {
         HttpPost httpPost = new HttpPost(url);
         List<NameValuePair> nvps = new ArrayList<>();
         for (Map.Entry<String, Object> entry : map.entrySet()) {
-            nvps.add(new BasicNameValuePair(entry.getKey(),(String) entry.getValue()));
+            nvps.add(new BasicNameValuePair(entry.getKey(), (String) entry.getValue()));
         }
-        httpPost.setEntity(new UrlEncodedFormEntity(nvps,"utf-8"));
-        return  httpPost;
+        httpPost.setEntity(new UrlEncodedFormEntity(nvps, "utf-8"));
+        return httpPost;
     }
 
-    public String applyFormForString(String method, String url, String param,Map<String,Object> map) {
-        return applyForString(method,FORM_METHOD,url, param, map,null);
+    public String applyFormForString(String method, String url, String param, Map<String, Object> map) {
+        return applyForString(method, FORM_METHOD, url, param, map, null, null, null);
     }
 
-    public String applyForString(String method, String url, String param,Map<String,Object> map) {
-        return applyForString(method,JSON_METHOD,url, param, map,null);
+    public String applyFormForString(String method, String url, String param, Map<String, Object> map, Map<String, String> header) {
+        return applyForString(method, FORM_METHOD, url, param, map, null, header, null);
     }
 
-    public String applyFileForString(String method, String url, String param,Map<String,Object> map,File file) {
-        return applyForString(method,FILE_METHOD,url, param, map,file);
+    public String applyForString(String method, String url, String param, Map<String, Object> map) {
+        return applyForString(method, JSON_METHOD, url, param, map, null, null, null);
     }
 
-    public String applyForStringByHttpClient(String method, String reqType, String url, String param,Map<String,Object> map) {
+    public String applyForString(String method, String url, String param, Map<String, Object> map, Map<String, String> header) {
+        return applyForString(method, JSON_METHOD, url, param, map, null, header, null);
+    }
+
+    public String applyFileForString(String method, String url, String param, Map<String, Object> map, File file, String postFileName) {
+        return applyForString(method, FILE_METHOD, url, param, map, file, null, postFileName);
+    }
+
+    public String applyFileForString(String method, String url, String param, Map<String, Object> map, File file, Map<String, String> header, String postFileName) {
+        return applyForString(method, FILE_METHOD, url, param, map, file, header, postFileName);
+    }
+
+    public String applyForStringByHttpClient(String method, String reqType, String url, String param, Map<String, Object> map) {
         CloseableHttpResponse response = null;
         CloseableHttpClient client = null;
 
@@ -142,21 +181,21 @@ public class RequestUtil {
         return data;
     }
 
-    public String applyForString(String method, String reqType, String url, String param,Map<String,Object> map,File file) {
+    public String applyForString(String method, String reqType, String url, String param, Map<String, Object> map, File file, Map<String, String> header, String postFileName) {
 
         String data = "";
         okhttp3.Response response = null;
-        try{
+        try {
             Request request;
-            if("GET".equals(method)){
-                request=buildGetHttp(url,param);
-            }else {
-                if(FORM_METHOD.equals(reqType)) {
-                    request = buildFormPostHttp(url, map);
+            if ("GET".equals(method)) {
+                request = buildGetHttp(url, param, header);
+            } else {
+                if (FORM_METHOD.equals(reqType)) {
+                    request = buildFormPostHttp(url, map, header);
                 }else if (FILE_METHOD.equals(reqType) && file !=null ){
-                    request = buildFilePostHttp(url,map,file);
+                    request = buildFilePostHttp(url, map, header, file, postFileName);
                 }else {
-                    request = buildJsonPostHttp(url, map);
+                    request = buildJsonPostHttp(url, map, header);
                 }
             }
             OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
@@ -167,10 +206,13 @@ public class RequestUtil {
                     .build();
             Call call = okHttpClient.newCall(request);
             response = call.execute();
-            if(response.isSuccessful()){
+            if (response.isSuccessful()) {
                 data = response.body().string();
+            } else {
+                logger.error("[BaseYunPrintService.applyForString] Error: url:{} res :{}", url, response.toString());
             }
         }catch (Exception e){
+            e.printStackTrace();
             logger.error("[BaseYunPrintService.applyForString] Error: url:{}, param:{}", url, param);
         }finally {
             if (response != null) {
