@@ -35,7 +35,7 @@
     </mongo:mongo> -->
     
     <!-- mongodb3.0  -->
-    <mongo:mongo-client  id="mongo" host="${mongo.host}" port="${mongo.port}" credentials="${mongo.user}:{$mongo.password}@${mongo.database}">
+    <mongo:mongo-client  id="mongo" host="${mongo.host}" port="${mongo.port}" credentials="${mongo.user}:${mongo.password}@${mongo.database}">
 	<mongo:client-options 
 			connections-per-host="${mongo.connectionsPerHost}" 
             threads-allowed-to-block-for-connection-multiplier="${mongo.threadsAllowedToBlockForConnectionMultiplier}" 
