@@ -533,11 +533,11 @@
         <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
         <!-- Swagger -->
         <!--springfox的基本信息文档: http://springfox.github.io/springfox/docs/current/#architecture -->
-<!--        <dependency>-->
-<!--            <groupId>io.springfox</groupId>-->
-<!--            <artifactId>springfox-swagger-ui</artifactId>-->
-<!--            <version>2.7.0</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.7.0</version>
+        </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -545,17 +545,17 @@
         </dependency>
         <!--整合Knife4j-->
         <!-- https://mvnrepository.com/artifact/com.github.xiaoymin/knife4j-spring -->
-        <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-spring</artifactId>
-            <version>2.0.4</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.github.xiaoymin</groupId>-->
+<!--            <artifactId>knife4j-spring</artifactId>-->
+<!--            <version>2.0.4</version>-->
+<!--        </dependency>-->
 
-        <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-spring-ui</artifactId>
-            <version>2.0.4</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.github.xiaoymin</groupId>-->
+<!--            <artifactId>knife4j-spring-ui</artifactId>-->
+<!--            <version>2.0.4</version>-->
+<!--        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <!-- 使用注解快速完成model配置 -->
