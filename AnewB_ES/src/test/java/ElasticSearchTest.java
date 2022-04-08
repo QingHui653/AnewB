@@ -37,7 +37,7 @@ public class ElasticSearchTest {
 		CriteriaQuery criteriaQuery = new CriteriaQuery(new Criteria()
 				.and(new Criteria("movieName").contains(name)))
 //				.contains(name))
-				.setPageable(new PageRequest(page-1, pageSize));
+				.setPageable(PageRequest.of(page-1, pageSize));
 		List<MovieDTO> movieList = elasticsearchTemplate.queryForList(criteriaQuery, MovieDTO.class);	
 		System.out.println("size "+movieList.size());
 		movieList.forEach(System.out::println);

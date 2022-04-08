@@ -3,6 +3,7 @@ package test.core.javacase.tree;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -175,4 +176,37 @@ public class TreeTest {
         //拼接
         p.right = right;
     }
+
+    /**
+     * 654.构造最大二叉树
+     *
+     * 按照我们刚才说的，先明确根节点做什么？对于构造二叉树的问题，根节点要做的就是把想办法把自己构造出来.
+     * 遍历找出最大, 然后左右两边在进行递归
+     */
+    public Node constructMaximumBinaryTree(int[] sums){
+        if(sums==null || sums.length==0) return null;
+        int max = Integer.MIN_VALUE;
+        int index = 0 ;
+        //找出最大值,即下标
+        for (int i = 0; i < sums.length; i++) {
+            if(sums[i]>max){
+                max= sums[i];
+                index = i ;
+            }
+        }
+        Node tree = new Node(max);
+
+        int[] minSums = new int[sums.length];
+        int[] maxSums = new int[sums.length];
+        for (int i = 0; i < sums.length; i++) {
+            if(i<index) minSums[i] =sums[i];
+            if(i>=index) maxSums[i-index] = sums[i];
+        }
+        //0到index
+        tree.left  = constructMaximumBinaryTree(minSums);
+        //index 到 sums.length-1
+        tree.right  = constructMaximumBinaryTree(maxSums);
+        return tree;
+    }
+
 }

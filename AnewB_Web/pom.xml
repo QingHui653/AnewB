@@ -781,10 +781,16 @@
         <!--<version>2.7.0</version>-->
         <!--</dependency>-->
         <!--nacos-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.dubbo</groupId>-->
+<!--            <artifactId>dubbo</artifactId>-->
+<!--            <version>2.6.5</version>-->
+<!--        </dependency>-->
+        <!-- https://mvnrepository.com/artifact/org.apache.dubbo/dubbo -->
         <dependency>
-            <groupId>com.alibaba</groupId>
+            <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo</artifactId>
-            <version>2.6.5</version>
+            <version>3.0.7</version>
         </dependency>
         <!--暂时不能使用 Apache 2.7.0; 与fescar-dubbo 引用的 2.7.0 有冲突-->
         <dependency>
