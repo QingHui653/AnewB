@@ -790,7 +790,7 @@
         <dependency>
             <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo</artifactId>
-            <version>3.0.7</version>
+            <version>3.0.13</version>
         </dependency>
         <!--暂时不能使用 Apache 2.7.0; 与fescar-dubbo 引用的 2.7.0 有冲突-->
         <dependency>
